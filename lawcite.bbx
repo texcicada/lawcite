@@ -1,0 +1,245 @@
+\ProvidesFile{lawcite.bbx}[2020/04/11 v1.0 biblatex bibliography style]
+\RequireBibliographyStyle{ext-authortitle-ibid}
+%%%%%%%%% case
+\newtoggle{partysepitalic}
+\toggletrue{partysepitalic}
+%
+\newtoggle{partysepdotted}
+\togglefalse{partysepdotted}
+%
+\newtoggle{partynamesitalic}
+\toggletrue{partynamesitalic}
+%
+\newcounter{reftypemode}
+\setcounter{reftypemode}{3}%default: 3 allbelow
+%
+\newtoggle{mncbrackets}
+\toggletrue{mncbrackets}
+%
+\newtoggle{multicitecomma}
+\togglefalse{multicitecomma}
+%
+\newtoggle{printlegtoc}\toggletrue{printlegtoc}
+%
+\newtoggle{refintoc}\toggletrue{refintoc}
+%
+%%%%%%%%% statute
+\newtoggle{statjurisdiction}
+\togglefalse{statjurisdiction}
+%
+\newtoggle{stattycomma}
+\togglefalse{stattycomma}
+%
+\newtoggle{stattyitalic}
+\togglefalse{stattyitalic}
+
+
+% statute
+\DeclareBibliographyOption[boolean]{regulations-as-tor}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{printregulations}\toggletrue{printxregulations}}
+{\togglefalse{printregulations}\togglefalse{printxregulations}}%
+}
+%
+\DeclareBibliographyOption[boolean]{show-statute-jurisdiction}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{statjurisdiction}}
+{\togglefalse{statjurisdiction}}%
+}
+%
+\DeclareBibliographyOption[boolean]{statute-title-year-comma}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{stattycomma}}
+{\togglefalse{stattycomma}}%
+}
+%
+\DeclareBibliographyOption[boolean]{statute-title-year-italic}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{stattyitalic}}
+{\togglefalse{stattyitalic}}%
+}
+
+
+
+
+% case
+\DeclareBibliographyOption[boolean]{multi-comma-sep}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{multicitecomma}}
+{\togglefalse{multicitecomma}}%
+}
+%
+
+
+\DeclareBibliographyOption[boolean]{caseref-in-toc}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{refintoc}}
+{\togglefalse{refintoc}}%
+}
+%
+\DeclareBibliographyOption[boolean]{mnc-brackets}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{mncbrackets}}
+{\togglefalse{mncbrackets}}%
+}
+%
+\DeclareBibliographyOption[boolean]{party-names-italic}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{partynamesitalic}}
+{\togglefalse{partynamesitalic}}%
+}
+%
+\DeclareBibliographyOption[boolean]{party-separator-italic}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{partysepitalic}}
+{\togglefalse{partysepitalic}}
+}
+%
+\DeclareBibliographyOption[boolean]{party-separator-dotted}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{partysepdotted}}
+{\togglefalse{partysepdotted}}
+}
+%
+%
+\DeclareBibliographyOption[boolean]{print-toc-tos}[true]{%
+\ifstrequal{#1}{true}{\toggletrue{printlegtoc}}{\togglefalse{printlegtoc}}
+}
+
+%
+\DeclareBibliographyOption[string]{lawrefstyle}[caseallbelow]{%
+\ifstrempty{#1}{\setcounter{reftypemode}{3}}{}
+\ifstrequal{#1}{caseallabove}{\setcounter{reftypemode}{1}}{}
+\ifstrequal{#1}{caseabovebelow}{\setcounter{reftypemode}{2}}{}
+\ifstrequal{#1}{caseallbelow}{\setcounter{reftypemode}{3}}{}
+\ifstrequal{#1}{casetitleonly}{\setcounter{reftypemode}{4}}{}
+\ifstrequal{#1}{caserefonly}{\setcounter{reftypemode}{5}}{}
+}
+
+%
+\newtoggle{commainindex}
+\togglefalse{commainindex}
+\DeclareBibliographyOption[boolean]{comma-in-index}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{commainindex}}
+{\togglefalse{commainindex}}%
+}
+
+
+%
+\newtoggle{casenamecomma}
+\togglefalse{casenamecomma}
+\DeclareBibliographyOption[boolean]{casename-comma}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{casenamecomma}}
+{\togglefalse{casenamecomma}}%
+}
+
+
+\newcommand\lcsetstyledefault{%
+   \toggletrue{partynamesitalic}
+   \toggletrue{partysepitalic}
+   \togglefalse{partysepdotted}
+   \toggletrue{mncbrackets}
+   \setcounter{reftypemode}{3}
+   \toggletrue{printlegtoc}
+   \toggletrue{statjurisdiction}
+   \togglefalse{stattycomma}
+   \toggletrue{stattyitalic}
+   \toggletrue{commainindex}
+   \togglefalse{multicitecomma}
+   \togglefalse{casenamecomma}
+ \renewcommand\postnotedelim{,\ }
+}
+
+\newcommand\lcsetstylemlr{%
+   \toggletrue{partysepdotted}
+   \togglefalse{partysepitalic}
+   \toggletrue{partynamesitalic}
+   \toggletrue{mncbrackets}
+   \setcounter{reftypemode}{2}
+   \togglefalse{printlegtoc}
+   \togglefalse{multicitecomma}
+   \togglefalse{casenamecomma}
+ \renewcommand\postnotedelim{,\ }
+}
+
+\newcommand\lcsetstylemcgill{%
+   \togglefalse{partysepdotted}
+   \toggletrue{partysepitalic}
+   \toggletrue{partynamesitalic}
+   \setcounter{reftypemode}{3}
+   \togglefalse{mncbrackets}
+   \toggletrue{stattycomma}%after the title
+   \togglefalse{stattyitalic}
+   \togglefalse{statjurisdiction}
+%   \toggletrue{statutecomma}%after the title
+ \toggletrue{commainindex}
+ \toggletrue{multicitecomma}
+ \toggletrue{casenamecomma}
+ \renewcommand\postnotedelim{\ }
+}
+
+
+%
+\DeclareBibliographyOption[string]{lawcitestyle}[mlr]{%
+\ifstrempty{#1}{}{}
+\ifstrequal{#1}{default}{%
+   %xxx
+   \lcsetstyledefault
+}{}
+\ifstrequal{#1}{mlr}{%
+   %xxx
+   \lcsetstylemlr
+}{}
+\ifstrequal{#1}{mcgill}{%
+   %xxx
+   \lcsetstylemcgill
+}{}
+}
+
+
+%
+\DeclareBibliographyDriver{case}{%
+ \usebibmacro{begentry}
+   \usebibmacro{getcasenameref}
+ \usebibmacro{finentry}
+}
+%
+\DeclareBibliographyDriver{statute}{%
+ \usebibmacro{begentry}
+   \usebibmacro{getstatutenameref}
+ \usebibmacro{finentry}
+}
+
+\DeclareBibliographyDriver{ljarticle}{%
+ \usebibmacro{begentry}
+ \usebibmacro{ljb-generic}
+ \usebibmacro{finentry}
+}
+
+
+\DeclareSortingTemplate{casesort}{
+\sort{
+ \field{partya}
+ }
+\sort{
+ \field{partyb}
+ }
+\sort{
+ \field{caseyear}
+ }
+\sort{
+ \field{reportvolume}
+ }
+\sort{
+ \field{casenumber}
+ }
+\sort{
+ \field{reportseries}
+ }
+\sort{
+ \field{reportpage}
+ }
+}
+\endinput

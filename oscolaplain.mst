@@ -1,0 +1,14 @@
+%page_compositor "-"
+%page_compositor "."
+%delim_0 ", \\ChapterPage{"
+%delim_1 ", \\ChapterPage{"
+%delim_2 ", \\ChapterPage{"
+delim_0 "\\space\\dotfill\\space "\hss
+delim_1 "\\space\\dotfill\\space "\hss
+delim_2 "\\space\\dotfill\\space "\hss
+delim_n ", "
+delim_r "--"
+delim_t ""
+%encap_infix "{\\ChapterPage{"
+encap_prefix ""
+encap_suffix ""

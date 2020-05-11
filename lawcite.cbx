@@ -1,0 +1,1570 @@
+\ProvidesFile{lawcite.cbx}[2020-04-11 v1.0 biblatex citation lawcite style]
+\RequireCitationStyle{ext-authortitle-ibid}
+
+% commands
+\newcommand\statutetitleyeardelim{\addspace}
+\newcommand\statutejurisdictiondelim{\addspace}
+
+
+
+%====================================================
+%\DeclareListFormat{location}{%
+%#1%
+%\ifthenelse{\value{listcount}<\value{liststop}}
+%{\addcomma\space}
+%{}}
+
+%\printlist[hformati][hstarti–hstopi]{hliteral listi}
+
+%This command loops over all items in a hliteral listi, starting at item number hstarti
+%and stopping at item number hstopi, including hstarti and hstopi (all lists are numbered
+%starting at 1). Each item is printed using the formatting directive hformati,
+%as defined with \DeclareListFormat. If a type-specific hformati has been
+%declared, the type-specific formatting directive takes precedence over the generic
+%one. If the hliteral listi is undefined, nothing is printed. If the hformati is omitted,
+%\printlist tries using the name of the list as a format name.
+
+
+%\DeclareListWrapperFormat[hentrytype, …i]{hformati}{hcodei}
+%\DeclareListWrapperFormat*{hformati}{hcodei}
+%
+%Defines the list wrapper format hformati. This formatting directive is arbitrary hcodei
+%to be executed once for the entire list processed by \printlist. The name of the
+%literal list currently being processed is available to the hcodei as \currentlist.
+%If an hentrytypei is specified, the format is specific to that type. The hentrytypei
+%argument may be a comma-separated list of values. The starred variant of this
+%command
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% fieldformats: case
+\DeclareFieldFormat{partya}{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}
+\DeclareFieldFormat{partyb}{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}
+\DeclareFieldFormat{shipname}{\mkbibemph{#1}}
+\DeclareFieldFormat{caseshortname}{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}
+\DeclareFieldFormat{casenickname}{\mkbibquote{#1\addspace\bibstring{case}}}
+\DeclareFieldFormat{decisionyear}{\mkbibparens{#1}}
+
+
+\DeclareFieldFormat{partysep}
+{\iftoggle{partysepitalic}
+{%true
+\mkbibemph{#1}{\iftoggle{partysepdotted}{\adddot}{}}%
+}%end true
+{%false
+#1{\iftoggle{partysepdotted}{\adddot}{}}%
+}%end false
+}%end
+
+\DeclareFieldFormat{caseyear}{%
+\iffieldundef{casenumber}{#1}{\iftoggle{mncbrackets}{\mkbibbrackets{#1}}{#1}}}%make option
+\DeclareFieldFormat{courtname}{#1}
+\DeclareFieldFormat{casenumber}{#1}
+
+\DeclareFieldFormat{reportyear}{#1}
+\DeclareFieldFormat{reportvolume}{#1}
+\DeclareFieldFormat{reportseries}{#1}
+\DeclareFieldFormat{reportpage}{#1}
+
+
+
+% fieldformats: statute
+
+\DeclareFieldFormat{statutetitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{statutelongtitle}{#1}
+\DeclareFieldFormat{statuteshorttitle}{#1}
+\DeclareFieldFormat{statutenickname}{\mkbibquote{#1\space\bibstring{act}}}
+\DeclareFieldFormat{statutevolume}{#1}
+\DeclareFieldFormat{statutejurisdiction}{\mkbibparens{#1}}
+\DeclareFieldFormat{statuteregnalyear}{#1}
+\DeclareFieldFormat{statutechapter}{#1}
+\DeclareFieldFormat{statuteyear}{#1}
+\DeclareFieldFormat{statutetitleyear}{\iftoggle{stattyitalic}{\mkbibemph{#1}}{#1}}
+
+
+
+
+% bibmacros: case
+
+%=========== partysep
+\newbibmacro{getpartysep}{%
+\iffieldundef{partysep}{%
+ \iftoggle{partysepitalic}%
+  {\mkbibemph{\bibstring{versus}}}%
+  {\bibstring{versus}}%
+ \iftoggle{partysepdotted}{\adddot}{}%
+ }%
+ {%
+ \iftoggle{partysepitalic}%
+  {\mkbibemph{\printfield{partysep}}}%
+  {\printfield{partysep}}%
+ \iftoggle{partysepdotted}{\adddot}{}%
+ }%
+}
+
+%======= casename
+\newbibmacro{getcasename}{%
+\iffieldundef{shipname}{\printfield{partya}%
+\iffieldundef{partyb}{}%
+{\addspace\usebibmacro{getpartysep}\addspace%
+\printfield{partyb}}%
+}%no shipname
+{The \printfield{shipname}}%
+\iffieldundef{decisionyear}{}{\addspace\printfield{decisionyear}}%
+}%
+
+
+%======== caseshortname
+\newbibmacro{getcaseshortname}{%
+\iffieldundef{shipname}{\iffieldundef{caseshortname}{}{\printfield{caseshortname}}}%
+{\printfield{shipname}}%
+}
+
+%======== casenickname
+\newbibmacro{getcasenickname}{%
+\iffieldundef{casenickname}{}{\printfield{casenickname}}%
+}
+
+
+
+
+%======== caseyear
+\newbibmacro{getcaseyear}{%
+\iffieldundef{caseyear}{}%
+{\addspace\printfield{caseyear}}%
+}
+
+%======== courtname
+\newbibmacro{getcourtname}{%
+\iffieldundef{courtname}{}%
+{\addspace\printfield{courtname}}%
+}
+
+%======== casenumber
+\newbibmacro{getcasenumber}{%
+\iffieldundef{casenumber}{}%
+{\addspace\printfield{casenumber}}%
+}
+
+%
+\newbibmacro{getreportyear}{%
+\iffieldundef{reportyear}%
+{\iffieldundef{caseyear}%if no report year
+{}%if no case year
+{\printfield{caseyear}}%
+}%end if no reportyear
+{\iffieldundef{volyearneeded}{%
+\iffieldundef{reportvolume}{%
+\printtext{\mkbibbrackets{\printfield{reportyear}}}%
+}{\printtext{\mkbibparens{\printfield{reportyear}}}}%
+}{%
+\printtext{\mkbibbrackets{\printfield{reportyear}}}%
+%
+}}%
+}
+
+%  reportvolume = {3},
+%  volyearneeded = {true},
+
+
+%
+\newbibmacro{getreportvolume}{%
+\iffieldundef{reportvolume}{}%
+{%
+\addspace\printfield{reportvolume}%
+}}
+
+%
+\newbibmacro{getreportseries}{%
+\addspace\printfield{reportseries}%
+}
+
+%
+\newbibmacro{getreportpage}{%
+\addspace\printfield{reportpage}%
+}
+
+%======== getreportref
+\newbibmacro{getreportref}{%
+\iffieldundef{reportpage}{}%
+{%
+ \iffieldundef{casenumber}{}{\addsemicolon\addspace}%
+ \usebibmacro{getreportyear}%
+ \usebibmacro{getreportvolume}%
+ \usebibmacro{getreportseries}%
+ \usebibmacro{getreportpage}%
+}}
+
+%======== getnote
+\newbibmacro{getnote}{%
+\iffieldundef{note}{}%
+{%false
+ \addspace\printtext{\mkbibparens{%
+%    \iffieldundef{year}{}{\thefield{year}\addcomma\space}%
+ \printfield{note}%
+ }}%
+}}
+
+
+%======= casexxx
+\newbibmacro{casexxx}{%
+xxx}%
+
+
+%======== getcaseref
+\newbibmacro{getcaseref}{%
+ \usebibmacro{getcaseyear}%
+ \usebibmacro{getcourtname}%
+ \usebibmacro{getcasenumber}%
+   \newblock
+   \usebibmacro{getreportref}%
+   \newunit
+   \newblock
+}
+
+%====================================== toggle commands
+%\newcommand\lcnamerefdelim{\addcomma\addspace}
+\newcommand\lcnamerefdelim{\addspace}
+\newcommand\lcnamerefcommadelim{\addcomma\addspace}
+\newcommand\lcparentchilddelim{\addcomma}
+
+\newcommand\setcasenamecommaon{\toggletrue{casenamecomma}}
+\newcommand\setcasenamecommaoff{\togglefalse{casenamecomma}}
+
+\newcommand\setpartysepitalicon{\settoggle{partysepitalic}{true}}
+\newcommand\setpartysepitalicoff{\settoggle{partysepitalic}{false}}
+
+\newcommand\setpartysepdottedon{\settoggle{partysepdotted}{true}}
+\newcommand\setpartysepdottedoff{\settoggle{partysepdotted}{false}}
+
+
+\newcommand\setpartynamesitalicon{\settoggle{partynamesitalic}{true}}
+\newcommand\setpartynamesitalicoff{\settoggle{partynamesitalic}{false}}
+
+\newcommand\lcconstallabove{1}
+\newcommand\lcconstabovebelow{2}
+\newcommand\lcconstallbelow{3}
+\newcommand\lcconsttitleonly{4}
+
+\newcommand\setallabove{\setcounter{reftypemode}{\lcconstallabove}}
+\newcommand\setabovebelow{\setcounter{reftypemode}{\lcconstabovebelow}}
+\newcommand\setallbelow{\setcounter{reftypemode}{\lcconstallbelow}}
+\newcommand\settitleonly{\setcounter{reftypemode}{\lcconsttitleonly}}
+
+
+
+
+\newcommand\setmncbracketson{\settoggle{mncbrackets}{true}}
+\newcommand\setmncbracketsoff{\settoggle{mncbrackets}{false}}
+
+
+\newcommand\setprintlegtocon{\settoggle{printlegtoc}{true}}
+\newcommand\setprintlegtocoff{\settoggle{printlegtoc}{false}}
+
+
+\newcommand\setrefintocon{\settoggle{refintoc}{true}}
+\newcommand\setrefintocoff{\settoggle{refintoc}{false}}
+
+\newcommand\setstatjurison{\settoggle{statjurisdiction}{true}}
+\newcommand\setstatjurisoff{\settoggle{statjurisdiction}{false}}
+
+\newcommand\setmulticitecommaon{\toggletrue{multicitecomma}}
+\newcommand\setmulticitecommaoff{\togglefalse{multicitecomma}}
+
+\newcommand\lcsetdemoon{%
+\setlcinlinecolour{red}
+\setlcinlinerrcolour{brown}
+\setlcinlinerrcoloursc{blue}
+}
+\newcommand\lcsetdemooff{%
+\setlcinlinecolour{black}
+\setlcinlinerrcolour{black}
+\setlcinlinerrcoloursc{black}
+}
+
+
+%vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+
+%===== casenameref
+\newbibmacro{getcasenameref}{%
+ \ifboolexpr{%
+  test {\ifcitation}
+  and
+  test {\ifciteibid}
+  }%
+  {ibid\addspace}{%
+ \usebibmacro{getcasename}%
+ \ifboolexpr{%
+  not test {\iffieldundef{casenumber}}
+  or
+  not test {\iffieldundef{reportpage}}
+  }%
+ {\iftoggle{casenamecomma}{\lcnamerefcommadelim}{\lcnamerefdelim}}%
+ {\lcparentchilddelim}%
+ \usebibmacro{getcaseref}%
+%    \finentry
+ }%ifciteibid false
+}
+
+
+%bibmacros: statute  ========================
+\newbibmacro{getstatutetitle}{%
+\iffieldundef{statutetitle}{}%
+{\printfield{statutetitle}{%
+ \iffieldundef{statutetitleyear}{}{%
+  \iftoggle{stattycomma}{\addcomma\addspace}{\addspace}%
+  \usebibmacro{getstatutetitleyear}%
+  }%
+ }%
+}%
+}
+
+
+\newbibmacro{getstatutelongtitle}{%
+\iffieldundef{statutelongtitle}{}%
+{\printfield{statutelongtitle}}%
+}
+
+
+\newbibmacro{getstatuteshorttitle}{%
+\iffieldundef{statuteshorttitle}{}%
+{\printfield{statuteshorttitle}}%
+}
+
+
+\newbibmacro{getstatutenickname}{%
+\iffieldundef{statutenickname}{}%
+{\printfield{statutenickname}}%
+}
+
+
+\newbibmacro{getstatutevolume}{%
+\iffieldundef{statutevolume}{}%
+{\printfield{statutevolume}}%
+}
+
+
+\newbibmacro{getstatutejurisdiction}{%
+\iffieldundef{statutejurisdiction}{}%
+{\statutejurisdictiondelim\printfield{statutejurisdiction}}%
+}
+
+
+\newbibmacro{getstatuteregnalyear}{%
+\iffieldundef{statuteregnalyear}{}%
+{\printfield{statuteregnalyear}}%
+}
+
+
+\newbibmacro{getstatutechapter}{%
+\iffieldundef{statutechapter}{}%
+{\printfield{statutechapter}}%
+}
+
+
+\newbibmacro{getstatuteyear}{%
+\iffieldundef{statuteyear}{}%
+{\printfield{statuteyear}}%
+}
+
+
+\newbibmacro{getstatutetitleyear}{%
+\iffieldundef{statutetitleyear}{}%
+{\printfield{statutetitleyear}}%
+}
+
+%\ifboolexpr{%
+%test {\ifentrytype{statute}}%
+%}%
+%{\sindex[legislation]{\thefield{statutetitle} \thefield{statutetitleyear}}}%
+%{}%
+
+%======================= statutename
+\newbibmacro{getstatutename}{%
+ \usebibmacro{getstatutetitle}%
+% \iffieldundef{statutetitleyear}{%
+%  \iffieldundef{statuteyear}{}%
+%  {\addcomma\addspace\usebibmacro{getstatuteyear}
+%  }%
+% }%
+% {\statutetitleyeardelim\usebibmacro{getstatutetitleyear}}%
+ \iftoggle{statjurisdiction}{\usebibmacro{getstatutejurisdiction}}{}%
+}
+
+
+%======================= statuteref
+\newbibmacro{getstatuteref}{%
+{}%
+}
+
+%======================= statutenameref
+\newbibmacro{getstatutenameref}{%
+ \usebibmacro{getstatutename}%
+ \usebibmacro{getstatuteref}%
+}
+
+\expandafter\newbibmacro{\csname lc/aglc/can/delleg/revfedreg/1\endcsname}{%
+\printfield{statutetitle}\addcomma\addspace\printfield{statuteshorttitle}%
+\addcomma\addspace\bibstring{canchapter}\addspace\printfield{statutechapter}
+%sindex{} not coded here
+}%
+
+%======================= canreg
+\newbibmacro{getcanreg}{%
+ \usebibmacro{\csname lc/aglc/can/delleg/revfedreg/1\endcsname}%
+}
+
+
+
+
+
+%======================= canleg
+\newbibmacro{getcanleg}{%
+%----
+\iffieldequalstr{citeref}{canleg}{%
+ \printfield{title}\addcomma\addspace\printfield{svjy}%
+\addcomma\addspace\bibstring{canchapter}\addspace\thefield{chapter}%
+\renewcommand\lcindexaccum{}%empty
+\xappto\lcindexaccum{%
+\thefield{title}, \thefield{svjy}%
+, c \thefield{chapter}%
+}%
+\ifkeyword{regulations}{\toggletrue{printxregulations}}{\togglefalse{printxregulations}}%
+\sindex[\lctor]{\lcindexaccum}%
+\togglefalse{printxregulations}%
+ }{}%endif
+}
+
+%%%\ifkeyword{regulations}{\iftoggle{printregulations}{regulations}{legislation}}{legislation}
+% \ifkeyword upsets sindex[] (timing of the loop?), but \iftoggle is OK.
+
+
+%======================= canreg2
+\newbibmacro{getcanreg2}{%
+%----
+\iffieldequalstr{citeref}{crcreg}{%
+ \printfield{title}\addcomma\addspace CRC%
+\addcomma\addspace\bibstring{canchapter}\addspace\thefield{chapter}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\thefield{title}, CRC, c \thefield{chapter}}
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{sorreg}{%
+ \printfield{title}\addcomma\addspace SOR%
+/\printfield{year}-\printfield{regnum}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\thefield{title}, SOR/\thefield{year}-\thefield{regnum}}
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{altareg}{%
+ Alta Reg%
+\addspace\printfield{regnum}/\printfield{year}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{Alta Reg \thefield{regnum}/\thefield{year}} 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{bcreg}{%
+ BC Reg%
+\addspace\printfield{regnum}/\printfield{year}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{BC Reg \thefield{regnum}/\thefield{year}} 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{manreg}{%
+ Man Reg%
+\addspace\printfield{regnum}/\printfield{year}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{Man Reg \thefield{regnum}/\thefield{year}} 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{nbreg}{%
+ NB Reg%
+\addspace\printfield{year}-\printfield{regnum}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{NB Reg \thefield{year}-\thefield{regnum}} 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{nfldreg}{%
+ Nfld Reg%
+\addspace\printfield{regnum}/\printfield{year}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{Nfld \thefield{regnum}/\thefield{year}} 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{nlrreg}{%
+ NLR%
+\addspace\printfield{regnum}/\printfield{year}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{NLR \thefield{regnum}/\thefield{year}} 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{nwtreg}{%
+ NWT Reg%
+\addspace\printfield{regnum}-\printfield{year}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{NWT Reg \thefield{regnum}-\thefield{year}} 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{nsreg}{%
+ NS Reg%
+\addspace\printfield{regnum}/\printfield{year}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{NS Reg \thefield{regnum}/\thefield{year}} 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{nureg}{%
+ Nu Reg%
+\addspace\printfield{regnum}-\printfield{year}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{Nu Reg \thefield{regnum}-\thefield{year}} 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{oreg}{%
+ O Reg%
+\addspace\printfield{regnum}/\printfield{year}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{O Reg \thefield{regnum}/\thefield{year}} 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{peireg}{%
+ PEI Reg%
+\addspace EC\printfield{year}-\printfield{regnum}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{PEI Reg \thefield{year}-\thefield{regnum}} 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{ocreg}{%
+ OC%
+\addspace\printfield{regnum}-\printfield{year}%
+\addcomma\addspace\printfield{fulldate}%
+\addcomma\addspace GOQ\addspace\printfield{gazette}
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{OC Reg \thefield{regnum}-\thefield{year}%
+ , \thefield{fulldate}, GOQ \thefield{gazette}%
+ } 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{saskreg}{%
+ Sask Reg%
+\addspace\printfield{regnum}/\printfield{year}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{Sask Reg \thefield{regnum}/\thefield{year}} 
+ }{}%endif
+%----
+\iffieldequalstr{citeref}{yoicreg}{%
+ YOIC Reg%
+\addspace\printfield{year}/\printfield{regnum}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{YOIC Reg \thefield{year}/\thefield{regnum}} 
+ }{}%endif
+}
+
+
+%\newbibmacro{assigncaseprenote}{%
+% \ifcase\thereftypemode \or%
+% \usebibmacro{prenote}%inline
+% \or% prenote goes in the footnote for this variation, along with the case ref.
+% \or% prenote is already in the footnote
+% \fi%
+%}
+
+%\newbibmacro{assigncasepostnote}{%
+% \ifcase\thereftypemode \or%
+% \usebibmacro{postnote}% inline
+% \or% postnote is already in the footnote
+% \or% postnote is already in the footnote
+% \fi%
+%}
+
+
+%\newbibmacro{assigncaseitem}{%
+% \ifcase\thereftypemode%
+% \or\usebibmacro{getcasenameref}%
+% \or\usebibmacro{getcasename}\footnote{\usebibmacro{prenote}\usebibmacro{getcaseref}\usebibmacro{postnote}}%
+% \or\unspace\footnote{\usebibmacro{prenote}\usebibmacro{getcasenameref}\usebibmacro{postnote}}%
+% \fi%
+%}
+
+
+%% \ifboolexpr{%
+%% test {\ifentrytype{@case}}%
+%% }%
+%% {%
+%% \usebibmacro{assigncaseitem}
+%% }%
+%% {%
+%%%%%%%  \autocite[\usebibmacro{prenote}][\usebibmacro{postnote}]{#1}%
+%% }%
+
+
+
+
+
+%==================
+
+%index accumulator for related reports
+\newcommand\lcindexaccum{}
+
+
+
+%\sindex[legislation]{\thefield{statutetitle} \thefield{statutetitleyear}}%
+
+
+%============= lawcite
+\DeclareCiteCommand{lawcite}%
+%%caseallabove      reftypemode}{1}}{}
+%%caseabovebelow  reftypemode}{2}}{}
+%%caseallbelow      reftypemode}{3}}{}
+%%casetitleonly     reftypemode}{4}}{}
+%%caserefonly       reftypemode}{5}}{}
+%@@@@@@@@@@@@@@@@ prenote
+{%
+\ifboolexpr{%
+test {\ifentrytype{statute}}%
+}%
+{%start statute true
+\usebibmacro{prenote}%
+}% end statute true
+{%
+ \ifcase\thereftypemode \or%
+ \usebibmacro{prenote}%inline
+ \or% prenote goes inline for this variation, footnote has the case ref.
+ \or% prenote is already in the footnote
+ \or\usebibmacro{prenote}%
+  \fi%
+}%end statute false  
+}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%% \ifentrytype{case}{xxx}{zyyy}%does not work
+% \iffieldequalstr{entrytype}{case}{xxx}{zyyy}%works
+\ifboolexpr{%
+test {\ifentrytype{statute}}%
+}%
+{%start statute true
+\iffieldundef{citeref}{%
+  \iffieldundef{statutechapter}{%
+  \usebibmacro{getstatutenameref}%
+  \ifkeyword{regulations}{\toggletrue{printxregulations}}{\togglefalse{printxregulations}}%
+  \sindex[\lctor]{\thefield{statutetitle}\iftoggle{stattycomma}{,}{} \thefield{statutetitleyear}\iftoggle{statjurisdiction}{ (\thefield{statutejurisdiction})}{}}%
+  \togglefalse{printxregulations}
+   }{\usebibmacro{getcanreg}}%end canreg
+}%end: no citeref
+{%start false: citeref exists
+\usebibmacro{getcanleg}%
+\usebibmacro{getcanreg2}%
+}%end citeref
+}%end statute true
+{%
+ \ifcase\thereftypemode%
+ \or\usebibmacro{getcasenameref}%
+ \or\usebibmacro{prenote}\usebibmacro{getcasename}\mkbibfootnote{\usebibmacro{getcaseref}\usebibmacro{postnote}}%
+ \or\mkbibfootnote{\usebibmacro{prenote}\usebibmacro{getcasenameref}\usebibmacro{postnote}}%
+ \or\usebibmacro{getcasename}%
+ \fi%
+\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+%
+\usebibmacro{fullstepindex}%
+}% end statute false
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{%
+ \multicitedelim%
+%% \ifcase\thereftypemode \or%
+%% \multicitedelim%
+%% \or\addcomma%
+%% \or\multicitedelim%
+%% \or\addcomma\addspace%
+%%  \fi%
+}%
+%@@@@@@@@@@@@@@@@ postnote
+{%
+\ifboolexpr{%
+test {\ifentrytype{statute}}%
+}%
+{\usebibmacro{postnote}}%statute true
+{%
+ \ifcase\thereftypemode \or%
+ \usebibmacro{postnote}% inline
+ \or% prenote goes inline for this variation, footnote has the case ref.
+ \or% postnote is already in the footnote
+ \or\usebibmacro{postnote}
+ \fi%
+}%
+}
+
+
+%============= lawciterr
+\DeclareCiteCommand{lawciterr}%
+%%caseallabove      reftypemode}{1}}{}
+%%caseabovebelow  reftypemode}{2}}{}
+%%caseallbelow      reftypemode}{3}}{}
+%%casetitleonly     reftypemode}{4}}{}
+%%caserefonly       reftypemode}{5}}{}
+%@@@@@@@@@@@@@@@@ prenote
+{%
+ \ifcase\thereftypemode \or%
+ \usebibmacro{prenote}%inline
+ \or% prenote goes inline for this variation, footnote has the case ref.
+ \or% prenote is already in the footnote
+ \or\usebibmacro{prenote}%
+  \fi%
+}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%% \ifentrytype{case}{xxx}{zyyy}%does not work
+% \iffieldequalstr{entrytype}{case}{xxx}{zyyy}%works
+ \ifcase\thereftypemode%
+ \or\iffirstcitekey{\usebibmacro{getcasenameref}}{\usebibmacro{getcaseref}}%
+ \or\usebibmacro{prenote}\iffirstcitekey{\usebibmacro{getcasename}}{}\mkbibfootnote{\usebibmacro{getcaseref}\usebibmacro{postnote}}%
+ \or\mkbibfootnote{\usebibmacro{prenote}\iffirstcitekey{\usebibmacro{getcasenameref}}{\usebibmacro{getcaseref}}\usebibmacro{postnote}}%
+ \or\usebibmacro{getcasename}%
+ \fi%
+\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+%
+\usebibmacro{fullstepindex}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{%
+ \ifcase\thereftypemode \or%
+ \usebibmacro{postnote}% inline
+ \or% prenote goes inline for this variation, footnote has the case ref.
+ \or% postnote is already in the footnote
+ \or\usebibmacro{postnote}
+ \fi%
+}
+
+
+
+
+
+
+%%%============= lawciterr
+%%\DeclareCiteCommand{lawciterr}%
+%%%%caseallabove      reftypemode}{1}}{}
+%%%%caseabovebelow  reftypemode}{2}}{}
+%%%%caseallbelow      reftypemode}{3}}{}
+%%%%casetitleonly     reftypemode}{4}}{}
+%%%%caserefonly       reftypemode}{5}}{}
+%%%@@@@@@@@@@@@@@@@ prenote
+%%{%
+%% \ifcase\thereftypemode \or%
+%% \usebibmacro{prenote}%inline
+%% \or% prenote goes inline for this variation, footnote has the case ref.
+%% \or% prenote is already in the footnote
+%% \or\usebibmacro{prenote}%
+%%  \fi%
+%%}%
+%%%@@@@@@@@@@@@@@@@ item
+%%{%
+%%%% \ifentrytype{case}{xxx}{zyyy}%does not work
+%%% \iffieldequalstr{entrytype}{case}{xxx}{zyyy}%works
+%% \ifcase\thereftypemode%
+%% \or\usebibmacro{getcasenameref}%
+%% \or\usebibmacro{prenote}\usebibmacro{getcasename}\mkbibfootnote{\usebibmacro{getcaseref}\usebibmacro{postnote}}%
+%% \or\mkbibfootnote{\usebibmacro{prenote}\usebibmacro{getcasenameref}\usebibmacro{postnote}}%
+%% \or\usebibmacro{getcasename}%
+%% \fi%
+%%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+%%%
+%%\usebibmacro{rrindex}%
+%%}%end item
+%%%@@@@@@@@@@@@@@@@ delim
+%%{\multicitedelim}%
+%%%@@@@@@@@@@@@@@@@ postnote
+%%{%
+%% \ifcase\thereftypemode \or%
+%% \usebibmacro{postnote}% inline
+%% \or% prenote goes inline for this variation, footnote has the case ref.
+%% \or% postnote is already in the footnote
+%% \or\usebibmacro{postnote}
+%% \fi%
+%%}
+
+
+
+
+
+
+
+%============= lawcitetitle
+\DeclareCiteCommand{lawcitetitle}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\usebibmacro{fullstepindex}%
+\usebibmacro{getcasename}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+%============= lawcitetitlerr
+\DeclareCiteCommand{lawcitetitlerr}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\usebibmacro{rrindex}%
+\iffirstcitekey{\usebibmacro{getcasename}}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+%============= lawciteref
+\DeclareCiteCommand{lawciteref}%
+%@@@@@@@@@@@@@@@@ prenote
+{}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\usebibmacro{fullstepindex}%
+\usebibmacro{prenote}\usebibmacro{getcaseref}\usebibmacro{postnote}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{}
+
+
+
+%============= lcrefnn  %no note
+\DeclareCiteCommand{lcrefnn}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\usebibmacro{fullstepindex}%
+\usebibmacro{getcaseref}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+%============= lcrefnnrr  %no note
+\DeclareCiteCommand{lcrefnnrr}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\usebibmacro{rrindex}%
+\usebibmacro{getcaseref}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
+
+%============= lcnote
+\DeclareCiteCommand{lcnote}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{fullstepindex}%
+\usebibmacro{getnote}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
+%============= lcnoterr
+\DeclareCiteCommand{lcnoterr}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{rrindex}%
+\iffirstcitekey{\usebibmacro{getnote}}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
+
+%============= lcshorttitle
+\DeclareCiteCommand{lcshorttitle}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\usebibmacro{sendtocaseindex}%
+\usebibmacro{fullstepindex}%
+\usebibmacro{getcaseshortname}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
+%============= lcshorttitlerr
+\DeclareCiteCommand{lcshorttitlerr}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\usebibmacro{sendtocaseindex}%
+\usebibmacro{rrindex}%
+\iffirstcitekey{\usebibmacro{getcaseshortname}}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
+
+
+%============= lcnickname
+\DeclareCiteCommand{lcnickname}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\usebibmacro{sendtocaseindex}%
+\usebibmacro{fullstepindex}%
+\usebibmacro{getcasenickname}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
+%============= lcnicknamerr
+\DeclareCiteCommand{lcnicknamerr}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\usebibmacro{sendtocaseindex}%
+%%\usebibmacro{fullstepindex}%
+\usebibmacro{rrindex}%
+\iffirstcitekey{\usebibmacro{getcasenickname}}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
+%\newtoggle{notecolour}
+%\togglefalse{notecolour}
+%\newcommand\nn{\toggletrue{notecolour}}
+%\iftoggle{notecolour}{\bfseries xx}{yy}
+
+%%%\thefield{courtname} \thefield{mncnumber}} %
+%%%\iffieldundef{rptseries}{}{, \iffieldundef{rptyear}{}{\iffieldundef{rptvolume}{[}{(}\thefield{rptyear}\iffieldundef{rptvolume}{]}{)}} \iffieldundef{rptvolume}{}{\thefield{rptvolume}} \thefield{rptseries} \thefield{rptpage}
+
+
+\newbibmacro{sendtocaseindex}{%
+\ifboolexpr{%
+test {\ifentrytype{case}}%
+}%
+{%true
+%\iffirstcitekey{%
+\sindex[cases]{\iffieldundef{shipname}{\thefield{partya}%no space, for one party only; space if partyb (before v)
+\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}} \thefield{partyb}}}{\thefield{shipname}, The}%
+\iftoggle{refintoc}{% 1st character is a space
+\iftoggle{commainindex}{,}{}\addspace\iffieldundef{casenumber}{}{\iftoggle{mncbrackets}{[}{}\thefield{caseyear}\iftoggle{mncbrackets}{]}{} \thefield{courtname} \thefield{casenumber}}%
+%\iffieldundef{reportpage}{}{\thefield{reportyear} \thefield{reportvolume} \thefield{reportseries} \thefield{reportpage}} %
+\iffieldundef{reportpage}{}{%
+\iffieldundef{casenumber}{}{;}%
+\iffieldundef{reportyear}{}{%
+\iffieldundef{reportvolume}{ [}{%
+\iffieldundef{volyearneeded}{ (}{ [}}%
+\thefield{reportyear}%
+\iffieldundef{reportvolume}{]}{%
+\iffieldundef{volyearneeded}{)}{]}} }%
+\thefield{reportvolume} %
+\thefield{reportseries} %  use \mkbibordinal{}?
+\thefield{reportpage}%
+}%end if reportpage
+}%end refintoc true
+{%start reefintoc false
+\iffieldundef{icaseyear}{\iffieldundef{caseyear}{\iffieldundef{reportyear}{}{ (\thefield{reportyear})}}{ (\thefield{caseyear})}}{ (\thefield{icaseyear})}%
+}%end refintoc false
+}%end sindex
+%}%end \iffirstcitekey
+}%end true
+{%false
+\ifboolexpr{%
+test {\ifentrytype{statute}}%
+}%
+{%
+\ifkeyword{regulations}{\toggletrue{printxregulations}}{\togglefalse{printxregulations}}%
+\sindex[\lctor]{\thefield{statutetitle} \thefield{statutetitleyear}}%
+\togglefalse{printxregulations}%
+}%
+{}%
+}%end false 
+}
+
+
+
+
+
+
+\newbibmacro{getindexcasename}{%
+\ifboolexpr{%
+test {\ifentrytype{case}}%
+}%
+{%true
+\renewcommand\lcindexaccum{}%empty
+\xappto\lcindexaccum{%
+%partynames = casename
+\iffieldundef{shipname}{\thefield{partya}%no space, for one party only; space if partyb (before v)
+\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}} \thefield{partyb}}}{\thefield{shipname}, The}%
+}%end accum
+}%end true
+{%false 
+}%end case false
+}
+
+
+%-----------------
+\newbibmacro{getindexcaseref}{%
+\xappto\lcindexaccum{%
+%\thefield{courtname}; \thefield{reportseries}
+%caseref
+%\iftoggle{refintoc}{%   space 1st character of line below
+\iftoggle{commainindex}{,}{}\addspace\iffieldundef{casenumber}{}{\iftoggle{mncbrackets}{[}{}\thefield{caseyear}\iftoggle{mncbrackets}{]}{} \thefield{courtname} \thefield{casenumber}}%
+%\iffieldundef{reportpage}{}{\thefield{reportyear} \thefield{reportvolume} \thefield{reportseries} \thefield{reportpage}} %
+\iffieldundef{reportpage}{}{%
+\iffieldundef{casenumber}{}{;}%
+\iffieldundef{reportyear}{}{%
+\iffieldundef{reportvolume}{ [}{%
+\iffieldundef{volyearneeded}{ (}{ [}}%
+\thefield{reportyear}%
+\iffieldundef{reportvolume}{]}{%
+\iffieldundef{volyearneeded}{)}{]}} }%
+\thefield{reportvolume} %
+\thefield{reportseries} %  use \mkbibordinal{}?
+\thefield{reportpage}%
+}%end if reportpage
+%}%end refintoc true
+%{%start reefintoc false
+%\iffieldundef{icaseyear}{\iffieldundef{caseyear}{\iffieldundef{reportyear}{}{ (\thefield{reportyear})}}{ (\thefield{caseyear})}}{ (\thefield{icaseyear})}%
+%}%end refintoc false
+}%caseref accum
+}
+
+\DeclareFieldFormat{parens}{\mkbibparens{#1}}
+\DeclareFieldFormat{emph}{\mkbibemph{#1}}
+\DeclareFieldFormat{plain}{#1}
+
+\DeclareNameFormat{authorplain}{%
+%\ifthenelse{\value{listcount}=1}
+%{\namepartfamily%
+%\ifdefvoid{\namepartgiven}{}{
+%,! \addcomma\space\namepartgiven}}
+{%
+\ifdefvoid{\namepartgiven}{}{\namepartgiven\space}%
+\namepartfamily}%
+\ifthenelse{\value{listcount}<\value{liststop}}
+{\addcomma\space}
+{}}
+
+
+%\newcommand*{\begrelateddelimmultivolume}{\newunitpunct\par\nobreak}
+%\renewcommand*{\begrelateddelimmultivolume}{\newunitpunct\addspace}
+%\newcommand*{\relateddelim}{\adddot\par\nobreak}
+\renewcommand*{\relateddelim}{\adddot\addspace}
+
+\newbibmacro{getljarticleauthor}{%
+\printnames[authorplain][-\value{listtotal}]{author}%
+}
+
+\newbibmacro{getljarticletitle}{%
+\printtext[emph]{\thefield{title}\iffieldundef{subtitle}{}{\addcolon\addspace\printfield{subtitle}}}%
+}
+%\newbibmacro{getljarticlesubtitle}{%
+%}
+\newbibmacro{getljarticleyear}{%
+\printtext[parens]{\thefield{year}}%
+}
+\newbibmacro{getljarticlevolume}{%
+\printfield[plain]{volume}%
+}
+\newbibmacro{getljarticlejournaltitle}{%
+\printfield[plain]{journaltitle}%
+}
+\newbibmacro{getljarticlepage}{%
+\printfield[plain]{pages}%
+}
+
+\newbibmacro{getljarticle}{%
+\usebibmacro{getljarticleauthor}%
+\addcomma\addspace%
+\usebibmacro{getljarticletitle}%
+\addcomma\addspace%
+\usebibmacro{getljarticleyear}%
+\addspace%
+\usebibmacro{getljarticlevolume}%
+\addspace%
+\usebibmacro{getljarticlejournaltitle}%
+\addspace%
+\usebibmacro{getljarticlepage}%
+\iffieldundef{related}{}{\addspace\usebibmacro{related}}
+\newunit\newblock%
+}
+
+
+\newbibmacro{sendtoindexrr}{%
+\sindex[cases]{%
+%{%
+%\color{red}%
+\lcindexaccum%
+%}%
+}%
+}
+
+
+
+\newbibmacro{fullstepindex}{%name-ref for all keys
+\usebibmacro{getindexcasename}%
+\usebibmacro{getindexcaseref}%
+\usebibmacro{sendtoindexrr}%
+}
+
+
+
+
+%indexer
+\newbibmacro{rrindex}{%name for first key; refs for the rest
+\iffirstcitekey{%
+\usebibmacro{getindexcasename}%
+}{}%firstcite
+{%loopcite
+\usebibmacro{getindexcaseref}%
+}%end loopcite
+\iflastcitekey{\usebibmacro{sendtoindexrr}}{}%
+}
+
+
+%%%\newbibmacro{sendtocaseindex:nameref}{%
+%%%\ifboolexpr{%
+%%%test {\ifentrytype{case}}%
+%%%}%
+%%%{%true
+%%%\thefield{partya}%no space, for one party only; space if partyb (before v)
+%%%\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}} \thefield{partyb}}, %
+%%%\iffieldundef{casenumber}{}{\iftoggle{mncbrackets}{[}{}\thefield{caseyear}\iftoggle{mncbrackets}{]}{} \thefield{courtname} \thefield{casenumber}}%
+%%%\iffieldundef{reportpage}{}{%
+%%%\iffieldundef{casenumber}{}{;}%
+%%%\iffieldundef{reportyear}{}{%
+%%%\iffieldundef{reportvolume}{ [}{%
+%%%\iffieldundef{volyearneeded}{ (}{ [}}%
+%%%\thefield{reportyear}%
+%%%\iffieldundef{reportvolume}{]}{%
+%%%\iffieldundef{volyearneeded}{)}{]}} }%
+%%%\thefield{reportvolume} %
+%%%\thefield{reportseries} %
+%%%\thefield{reportpage}%
+%%%}%end if reportpage
+%%%}%end true
+%%%{%false
+%%%\ifboolexpr{%
+%%%test {\ifentrytype{statute}}%
+%%%}%
+%%%{\sindex[legislation]{\thefield{statutetitle} \thefield{statutetitleyear}}}%
+%%%{}%
+%%%}%end false 
+%%%}
+%%%
+%%%
+%%%
+%%%\newbibmacro{sendtocaseindex:ref}{%
+%%%\ifboolexpr{%
+%%%test {\ifentrytype{case}}%
+%%%}%
+%%%{%true
+%%%\multicitedelim%
+%%%\iffieldundef{casenumber}{}{\iftoggle{mncbrackets}{[}{}\thefield{caseyear}\iftoggle{mncbrackets}{]}{} \thefield{courtname} \thefield{casenumber}}%
+%%%\iffieldundef{reportpage}{}{%
+%%%\iffieldundef{casenumber}{}{;}%
+%%%\iffieldundef{reportyear}{}{%
+%%%\iffieldundef{reportvolume}{ [}{%
+%%%\iffieldundef{volyearneeded}{ (}{ [}}%
+%%%\thefield{reportyear}%
+%%%\iffieldundef{reportvolume}{]}{%
+%%%\iffieldundef{volyearneeded}{)}{]}} }%
+%%%\thefield{reportvolume} %
+%%%\thefield{reportseries} %
+%%%\thefield{reportpage}%
+%%%}%end if reportpage
+%%%}%end true
+%%%{%false
+%%%\ifboolexpr{%
+%%%test {\ifentrytype{statute}}%
+%%%}%
+%%%{\sindex[legislation]{\thefield{statutetitle} \thefield{statutetitleyear}}}%
+%%%{}%
+%%%}%end false 
+%%%}
+
+
+
+
+
+%%%\newcommand\lcindexaccum{}
+%%%\newcommand\lcindexclear{\renewcommand\lcindexaccum{}}
+%%%\newcommand\lcindexadd[1]{\renewcommand\lcindexaccum{#1}}
+%%%
+%%%
+%%%\newbibmacro{sendtocaseindex:test}{%
+%%%\ifboolexpr{%
+%%%test {\ifentrytype{case}}%
+%%%}%
+%%%{%true
+%%%\iffirstcitekey{\lcindexclear\xappto\lcindexaccum{%\usebibmacro{sendtocaseindex:nameref}
+%%%\thefield{partya}%no space, for one party only; space if partyb (before v)
+%%%\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}} \thefield{partyb}}, %
+%%%\iffieldundef{casenumber}{}{\iftoggle{mncbrackets}{[}{}\thefield{caseyear}\iftoggle{mncbrackets}{]}{} \thefield{courtname} \thefield{casenumber}}%
+%%%\iffieldundef{reportpage}{}{%
+%%%\iffieldundef{casenumber}{}{;}%
+%%%\iffieldundef{reportyear}{}{%
+%%%\iffieldundef{reportvolume}{ [}{%
+%%%\iffieldundef{volyearneeded}{ (}{ [}}%
+%%%\thefield{reportyear}%
+%%%\iffieldundef{reportvolume}{]}{%
+%%%\iffieldundef{volyearneeded}{)}{]}} }%
+%%%\thefield{reportvolume} %
+%%%\thefield{reportseries} %
+%%%\thefield{reportpage}%
+%%%}%end if reportpage
+%%%}}%true
+%%%{\xappto\lcindexaccum{\usebibmacro{sendtocaseindex:ref}}}%false
+%%%%\lcindexadd{y}
+%%%%\gappto\lcindexaccum{y}
+%%%\iflastcitekey{\edef\lcx{\lcindexaccum}\sindex[cases]{\lcx}}{}%
+%%%}%end true
+%%%{}}
+
+
+%:
+\newcommand\lcinlinecolour{red}
+\newcommand\setlcinlinecolour[1]{\renewcommand\lcinlinecolour{#1}}
+
+%first child:
+\newcommand\lcinlinerrcolour{brown}
+\newcommand\setlcinlinerrcolour[1]{\renewcommand\lcinlinerrcolour{#1}}
+
+%subsequent children:
+\newcommand\lcinlinerrcoloursc{blue}
+\newcommand\setlcinlinerrcoloursc[1]{\renewcommand\lcinlinerrcoloursc{#1}}
+
+
+%============= lcinline
+\DeclareCiteCommand{lcinline}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%\sindex[cases]{\thefield{partya} v \thefield{partyb}}
+%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\textcolor{\lcinlinecolour}{\usebibmacro{getcasenameref}}%
+%\usebibmacro{sendtocaseindex}
+%%%\usebibmacro{getindexcasename}
+%%%\usebibmacro{getindexcaseref}
+%%%\usebibmacro{sendtoindexrr}
+\usebibmacro{fullstepindex}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%
+%@@@@@@@@@@@@@@@@ postnote
+%{\usebibmacro{postnote}\iflastcitekey{\addspace\usebibmacro{getnote}}{}}
+{\usebibmacro{postnote}\usebibmacro{getnote}}%{\iflastcitekey{\usebibmacro{postnote}\addspace\usebibmacro{getnote}}{\usebibmacro{postnote}}}
+
+
+%============= lcinlinerr
+\DeclareCiteCommand{lcinlinerr}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%\ifentryseen{\thefield{crossref}}{\usebibmacro{getcaseref}}{\usebibmacro{getcasenameref}}%
+%\iffieldxref{partya}{\usebibmacro{getcaseref}}{\usebibmacro{getcasenameref}}%
+%\usebibmacro{sendtocaseindex:test}%
+%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\iffirstcitekey{\textcolor{\lcinlinerrcolour}{\usebibmacro{getcasenameref}}}{\textcolor{\lcinlinerrcoloursc}{\usebibmacro{getcaseref}}}%
+%%%indexer
+%%\iffirstcitekey{%
+%%\usebibmacro{getindexcasename}%
+%%}{}%firstcite
+%%{%loopcite
+%%\usebibmacro{getindexcaseref}%
+%%}%end loopcite
+%%\iflastcitekey{\usebibmacro{sendtoindexrr}}{}%
+\usebibmacro{rrindex}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%
+%@@@@@@@@@@@@@@@@ postnote
+{\iflastcitekey{\usebibmacro{postnote}\iffieldundef{note}{}{\addspace\usebibmacro{getnote}}}{\usebibmacro{postnote}}}
+
+
+%============= lcinlinenn  %no note
+\DeclareCiteCommand{lcinlinenn}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%\ifentryseen{\thefield{crossref}}{\usebibmacro{getcaseref}}{\usebibmacro{getcasenameref}}%
+%\iffieldxref{partya}{\usebibmacro{getcaseref}}{\usebibmacro{getcasenameref}}%
+%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}% ??
+\usebibmacro{fullstepindex}%
+\usebibmacro{getcasenameref}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
+%============= lcinlinennrr  %no note
+\DeclareCiteCommand{lcinlinennrr}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%\ifentryseen{\thefield{crossref}}{\usebibmacro{getcaseref}}{\usebibmacro{getcasenameref}}%
+%\iffieldxref{partya}{\usebibmacro{getcaseref}}{\usebibmacro{getcasenameref}}%
+%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}% ??
+\usebibmacro{rrindex}%
+\iffirstcitekey{\usebibmacro{getcasenameref}}{\usebibmacro{getcaseref}}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
+
+
+
+
+
+%%%%============= lawcitefoot
+%%%\DeclareCiteCommand{lawcitefoot}%
+%%%%@@@@@@@@@@@@@@@@ prenote
+%%%{}%
+%%%%@@@@@@@@@@@@@@@@ item
+%%%{%
+%%%%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+%%%\usebibmacro{fullstepindex}%
+%%%\mkbibfootnote{\usebibmacro{prenote}\usebibmacro{getcasenameref}\usebibmacro{postnote}}%
+%%%}%end item
+%%%%@@@@@@@@@@@@@@@@ delim
+%%%{\multicitedelim}%
+%%%%@@@@@@@@@@@@@@@@ postnote
+%%%{}
+%%%
+
+%============= lcfoot
+\DeclareCiteCommand{lcfoot}[\mkbibfootnote]%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\usebibmacro{fullstepindex}%
+\usebibmacro{getcasenameref}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+%============= lcfootrr
+\DeclareCiteCommand{lcfootrr}[\mkbibfootnote]%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\iffirstcitekey{\usebibmacro{getcasenameref}}{\usebibmacro{getcaseref}}%
+%%%indexer
+%%\iffirstcitekey{%
+%%\usebibmacro{getindexcasename}
+%%}{}%firstcite
+%%{%loopcite
+%%\usebibmacro{getindexcaseref}
+%%}%end loopcite
+%%\iflastcitekey{\usebibmacro{sendtoindexrr}}{}
+\usebibmacro{rrindex}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
+%============= ljcite
+\DeclareCiteCommand{ljcite}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getljarticle}
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}\iffieldundef{note}{}{\addspace\printfield[parens]{note}}%
+}
+
+
+
+%============= lcljauthor
+\DeclareCiteCommand{lcljauthor}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getljarticleauthor}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
+
+
+%============= lcljtitle
+\DeclareCiteCommand{lcljtitle}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getljarticletitle}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
+
+
+%============= lcljyear
+\DeclareCiteCommand{lcljyear}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getljarticleyear}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
+
+
+%============= lcljjournaltitle
+\DeclareCiteCommand{lcljjournaltitle}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getljarticlejournaltitle}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
+
+
+%============= lcljvolume
+\DeclareCiteCommand{lcljvolume}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getljarticlevolume}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
+
+
+%============= lcljpage
+\DeclareCiteCommand{lcljpage}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getljarticlepage}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
+
+
+
+\newcommand\multicitecommadelim{\addcomma\addspace}
+
+%\DeclareMultiCiteCommand{lawcites}[xxx]{lawcite}{\multicitedelim}
+\DeclareMultiCiteCommand{\lawcitesinline}{lcinline}{\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%different cases
+\DeclareMultiCiteCommand{\lawcitesinlinerr}{lcinlinerr}{\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%same case, different reports
+\DeclareMultiCiteCommand{\lawcitesfoot}[\mkbibfootnote]{lcfoot}{\multicitedelim}
+\DeclareMultiCiteCommand{\lawcitesfootrr}[\mkbibfootnote]{lcfootrr}{\multicitedelim}
+%
+%%\DeclareMultiCiteCommand{\lawcitesinline}{lcinline}{\multicitedelim}%different cases
+
+
+% sundry commands
+%index
+%%\newcommand\printlcindexes{%
+%%\iftoggle{printlegtoc}{%
+%%\let\oldtwocolumn\twocolumn
+%%\renewcommand{\twocolumn}[1][]{#1}
+%%\let\oldclearpage\clearpage
+%%\renewcommand\clearpage{\relax}
+%%\printindex[cases]
+%%\printindex[legislation]
+%%\renewcommand{\twocolumn}[1][]{\oldtwocolumn}
+%%\renewcommand\clearpage{\oldclearpage}
+%%}{}
+%%\bigskip
+%%\hrule%{0.8\linewidth}
+%%\bigskip
+%%}
+
+%https://tex.stackexchange.com/questions/166414/including-cover-pictures-in-bibliography
+
+\renewbibmacro*{finentry}{\finentry
+  \iffieldundef{thumbnail}
+    {}
+    {\marginpar{\usefield{\insertbibimage}{thumbnail}}}}
+     
+
+\endinput

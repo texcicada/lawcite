@@ -1,0 +1,105 @@
+%hyperref support for splitindex
+%\NewDocumentCommand\boldhyperpage{ m } {\textbf{\hyperpage{#1}}
+\NewDocumentCommand\boldhyperpage{ m } {\hyperpage{#1}}
+
+\DeclareDatamodelFields[type=field, datatype=verbatim]{thumbnail}
+\DeclareDatamodelEntryfields{thumbnail}
+
+\newcommand*{\insertbibimage}[1]{\includegraphics[width=1cm, keepaspectratio]{#1}}
+
+%
+\newtoggle{printregulations}
+\toggletrue{printregulations}
+
+%
+\newtoggle{printxregulations}
+\toggletrue{printxregulations}
+
+
+%\newbibmacro{lctor}{%
+\newcommand\lctor{%
+%\ifkeyword{regulations}{\iftoggle{printregulations}{regulations}{legislation}}{legislation}%
+\iftoggle{printxregulations}{regulations}{legislation}%
+%legislation%
+}
+
+
+
+
+\DeclareDatamodelEntrytypes{case,statute}
+\DeclareDatamodelFields[type=field, datatype=literal]{
+% case fields
+  partya,
+  partyb,
+  partysep,
+  shipname,
+  caseyear, %will be a date
+  icaseyear, %for the index
+  decisionyear, %for the casename, when no report year
+  reportyear, %will be a date
+  reportvolume,
+  volyearneeded, %will be a boolean
+  reportseries,
+  reportpage,
+  courtname,
+  casenumber,
+  note,
+  caseshortname,
+  casenickname,
+% statute
+statutetitle,
+statutelongtitle,
+statuteshorttitle,
+statutenickname,
+statutevolume,
+statutejurisdiction,
+statuteregnalyear,
+statutechapter,
+statuteyear,%for the volume
+statutetitleyear,%for the title
+%reg2
+title,
+chapter,
+year,
+citeref,
+regnum,
+fulldate,
+gazette,
+%leg
+svjy,
+}
+
+\DeclareDatamodelEntryfields[case]{%
+partya,partyb,partysep,caseyear,reportyear,reportvolume,%
+volyearneeded,reportseries,reportpage,courtname,casenumber,note,shipname,%
+icaseyear,caseshortname,casenickname,decisionyear}
+
+
+\DeclareDatamodelEntryfields[statute]{%
+statutetitle,%
+statutelongtitle,%
+statuteshorttitle,%
+statutenickname,%
+statutevolume,%
+statutejurisdiction,%
+statuteregnalyear,%
+statutechapter,%
+statuteyear,%for the volume
+statutetitleyear,%for the title
+%reg2
+title,%
+chapter,%
+year,%
+citeref,%
+regnum,%
+fulldate,%
+gazette,%
+%
+svjy,%
+}
+
+
+\DeclareLanguageMapping{english}{english-lawcite}
+
+
+\endinput
