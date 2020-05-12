@@ -1,6 +1,6 @@
 %hyperref support for splitindex
 %\NewDocumentCommand\boldhyperpage{ m } {\textbf{\hyperpage{#1}}
-\NewDocumentCommand\boldhyperpage{ m } {\hyperpage{#1}}
+%\NewDocumentCommand\boldhyperpage{ m } {\hyperpage{#1}}
 
 \DeclareDatamodelFields[type=field, datatype=verbatim]{thumbnail}
 \DeclareDatamodelEntryfields{thumbnail}

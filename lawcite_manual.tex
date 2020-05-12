@@ -370,6 +370,7 @@ location = {Boston},
   reportseries = {AC},
   reportpage = {562},
   casenickname = {snail in the bottle},
+  note = {HL},
 	}
 
 %Commonwealth v Tasmania ("Tasmanian Dam case") [1983] HCA 21; (1983) 158 CLR 1
@@ -813,7 +814,7 @@ regnum = {87},
 \begin{filecontents*}{lawcite.dbx}
 %hyperref support for splitindex
 %\NewDocumentCommand\boldhyperpage{ m } {\textbf{\hyperpage{#1}}
-\NewDocumentCommand\boldhyperpage{ m } {\hyperpage{#1}}
+%\NewDocumentCommand\boldhyperpage{ m } {\hyperpage{#1}}
 
 \DeclareDatamodelFields[type=field, datatype=verbatim]{thumbnail}
 \DeclareDatamodelEntryfields{thumbnail}
@@ -980,7 +981,15 @@ svjy,%
 {\togglefalse{stattyitalic}}%
 }
 
-
+%
+\newtoggle{indemomode}
+\togglefalse{indemomode}
+\DeclareBibliographyOption[boolean]{demo-mode}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{indemomode}}
+{\togglefalse{indemomode}}%
+\iftoggle{indemomode}{\lcsetdemoon}{\lcsetdemooff}
+}
 
 
 % case
@@ -2021,6 +2030,27 @@ test {\ifentrytype{statute}}%
 {\usebibmacro{postnote}}
 
 
+%============= lawciterefrr
+\DeclareCiteCommand{lawciterefrr}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+%\usebibmacro{fullstepindex}%
+\usebibmacro{rrindex}%
+\usebibmacro{getcaseref}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
+
+
+
 %============= lcrefnnrr  %no note
 \DeclareCiteCommand{lcrefnnrr}%
 %@@@@@@@@@@@@@@@@ prenote
@@ -2449,6 +2479,9 @@ test {\ifentrytype{case}}%
 \newcommand\lcinlinerrcoloursc{blue}
 \newcommand\setlcinlinerrcoloursc[1]{\renewcommand\lcinlinerrcoloursc{#1}}
 
+\lcsetdemooff
+
+
 
 %============= lcinline
 \DeclareCiteCommand{lcinline}%
@@ -2596,6 +2629,30 @@ test {\ifentrytype{case}}%
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}
+
+
+\newbibmacro{getciteref}{%
+\iffieldundef{citeref}{}{\printtext{<\thefield{citeref}>}}
+}
+
+
+%============= lcciteref
+\DeclareCiteCommand{lcciteref}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getciteref}
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}\iffieldundef{note}{}{\addspace\printfield[parens]{note}}%
+}
+
+
+
+
 
 
 
@@ -3117,6 +3174,7 @@ userdefinedwidth = \textwidth ,
 
 %------------------
 \begin{document}
+\lcsetdemoon
 \maketitle
 \begin{abstract}
 \myabstracttext
@@ -4014,7 +4072,7 @@ for parent-children, the bibentries in the \verb|.bib| file will look like:\marg
 
 \mcmd{lawcitetitlerr}
 
-\mcmd{lawciteref}
+\mcmd{lawciterefrr}
 
 \mcmd{lcrefnnrr}
 

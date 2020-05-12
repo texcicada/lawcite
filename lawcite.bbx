@@ -59,7 +59,15 @@
 {\togglefalse{stattyitalic}}%
 }
 
-
+%
+\newtoggle{indemomode}
+\togglefalse{indemomode}
+\DeclareBibliographyOption[boolean]{demo-mode}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{indemomode}}
+{\togglefalse{indemomode}}%
+\iftoggle{indemomode}{\lcsetdemoon}{\lcsetdemooff}
+}
 
 
 % case
