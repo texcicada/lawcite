@@ -32,7 +32,17 @@
 %
 \newtoggle{stattyitalic}
 \togglefalse{stattyitalic}
+%
+\newtoggle{lcindexing}
+\toggletrue{lcindexing}
 
+% statute
+\DeclareBibliographyOption[boolean]{set-lawcite-indexing}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{lcindexing}}
+{\togglefalse{lcindexing}}%
+}
+%
 
 % statute
 \DeclareBibliographyOption[boolean]{regulations-as-tor}[true]{%

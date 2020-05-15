@@ -954,7 +954,17 @@ svjy,%
 %
 \newtoggle{stattyitalic}
 \togglefalse{stattyitalic}
+%
+\newtoggle{lcindexing}
+\toggletrue{lcindexing}
 
+% statute
+\DeclareBibliographyOption[boolean]{set-lawcite-indexing}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{lcindexing}}
+{\togglefalse{lcindexing}}%
+}
+%
 
 % statute
 \DeclareBibliographyOption[boolean]{regulations-as-tor}[true]{%
@@ -1622,7 +1632,7 @@ xxx}%
 , c \thefield{chapter}%
 }%
 \ifkeyword{regulations}{\toggletrue{printxregulations}}{\togglefalse{printxregulations}}%
-\sindex[\lctor]{\lcindexaccum}%
+\iftoggle{lcindexing}{\sindex[\lctor]{\lcindexaccum}}{}%
 \togglefalse{printxregulations}%
 	}{}%endif
 }
@@ -1637,79 +1647,92 @@ xxx}%
 \iffieldequalstr{citeref}{crcreg}{%
 	\printfield{title}\addcomma\addspace CRC%
 \addcomma\addspace\bibstring{canchapter}\addspace\thefield{chapter}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{\thefield{title}, CRC, c \thefield{chapter}}
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{\thefield{title}, CRC, c \thefield{chapter}}}{}
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{sorreg}{%
 	\printfield{title}\addcomma\addspace SOR%
 /\printfield{year}-\printfield{regnum}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{\thefield{title}, SOR/\thefield{year}-\thefield{regnum}}
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{\thefield{title}, SOR/\thefield{year}-\thefield{regnum}}}{}
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{altareg}{%
 	Alta Reg%
 \addspace\printfield{regnum}/\printfield{year}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{Alta Reg \thefield{regnum}/\thefield{year}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{Alta Reg \thefield{regnum}/\thefield{year}}}{}	
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{bcreg}{%
 	BC Reg%
 \addspace\printfield{regnum}/\printfield{year}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{BC Reg \thefield{regnum}/\thefield{year}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{BC Reg \thefield{regnum}/\thefield{year}}}{}	
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{manreg}{%
 	Man Reg%
 \addspace\printfield{regnum}/\printfield{year}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{Man Reg \thefield{regnum}/\thefield{year}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{Man Reg \thefield{regnum}/\thefield{year}}}{}	
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{nbreg}{%
 	NB Reg%
 \addspace\printfield{year}-\printfield{regnum}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{NB Reg \thefield{year}-\thefield{regnum}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{NB Reg \thefield{year}-\thefield{regnum}}	}{}
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{nfldreg}{%
 	Nfld Reg%
 \addspace\printfield{regnum}/\printfield{year}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{Nfld \thefield{regnum}/\thefield{year}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{Nfld \thefield{regnum}/\thefield{year}}}{}	
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{nlrreg}{%
 	NLR%
 \addspace\printfield{regnum}/\printfield{year}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{NLR \thefield{regnum}/\thefield{year}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{NLR \thefield{regnum}/\thefield{year}}}{}	
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{nwtreg}{%
 	NWT Reg%
 \addspace\printfield{regnum}-\printfield{year}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{NWT Reg \thefield{regnum}-\thefield{year}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{NWT Reg \thefield{regnum}-\thefield{year}}}{}	
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{nsreg}{%
 	NS Reg%
 \addspace\printfield{regnum}/\printfield{year}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{NS Reg \thefield{regnum}/\thefield{year}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{NS Reg \thefield{regnum}/\thefield{year}}}{}	
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{nureg}{%
 	Nu Reg%
 \addspace\printfield{regnum}-\printfield{year}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{Nu Reg \thefield{regnum}-\thefield{year}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{Nu Reg \thefield{regnum}-\thefield{year}}}{}	
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{oreg}{%
 	O Reg%
 \addspace\printfield{regnum}/\printfield{year}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{O Reg \thefield{regnum}/\thefield{year}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{O Reg \thefield{regnum}/\thefield{year}}}{}	
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{peireg}{%
 	PEI Reg%
 \addspace EC\printfield{year}-\printfield{regnum}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{PEI Reg \thefield{year}-\thefield{regnum}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{PEI Reg \thefield{year}-\thefield{regnum}}	}{}
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{ocreg}{%
@@ -1717,21 +1740,24 @@ xxx}%
 \addspace\printfield{regnum}-\printfield{year}%
 \addcomma\addspace\printfield{fulldate}%
 \addcomma\addspace GOQ\addspace\printfield{gazette}
+\iftoggle{lcindexing}{%
 	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{OC Reg \thefield{regnum}-\thefield{year}%
 	, \thefield{fulldate}, GOQ \thefield{gazette}%
-	}	
+	}}{}	
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{saskreg}{%
 	Sask Reg%
 \addspace\printfield{regnum}/\printfield{year}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{Sask Reg \thefield{regnum}/\thefield{year}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{Sask Reg \thefield{regnum}/\thefield{year}}}{}	
 	}{}%endif
 %----
 \iffieldequalstr{citeref}{yoicreg}{%
 	YOIC Reg%
 \addspace\printfield{year}/\printfield{regnum}%
-	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{YOIC Reg \thefield{year}/\thefield{regnum}}	
+\iftoggle{lcindexing}{%
+	\sindex[\iftoggle{printregulations}{regulations}{legislation}]{YOIC Reg \thefield{year}/\thefield{regnum}}	}{}
 	}{}%endif
 }
 
@@ -1822,7 +1848,8 @@ test {\ifentrytype{statute}}%
 		\iffieldundef{statutechapter}{%
 		\usebibmacro{getstatutenameref}%
 		\ifkeyword{regulations}{\toggletrue{printxregulations}}{\togglefalse{printxregulations}}%
-		\sindex[\lctor]{\thefield{statutetitle}\iftoggle{stattycomma}{,}{} \thefield{statutetitleyear}\iftoggle{statjurisdiction}{ (\thefield{statutejurisdiction})}{}}%
+\iftoggle{lcindexing}{%
+		\sindex[\lctor]{\thefield{statutetitle}\iftoggle{stattycomma}{,}{} \thefield{statutetitleyear}\iftoggle{statjurisdiction}{ (\thefield{statutejurisdiction})}{}}}{}%
 		\togglefalse{printxregulations}
 			}{\usebibmacro{getcanreg}}%end canreg
 }%end: no citeref
@@ -2188,6 +2215,7 @@ test {\ifentrytype{case}}%
 }%
 {%true
 %\iffirstcitekey{%
+\iftoggle{lcindexing}{%
 \sindex[cases]{\iffieldundef{shipname}{\thefield{partya}%no space, for one party only; space if partyb (before v)
 \iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}} \thefield{partyb}}}{\thefield{shipname}, The}%
 \iftoggle{refintoc}{% 1st character is a space
@@ -2209,7 +2237,7 @@ test {\ifentrytype{case}}%
 {%start reefintoc false
 \iffieldundef{icaseyear}{\iffieldundef{caseyear}{\iffieldundef{reportyear}{}{ (\thefield{reportyear})}}{ (\thefield{caseyear})}}{ (\thefield{icaseyear})}%
 }%end refintoc false
-}%end sindex
+}}{}%end sindex
 %}%end \iffirstcitekey
 }%end true
 {%false
@@ -2218,7 +2246,8 @@ test {\ifentrytype{statute}}%
 }%
 {%
 \ifkeyword{regulations}{\toggletrue{printxregulations}}{\togglefalse{printxregulations}}%
-\sindex[\lctor]{\thefield{statutetitle} \thefield{statutetitleyear}}%
+\iftoggle{lcindexing}{%
+\sindex[\lctor]{\thefield{statutetitle} \thefield{statutetitleyear}}}{}%
 \togglefalse{printxregulations}%
 }%
 {}%
@@ -2330,26 +2359,29 @@ test {\ifentrytype{case}}%
 \usebibmacro{getljarticlejournaltitle}%
 \addspace%
 \usebibmacro{getljarticlepage}%
-\iffieldundef{related}{}{\addspace\usebibmacro{related}}
+\iffieldundef{related}{}{\addspace\usebibmacro{related}}%
 \newunit\newblock%
 }
 
 
 \newbibmacro{sendtoindexrr}{%
+\iftoggle{lcindexing}{%
 \sindex[cases]{%
 %{%
 %\color{red}%
 \lcindexaccum%
 %}%
-}%
+}}{}%
 }
 
 
 
 \newbibmacro{fullstepindex}{%name-ref for all keys
+\iftoggle{lcindexing}{%
 \usebibmacro{getindexcasename}%
 \usebibmacro{getindexcaseref}%
 \usebibmacro{sendtoindexrr}%
+}{}
 }
 
 
@@ -2357,6 +2389,7 @@ test {\ifentrytype{case}}%
 
 %indexer
 \newbibmacro{rrindex}{%name for first key; refs for the rest
+\iftoggle{lcindexing}{%
 \iffirstcitekey{%
 \usebibmacro{getindexcasename}%
 }{}%firstcite
@@ -2364,6 +2397,7 @@ test {\ifentrytype{case}}%
 \usebibmacro{getindexcaseref}%
 }%end loopcite
 \iflastcitekey{\usebibmacro{sendtoindexrr}}{}%
+}{}%
 }
 
 
@@ -2662,7 +2696,7 @@ test {\ifentrytype{case}}%
 {\usebibmacro{prenote}}%
 %@@@@@@@@@@@@@@@@ item
 {%
-\usebibmacro{getljarticle}
+\usebibmacro{getljarticle}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
@@ -2793,6 +2827,9 @@ test {\ifentrytype{case}}%
     {}
     {\marginpar{\usefield{\insertbibimage}{thumbnail}}}}
     	
+
+\newcommand\lcsetindexingoff{\togglefalse{lcindexing}}
+\newcommand\lcsetindexingon{\toggletrue{lcindexing}}
 
 \endinput
 \end{filecontents*}
@@ -3251,6 +3288,9 @@ and McGill-style (plus the citeref method, for comparison): \lcsetstylemcgill
 \lcsetstyledefault
 
 \section{Getting Started}
+\subsection{Installing}
+Put the style definition files (.dbx, .bbx, .cbx, .lbx) in a place that TeX can find them, for example the current folder, or in the texmf tree (and if the latter, refresh the File Name Database).
+
 \subsection{Activating}
 Set the biblatex style or citestyle to lawcite.
 
@@ -3271,7 +3311,7 @@ The standard bibliographic/index workflow applies:
 \item xelatex (settle the page numbers and cross-references)
 \end{itemize}
 
-Splitindex is used for the Table of Cases and Table of Statutes (in actualiy, indices). To apply styling on indices coming from a file \textit{foo}, do: 
+Splitindex is used for the Table of Cases and Table of Statutes (in actuality, indices). To apply styling on indices coming from a file \textit{foo}, do: 
 
 \verb|splitindex foo -- -s indexplain.ist -c|
 \bigskip
@@ -3774,7 +3814,7 @@ A complicating factor is parallel reports of the same case: technically, each re
 \fbox{\includegraphics[scale=0.8]{tocexamples.png}}\\
 \end{tabular}
 \end{center}
-\caption[Child keys in the ToC]{For parent-child keys, each unique citation combination results in a separate entry in the Table of Cases. Cite all the children, every time, to get a single entry. Here, the first entry is parent, child1, child2 (\textit{parent has no caseref}); the second and fourth entries are only one child each; and the third, and desired form, is both children.}
+\caption[Child keys in the ToC]{For parent-child keys, each unique citation combination results in a separate entry in the Table of Cases. Cite all the children, every time, to get a single entry. Here, the first entry is parent, child1, child2 (\textit{parent has no caseref}); the second and fourth entries are only one child each; and the third, and desired form, is both children. If a partial ref is to be cited, see examples d.\ref{c:indexoffb} or d.\ref{c:indexoffa} for how to switch its indexing off and on.}
 \label{fig:indextoc}
 \end{figure}
 
@@ -3791,7 +3831,7 @@ The @statute bibentry type is more straightfoward: really, just a title and year
 
 Both bibentry types will need some additional data (such as shortname) for extra usability.
 
-Note that database entries that look like medium neutral citations (like \lcrefnn{armstrongmnc}) are stored in the .bib file, and therefore processed by the citations commands, as if they were MNCs, but they will not have internal paragraph numbers or page numbers.
+Note that database entries that look like medium neutral citations (like \textcolor{red}{\lcsetindexingoff\lcrefnn{armstrongmnc}\lcsetindexingon}\footnote{This item has been switched off from being sent to the Table of Cases.}) are stored in the .bib file, and therefore processed by the citation commands, as if they were MNCs, but they will not have internal paragraph numbers or their own page numbers.
 
 
 
@@ -4301,7 +4341,7 @@ A citation driver command's structure is:
 {postnote}
 \end{verbatim}
 
-Given that the citation can split into two, the prenote and postnote need to stay with the head and tail, and so are moved into the \textit{loop} parameter, and then a case statement is applied.
+Given that the citation can split into two, the prenote and postnote need to stay with the head and tail, and so are moved into the \textit{loop} parameter\footnote{Meaning that multiple keys do not format correctly in `abovebelow' mode.}, and then a case statement is applied.
 
 \begin{verbatim}
 %============= lawcite
@@ -4575,6 +4615,12 @@ Sets whether to print the caseref in the Table of Cases, or not. If true, child 
 Sets whether or not, in the Tables of Cases, a comma is added after the case name for readability.
 \bigskip
 
+\optsett{set-lawcite-indexing=}{true}
+
+Sets whether indexing occurs at all. Intended to be used on a per-item basis, to exclude the item when it is part of a set and cited alone. Affects all indexing: ToC, ToS, ToR.
+\bigskip
+
+
 \subsection{Statute options}
 
 \optsett{show-statute-jurisdiction=}{false}
@@ -4782,6 +4828,14 @@ Set the colour of \texttt{\textbackslash lcinlinerr}'s first cite key's \colorbo
 
 Set the colour of \texttt{\textbackslash lcinlinerr}'s second and subsequent cite key's \colorbox{yellow!20}{\texttt{getcaseref}}.
 \bigskip
+
+\optsett{\cmd{lcsetindexingoff}}{} \\
+\optsett{\cmd{lcsetindexingon}}{}
+
+Switch indexing off and on. Intended for use as a wrapper around an item that is not to go to an index (ToC, ToS, ToR), for example because it is a parent key, or one child key from a child-set.
+\bigskip
+
+
 	
 
 \optsett{\cmd{lcsetdemoon}}{} 
@@ -5274,20 +5328,24 @@ Citing child multi-keys inline, with multicites:\marginnote{\refstepcounter{demo
 \bigskip
 
 
-Citing unrelated multiple keys in the footnote:\marginnote{\refstepcounter{democount}(d.\thedemocount)}
+Citing unrelated multiple keys in the footnote:\marginnote{\refstepcounter{democount}(d.\thedemocount)\label{c:indexoffb}}
 \begin{filecontents}[overwrite,nosearch,noheader]{\democodefile}
 Text\lawcitesfoot[See also][all examining the matter]{becker,cassie,rmorgan}\\
+\lcsetindexingoff%Do not send to ToC
 Text\lawcitesfoot{columbusne,armstrongmnc}
+\lcsetindexingon
 \end{filecontents}
 \PrintDemo {style=parallel}
 \bigskip
 \hfill * \hfill\ 
 \bigskip
 
-Citing unrelated multiple keys, with multicites, in the footnote:\marginnote{\refstepcounter{democount}(d.\thedemocount)}
+Citing unrelated multiple keys, with multicites, in the footnote:\marginnote{\refstepcounter{democount}(d.\thedemocount)\label{c:indexoffa}}
 \begin{filecontents}[overwrite,nosearch,noheader]{\democodefile}
 Text\lawcitesfoot(See also)(all examining the matter)[\nopp 21]{becker}[\mkbibbrackets{15}]{cassie}[\nopp 1055]{rmorgan}\\
+\lcsetindexingoff%Do not send to ToC
 Text\lawcitesfoot[\nopp 838]{columbusne}[\nopp 247]{armstronglewin}
+\lcsetindexingon
 \end{filecontents}
 \PrintDemo {style=parallel}
 \bigskip
@@ -5900,7 +5958,7 @@ page 			& \cmd{lcljpage}		& \lcljpage{smythsc} 			\\
 \bigskip
 
 
-``it has been argued\footnote{By \ljcite[\nopp 785]{friedman}, cited by \lcljauthor{smythsc}.} that, stylistically,
+``it has been argued\footnote{By \ljcite[\nopp 785]{friedman}, as cited by \lcljauthor{smythsc}.} that, stylistically,
 dissents are often looser than majority judgments.''\footnote{\ljcite[\nopp 59]{smythsc}.}
 
 \bigskip
@@ -5948,36 +6006,7 @@ The \lawcite[\bibstring{chapter} 1, \bibstring{section} 2; \bibstring{sections} 
 \hrule
 
 
-%\section{The citeref= Method}
-%Statutechapter method (canreg):
 
-
-%it has been argued that, stylistically,
-%dissents are often looser than majority judgments.
-%Russell Smyth
-%WHAT DO INTERMEDIATE APPELLATE COURTS
-%CITE? A QUANTITATIVE STUDY OF THE CITATION
-%PRACTICE OF AUSTRALIAN STATE SUPREME COURTS
-%  (1999) 21 AdelLR 51-80, 59
-%[1999] AdelLawRw 3; (1999) 21 Adelaide Law Review 51
-%Lawrence Friedman, Robert Kagan, Bliss Cartwright and Stanton
-%Wheeler, 'State Supreme Courts: A Century of Style and Citation' (1981) 33 Stanford Law
-%Review 773 (covering 16 state supreme courts in the period 1870-1970).
-%785
-
-
-
-%``\multicitedelim''
-
-%
-%\section{The Elements of a Legal Citation -- Legislation}
-%xxx
-%
-%
-%Becker\footnote{Butt on Legal Usage, 295}
-%Cassie\footnote{Butt on Legal Usage, 187}
-%Becher\footnote{Butt on Legal Usage, 295}
-%Morgan\footnote{AnnCrimLegNSW 2014-2015 para [8-s 249B.5], p 1070}
 
 
 
@@ -6023,20 +6052,7 @@ The \lawcite[\bibstring{chapter} 1, \bibstring{section} 2; \bibstring{sections} 
 \lcsetstylemcgill
 \noindent \lawcitesinlinerr{mcleanbclr, mcleanlii}
 %
-%    The CanLII reference looks like a neutral citation, but it is simply an identifier used by the online service.
-%    
-%McLean v Pilon (1978), 7 BCLR 99 at 102, 1978 CanLII 237 (SC). The case begins on page 99 of volume 7 of the British Columbia Law Reports and we are referring the reader to page 102.
-%
-%Hareid v Holstad, 1995 CanLII 3083 (BCSC).
-%
-%Kovinsky v Detroit and Windsor Subway Co, [1930] OJ No 196 (QL) (SCAD). 
-%
-%This case is summarized in Ontario Weekly Notes (38 OWN 170) but the full text is only available on Quicklaw. The citation is a Quicklaw (QL) identifier only. OJ stands for Ontario Judgments. Quicklaw has similar databases for each of the provinces (AJ, BCJ, MJ, etc.). Canadian readers would readily recognize the citation as being a case found on Quicklaw and so adding (QL) is superfluous.  However, for readers outside of Canada, this piece of information may be helpful.
-%
-%Wahn v United Keno Hill Mines Ltd, 1999 CarswellOnt 1424 (WL Can) (Sup Ct).
-%
-%The full text of this case can be found on WestlawNext Canada. Canadian readers would readily recognize the citation as being a case found on WestlawNext Canada and so adding (WL Can) is superfluous. However, for readers outside of Canada, this piece of information may be helpful.
-
 \bigskip 
+
 \hfill ----oooOooo---- \hfill\ 
 \end{document}

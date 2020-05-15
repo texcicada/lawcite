@@ -914,10 +914,10 @@ regnum = {87},
 
 %\lcsetdemooff
 \newcommand\lcdemolabelw{4cm}
-
+\newcommand\lccitedemowidth{4cm}
 %===============================================
 \newcommand\lccitedemo[1]{%
-\renewcommand\lcdemolabelw{4cm}
+\renewcommand\lcdemolabelw{\lccitedemowidth}
 
 \noindent\fbox{#1}\vspace{2pt}
 
@@ -953,9 +953,10 @@ regnum = {87},
 }
 
 
+\newcommand\lccitedemowidthrr{3cm}
 %===============================================
 \newcommand\lccitedemorr[1]{%
-\renewcommand\lcdemolabelw{3cm}
+\renewcommand\lcdemolabelw{\lccitedemowidthrr}
 
 \noindent\fbox{#1}\vspace{2pt}
 
@@ -999,9 +1000,10 @@ regnum = {87},
 
 
 
+\newcommand\lccitedemowidthstat{3.5cm}
 %===============================================
 \newcommand\lccitedemostat[1]{%
-\renewcommand\lcdemolabelw{3.5cm}
+\renewcommand\lcdemolabelw{\lccitedemowidthstat}
 
 \noindent\fbox{#1}\vspace{2pt}
 
@@ -1017,9 +1019,11 @@ regnum = {87},
 
 }
 
+
+\newcommand\lccitedemowidthlj{3cm}
 %===============================================
 \newcommand\lccitedemolj[1]{%
-\renewcommand\lcdemolabelw{3cm}
+\renewcommand\lcdemolabelw{\lccitedemowidthlj}
 
 \noindent\fbox{#1}\vspace{2pt}
 
@@ -1042,8 +1046,7 @@ regnum = {87},
 
 }
 
-
-
+\usepackage{multienv}
 
 
 %------------------
@@ -1088,7 +1091,7 @@ regnum = {87},
 \bigskip 
 
 
-
+%=============================================
 \subsubsection*{Multicite keys}
 
 \renewcommand\lcdemolabelw{4cm}
@@ -1112,13 +1115,14 @@ regnum = {87},
 \noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcitesfootrr}}Text\lawcitesfootrr[\nopp 200]{columbussr}[\nopp 838]{columbusne}
 
 
+%===============================================
 \subsection*{Statutes}
 *{\small \textsc{Note}: Observe how citing the same item in multiple styles generates multiple entries in the Table of Statutes. In practice, any item would only ever be cited consistently under one style.}
 \bigskip 
 
-\p Text text text 
+\p Text text text. These two items (=two unique strings) are not being sent to the Table of Cases. 
 
-\lccitedemostat{crimcan}
+\lcsetindexingoff\lccitedemostat{crimcan}\lcsetindexingon
 \bigskip 
 
 \p Text text text 
@@ -1129,6 +1133,7 @@ regnum = {87},
 \p Text text text 
 
 \lccitedemostat{canleg}
+\noindent *{\small \textsc{Note}: A \texttt{citeref} has priority over any style settings.\footnote{Only Canadian *leg and *reg \texttt{citeref}s have been defined, so far.}}
 \bigskip 
 
 
@@ -1162,5 +1167,7 @@ line_max 172
 
 \end{verbatim}
 \bigskip 
+
+
 \hfill ----oooOooo---- \hfill\ 
 \end{document}
