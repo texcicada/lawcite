@@ -2381,7 +2381,7 @@ test {\ifentrytype{case}}%
 \usebibmacro{getindexcasename}%
 \usebibmacro{getindexcaseref}%
 \usebibmacro{sendtoindexrr}%
-}{}
+}{}%
 }
 
 
@@ -2827,10 +2827,164 @@ test {\ifentrytype{case}}%
     {}
     {\marginpar{\usefield{\insertbibimage}{thumbnail}}}}
     	
-
+%===================
 \newcommand\lcsetindexingoff{\togglefalse{lcindexing}}
 \newcommand\lcsetindexingon{\toggletrue{lcindexing}}
 
+
+%=================== utility macros: display the bibentry using all cite commands
+%----------------------
+\newcommand\sdfs[1]{\ttfamily\small\color{blue} #1\space\dotfill\space}
+
+%\lcsetdemooff
+\newcommand\lcdemolabelw{6cm}
+\newcommand\lccitedemowidth{6cm}
+%===============================================
+\newcommand\lccitedemo[1]{%
+\renewcommand\lcdemolabelw{\lccitedemowidth}
+
+\noindent\fbox{#1}\vspace{2pt}
+
+\lcsetstyledefault\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (default)}}Text\lawcite{#1}
+
+\lcsetstylemlr\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (MLR)}}\lawcite{#1}
+
+\lcsetstylemcgill\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (McGill)}}Text\lawcite{#1}
+
+\lcsetstyledefault\setallabove\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (all above)}}\lawcite{#1}
+
+\settitleonly\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (name only)}}\lawcite{#1}
+\lcsetstyledefault%\medskip
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcinline}}\lcinline{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcinlinenn}}\lcinlinenn{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcfoot}}Text\lcfoot{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcnickname}}\lcnickname{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcitetitle}}\lawcitetitle{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawciteref}}\lawciteref{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcrefnn}}\lcrefnn{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcnote}}\lcnote{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcshorttitle}}\lcshorttitle{#1}
+
+}
+
+
+\newcommand\lccitedemowidthrr{5cm}
+%===============================================
+\newcommand\lccitedemorr[1]{%
+\renewcommand\lcdemolabelw{\lccitedemowidthrr}
+
+\noindent\fbox{#1}\vspace{2pt}
+
+%\lcsetstyledefault\noindent\makebox[\lcdemolabelw][l]{lawcite (default)}Text\lawcite{#1}
+%
+%\lcsetstylemlr\noindent\makebox[\lcdemolabelw][l]{lawcite (MLR)}\lawcite{#1}
+%
+%\lcsetstylemcgill\noindent\makebox[\lcdemolabelw][l]{lawcite (McGill)}Text\lawcite{#1}
+%
+%\lcsetstyledefault\setallabove\noindent\makebox[\lcdemolabelw][l]{lawcite (all above)}\lawcite{#1}
+%
+%\settitleonly\noindent\makebox[\lcdemolabelw][l]{lawcite (name only)}\lawcite{#1}
+%\lcsetstyledefault\medskip
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcinlinerr}}\lcinlinerr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcinlinennrr}}\lcinlinennrr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcfootrr}}Text\lcfootrr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcnicknamerr}}\lcnicknamerr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcitetitlerr}}\lawcitetitlerr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawciterefrr}}\lawciterefrr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcrefnnrr}}\lcrefnnrr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcnoterr}}\lcnoterr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcshorttitlerr}}\lcshorttitlerr{#1}
+
+}
+
+
+
+
+%===============================================
+
+
+
+
+
+\newcommand\lccitedemowidthstat{5.5cm}
+%===============================================
+\newcommand\lccitedemostat[1]{%
+\renewcommand\lcdemolabelw{\lccitedemowidthstat}
+
+\noindent\fbox{#1}\vspace{2pt}
+
+\lcsetstyledefault\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (default)}}\lawcite{#1}
+
+\lcsetstylemlr\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (MLR)}}\lawcite{#1}
+
+\lcsetstylemcgill\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (McGill)}}\lawcite{#1}
+
+\lcsetstyledefault\setallabove\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (all above)}}\lawcite{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcciteref}}\lcciteref{#1}
+
+}
+
+
+\newcommand\lccitedemowidthlj{5cm}
+%===============================================
+\newcommand\lccitedemolj[1]{%
+\renewcommand\lcdemolabelw{\lccitedemowidthlj}
+
+\noindent\fbox{#1}\vspace{2pt}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{ljcite}}\ljcite{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljauthor}}\lcljauthor{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljtitle}}\lcljtitle{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljyear}}\lcljyear{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljvolume}}\lcljvolume{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljjournaltitle}}\lcljjournaltitle{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljpage}}\lcljpage{#1}
+}
+
+
+%=================== print the index
+\newcommand\printlawciteindexes{%
+\iftoggle{printlegtoc}{%
+\let\oldtwocolumn\twocolumn
+\renewcommand{\twocolumn}[1][]{##1}
+\let\oldclearpage\clearpage
+\renewcommand\clearpage{\relax}
+\printindex[cases]
+\printindex[legislation]
+\iftoggle{printregulations}{\printindex[regulations]}{}
+\renewcommand{\twocolumn}[1][]{\oldtwocolumn}
+\renewcommand\clearpage{\oldclearpage}
+}{}
+}
+
+
+
+%===================
 \endinput
 \end{filecontents*}
 
@@ -2952,6 +3106,7 @@ sub-rules = {{Sub-rules}{sub-rr}},
 \setmainfont{Noto Serif}
 \setsansfont{TeX Gyre Schola}[Scale=1.2]%Gentium Plus}
 \setmonofont{Noto Sans Mono}[Colour=blue]
+%\newfontface\fdisplabel{Noto Sans}[Scale=0.8]
 \setmathfont{Fira Math}
 %------------------
 \usepackage{ruby}
@@ -3208,6 +3363,62 @@ userdefinedwidth = \textwidth ,
             citecolor=blue, 
             hyperindex=false,       
 ]{hyperref}
+
+%================
+%mark undefined \ref and \autoref
+\makeatletter
+
+\def\@setref#1#2#3{%
+  \ifx#1\relax
+   \protect\G@refundefinedtrue
+   \nfss@text{\reset@font\textcolor{red}{??}}% <=====
+   \@latex@warning{Reference `#3' on page \thepage \space
+             undefined}%
+  \else
+   \expandafter#2#1\null
+  \fi}
+
+
+%======================
+\DeclareRobustCommand*{\autoref}{%
+  \leavevmode
+  \@ifstar{\HyRef@autoref\@gobbletwo}{\HyRef@autoref\hyper@@link}%
+}
+\def\HyRef@autoref#1#2{%
+  \begingroup
+    \Hy@safe@activestrue
+    \expandafter\HyRef@autosetref\csname r@#2\endcsname{#2}{#1}%
+  \endgroup
+}
+\def\HyRef@autosetref#1#2#3{% link command, csname, refname
+  \HyRef@ShowKeysRef{#2}%
+  \ifcase 0\ifx#1\relax 1\fi\ifx#1\Hy@varioref@undefined 1\fi\relax
+    \edef\HyRef@thisref{%
+      \expandafter\@fourthoffive#1\@empty\@empty\@empty
+    }%
+    \expandafter\HyRef@testreftype\HyRef@thisref.\\%
+    \Hy@safe@activesfalse
+    #3{%
+      \expandafter\@fifthoffive#1\@empty\@empty\@empty
+    }{%
+      \expandafter\@fourthoffive#1\@empty\@empty\@empty
+    }{%
+      \HyRef@currentHtag
+      \expandafter\@firstoffive#1\@empty\@empty\@empty
+      \null
+    }%
+  \else
+    \protect\G@refundefinedtrue
+    \nfss@text{\reset@font\bfseries \fbox{\textcolor{red}{???}}}% <=====
+    \@latex@warning{%
+      Reference `#2' on page \thepage\space undefined%
+    }%
+  \fi
+}
+\makeatother
+
+
+
 
 %------------------
 \begin{document}
@@ -5899,28 +6110,7 @@ Text\lawcitesfootrr{armstrongmnc}[\nopp 246]{armstronglewin}[\nopp 1029]{armstro
 
 
 %\bigskip
-
-%%Dynamic entry set: for the bibliography
-%%%\defbibentryset{becherset}{columbussr,columbusne}
-%%\defbibentryset{becherset}{keyabc,case2}
-%%
-%%xdata: \lawcitesinlinerr(Zimmerman J, for the court)[\nopp 200]{xcolumbussr}[\nopp 838]{xcolumbusne} 
-%%%\lcinline{becherset}
-
-%xxx
-
-
-
-%\[
-%\overunderbraces{&\br{2}{x}& &\br{2}{y}}%
-%{a + b +&c + d +&e + f&+&g + h&+ i + j&+ k + l + m}%
-%{& &\br{3}{z}}
-%= \pi r^2
-%\]
-
 %==========================
-%\renewcommand\egcasename\egcasename{City of Marion v Becker}
-%\renewcommand\egcaseref{(1973) 6 SASR 13, 29 (Bray CJ)}
 
 
 
@@ -6010,14 +6200,6 @@ The \lawcite[\bibstring{chapter} 1, \bibstring{section} 2; \bibstring{sections} 
 
 
 
-\printbibliography[
-	nottype=case,
-	nottype=statute,
-	notkeyword=lj,
-		]
-\printindex
-
-
 \begin{figure}
 \begin{center}
 \fbox{\includegraphics[scale=0.9]{velocity.png}}\attribution{CommonLII}
@@ -6051,6 +6233,92 @@ The \lawcite[\bibstring{chapter} 1, \bibstring{section} 2; \bibstring{sections} 
 
 \lcsetstylemcgill
 \noindent \lawcitesinlinerr{mcleanbclr, mcleanlii}
+
+
+
+%==================================================================
+\section{Utility Macros}
+\lcsetdemooff
+\lcsetindexingoff
+
+\optsett{\cmd{lccitedemo}\{key(s)\}}{}\\
+\optsett{\cmd{lccitedemorr}\{key(s)\}}{}\\
+\optsett{\cmd{lccitedemostat}\{key\}}{}\\
+\optsett{\cmd{lccitedemolj}\{key\}}{}\\
+
+These macros display what the citation commands available for an entry type produce. 
+
+\subsection*{Cases}
+
+\lccitedemo{snail}
+\bigskip 
+
+\lccitedemo{becker}
+\bigskip 
+
+ 
+\lccitedemorr{armstronglewin, armstronger}
+\bigskip 
+
+\lccitedemorr{columbussr, columbusne}\par
+\noindent *{\small \textsc{Note}: If the child keys are cited separately, there will be separate entries in the Table of Cases.}
+\bigskip 
+
+
+%=============================================
+\subsubsection*{Multicite keys}
+%\renewcommand\lcdemolabelw{4cm}
+{\small These multicite display tables are hard-coded.}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcitesinline}}\lawcitesinline[\nopp 564]{snail}[\nopp 15]{becker}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcitesinlinerr}}\lawcitesinlinerr[\nopp 200]{columbussr}[\nopp 838]{columbusne}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcitesfoot}}Text\lawcitesfoot[\nopp 564]{snail}[\nopp 15]{becker}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcitesfootrr}}Text\lawcitesfootrr[\nopp 200]{columbussr}[\nopp 838]{columbusne}
+
+
+%===============================================
+\subsection*{Statutes}
+
+\lccitedemostat{crimcan}
+\bigskip 
+
+\lccitedemostat{crimnsw}
+\bigskip 
+
+\lccitedemostat{canleg}
+\noindent *{\small \textsc{Note}: A \texttt{citeref} has priority over any style settings.\footnote{Only Canadian *leg and *reg \texttt{citeref}s have been defined, so far.}}
+\bigskip 
+
+
+\subsection*{Regulations}
+
+\lccitedemostat{canregbc}
+\bigskip 
+
+
+\subsection*{Law Journals}
+
+\lccitedemolj{smythsc}
+\bigskip 
+
+
+
+%-------------------------------------
+\bigskip
+\hfill\rulesep\hfill\ %\hrule
+\bigskip
+%
+\printbibliography[
+	nottype=case,
+	nottype=statute,
+	notkeyword=lj,
+		]
+\printindex
+
+
 %
 \bigskip 
 

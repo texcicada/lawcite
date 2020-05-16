@@ -1192,7 +1192,7 @@ test {\ifentrytype{case}}%
 \usebibmacro{getindexcasename}%
 \usebibmacro{getindexcaseref}%
 \usebibmacro{sendtoindexrr}%
-}{}
+}{}%
 }
 
 
@@ -1645,11 +1645,11 @@ test {\ifentrytype{case}}%
 
 %=================== utility macros: display the bibentry using all cite commands
 %----------------------
-\newcommand\sdfs[1]{\fdisplabel\color{blue} #1\space\dotfill\space}
+\newcommand\sdfs[1]{\ttfamily\small\color{blue} #1\space\dotfill\space}
 
 %\lcsetdemooff
-\newcommand\lcdemolabelw{4cm}
-\newcommand\lccitedemowidth{4cm}
+\newcommand\lcdemolabelw{6cm}
+\newcommand\lccitedemowidth{6cm}
 %===============================================
 \newcommand\lccitedemo[1]{%
 \renewcommand\lcdemolabelw{\lccitedemowidth}
@@ -1688,7 +1688,7 @@ test {\ifentrytype{case}}%
 }
 
 
-\newcommand\lccitedemowidthrr{3cm}
+\newcommand\lccitedemowidthrr{5cm}
 %===============================================
 \newcommand\lccitedemorr[1]{%
 \renewcommand\lcdemolabelw{\lccitedemowidthrr}
@@ -1735,7 +1735,7 @@ test {\ifentrytype{case}}%
 
 
 
-\newcommand\lccitedemowidthstat{3.5cm}
+\newcommand\lccitedemowidthstat{5.5cm}
 %===============================================
 \newcommand\lccitedemostat[1]{%
 \renewcommand\lcdemolabelw{\lccitedemowidthstat}
@@ -1755,7 +1755,7 @@ test {\ifentrytype{case}}%
 }
 
 
-\newcommand\lccitedemowidthlj{3cm}
+\newcommand\lccitedemowidthlj{5cm}
 %===============================================
 \newcommand\lccitedemolj[1]{%
 \renewcommand\lcdemolabelw{\lccitedemowidthlj}
@@ -1778,7 +1778,20 @@ test {\ifentrytype{case}}%
 }
 
 
-
+%=================== print the index
+\newcommand\printlawciteindexes{%
+\iftoggle{printlegtoc}{%
+\let\oldtwocolumn\twocolumn
+\renewcommand{\twocolumn}[1][]{##1}
+\let\oldclearpage\clearpage
+\renewcommand\clearpage{\relax}
+\printindex[cases]
+\printindex[legislation]
+\iftoggle{printregulations}{\printindex[regulations]}{}
+\renewcommand{\twocolumn}[1][]{\oldtwocolumn}
+\renewcommand\clearpage{\oldclearpage}
+}{}
+}
 
 
 
