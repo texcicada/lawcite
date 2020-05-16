@@ -44,6 +44,24 @@
 }
 %
 
+%
+\newtoggle{lcparnumrefs}
+\toggletrue{lcparnumrefs}
+\newcommand\lcparnumrefsencap{}
+
+% statute
+\DeclareBibliographyOption[boolean]{use-toc-parnumrefs}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{lcparnumrefs}}
+{\togglefalse{lcparnumrefs}}%
+\iftoggle{lcparnumrefs}{\renewcommand\lcparnumrefsencap{|myhyperref}}{\renewcommand\lcparnumrefsencap{}}%
+}
+%
+
+
+
+
+
 % statute
 \DeclareBibliographyOption[boolean]{regulations-as-tor}[true]{%
 \ifstrequal{#1}{true}
