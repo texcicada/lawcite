@@ -1,0 +1,82 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {british}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Example}{7}{section.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Getting Started}{7}{section.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1}Installing}{7}{subsection.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2}Activating}{8}{subsection.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3}Workflow}{8}{subsection.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Typesetting Legal Citations with Biblatex}{9}{section.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}The Elements of a Legal Citation -- Cases}{9}{section.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Bibentries}{16}{section.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1}dbx, bbx, cbx, lbx files}{20}{subsection.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2}Citing}{26}{subsection.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}Package Options}{27}{section.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.1}Case options}{28}{subsection.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2}Table of Cases options}{29}{subsection.6.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3}Statute options}{29}{subsection.6.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.4}Table of Statutes/Regulations options}{29}{subsection.6.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.5}Citation options}{29}{subsection.6.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7}Style-setting commands}{30}{section.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.1}Style switching commands}{31}{subsection.7.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.2}Style component low-level commands}{31}{subsection.7.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.3}Delimiters}{32}{subsection.7.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.4}Miscellaneous commands}{33}{subsection.7.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8}Bibmacros}{33}{section.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.1}Bibmacros for Cases}{33}{subsection.8.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.2}Bibmacros for Statutes}{35}{subsection.8.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.3}Bibmacros for Law Journals}{35}{subsection.8.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {9}Citation Commands}{36}{section.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {9.1}The \textbackslash lawcite Command}{36}{subsection.9.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {9.2}Cases}{40}{subsection.9.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {9.2.1}Citing a Component}{40}{subsubsection.9.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {9.2.2}Single-cite, multi-keys}{41}{subsubsection.9.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {9.2.3}Multicite commands: single cite and multicite: multi-keys}{42}{subsubsection.9.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {9.2.4}Demo Mode}{46}{subsubsection.9.2.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {9.3}Statutes}{46}{subsection.9.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {10}Multicite Usage}{50}{section.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {10.1}Multiple Keys}{50}{subsection.10.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {10.1.1}Separate Cases}{50}{subsubsection.10.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {10.1.2}One Case: Parent-Child Keys with \texttt {crossref}}{52}{subsubsection.10.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {10.1.3}The footnote versions}{55}{subsubsection.10.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {11}Law Journals}{58}{section.11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {12}Utility Macros}{60}{section.12}%

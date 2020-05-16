@@ -1638,8 +1638,149 @@ test {\ifentrytype{case}}%
     {}
     {\marginpar{\usefield{\insertbibimage}{thumbnail}}}}
      
-
+%===================
 \newcommand\lcsetindexingoff{\togglefalse{lcindexing}}
 \newcommand\lcsetindexingon{\toggletrue{lcindexing}}
 
+
+%=================== utility macros: display the bibentry using all cite commands
+%----------------------
+\newcommand\sdfs[1]{\fdisplabel\color{blue} #1\space\dotfill\space}
+
+%\lcsetdemooff
+\newcommand\lcdemolabelw{4cm}
+\newcommand\lccitedemowidth{4cm}
+%===============================================
+\newcommand\lccitedemo[1]{%
+\renewcommand\lcdemolabelw{\lccitedemowidth}
+
+\noindent\fbox{#1}\vspace{2pt}
+
+\lcsetstyledefault\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (default)}}Text\lawcite{#1}
+
+\lcsetstylemlr\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (MLR)}}\lawcite{#1}
+
+\lcsetstylemcgill\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (McGill)}}Text\lawcite{#1}
+
+\lcsetstyledefault\setallabove\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (all above)}}\lawcite{#1}
+
+\settitleonly\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (name only)}}\lawcite{#1}
+\lcsetstyledefault%\medskip
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcinline}}\lcinline{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcinlinenn}}\lcinlinenn{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcfoot}}Text\lcfoot{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcnickname}}\lcnickname{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcitetitle}}\lawcitetitle{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawciteref}}\lawciteref{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcrefnn}}\lcrefnn{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcnote}}\lcnote{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcshorttitle}}\lcshorttitle{#1}
+
+}
+
+
+\newcommand\lccitedemowidthrr{3cm}
+%===============================================
+\newcommand\lccitedemorr[1]{%
+\renewcommand\lcdemolabelw{\lccitedemowidthrr}
+
+\noindent\fbox{#1}\vspace{2pt}
+
+%\lcsetstyledefault\noindent\makebox[\lcdemolabelw][l]{lawcite (default)}Text\lawcite{#1}
+%
+%\lcsetstylemlr\noindent\makebox[\lcdemolabelw][l]{lawcite (MLR)}\lawcite{#1}
+%
+%\lcsetstylemcgill\noindent\makebox[\lcdemolabelw][l]{lawcite (McGill)}Text\lawcite{#1}
+%
+%\lcsetstyledefault\setallabove\noindent\makebox[\lcdemolabelw][l]{lawcite (all above)}\lawcite{#1}
+%
+%\settitleonly\noindent\makebox[\lcdemolabelw][l]{lawcite (name only)}\lawcite{#1}
+%\lcsetstyledefault\medskip
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcinlinerr}}\lcinlinerr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcinlinennrr}}\lcinlinennrr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcfootrr}}Text\lcfootrr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcnicknamerr}}\lcnicknamerr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcitetitlerr}}\lawcitetitlerr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawciterefrr}}\lawciterefrr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcrefnnrr}}\lcrefnnrr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcnoterr}}\lcnoterr{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcshorttitlerr}}\lcshorttitlerr{#1}
+
+}
+
+
+
+
+%===============================================
+
+
+
+
+
+\newcommand\lccitedemowidthstat{3.5cm}
+%===============================================
+\newcommand\lccitedemostat[1]{%
+\renewcommand\lcdemolabelw{\lccitedemowidthstat}
+
+\noindent\fbox{#1}\vspace{2pt}
+
+\lcsetstyledefault\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (default)}}\lawcite{#1}
+
+\lcsetstylemlr\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (MLR)}}\lawcite{#1}
+
+\lcsetstylemcgill\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (McGill)}}\lawcite{#1}
+
+\lcsetstyledefault\setallabove\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (all above)}}\lawcite{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcciteref}}\lcciteref{#1}
+
+}
+
+
+\newcommand\lccitedemowidthlj{3cm}
+%===============================================
+\newcommand\lccitedemolj[1]{%
+\renewcommand\lcdemolabelw{\lccitedemowidthlj}
+
+\noindent\fbox{#1}\vspace{2pt}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{ljcite}}\ljcite{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljauthor}}\lcljauthor{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljtitle}}\lcljtitle{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljyear}}\lcljyear{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljvolume}}\lcljvolume{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljjournaltitle}}\lcljjournaltitle{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljpage}}\lcljpage{#1}
+}
+
+
+
+
+
+
+%===================
 \endinput
