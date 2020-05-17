@@ -1793,6 +1793,49 @@ test {\ifentrytype{case}}%
 }{}
 }
 
+%Numbered paragraphs: pre-formatting
+\newcommand\numparshiftleft{}
+\newcommand\numparfillright{}
+\newcommand\numparindent{}
+\newcommand\numparformat{}
+\newcommand\numpardelimleft{[}
+\newcommand\numpardelimright{]}
+\newcommand\numpardelimpost{\ }
+\newsavebox{\mybox}
+
+
+%Numbered paragraphs
+\newcounter{parno}%[paragraph]%% numbered paragraph
+\renewcommand{\theparno}{\arabic{parno}}
+\newcommand{\p}{\refstepcounter{parno}\noindent\numparshiftleft{\savebox{\mybox}{\mbox{\numparformat\numpardelimleft\theparno\numpardelimright}}\usebox{\mybox}}\label{para.\theparno}\numparfillright\numparindent\numpardelimpost}
+\setcounter{secnumdepth}{4}
+\setcounter{parno}{0}
+
+%Numbered paragraphs: formatting
+\newcommand\setnumparshiftleft[1]{\renewcommand\numparshiftleft{#1}}
+\newcommand\setnumparfillright[1]{\renewcommand\numparfillright{#1}}
+\newcommand\setnumparindent[1]{\renewcommand\numparindent{#1}}
+\newcommand\setnumparformat[1]{\renewcommand\numparformat{#1}}
+\newcommand\setnumpardelimleft[1]{\renewcommand\numpardelimleft{#1}}
+\newcommand\setnumpardelimright[1]{\renewcommand\numpardelimright{#1}}
+
+
+
+%numbered paragraphs cross-referencing method
+\newcommand\definname{para}
+\newcommand{\paradef}[1]{\label{#1}}
+\newcommand\pararef[1]{\definname\ [\ref{#1}]}
+
+%user bib commands
+\newcommand\lcsec[1]{\bibstring{section}~#1}
+\newcommand\lcsecyr[2]{\bibstring{section}~#1\addspace\mkbibparens{#2}}
+\newcommand\lcssec[1]{\bibstring{sections}~#1}
+\newcommand\lcssecyr[2]{\bibstring{sections}~#1\addspace\mkbibparens{#2}}
+\newcommand\lcpara[1]{\mkbibbrackets{#1}}
+\newcommand\lcparas[2]{\mkbibbrackets{#1}--\mkbibbrackets{#2}}
+\newcommand\lcatpara[1]{\bibstring{atparagraph}\addspace\mkbibbrackets{#1}}
+\newcommand\lcatparas[2]{\bibstring{atparagraph}\addspace\mkbibbrackets{#1}--\mkbibbrackets{#2}}
+
 
 
 %===================
