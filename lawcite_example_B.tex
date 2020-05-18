@@ -1,0 +1,199 @@
+
+
+\begin{filecontents*}{\jobname.bib}
+@case{sc11,partya = {TFM Epping Land Pty Ltd},partyb = {Decon Australia Pty Ltd},caseyear = {2020},courtname = {NSWCA},casenumber = {93},}
+@case{sc12,partya = {Kay},partyb = {KRM (Vic) Pty Ltd; Classic Bet (NSW) Pty Ltd v Kay},caseyear = {2020},courtname = {NSWCA},casenumber = {92},}
+@case{sc13,partya = {Lawrence},partyb = {Ciantar},caseyear = {2020},courtname = {NSWCA},casenumber = {89},}
+@case{sc14,partya = {Best},partyb = {Rosamond},caseyear = {2020},courtname = {NSWCA},casenumber = {90},}
+@case{sc15,partya = {Kirby},partyb = {Dental Council of NSW},caseyear = {2020},courtname = {NSWCA},casenumber = {91},}
+@case{sc16,partya = {Foundas},partyb = {Arambatzis (No 3)},caseyear = {2020},courtname = {NSWCA},casenumber = {87},}
+@case{sc17,partya = {Mendonca},partyb = {Legal Services Commissioner},caseyear = {2020},courtname = {NSWCA},casenumber = {84},}
+@case{sc18,partya = {Ballas},partyb = {Department of Education (State of NSW)},caseyear = {2020},courtname = {NSWCA},casenumber = {86},}
+@case{sc19,partya = {Hackett (a pseudonym)},partyb = {Secretary, Department of Communities and Justice},caseyear = {2020},courtname = {NSWCA},casenumber = {83},}
+@case{sc20,partya = {Inghams Enterprises Pty Limited},partyb = {Hannigan},caseyear = {2020},courtname = {NSWCA},casenumber = {82},}
+@case{sc21,partya = {Sayed},partyb = {National Australia Bank},caseyear = {2020},courtname = {NSWCA},casenumber = {88},}
+
+
+@statute{bcisp,
+statutetitle = {Building and Construction Industry Security of Payment Act},
+statutetitleyear = {1999},
+statutejurisdiction = {NSW},
+}
+
+
+@statute{hba,
+statutetitle = {Home Building Act},
+statutejurisdiction = {NSW},
+statutetitleyear = {1989},
+}
+
+\end{filecontents*}
+
+
+%===================================================
+
+\documentclass[12pt]{article}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+\usepackage[table]{xcolor}
+\pagecolor{blue!3}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+%\setsansfont{Noto Sans}[Scale=0.8]
+%\setmonofont{Noto Sans Mono}%[Scale=0.8]
+
+%------------------
+
+
+
+\newcommand\abibname{lawcite}
+\newcommand\abibstyle{style=\abibname}
+\usepackage[
+	\abibstyle , 
+	indexing=cite,
+	citetracker=true,
+	ibidtracker=true,
+	pagetracker=true,
+	idemtracker=true,
+	opcittracker=true,
+	loccittracker=true,
+	autocite=footnote,
+   datezeros=true,
+	lawcitestyle=default,
+	use-toc-parnumrefs=true,
+		]{biblatex}
+
+\addbibresource{\jobname.bib}
+		
+%=================
+%indexing
+
+\newcommand*\myhyperref[1]{\ref{para.#1}}
+
+\usepackage{splitidx}
+\newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to paragraph numbers.\bigskip}
+\setindexpreamble[cases]{\pagerefindexnote}
+\setindexpreamble[legislation]{\pagerefindexnote}
+\setindexpreamble[regulations]{\pagerefindexnote}
+
+
+%Print the `preamble' of the index:
+\makeatletter
+ \renewcommand*{\@@printindex}{}
+ \def\@@printindex[#1][#2]{%
+ \begingroup
+ \edef\indexshortcut{#1}%
+ \def\indexname{#2\par \useindexpreamble}%<=====
+ \def\kvtcb@text@index{#2}%
+ \let\index@preamble\relax
+ \expandafter\let\expandafter\index@preamble
+ \csname index@\indexshortcut @preamble\endcsname
+ \if@splitidx
+ \def\@tempa{idx}\def\@tempb{#1}%
+ \ifx\@tempa\@tempb\let\@indexsuffix\@gobble\fi
+ \fi
+\@input@{\jobname\@indexsuffix{#1}.ind}%
+\endgroup
+\csname printindex@endhook\endcsname
+}
+\makeatother
+\makeindex
+\newindex[Table of Cases]{cases}
+\newindex[Table of Statutes]{legislation}
+\newindex[Table of Regulations]{regulations}
+
+%%%
+%%%%Numbered paragraphs
+%%%\newcounter{parno}%[paragraph]%% numbered paragraph
+%%%\renewcommand{\theparno}{\arabic{parno}}
+%%%\newcommand{\p}{\refstepcounter{parno}\noindent[\theparno]\label{para.\theparno}\ } 
+%%%\setcounter{secnumdepth}{4}
+%%%\setcounter{parno}{0}
+%%%
+%%%
+%%%%numbered paragraphs cross-referencing method
+%%%\newcommand\definname{para}
+%%%\newcommand{\paradef}[1]{\label{#1}}
+%%%\newcommand\pararef[1]{\definname\ [\ref{#1}]}
+%%%
+
+
+
+%-------------------------------------------------------
+\AtWriteToIndex{cases}{\let\thepage\theparno}
+\AtWriteToIndex{legislation}{\let\thepage\theparno}
+\AtWriteToIndex{regulations}{\let\thepage\theparno}
+%-------------------------------------------------------
+
+\usepackage{tikz}
+\usetikzlibrary{shadows,backgrounds}
+
+
+%%%user bib commands
+%%\newcommand\lcsec[1]{\bibstring{section}~#1}
+%%\newcommand\lcsecyr[2]{\bibstring{section}~#1\addspace\mkbibparens{#2}}
+%%\newcommand\lcssec[1]{\bibstring{sections}~#1}
+%%\newcommand\lcssecyr[2]{\bibstring{sections}~#1\addspace\mkbibparens{#2}}
+
+\usepackage[
+				bookmarks,
+            colorlinks=true,        
+            allcolors = black,  
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+\newcommand\theball{\tikz \shade[ball color=green!40] (0,0) circle (0.75ex);\hspace{0.75em}}
+
+
+
+%------------------
+\begin{document}
+\noindent Some decisions of the Court of Appeal of the Supreme Court of New South Wales, as at mid-May 2020.
+\bigskip
+
+\hfill\rulesep\hfill\ %
+\bigskip
+
+\printlawciteindexes
+\bigskip
+\hfill\rulesep\hfill\ %\hrule%{0.8\linewidth}
+\bigskip
+
+
+\newpage
+
+\bigskip
+
+\setnumparshiftleft{\hspace{-2em}\theball\hspace{1.5em}}
+\setnumparfillright{\hspace{0.5em}---\hspace{0.5em}}
+%\setnumparformat{\color{blue}\bfseries}
+%\setnumpardelimleft{}
+%\setnumpardelimright{.}
+\setnumpardelimpost{}
+
+\p A case about a builder with a \lawcite{bcisp} payment claim\lawcite{sc11}.
+
+\p Interpretation of two commercial agreements about how liability is incurred `collectively and individually'\lawcite{sc12}.
+
+\p Another \lawcite{hba} case and the interpretation of contracts\lawcite{sc13}.
+
+\p A case of ``a long afternoon and evening of drinking'' between two then-friends, with an assault occurring when the respondent ``found the appellant and the respondent’s then wife'' etc, the appellant commencing proceedings seeking damages more than three years after the assault, and the primary judge finding the action was statute barred\lawcite[\lcparas{3}{5}]{sc14}.
+
+\p Was there apprehended bias by the Dental Council in suspendng a dentist's registration and then imposing conditions on it? And did the tribunal confirming the appropriateness of the conditions fail to exercise its jurisdiction?\lawcite{sc15}.
+
+\p A land law case, involving co-ownership, and, as the catchwords say, `where the trustee was not the registered proprietor at the time the demand for occupation rent was made'\lawcite{sc16}.
+
+\p x\lawcite{sc17}
+
+\p x\lawcite{sc18}
+
+\p x\lawcite{sc19}
+
+\p x\lawcite{sc20}
+
+\p x\lawcite{sc21}
+
+\bigskip
+\bigskip
+\hfill ----oooOooo---- \hfill\ 
+\end{document}

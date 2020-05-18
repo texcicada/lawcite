@@ -3025,6 +3025,7 @@ test {\ifentrytype{case}}%
 \newcommand\setnumparformat[1]{\renewcommand\numparformat{#1}}
 \newcommand\setnumpardelimleft[1]{\renewcommand\numpardelimleft{#1}}
 \newcommand\setnumpardelimright[1]{\renewcommand\numpardelimright{#1}}
+\newcommand\setnumpardelimpost[1]{\renewcommand\numpardelimpost{#1}}
 
 
 
@@ -3196,8 +3197,8 @@ atparagraphs = {{at paragraphs}{at paras}},
 \usepackage{microtype}
 \usepackage[framemethod=TikZ]{mdframed}
 \usetikzlibrary{positioning}
-\usepackage{tikzpagenodes}
 \usetikzlibrary{shadows,backgrounds}
+\usepackage{tikzpagenodes}
 \usepackage{makecell}
 \usepackage{soul}
 \definecolor{mylightyellow}{rgb}{0.90,0.98,0.03}
