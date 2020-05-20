@@ -3570,7 +3570,7 @@ Set the biblatex style or citestyle to lawcite.
 \begin{verbatim}
 \usepackage[style=lawcite]{biblatex}
 \end{verbatim}
-Additional, and more granular, options are available: see section \ref{packopt}.
+Additional, and more granular, options are available: see \autoref{packopt}.
 
 
 \subsection{Workflow}
@@ -4890,7 +4890,7 @@ Sets whether or not, in the Tables of Cases, a comma is added after the case nam
 
 \optsett{set-lawcite-indexing=}{true}
 
-Sets whether indexing occurs at all. Intended to be used on a per-item basis, to exclude the item when it is part of a set and cited alone. Affects all indexing: ToC, ToS, ToR.
+Sets whether indexing occurs at all. The corresponding commands (\cmd{lcsetindexingoff} and \cmd{lcsetindexingon}, see \autoref{indexoffon}) are intended to be used on a per-item basis, to exclude the item when it is part of a set and cited alone. Affects all indexing: ToC, ToS, ToR.
 \bigskip
 
 
@@ -5105,7 +5105,7 @@ Set the colour of \texttt{\textbackslash lcinlinerr}'s second and subsequent cit
 \optsett{\cmd{lcsetindexingoff}}{} \\
 \optsett{\cmd{lcsetindexingon}}{}
 
-Switch indexing off and on. Intended for use as a wrapper around an item that is not to go to an index (ToC, ToS, ToR), for example because it is a parent key, or one child key from a child-set.
+\label{indexoffon}Switch indexing off and on. Intended for use as a wrapper around an item that is not to go to an index (ToC, ToS, ToR), for example because it is a parent key, or one child key from a child-set.
 \bigskip
 
 
