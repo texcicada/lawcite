@@ -1,0 +1,102 @@
+
+
+\begin{filecontents*}{\jobname.bib}
+@article{sc12,
+title = {Kay v KRM (Vic) Pty Ltd; Classic Bet (NSW) Pty Ltd v Kay},
+number = {[2020] NSWCA 92},
+keywords={legal,case},
+}
+
+
+@article{hba,
+title = {Home Building Act 1989},
+location = {NSW},
+keywords={legal,statute},
+}
+
+\end{filecontents*}
+
+
+%===================================================
+
+%\documentclass[12pt]{article}
+\documentclass[12pt,varwidth,border=6pt]{standalone}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+\usepackage[table]{xcolor}
+\pagecolor{blue!3}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+%\setsansfont{Noto Sans}[Scale=0.8]
+%\setmonofont{Noto Sans Mono}%[Scale=0.8]
+
+%------------------
+
+
+
+\newcommand\abibname{numeric}
+\newcommand\abibstyle{style=\abibname}
+\usepackage[
+	\abibstyle , 
+	indexing=cite,
+	citetracker=true,
+	ibidtracker=true,
+	pagetracker=true,
+	idemtracker=true,
+	opcittracker=true,
+	loccittracker=true,
+	autocite=footnote,
+		]{biblatex}
+
+\addbibresource{\jobname.bib}
+
+\addbibresource{biblatex-examples.bib}
+				
+%============= legal
+\DeclareCiteCommand{legal}%
+{%
+\usebibmacro{prenote}%
+}% 
+%@@@@@@@@@@@@@@@@ item
+{%
+\mkbibemph{\thefield{title}}%
+\iffieldundef{number}{}{\addspace\printfield{number}}%case
+\iflistundef{location}{}{\addspace\mkbibparens{\printlist{location}}}%statute
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{%
+\multicitedelim%
+}%
+%@@@@@@@@@@@@@@@@ postnote
+{%
+\usebibmacro{postnote}%
+}
+
+
+
+%=================
+
+
+\usepackage[
+				bookmarks,
+            colorlinks=true,        
+            allcolors = black,  
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+
+
+
+
+%------------------
+\begin{document}
+
+Custom citation command + @article bibentry type:
+
+\legal[at \mkbibbrackets{15}]{sc12} and \legal[s 4]{hba}
+
+x\cite{sigfridsson,reese,kullback:related}
+
+\printbibliography%[notkeyword=legal]
+ 
+\end{document}

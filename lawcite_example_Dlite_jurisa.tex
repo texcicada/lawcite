@@ -1,0 +1,144 @@
+
+
+\begin{filecontents*}{\jobname.bib}
+@jurisdiction{sc12,
+title = {Kay v KRM (Vic) Pty Ltd; Classic Bet (NSW) Pty Ltd v Kay},
+number = {[2020] NSWCA 92},
+keywords={legal,case},
+}
+
+@jurisdiction{bcisp,
+title = {Building and Construction Industry Security of Payment Act 1999},
+location = {NSW},
+keywords={legal,statute},
+}
+
+@jurisdiction{hba,
+title = {Home Building Act 1989},
+location = {NSW},
+keywords={legal,statute},
+}
+
+\end{filecontents*}
+
+
+%===================================================
+
+%\documentclass[12pt]{article}
+\documentclass[12pt,varwidth,border=6pt]{standalone}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+\usepackage[table]{xcolor}
+\pagecolor{blue!3}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+%\setsansfont{Noto Sans}[Scale=0.8]
+%\setmonofont{Noto Sans Mono}%[Scale=0.8]
+
+%------------------
+
+
+
+\newcommand\abibname{ext-authortitle-ibid}
+\newcommand\abibstyle{style=\abibname}
+\usepackage[
+	\abibstyle , 
+	indexing=cite,
+	citetracker=true,
+	ibidtracker=true,
+	pagetracker=true,
+	idemtracker=true,
+	opcittracker=true,
+	loccittracker=true,
+	autocite=footnote,
+		]{biblatex}
+
+\addbibresource{\jobname.bib}
+
+\addbibresource{biblatex-examples.bib}
+				
+%============= legal
+\DeclareFieldFormat[jurisdiction]{title}{\mkbibemph{#1}}
+\DeclareFieldFormat[jurisdiction]{number}{#1}
+%\DeclareFieldFormat[jurisdiction]{location}{\mkbibbrackets{#1}}
+\DeclareListFormat[jurisdiction]{location}{%
+\mkbibparens{#1%
+\ifthenelse{\value{listcount}<\value{liststop}}
+{\addcomma\space}
+{}}}
+
+\newbibmacro{getlegaltitle}{%
+\printfield{title}%
+}
+\newbibmacro{getlegalrefcase}{%
+\iffieldundef{number}{}{\printfield{number}}%
+}
+
+\newbibmacro{getlegalrefstat}{%
+\iflistundef{location}{}{\printlist{location}}%
+}
+
+\newbibmacro{getlegalref}{%
+\usebibmacro{getlegalrefstat}%
+\usebibmacro{getlegalrefcase}%
+}
+
+\newbibmacro{getlegalfull}{%
+\usebibmacro{getlegaltitle}%
+\addspace%
+\usebibmacro{getlegalref}%
+}
+
+\DeclareCiteCommand{legal}%
+{%
+\usebibmacro{prenote}%
+}% 
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getlegalfull}
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{%
+\multicitedelim%
+}%
+%@@@@@@@@@@@@@@@@ postnote
+{%
+\usebibmacro{postnote}%
+}
+
+%
+\DeclareBibliographyDriver{jurisdiction}{%
+	\usebibmacro{begentry}
+   \usebibmacro{getlegalfull}
+	\usebibmacro{finentry}
+}
+
+
+%=================
+
+
+\usepackage[
+				bookmarks,
+            colorlinks=true,        
+            allcolors = black,  
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+
+
+
+
+%------------------
+\begin{document}
+
+
+Custom citation command + custom bibdriver + @jurisdiction bibentry type; no sortkey:
+
+\legal[at \mkbibbrackets{15}]{sc12} and \legal[s 4]{hba} and \legal{bcisp}.
+
+x \parencite{reese,kullback:related,aristotle:anima}.
+
+\printbibliography%[notkeyword=legal]
+%\printbibliography[keyword=legal,title=Legal]
+ 
+\end{document}

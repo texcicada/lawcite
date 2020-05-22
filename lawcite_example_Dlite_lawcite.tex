@@ -1,0 +1,108 @@
+
+
+\begin{filecontents*}{\jobname.bib}
+@case{sc12,
+%sortkey={},
+partya = {Kay},partyb = {KRM (Vic) Pty Ltd; Classic Bet (NSW) Pty Ltd v Kay},caseyear = {2020},courtname = {NSWCA},casenumber = {92},}
+
+@statute{hba,
+%sortkey={},
+statutetitle = {Home Building Act},
+statutejurisdiction = {NSW},
+statutetitleyear = {1989},
+}
+
+@statute{bcisp,
+%sortkey={},
+statutetitle = {Building and Construction Industry Security of Payment Act},
+statutetitleyear = {1999},
+statutejurisdiction = {NSW},
+}
+
+@case{sc16,
+%sortkey={}, 
+partya = {Foundas},partyb = {Arambatzis (No 3)},caseyear = {2020},courtname = {NSWCA},casenumber = {87},}
+
+\end{filecontents*}
+
+
+%===================================================
+
+\documentclass[12pt]{article}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+\usepackage[table]{xcolor}
+\pagecolor{blue!3}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+%\setsansfont{Noto Sans}[Scale=0.8]
+%\setmonofont{Noto Sans Mono}%[Scale=0.8]
+
+%------------------
+
+
+
+\newcommand\abibname{lawcite}
+\newcommand\abibstyle{style=\abibname}
+\usepackage[
+	\abibstyle , 
+	set-lawcite-indexing=false,
+	lawrefstyle=caseallabove,
+	show-statute-jurisdiction=true,
+	indexing=cite,
+	citetracker=true,
+	ibidtracker=true,
+	pagetracker=true,
+	idemtracker=true,
+	opcittracker=true,
+	loccittracker=true,
+	autocite=footnote,
+%	sorting=casestat,
+		]{biblatex}
+
+\addbibresource{\jobname.bib}
+
+\addbibresource{biblatex-examples.bib}
+
+\DeclareRefcontext{legalcase}{sorting=casesort}
+\DeclareRefcontext{legalstat}{sorting=statsort}
+\DeclareRefcontext{legalcasestat}{sorting=casestat}
+				
+%=================
+
+
+\usepackage[
+				bookmarks,
+            colorlinks=true,        
+            allcolors = black,  
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+
+
+
+
+%------------------
+\begin{document}
+
+
+Lawcite:
+
+\lawcite{sc12,sc16} and \lawcite[s 4]{hba} and \lawcite{bcisp}.
+
+x \parencite{reese,kullback:related,aristotle:anima}.
+
+\printbibliography%[keyword=legal,title=Legal Material]
+
+\printbibliography[nottype=case,nottype=statute]
+\newrefcontext{legalcase}%sorting=casesort}
+%\printbibliography[filter=legal,title=Legal]
+\printbibliography[type=case,title=Legal Cases]
+\newrefcontext{legalstat}
+\printbibliography[type=statute,title=Legislation]
+
+\defbibfilter{legal}{type=case or type=statute}
+\newrefcontext{legalcasestat}
+\printbibliography[filter=legal,title=Legal]
+ 
+\end{document}
