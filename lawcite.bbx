@@ -237,19 +237,19 @@
 
 %
 \DeclareBibliographyDriver{case}{%
- \usebibmacro{begentry}
+ \usebibmacro{begentry}%
    \usebibmacro{getcasenameref}
  \usebibmacro{finentry}
 }
 %
 \DeclareBibliographyDriver{statute}{%
- \usebibmacro{begentry}
+ \usebibmacro{begentry}%
    \usebibmacro{getstatutenameref}
  \usebibmacro{finentry}
 }
 
 \DeclareBibliographyDriver{ljarticle}{%
- \usebibmacro{begentry}
+ \usebibmacro{begentry}%
  \usebibmacro{ljb-generic}
  \usebibmacro{finentry}
 }
@@ -317,6 +317,130 @@
  \field{reportpage}
  }
 }
+
+
+
+
+
+\DeclareSortingTemplate{legytj}{
+\sort{
+ \field{caseyear}
+ \field{statutetitleyear}
+ }
+\sort{
+ \field{partya}
+ \field{statutetitle}
+ }
+\sort{
+ \field{statutejurisdiction}
+ \field{partyb}
+ }
+\sort{
+ \field{casenumber}
+ }
+\sort{
+ \field{reportvolume}
+ }
+\sort{
+ \field{reportseries}
+ }
+\sort{
+ \field{reportpage}
+ }
+}
+
+
+
+\DeclareSortingTemplate{legyjt}{
+\sort{
+ \field{caseyear}
+ \field{statutetitleyear}
+ }
+\sort{
+ \field{statutejurisdiction}
+ \field{courtname}
+% \field{partyb}
+ }
+\sort{
+ \field{partya}
+ \field{statutetitle}
+ }
+\sort{
+ \field{casenumber}
+ }
+\sort{
+ \field{reportvolume}
+ }
+\sort{
+ \field{reportseries}
+ }
+\sort{
+ \field{reportpage}
+ }
+}
+
+
+
+\DeclareSortingTemplate{legjyt}{
+\sort{
+ \field{statutejurisdiction}
+ \field{courtname}
+% \field{partyb}
+ }
+\sort{
+ \field{caseyear}
+ \field{statutetitleyear}
+ }
+\sort{
+ \field{partya}
+ \field{statutetitle}
+ }
+\sort{
+ \field{casenumber}
+ }
+\sort{
+ \field{reportvolume}
+ }
+\sort{
+ \field{reportseries}
+ }
+\sort{
+ \field{reportpage}
+ }
+}
+
+\DeclareSortingTemplate{legjty}{
+\sort{
+ \field{statutejurisdiction}
+ \field{partyb}
+ }
+\sort{
+ \field{partya}
+ \field{statutetitle}
+ }
+\sort{
+ \field{caseyear}
+ \field{statutetitleyear}
+ }
+\sort{
+ \field{casenumber}
+ }
+\sort{
+ \field{reportvolume}
+ }
+\sort{
+ \field{reportseries}
+ }
+\sort{
+ \field{reportpage}
+ }
+}
+
+
+
+
+
+
 
 
 \endinput

@@ -2,16 +2,11 @@
 
 \begin{filecontents*}{\jobname.bib}
 @jurisdiction{sc12,
-title = {Kay v KRM (Vic) Pty Ltd; Classic Bet (NSW) Pty Ltd v Kay},
+title = {Kay v KRM (Vic) Pty Ltd},
 number = {[2020] NSWCA 92},
 keywords={legal,case},
 }
 
-@jurisdiction{bcisp,
-title = {Building and Construction Industry Security of Payment Act 1999},
-location = {NSW},
-keywords={legal,statute},
-}
 
 @jurisdiction{hba,
 title = {Home Building Act 1989},
@@ -38,7 +33,7 @@ keywords={legal,statute},
 
 
 
-\newcommand\abibname{ext-authortitle-ibid}
+\newcommand\abibname{numeric}
 \newcommand\abibstyle{style=\abibname}
 \usepackage[
 	\abibstyle , 
@@ -88,22 +83,22 @@ keywords={legal,statute},
 \usebibmacro{getlegalref}%
 }
 
-\DeclareCiteCommand{legal}%
-{%
-\usebibmacro{prenote}%
-}% 
-%@@@@@@@@@@@@@@@@ item
-{%
-\usebibmacro{getlegalfull}
-}%end item
-%@@@@@@@@@@@@@@@@ delim
-{%
-\multicitedelim%
-}%
-%@@@@@@@@@@@@@@@@ postnote
-{%
-\usebibmacro{postnote}%
-}
+%%%\DeclareCiteCommand{legal}%
+%%%{%
+%%%\usebibmacro{prenote}%
+%%%}% 
+%%%%@@@@@@@@@@@@@@@@ item
+%%%{%
+%%%\usebibmacro{getlegalfull}
+%%%}%end item
+%%%%@@@@@@@@@@@@@@@@ delim
+%%%{%
+%%%\multicitedelim%
+%%%}%
+%%%%@@@@@@@@@@@@@@@@ postnote
+%%%{%
+%%%\usebibmacro{postnote}%
+%%%}
 
 %
 \DeclareBibliographyDriver{jurisdiction}{%
@@ -125,20 +120,18 @@ keywords={legal,statute},
 ]{hyperref}
 
 
-
+\newcommand\putbrackets[1]{[#1]}
 
 
 %------------------
 \begin{document}
 
+Custom bibliography command + @jurisdiction bibentry type:
 
-Custom citation command + custom bibdriver + @jurisdiction bibentry type:
+\ldots in a recent case\cite[at 15]{sc12} and as required by statute\cite[s 4]{hba}
 
-\legal[at \mkbibbrackets{15}]{sc12} and \legal[s 4]{hba} and \legal{bcisp}.
-
-x \parencite{reese,kullback:related,aristotle:anima}.
+x\cite{sigfridsson,reese,kullback:related}
 
 \printbibliography%[notkeyword=legal]
-%\printbibliography[keyword=legal,title=Legal]
  
 \end{document}

@@ -1159,19 +1159,19 @@ svjy,%
 
 %
 \DeclareBibliographyDriver{case}{%
-	\usebibmacro{begentry}
+	\usebibmacro{begentry}%
    \usebibmacro{getcasenameref}
 	\usebibmacro{finentry}
 }
 %
 \DeclareBibliographyDriver{statute}{%
-	\usebibmacro{begentry}
+	\usebibmacro{begentry}%
    \usebibmacro{getstatutenameref}
 	\usebibmacro{finentry}
 }
 
 \DeclareBibliographyDriver{ljarticle}{%
-	\usebibmacro{begentry}
+	\usebibmacro{begentry}%
 	\usebibmacro{ljb-generic}
 	\usebibmacro{finentry}
 }
@@ -1239,6 +1239,130 @@ svjy,%
 	\field{reportpage}
 	} 
 }
+
+
+
+
+
+\DeclareSortingTemplate{legytj}{
+\sort{
+	\field{caseyear}
+	\field{statutetitleyear}
+	}
+\sort{
+	\field{partya}
+	\field{statutetitle}
+	}
+\sort{
+	\field{statutejurisdiction}
+	\field{partyb}
+	}
+\sort{
+	\field{casenumber}
+	} 
+\sort{
+	\field{reportvolume}
+	} 
+\sort{
+	\field{reportseries}
+	} 
+\sort{
+	\field{reportpage}
+	} 
+}
+
+
+
+\DeclareSortingTemplate{legyjt}{
+\sort{
+	\field{caseyear}
+	\field{statutetitleyear}
+	}
+\sort{
+	\field{statutejurisdiction}
+	\field{courtname}
+%	\field{partyb}
+	}
+\sort{
+	\field{partya}
+	\field{statutetitle}
+	}
+\sort{
+	\field{casenumber}
+	} 
+\sort{
+	\field{reportvolume}
+	} 
+\sort{
+	\field{reportseries}
+	} 
+\sort{
+	\field{reportpage}
+	} 
+}
+
+
+
+\DeclareSortingTemplate{legjyt}{
+\sort{
+	\field{statutejurisdiction}
+	\field{courtname}
+%	\field{partyb}
+	}
+\sort{
+	\field{caseyear}
+	\field{statutetitleyear}
+	}
+\sort{
+	\field{partya}
+	\field{statutetitle}
+	}
+\sort{
+	\field{casenumber}
+	} 
+\sort{
+	\field{reportvolume}
+	} 
+\sort{
+	\field{reportseries}
+	} 
+\sort{
+	\field{reportpage}
+	} 
+}
+
+\DeclareSortingTemplate{legjty}{
+\sort{
+	\field{statutejurisdiction}
+	\field{partyb}
+	}
+\sort{
+	\field{partya}
+	\field{statutetitle}
+	}
+\sort{
+	\field{caseyear}
+	\field{statutetitleyear}
+	}
+\sort{
+	\field{casenumber}
+	} 
+\sort{
+	\field{reportvolume}
+	} 
+\sort{
+	\field{reportseries}
+	} 
+\sort{
+	\field{reportpage}
+	} 
+}
+
+
+
+
+
+
 
 
 \endinput
@@ -3040,7 +3164,86 @@ test {\ifentrytype{case}}%
 \renewcommand\clearpage{\oldclearpage}
 }{}
 }
+%========================================== `lite' cite
+\DeclareRefcontext{legalcase}{sorting=casesort}
+\DeclareRefcontext{legalstat}{sorting=statsort}
+\DeclareRefcontext{legalcasestat}{sorting=casestat}
+				
+\defbibheading{lm}{%
+\section*{Legal Material}}
 
+%============= legal
+\DeclareFieldFormat[jurisdiction]{title}{\mkbibemph{#1}}
+\DeclareFieldFormat[jurisdiction]{number}{#1}
+\DeclareListFormat[jurisdiction]{location}{%
+\mkbibparens{#1%
+\ifthenelse{\value{listcount}<\value{liststop}}%
+{\addcomma\space}%
+{}}}
+
+\newbibmacro{lclgetlegaltitle}{%
+\printfield{title}%
+}
+\newbibmacro{lclgetlegalrefcase}{%
+\iffieldundef{number}{}{\printfield{number}}%
+}
+
+\newbibmacro{lclgetlegalrefstat}{%
+\iflistundef{location}{}{\printlist{location}}%
+}
+
+\newbibmacro{lclgetlegalref}{%
+\usebibmacro{lclgetlegalrefstat}%
+\usebibmacro{lclgetlegalrefcase}%
+}
+
+
+
+
+\newbibmacro{lclgetlegalfull}{%
+\ifboolexpr{%
+test {\ifentrytype{jurisdiction}}% 
+}%
+{%true: jurisdiction entrytype
+\usebibmacro{lclgetlegaltitle}%
+\addspace%
+\usebibmacro{lclgetlegalref}%
+}%
+{%false = not jurisdiction entrytype
+\mkbibemph{\thefield{title}}%
+\iffieldundef{number}{}{\addspace\thefield{number}}%case
+\iflistundef{location}{}{\addspace\mkbibparens{\printlist{location}}}%statute
+}%
+}
+
+\DeclareCiteCommand{legal}%
+{%
+\usebibmacro{prenote}%
+}% 
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{lclgetlegalfull}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{%
+\multicitedelim%
+}%
+%@@@@@@@@@@@@@@@@ postnote
+{%
+\usebibmacro{postnote}%
+}
+
+%
+\DeclareBibliographyDriver{jurisdiction}{%
+	\usebibmacro{begentry}%
+   \usebibmacro{lclgetlegalfull}%
+	\usebibmacro{finentry}
+}
+
+
+
+
+%==========================================
 %Numbered paragraphs: pre-formatting
 \newcommand\numparshiftleft{}
 \newcommand\numparfillright{}
@@ -3223,6 +3426,27 @@ atparagraphs = {{at paragraphs}{at paras}},
 \cfillrgb{0.75}{0}{0.85}
 \newcommand{\defaultrubysep}{0.25ex}
 \renewcommand{\rubysep}{\defaultrubysep}
+%=======
+\newcounter{savefootnote}
+\newcounter{symfootnote}
+\newcommand{\symfootnote}[1]{%
+   \setcounter{savefootnote}{\value{footnote}}%
+   \setcounter{footnote}{\value{symfootnote}}%
+   \ifnum\value{footnote}>8\setcounter{footnote}{0}\fi%
+   \let\oldthefootnote=\thefootnote%
+   \renewcommand{\thefootnote}{\fnsymbol{footnote}}%
+   \footnote{#1}%
+   \let\thefootnote=\oldthefootnote%
+   \setcounter{symfootnote}{\value{footnote}}%
+   \setcounter{footnote}{\value{savefootnote}}%
+}
+%=======
+
+\newcommand\ack{{\noindent *{\small\textsc{Acknowledgements}: }{\scriptsize All latex coding inspiration in this document derives ultimately from hundreds of contributions on tex stackexchange, and from package authors and maintainers over the decades.}}}
+
+%{\renewcommand\footnotemark{}
+%\renewcommand\footnoterule{}\symfootnote{}}
+
 \newfontface\fsemi{Noto Serif JP}
 \title{Legal Citation\\\normalsize with Biblatex \\ \ \\ Programming a flexible multi-style style\\ \ \\ \rulesep}
 \author{{\fsemi \ruby{\textcolor{brown!75!green}{\Huge \contour{}{蝉}
@@ -3530,6 +3754,7 @@ userdefinedwidth = \textwidth ,
 \begin{abstract}
 \myabstracttext
 \end{abstract}
+\vfill{\ack}
 \newpage
 \tableofcontents
 \bigskip

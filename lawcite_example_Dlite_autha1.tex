@@ -1,19 +1,19 @@
 
 
 \begin{filecontents*}{\jobname.bib}
-@article{sc12,
-title = {Kay v KRM (Vic) Pty Ltd; Classic Bet (NSW) Pty Ltd v Kay},
+@jurisdiction{sc12,
+title = {Kay v KRM (Vic) Pty Ltd},
 number = {[2020] NSWCA 92},
 keywords={legal,case},
 }
 
-@article{bcisp,
+@jurisdiction{bcisp,
 title = {Building and Construction Industry Security of Payment Act 1999},
 location = {NSW},
 keywords={legal,statute},
 }
 
-@article{hba,
+@jurisdiction{hba,
 title = {Home Building Act 1989},
 location = {NSW},
 keywords={legal,statute},
@@ -31,12 +31,8 @@ keywords={legal,statute},
 \pagecolor{blue!3}
 \usepackage{fontspec}
 \setmainfont{Noto Serif}
-
-
-\newfontface\ftmark{Noto Sans Symbols2}
-\newcommand\goodoh{{\large\ftmark 🗸}}
-\newcommand\notsogoodoh{{\large\ftmark 🗶}}
-
+%\setsansfont{Noto Sans}[Scale=0.8]
+%\setmonofont{Noto Sans Mono}%[Scale=0.8]
 
 %------------------
 
@@ -60,21 +56,65 @@ keywords={legal,statute},
 
 \addbibresource{biblatex-examples.bib}
 				
-\newcommand\setmpx{\color{red}}
-\AtEveryBibitem{%
-\ifkeyword{legal}{\setmpx\notsogoodoh}{}%
-}				
+%%%%============= legal
+%%%\DeclareCiteCommand{legal}%
+%%%{%
+%%%\usebibmacro{prenote}%
+%%%}% 
+%%%%@@@@@@@@@@@@@@@@ item
+%%%{%
+%%%\mkbibemph{\thefield{title}}%
+%%%\iffieldundef{number}{}{\addspace\thefield{number}}%case
+%%%\iflistundef{location}{}{\addspace\mkbibparens{\printlist{location}}}%statute
+%%%}%end item
+%%%%@@@@@@@@@@@@@@@@ delim
+%%%{%
+%%%\multicitedelim%
+%%%}%
+%%%%@@@@@@@@@@@@@@@@ postnote
+%%%{%
+%%%\usebibmacro{postnote}%
+%%%}
 
 %============= legal
+\DeclareFieldFormat[jurisdiction]{title}{\mkbibemph{#1}}
+\DeclareFieldFormat[jurisdiction]{number}{#1}
+%\DeclareFieldFormat[jurisdiction]{location}{\mkbibbrackets{#1}}
+\DeclareListFormat[jurisdiction]{location}{%
+\mkbibparens{#1%
+\ifthenelse{\value{listcount}<\value{liststop}}%
+{\addcomma\space}%
+{}}}
+
+\newbibmacro{getlegaltitle}{%
+\printfield{title}%
+}
+\newbibmacro{getlegalrefcase}{%
+\iffieldundef{number}{}{\printfield{number}}%
+}
+
+\newbibmacro{getlegalrefstat}{%
+\iflistundef{location}{}{\printlist{location}}%
+}
+
+\newbibmacro{getlegalref}{%
+\usebibmacro{getlegalrefstat}%
+\usebibmacro{getlegalrefcase}%
+}
+
+\newbibmacro{getlegalfull}{%
+\usebibmacro{getlegaltitle}%
+\addspace%
+\usebibmacro{getlegalref}%
+}
+
 \DeclareCiteCommand{legal}%
 {%
 \usebibmacro{prenote}%
 }% 
 %@@@@@@@@@@@@@@@@ item
 {%
-\mkbibemph{\thefield{title}}%
-\iffieldundef{number}{}{\addspace\thefield{number}}%case
-\iflistundef{location}{}{\addspace\mkbibparens{\printlist{location}}}%statute
+\usebibmacro{getlegalfull}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {%
@@ -83,6 +123,13 @@ keywords={legal,statute},
 %@@@@@@@@@@@@@@@@ postnote
 {%
 \usebibmacro{postnote}%
+}
+
+%
+\DeclareBibliographyDriver{jurisdiction}{%
+	\usebibmacro{begentry}%
+   \usebibmacro{getlegalfull}%
+	\usebibmacro{finentry}
 }
 
 
@@ -105,7 +152,7 @@ keywords={legal,statute},
 %------------------
 \begin{document}
 
-Custom citation command + @article bibentry type:
+Custom citation command + custom bib driver + @jurisdiction bibentry type:
 
 \legal[at \mkbibbrackets{15}]{sc12} and \legal[s 4]{hba} and \legal{bcisp}.
 

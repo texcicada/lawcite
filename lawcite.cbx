@@ -1792,7 +1792,86 @@ test {\ifentrytype{case}}%
 \renewcommand\clearpage{\oldclearpage}
 }{}
 }
+%========================================== `lite' cite
+\DeclareRefcontext{legalcase}{sorting=casesort}
+\DeclareRefcontext{legalstat}{sorting=statsort}
+\DeclareRefcontext{legalcasestat}{sorting=casestat}
+    
+\defbibheading{lm}{%
+\section*{Legal Material}}
 
+%============= legal
+\DeclareFieldFormat[jurisdiction]{title}{\mkbibemph{#1}}
+\DeclareFieldFormat[jurisdiction]{number}{#1}
+\DeclareListFormat[jurisdiction]{location}{%
+\mkbibparens{#1%
+\ifthenelse{\value{listcount}<\value{liststop}}%
+{\addcomma\space}%
+{}}}
+
+\newbibmacro{lclgetlegaltitle}{%
+\printfield{title}%
+}
+\newbibmacro{lclgetlegalrefcase}{%
+\iffieldundef{number}{}{\printfield{number}}%
+}
+
+\newbibmacro{lclgetlegalrefstat}{%
+\iflistundef{location}{}{\printlist{location}}%
+}
+
+\newbibmacro{lclgetlegalref}{%
+\usebibmacro{lclgetlegalrefstat}%
+\usebibmacro{lclgetlegalrefcase}%
+}
+
+
+
+
+\newbibmacro{lclgetlegalfull}{%
+\ifboolexpr{%
+test {\ifentrytype{jurisdiction}}%
+}%
+{%true: jurisdiction entrytype
+\usebibmacro{lclgetlegaltitle}%
+\addspace%
+\usebibmacro{lclgetlegalref}%
+}%
+{%false = not jurisdiction entrytype
+\mkbibemph{\thefield{title}}%
+\iffieldundef{number}{}{\addspace\thefield{number}}%case
+\iflistundef{location}{}{\addspace\mkbibparens{\printlist{location}}}%statute
+}%
+}
+
+\DeclareCiteCommand{legal}%
+{%
+\usebibmacro{prenote}%
+}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{lclgetlegalfull}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{%
+\multicitedelim%
+}%
+%@@@@@@@@@@@@@@@@ postnote
+{%
+\usebibmacro{postnote}%
+}
+
+%
+\DeclareBibliographyDriver{jurisdiction}{%
+ \usebibmacro{begentry}%
+   \usebibmacro{lclgetlegalfull}%
+ \usebibmacro{finentry}
+}
+
+
+
+
+%==========================================
 %Numbered paragraphs: pre-formatting
 \newcommand\numparshiftleft{}
 \newcommand\numparfillright{}

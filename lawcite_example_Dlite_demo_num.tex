@@ -1,20 +1,42 @@
 
 
 \begin{filecontents*}{\jobname.bib}
-@article{sc12,
-title = {Kay v KRM (Vic) Pty Ltd; Classic Bet (NSW) Pty Ltd v Kay},
-number = {[2020] NSWCA 92},
+%-----
+@article{demo1case1,
+title = {Demo1 Case Title},
+number = {Case Reference},
 keywords={legal,case},
 }
 
-@article{bcisp,
-title = {Building and Construction Industry Security of Payment Act 1999},
+@article{demo1stat1,
+title = {Demo1: Building and Construction Industry Security of Payment Act 1999},
 location = {NSW},
 keywords={legal,statute},
 }
 
-@article{hba,
-title = {Home Building Act 1989},
+@article{demo1stat2,
+title = {Demo1: Home Building Act 1989},
+location = {NSW},
+keywords={legal,statute},
+}
+
+
+
+%-----
+@jurisdiction{demo2case1,
+title = {Demo2 Case Title},
+number = {Case Reference},
+keywords={legal,case},
+}
+
+@jurisdiction{demo2stat1,
+title = {Demo2: Building and Construction Industry Security of Payment Act 1999},
+location = {NSW},
+keywords={legal,statute},
+}
+
+@jurisdiction{demo2stat2,
+title = {Demo2: Home Building Act 1989},
 location = {NSW},
 keywords={legal,statute},
 }
@@ -32,17 +54,11 @@ keywords={legal,statute},
 \usepackage{fontspec}
 \setmainfont{Noto Serif}
 
-
-\newfontface\ftmark{Noto Sans Symbols2}
-\newcommand\goodoh{{\large\ftmark 🗸}}
-\newcommand\notsogoodoh{{\large\ftmark 🗶}}
-
-
 %------------------
 
 
 
-\newcommand\abibname{ext-authortitle-ibid}
+\newcommand\abibname{numeric}
 \newcommand\abibstyle{style=\abibname}
 \usepackage[
 	\abibstyle , 
@@ -60,33 +76,6 @@ keywords={legal,statute},
 
 \addbibresource{biblatex-examples.bib}
 				
-\newcommand\setmpx{\color{red}}
-\AtEveryBibitem{%
-\ifkeyword{legal}{\setmpx\notsogoodoh}{}%
-}				
-
-%============= legal
-\DeclareCiteCommand{legal}%
-{%
-\usebibmacro{prenote}%
-}% 
-%@@@@@@@@@@@@@@@@ item
-{%
-\mkbibemph{\thefield{title}}%
-\iffieldundef{number}{}{\addspace\thefield{number}}%case
-\iflistundef{location}{}{\addspace\mkbibparens{\printlist{location}}}%statute
-}%end item
-%@@@@@@@@@@@@@@@@ delim
-{%
-\multicitedelim%
-}%
-%@@@@@@@@@@@@@@@@ postnote
-{%
-\usebibmacro{postnote}%
-}
-
-
-
 %=================
 
 
@@ -105,11 +94,12 @@ keywords={legal,statute},
 %------------------
 \begin{document}
 
-Custom citation command + @article bibentry type:
 
-\legal[at \mkbibbrackets{15}]{sc12} and \legal[s 4]{hba} and \legal{bcisp}.
+x \legal[at \mkbibbrackets{15}]{demo1case1} and \legal[s 4]{demo1stat1} and \legal{demo1stat2}.
 
-x \parencite{reese,kullback:related,aristotle:anima}.
+x \legal[at \mkbibbrackets{15}]{demo2case1} and \legal[s 4]{demo2stat1} and \legal{demo2stat2}.
+
+x \parencite{reese,aristotle:anima}.
 
 \printbibliography%[notkeyword=legal]
  

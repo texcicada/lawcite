@@ -1,0 +1,203 @@
+
+
+\begin{filecontents*}{\jobname.bib}
+@case{sc11,partya = {TFM Epping Land Pty Ltd},partyb = {Decon Australia Pty Ltd},caseyear = {2020},courtname = {NSWCA},casenumber = {93},}
+@case{sc12,partya = {Kay},partyb = {KRM (Vic) Pty Ltd; Classic Bet (NSW) Pty Ltd v Kay},caseyear = {2020},courtname = {NSWCA},casenumber = {92},}
+@case{sc13,partya = {Lawrence},partyb = {Ciantar},caseyear = {2020},courtname = {NSWCA},casenumber = {89},}
+@case{sc14,partya = {Best},partyb = {Rosamond},caseyear = {2020},courtname = {NSWCA},casenumber = {90},}
+@case{sc15,partya = {Kirby},partyb = {Dental Council of NSW},caseyear = {2020},courtname = {NSWCA},casenumber = {91},}
+@case{sc16,partya = {Foundas},partyb = {Arambatzis (No. 3)},caseyear = {2020},courtname = {NSWCA},casenumber = {87},}
+@case{sc17,partya = {Mendonca},partyb = {Legal Services Commissioner},caseyear = {2020},courtname = {NSWCA},casenumber = {84},}
+@case{sc18,partya = {Ballas},partyb = {Department of Education (State of NSW)},caseyear = {2020},courtname = {NSWCA},casenumber = {86},}
+@case{sc19,partya = {Hackett (a pseudonym)},partyb = {Secretary, Department of Communities and Justice},caseyear = {2020},courtname = {NSWCA},casenumber = {83},}
+@case{sc20,partya = {Inghams Enterprises Pty Limited},partyb = {Hannigan},caseyear = {2020},courtname = {NSWCA},casenumber = {82},}
+@case{sc21,partya = {Sayed},partyb = {National Australia Bank},caseyear = {2020},courtname = {NSWCA},casenumber = {88},}
+
+@statute{hba,
+%sortkey={},
+statutetitle = {Home Building Act},
+statutejurisdiction = {NSW},
+statutetitleyear = {1989},
+}
+
+@statute{bcisp,
+%sortkey={},
+statutetitle = {Building and Construction Industry Security of Payment Act},
+statutetitleyear = {1999},
+statutejurisdiction = {NSW},
+}
+
+@statute{stat1,statutetitle = {Aboriginal Land Rights Act},statutetitleyear = {1983},statutejurisdiction = {NSW},}
+@statute{stat2,statutetitle = {Aboriginal Land Rights Amendment Act},statutetitleyear = {2001},statutejurisdiction = {NSW},}
+@statute{stat3,statutetitle = {Aborigines Act},statutetitleyear = {1969},statutejurisdiction = {NSW},}
+@statute{stat4,statutetitle = {Aborigines Protection (Amendment) Act},statutetitleyear = {1918},statutejurisdiction = {NSW},}
+@statute{stat5,statutetitle = {Aborigines Protection (Amendment) Act},statutetitleyear = {1936},statutejurisdiction = {NSW},}
+@statute{stat6,statutetitle = {Aborigines Protection Act},statutetitleyear = {1909},statutejurisdiction = {NSW},}
+@statute{stat7,statutetitle = {Adoption Act},statutetitleyear = {2000},statutejurisdiction = {NSW},}
+@statute{stat8,statutetitle = {Children (Care and Protection) Act},statutetitleyear = {1987},statutejurisdiction = {NSW},}
+@statute{stat9,statutetitle = {Children and Young Persons (Care and Protection) Act},statutetitleyear = {1998},statutejurisdiction = {NSW},}
+@statute{stat10,statutetitle = {Children and Young Persons (Care and Protection) Miscellaneous Amendments Act},statutetitleyear = {2000},statutejurisdiction = {NSW},}
+@statute{stat11,statutetitle = {Civil Procedure Act},statutetitleyear = {2005},statutejurisdiction = {NSW},}
+@statute{stat12,statutetitle = {Constitution},}
+@statute{stat13,statutetitle = {Environmental Permitting (England and Wales) Regulations},statutetitleyear = {2010},}
+@statute{stat14,statutetitle = {Evidence Act},statutetitleyear = {1995},statutejurisdiction = {NSW},}
+@statute{stat15,statutetitle = {Foreign States Immunities Act},statutetitleyear = {1985},statutejurisdiction = {Cth},}
+@statute{stat16,statutetitle = {Income Tax Assessment Act},statutetitleyear = {1936},statutejurisdiction = {Cth},}
+@statute{stat17,statutetitle = {Indian Child Welfare Act},statutejurisdiction = {US},}
+@statute{stat18,statutetitle = {International Arbitration Act},statutetitleyear = {1974},statutejurisdiction = {Cth},}
+@statute{stat19,statutetitle = {Interpretation Act},statutetitleyear = {1987},statutejurisdiction = {NSW},}
+@statute{stat20,statutetitle = {Jurisdiction of Courts (Cross-Vesting) Act},statutetitleyear = {1987},statutejurisdiction = {NSW},}
+@statute{stat21,statutetitle = {Land Title Act},statutetitleyear = {1994},statutejurisdiction = {Qld},}
+@statute{stat22,statutetitle = {Unfair and Deceptive Trade Practices Act},statutejurisdiction = {North Carolina},}
+@statute{stat23,statutetitle = {Supreme Court Act},statutetitleyear = {1970},statutejurisdiction = {NSW},}
+@statute{stat24,statutetitle = {Uniform Civil Procedure Rules},statutetitleyear = {2005},statutejurisdiction = {NSW},}
+@statute{stat25,statutetitle = {Workers Compensation Act},statutetitleyear = {1987},statutejurisdiction = {NSW},}
+@statute{stat26,statutetitle = {Workers Compensation Legislation Amendment (Miscellaneous Provisions) Act},statutetitleyear = {2005},statutejurisdiction = {NSW},}
+
+
+\end{filecontents*}
+
+
+%===================================================
+
+\documentclass[12pt]{article}
+%\documentclass[12pt,varwidth,border=6pt]{standalone}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+\usepackage[table]{xcolor}
+\pagecolor{blue!3}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+
+
+%------------------
+
+
+
+\newcommand\abibname{lawcite}
+\newcommand\abibstyle{style=\abibname}
+\usepackage[
+	\abibstyle , 
+	set-lawcite-indexing=false,
+	lawrefstyle=caseallabove,
+	show-statute-jurisdiction=true,
+	indexing=cite,
+	citetracker=true,
+	ibidtracker=true,
+	pagetracker=true,
+	idemtracker=true,
+	opcittracker=true,
+	loccittracker=true,
+	autocite=footnote,
+%	sorting=casestat,
+		]{biblatex}
+
+\addbibresource{\jobname.bib}
+
+\addbibresource{biblatex-examples.bib}
+
+\DeclareRefcontext{legalcase}{sorting=casesort}
+\DeclareRefcontext{legalstat}{sorting=statsort}
+\DeclareRefcontext{legalcasestat}{sorting=casestat}
+\DeclareRefcontext{legalyear}{sorting=legyjt}
+\DeclareRefcontext{legaljuris}{sorting=legjyt}
+
+
+
+				
+\defbibheading{lm}{%
+\section*{Legal Material}}
+\defbibheading{lmyear}{\section*{Legal Material -- by yjt}}
+\defbibheading{lmjuris}{\section*{Legal Material -- by jyt}}
+
+
+
+%=================
+
+
+\usepackage[
+				bookmarks,
+            colorlinks=true,        
+            allcolors = black,  
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+
+
+
+
+%------------------
+\begin{document}
+
+
+Lawcite:
+
+\lawcite[s 4]{hba} and \lawcite{bcisp}.
+
+\lawcite{sc11}
+\lawcite{sc12}
+\lawcite{sc13}
+\lawcite{sc14}
+\lawcite{sc15}
+\lawcite{sc16}
+\lawcite{sc17}
+\lawcite{sc18}
+\lawcite{sc19}
+\lawcite{sc20}
+\lawcite{sc21}
+
+\lawcite{stat1}
+\lawcite{stat2}
+\lawcite{stat3}
+\lawcite{stat4}
+\lawcite{stat5}
+\lawcite{stat6}
+\lawcite{stat7}
+\lawcite{stat8}
+\lawcite{stat9}
+\lawcite{stat10}
+\lawcite{stat11}
+\lawcite{stat12}
+\lawcite{stat13}
+\lawcite{stat14}
+\lawcite{stat15}
+\lawcite{stat16}
+\lawcite{stat17}
+\lawcite{stat18}
+\lawcite{stat19}
+\lawcite{stat20}
+\lawcite{stat21}
+\lawcite{stat22}
+\lawcite{stat23}
+\lawcite{stat24}
+\lawcite{stat25}
+\lawcite{stat26}
+
+
+
+%%\printbibliography%[keyword=legal,title=Legal Material]
+
+%%%%\printbibliography[nottype=case,nottype=statute]
+
+\newrefcontext{legalcase}%sorting=casesort}
+%\printbibliography[filter=legal,title=Legal]
+\printbibheading[heading=lm]
+\printbibliography[type=case,title=Cases,heading=subbibliography]
+\newrefcontext{legalstat}
+\printbibliography[type=statute,title=Legislation,heading=subbibliography]
+
+%
+\printbibheading[heading=lmyear]
+\newrefcontext{legalyear}
+\printbibliography[type=case,title=Cases,heading=subbibliography]
+\printbibliography[type=statute,title=Legislation,heading=subbibliography]
+
+%
+\printbibheading[heading=lmjuris]
+\newrefcontext{legaljuris}
+\printbibliography[type=case,title=Cases,heading=subbibliography]
+\printbibliography[type=statute,title=Legislation,heading=subbibliography]
+
+
+ 
+\end{document}

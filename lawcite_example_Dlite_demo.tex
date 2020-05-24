@@ -1,0 +1,120 @@
+
+
+\begin{filecontents*}{\jobname.bib}
+%-----
+@article{demo1case1,
+title = {Demo1; Case Title},
+number = {Case Reference},
+keywords={legal,case,Demo1},
+}
+
+@article{demo1stat1,
+title = {Demo1: Building and Construction Industry Security of Payment Act 1999},
+location = {NSW},
+keywords={legal,statute,Demo1},
+}
+
+@article{demo1stat2,
+title = {Demo1: Home Building Act 1989},
+location = {NSW},
+keywords={legal,statute,Demo1},
+}
+
+
+
+%-----
+@jurisdiction{demo2case1,
+title = {Demo2: Case Title},
+number = {Case Reference},
+keywords={legal,case,Demo2},
+}
+
+@jurisdiction{demo2stat1,
+title = {Demo2: Building and Construction Industry Security of Payment Act 1999},
+location = {NSW},
+keywords={legal,statute,Demo2},
+}
+
+@jurisdiction{demo2stat2,
+title = {Demo2: Home Building Act 1989},
+location = {NSW},
+keywords={legal,statute,Demo2},
+}
+
+
+\end{filecontents*}
+
+
+%===================================================
+
+%\documentclass[12pt]{article}
+\documentclass[12pt,varwidth,border=6pt]{standalone}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+\usepackage[table]{xcolor}
+\pagecolor{blue!3}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setmonofont{Noto Sans Mono}[Colour=blue]
+
+\newfontface\ftmark{Noto Sans Symbols2}
+\newcommand\goodoh{{\large\ftmark 🗸}}
+\newcommand\notsogoodoh{{\large\ftmark 🗶}}
+
+%------------------
+
+
+
+\newcommand\abibname{lawcite}
+\newcommand\abibstyle{style=\abibname}
+\usepackage[
+	\abibstyle , 
+	indexing=cite,
+	citetracker=true,
+	ibidtracker=true,
+	pagetracker=true,
+	idemtracker=true,
+	opcittracker=true,
+	loccittracker=true,
+	autocite=footnote,
+		]{biblatex}
+
+\addbibresource{\jobname.bib}
+
+\addbibresource{biblatex-examples.bib}
+				
+			
+\newcommand\setmpx{\color{red}}
+\AtEveryBibitem{%
+\ifkeyword{Demo1}{\setmpx\notsogoodoh}{}\ifkeyword{Demo2}{\textcolor{blue}{\goodoh}}{}%
+}				
+			
+			
+%=================
+
+
+\usepackage[
+				bookmarks,
+            colorlinks=true,        
+            allcolors = black,  
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+
+\newcommand\cmd[1]{\texttt{\textbackslash #1}}
+
+
+
+%------------------
+\begin{document}
+\cmd{legal} command from within lawcite style
+
+x \legal[at \mkbibbrackets{15}]{demo1case1} and \legal[s 4]{demo1stat1} and \legal{demo1stat2}.
+
+y \legal[at \mkbibbrackets{15}]{demo2case1} and \legal[s 4]{demo2stat1} and \legal{demo2stat2}.
+
+z \parencite{reese,aristotle:anima}.
+
+\printbibliography%[notkeyword=legal]
+ 
+\end{document}
