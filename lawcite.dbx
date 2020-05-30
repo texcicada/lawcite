@@ -7,6 +7,9 @@
 
 \newcommand*{\insertbibimage}[1]{\includegraphics[width=1cm, keepaspectratio]{#1}}
 
+
+
+
 %
 \newtoggle{printregulations}
 \toggletrue{printregulations}

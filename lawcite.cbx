@@ -1141,8 +1141,13 @@ test {\ifentrytype{case}}%
 }
 
 \newbibmacro{getljarticletitle}{%
-\printtext[emph]{\thefield{title}\iffieldundef{subtitle}{}{\addcolon\addspace\printfield{subtitle}}}%
+\iftoggle{ljarttitleitalic}{%
+\printtext[emph]{\thefield{title}\iffieldundef{subtitle}{}{\addcolon\addspace\printfield{subtitle}}}}%
+{%not italic
+\printfield{title}\iffieldundef{subtitle}{}{\addcolon\addspace\printfield{subtitle}}%
+}%end not italic
 }
+
 %\newbibmacro{getljarticlesubtitle}{%
 %}
 \newbibmacro{getljarticleyear}{%
@@ -1152,7 +1157,12 @@ test {\ifentrytype{case}}%
 \printfield[plain]{volume}%
 }
 \newbibmacro{getljarticlejournaltitle}{%
+\iftoggle{ljjnltitleitalic}{%
+\printfield{journaltitle}%
+}%
+{%
 \printfield[plain]{journaltitle}%
+}%
 }
 \newbibmacro{getljarticlepage}{%
 \printfield[plain]{pages}%

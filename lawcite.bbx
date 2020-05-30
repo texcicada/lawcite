@@ -43,8 +43,49 @@
 {\togglefalse{lcindexing}}%
 }
 %
+%
+\newtoggle{ljarttitleitalic}
+\toggletrue{ljarttitleitalic}
+
+\newcommand\setljarttitleitalicon{%
+\toggletrue{ljarttitleitalic}
+}
+\newcommand\setljarttitleitalicoff{%
+\togglefalse{ljarttitleitalic}
+}
+
+% lj article title
+\DeclareBibliographyOption[boolean]{set-ljarticletitle-italic}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ljarttitleitalic}}
+{\togglefalse{ljarttitleitalic}}%
+}
+
 
 %
+\newtoggle{ljjnltitleitalic}
+\toggletrue{ljjnltitleitalic}
+
+\newcommand\setljjnltitleitalicon{%
+\toggletrue{ljjnltitleitalic}
+}
+\newcommand\setljjnltitleitalicoff{%
+\togglefalse{ljjnltitleitalic}
+}
+
+% lj journal title
+\DeclareBibliographyOption[boolean]{set-ljjournaltitle-italic}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ljjnltitleitalic}}
+{\togglefalse{ljjnltitleitalic}}%
+}
+
+
+
+
+
+
+%---------------------------
 \newtoggle{lcparnumrefs}
 \toggletrue{lcparnumrefs}
 \newcommand\lcparnumrefsencap{}
@@ -186,6 +227,8 @@
    \togglefalse{multicitecomma}
    \togglefalse{casenamecomma}
  \renewcommand\postnotedelim{,\ }
+   \toggletrue{ljarttitleitalic}
+   \togglefalse{ljjnltitleitalic}
 }
 
 \newcommand\lcsetstylemlr{%
@@ -198,6 +241,8 @@
    \togglefalse{multicitecomma}
    \togglefalse{casenamecomma}
  \renewcommand\postnotedelim{,\ }
+   \togglefalse{ljarttitleitalic}
+   \toggletrue{ljjnltitleitalic}
 }
 
 \newcommand\lcsetstylemcgill{%
@@ -214,6 +259,8 @@
  \toggletrue{multicitecomma}
  \toggletrue{casenamecomma}
  \renewcommand\postnotedelim{\ }
+   \togglefalse{ljarttitleitalic}
+   \toggletrue{ljjnltitleitalic}
 }
 
 

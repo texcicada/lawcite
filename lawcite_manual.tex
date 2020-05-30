@@ -821,6 +821,9 @@ regnum = {87},
 
 \newcommand*{\insertbibimage}[1]{\includegraphics[width=1cm, keepaspectratio]{#1}}
 
+
+
+
 %
 \newtoggle{printregulations}
 \toggletrue{printregulations}
@@ -965,8 +968,49 @@ svjy,%
 {\togglefalse{lcindexing}}%
 }
 %
+%
+\newtoggle{ljarttitleitalic}
+\toggletrue{ljarttitleitalic}
+
+\newcommand\setljarttitleitalicon{%
+\toggletrue{ljarttitleitalic}
+}
+\newcommand\setljarttitleitalicoff{%
+\togglefalse{ljarttitleitalic}
+}
+
+% lj article title
+\DeclareBibliographyOption[boolean]{set-ljarticletitle-italic}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ljarttitleitalic}}
+{\togglefalse{ljarttitleitalic}}%
+}
+
 
 %
+\newtoggle{ljjnltitleitalic}
+\toggletrue{ljjnltitleitalic}
+
+\newcommand\setljjnltitleitalicon{%
+\toggletrue{ljjnltitleitalic}
+}
+\newcommand\setljjnltitleitalicoff{%
+\togglefalse{ljjnltitleitalic}
+}
+
+% lj journal title
+\DeclareBibliographyOption[boolean]{set-ljjournaltitle-italic}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ljjnltitleitalic}}
+{\togglefalse{ljjnltitleitalic}}%
+}
+
+
+
+
+
+
+%---------------------------
 \newtoggle{lcparnumrefs}
 \toggletrue{lcparnumrefs}
 \newcommand\lcparnumrefsencap{}
@@ -1108,6 +1152,8 @@ svjy,%
    \togglefalse{multicitecomma}
    \togglefalse{casenamecomma}
 	\renewcommand\postnotedelim{,\ }
+   \toggletrue{ljarttitleitalic}
+   \togglefalse{ljjnltitleitalic}
 }
 
 \newcommand\lcsetstylemlr{%
@@ -1120,6 +1166,8 @@ svjy,%
    \togglefalse{multicitecomma}
    \togglefalse{casenamecomma}
 	\renewcommand\postnotedelim{,\ }
+   \togglefalse{ljarttitleitalic}
+   \toggletrue{ljjnltitleitalic}
 }
 
 \newcommand\lcsetstylemcgill{%
@@ -1136,6 +1184,8 @@ svjy,%
 	\toggletrue{multicitecomma}
 	\toggletrue{casenamecomma}
 	\renewcommand\postnotedelim{\ }
+   \togglefalse{ljarttitleitalic}
+   \toggletrue{ljjnltitleitalic}
 }
 
 
@@ -2513,8 +2563,13 @@ test {\ifentrytype{case}}%
 }
 
 \newbibmacro{getljarticletitle}{%
-\printtext[emph]{\thefield{title}\iffieldundef{subtitle}{}{\addcolon\addspace\printfield{subtitle}}}%
+\iftoggle{ljarttitleitalic}{%
+\printtext[emph]{\thefield{title}\iffieldundef{subtitle}{}{\addcolon\addspace\printfield{subtitle}}}}%
+{%not italic
+\printfield{title}\iffieldundef{subtitle}{}{\addcolon\addspace\printfield{subtitle}}%
+}%end not italic
 }
+
 %\newbibmacro{getljarticlesubtitle}{%
 %}
 \newbibmacro{getljarticleyear}{%
@@ -2524,7 +2579,12 @@ test {\ifentrytype{case}}%
 \printfield[plain]{volume}%
 }
 \newbibmacro{getljarticlejournaltitle}{%
+\iftoggle{ljjnltitleitalic}{%
+\printfield{journaltitle}%
+}%
+{%
 \printfield[plain]{journaltitle}%
+}%
 }
 \newbibmacro{getljarticlepage}{%
 \printfield[plain]{pages}%
@@ -3684,6 +3744,7 @@ userdefinedwidth = \textwidth ,
 
 
 \usepackage[
+				final=true,
 				bookmarks,
             colorlinks=true,        
             allcolors = black,  
@@ -3693,57 +3754,57 @@ userdefinedwidth = \textwidth ,
 
 %================
 %mark undefined \ref and \autoref
-\makeatletter
-
-\def\@setref#1#2#3{%
-  \ifx#1\relax
-   \protect\G@refundefinedtrue
-   \nfss@text{\reset@font\textcolor{red}{??}}% <=====
-   \@latex@warning{Reference `#3' on page \thepage \space
-             undefined}%
-  \else
-   \expandafter#2#1\null
-  \fi}
-
-
-%======================
-\DeclareRobustCommand*{\autoref}{%
-  \leavevmode
-  \@ifstar{\HyRef@autoref\@gobbletwo}{\HyRef@autoref\hyper@@link}%
-}
-\def\HyRef@autoref#1#2{%
-  \begingroup
-    \Hy@safe@activestrue
-    \expandafter\HyRef@autosetref\csname r@#2\endcsname{#2}{#1}%
-  \endgroup
-}
-\def\HyRef@autosetref#1#2#3{% link command, csname, refname
-  \HyRef@ShowKeysRef{#2}%
-  \ifcase 0\ifx#1\relax 1\fi\ifx#1\Hy@varioref@undefined 1\fi\relax
-    \edef\HyRef@thisref{%
-      \expandafter\@fourthoffive#1\@empty\@empty\@empty
-    }%
-    \expandafter\HyRef@testreftype\HyRef@thisref.\\%
-    \Hy@safe@activesfalse
-    #3{%
-      \expandafter\@fifthoffive#1\@empty\@empty\@empty
-    }{%
-      \expandafter\@fourthoffive#1\@empty\@empty\@empty
-    }{%
-      \HyRef@currentHtag
-      \expandafter\@firstoffive#1\@empty\@empty\@empty
-      \null
-    }%
-  \else
-    \protect\G@refundefinedtrue
-    \nfss@text{\reset@font\bfseries \fbox{\textcolor{red}{???}}}% <=====
-    \@latex@warning{%
-      Reference `#2' on page \thepage\space undefined%
-    }%
-  \fi
-}
-\makeatother
-
+%%%\makeatletter
+%%%
+%%%\def\@setref#1#2#3{%
+%%%  \ifx#1\relax
+%%%   \protect\G@refundefinedtrue
+%%%   \nfss@text{\reset@font\textcolor{red}{??}}% <=====
+%%%   \@latex@warning{Reference `#3' on page \thepage \space
+%%%             undefined}%
+%%%  \else
+%%%   \expandafter#2#1\null
+%%%  \fi}
+%%%
+%%%
+%%%%======================
+%%%\DeclareRobustCommand*{\autoref}{%
+%%%  \leavevmode
+%%%  \@ifstar{\HyRef@autoref\@gobbletwo}{\HyRef@autoref\hyper@@link}%
+%%%}
+%%%\def\HyRef@autoref#1#2{%
+%%%  \begingroup
+%%%    \Hy@safe@activestrue
+%%%    \expandafter\HyRef@autosetref\csname r@#2\endcsname{#2}{#1}%
+%%%  \endgroup
+%%%}
+%%%\def\HyRef@autosetref#1#2#3{% link command, csname, refname
+%%%  \HyRef@ShowKeysRef{#2}%
+%%%  \ifcase 0\ifx#1\relax 1\fi\ifx#1\Hy@varioref@undefined 1\fi\relax
+%%%    \edef\HyRef@thisref{%
+%%%      \expandafter\@fourthoffive#1\@empty\@empty\@empty
+%%%    }%
+%%%    \expandafter\HyRef@testreftype\HyRef@thisref.\\%
+%%%    \Hy@safe@activesfalse
+%%%    #3{%
+%%%      \expandafter\@fifthoffive#1\@empty\@empty\@empty
+%%%    }{%
+%%%      \expandafter\@fourthoffive#1\@empty\@empty\@empty
+%%%    }{%
+%%%      \HyRef@currentHtag
+%%%      \expandafter\@firstoffive#1\@empty\@empty\@empty
+%%%      \null
+%%%    }%
+%%%  \else
+%%%    \protect\G@refundefinedtrue
+%%%    \nfss@text{\reset@font\bfseries \fbox{\textcolor{red}{???}}}% <=====
+%%%    \@latex@warning{%
+%%%      Reference `#2' on page \thepage\space undefined%
+%%%    }%
+%%%  \fi
+%%%}
+%%%\makeatother
+%%%
 
 
 
@@ -5176,6 +5237,18 @@ Sets whether to print regulations in a separate Table of Regulations (when \text
 
 
 
+\subsection{Law Journal/Law Review options}
+
+\optsett{set-ljarticletitle-italic=}{true}\\
+\optsett{set-ljjournaltitle-italic=}{false}
+
+For a law journal article, sets the article title to italics, and the journal name to plain; or vice versa. See section \autoref{lj:italics} for an example.
+\bigskip
+
+
+
+
+
 
 \subsection{Citation options}
 
@@ -5325,6 +5398,16 @@ Sets whether a comma follows the casename or not.
 
 Sets whether multicites are separated by comma plus space; otherwise, the default delimiter (semicolon plus space) is used.
 \bigskip
+
+\optsett{\cmd{setljarttitleitalicon}}{} \\
+\optsett{\cmd{setljarttitleitalicoff}}{} \\
+\optsett{\cmd{setljjnltitleitalicon}}{} \\
+\optsett{\cmd{setljjnltitleitalicoff}}{} 
+
+Sets whether a law journal's article's title is in italics or not, and whether the journal's name is in italics or not. The settings are intended to be complementary: when one is on, the other should be off.
+\bigskip
+
+
 
 
 %\optsett{\cmd{lcnamerefdelim}}{}
@@ -6480,6 +6563,15 @@ page 			& \cmd{lcljpage}		& \lcljpage{smythsc} 			\\
 dissents are often looser than majority judgments.''\footnote{\ljcite[\nopp 59]{smythsc}.}
 
 \bigskip
+Article italics, journal plain:
+\begin{itemize}\item \ljcite{smythsc}\end{itemize}
+\setljarttitleitalicoff
+\setljjnltitleitalicon
+
+Article standard, journal standard:\label{lj:italics}
+\begin{itemize}\item \ljcite{smythsc}\end{itemize}
+\setljarttitleitalicon
+\setljjnltitleitalicoff
 
 
 \hrule
@@ -6596,7 +6688,7 @@ These macros display what the citation commands available for an entry type prod
 %=============================================
 \subsubsection*{Multicite keys}
 %\renewcommand\lcdemolabelw{4cm}
-{\small These multicite display tables are hard-coded.}
+{\small These multicite display tables are manually-coded.\footnote{There is no multicite demo macro coded yet.}}
 
 \noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcitesinline}}\lawcitesinline[\nopp 564]{snail}[\nopp 15]{becker}
 
