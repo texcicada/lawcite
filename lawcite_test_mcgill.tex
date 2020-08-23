@@ -1,0 +1,1368 @@
+
+
+\begin{filecontents*}{\jobname.bib}
+
+@case{keyabc,
+  partya = {ABC}, 
+  partyb = {XYZ*},
+  caseyear = {2016},
+  reportyear={2020},
+  reportvolume = {3},
+  volyearneeded = {true},
+  reportseries = {WLR},
+  reportpage = {123},
+  courtname = {XYZCA},
+  casenumber = {456},
+	}
+
+@case{case2,
+  partya = {DDA}, 
+  partyb = {MNO*},
+  caseyear = {2019},
+%  reportvolume = {3},
+%  volyearneeded = {true},
+%  reportseries = {WLR},
+%  reportpage = {123},
+  courtname = {HACCA},
+  casenumber = {14},
+	}
+@case{case3,
+  partya = {Efg}, 
+  partyb = {Hij*},
+  caseyear = {2018},
+%  reportvolume = {3},
+%  volyearneeded = {true},
+%  reportseries = {WLR},
+%  reportpage = {123},
+  courtname = {VFC},
+  casenumber = {1},
+	}
+@case{case4,
+  partya = {Klm}, 
+  partyb = {Nop*},
+  caseyear = {2015},
+  reportyear={2016},
+  reportvolume = {2},
+  volyearneeded = {true},
+  reportseries = {WLR},
+  reportpage = {25},
+  courtname = {MBC},
+  casenumber = {21},
+	}
+@case{case5,
+  partya = {No MNC A}, 
+  partyb = {No MNC B*},
+  reportyear={1757},
+  reportvolume = {1},
+%  volyearneeded = {true},
+  reportseries = {Co},
+  reportpage = {25},
+	}
+@book{book1,
+	title={A Title*},
+	author={B Auctoritas},
+	year={1828},
+	publisher={Holmes and Sons},
+	}
+
+
+
+@case{becher,
+  partya = {City of Columbus}, 
+  partyb = {Becher},
+%  reportyear={},
+  reportvolume = {180},
+%  volyearneeded = {true},
+  reportseries = {NE 2d},
+  reportpage = {836},
+  year = {1962},
+  note = {Ohio, Zimmerman J},
+	}
+
+
+@case{cassie,
+  partya = {Cassie}, 
+  partyb = {Koumans},
+  caseshortname = {Cassie},
+  caseyear = {2007},
+%	  reportyear={2016},
+%	  reportvolume = {2},
+%	  volyearneeded = {true},
+%	  reportseries = {WLR},
+%	  reportpage = {25},
+  courtname = {NSWSC},
+  casenumber = {481},
+	}
+
+
+@case{becker,
+  partya = {City of Marion}, 
+  partyb = {Becker},
+  caseshortname = {Becker},
+%  caseyear = {2007},
+  reportyear={1973},
+  reportvolume = {6},
+%  volyearneeded = {},
+  reportseries = {SASR},
+  reportpage = {13},
+%  courtname = {NSWSC},
+%  casenumber = {481},
+	}
+
+%R v Morgan [1970] 3 All ER 1053
+@case{rmorgan,
+  partya = {R}, 
+  partyb = {Morgan},
+  caseshortname = {Morgan},
+  reportyear={1970},
+  reportvolume = {3},
+  volyearneeded = {true},
+  reportseries = {All ER},
+  reportpage = {1053},
+	}
+
+
+@book{eco,
+author={Umberto Eco},
+title={Come si fa una tesi di laurea},
+subtitle={Le materie umanistiche},
+title+an = {How to write a Thesis for an Arts Degree},
+publisher={Bompiani},
+date={2004},
+origdate={1977},
+edition={15},
+options={skipbib=true},
+%isbn={9788845246310},
+}
+
+@book{anncrimnsw,
+author={Roderick N Howie and Peter A Johnson},
+title={Annotated Criminal Legislation New South Wales},
+publisher={LexisNexis Butterworths},
+date={2015},
+edition={2014-2015},
+}
+
+@case{columbus,
+  partya = {City of Columbus},
+  partyashortname = {Columbus}, 
+  partyb = {Becher},
+  caseshortname = {Becher},
+  icaseyear = {1962},
+  jurisdiction = {Ohio},
+  courtfullname = {Supreme Court of Ohio},
+  note = {Ohio SC, 1962},
+	}
+@case{columbussr,
+  reportvolume = {173},
+  reportseries = {Ohio St},
+  reportpage = {197},
+  crossref = {columbus},
+}
+
+@case{columbusne,
+  reportvolume = {180},
+  reportseries = {NE 2d},
+  reportseriesseries = {2d},
+  reportpage = {836},
+  crossref = {columbus},
+}
+%%%%%%%%%%%%%
+
+@xdata{xcolumbus,
+  partya = {xCity of Columbus},
+  partyashortname = {Columbus}, 
+  partyb = {Becher},
+  year = {1962},
+  jurisdiction = {Ohio},
+  courtfullname = {Supreme Court of Ohio},
+  note = {Ohio SC, 1962},
+	}
+	
+@case{xcolumbussr,
+  reportvolume = {173},
+  reportseries = {Ohio St},
+  reportpage = {197},
+  xdata = {xcolumbus},
+}
+
+@case{xcolumbusne,
+  reportvolume = {180},
+  reportseries = {NE 2d},
+  reportseriesseries = {2d},
+  reportpage = {836},
+  xdata = {xcolumbus},
+}
+
+
+%%%%%%%%%%%%%
+@case{thomas,
+  partya = {Thomas},
+  partyb = {Newton*},
+  icaseyear = {1827},
+	}
+
+@case{thomascar,
+  reportyear = {1827},
+  reportvolume = {2},
+  reportseries = {Car \& P},
+  reportpage = {606},
+  crossref = {thomas},
+}
+
+@case{thomaser,
+  reportvolume = {?},
+  reportseries = {ER},
+  reportpage = {276},
+  crossref = {thomas},
+}
+
+@case{thomasermnc,
+  caseyear = {1827},
+  courtname = {EngRep},
+  casenumber = {503},
+  crossref = {thomas},
+}
+
+
+@case{gitlow,
+  partya = {Gitlow},
+  partyb = {New York},%People of New York
+  partyashortname = {New York}, 
+  caseshortname = {Gitlow},
+  icaseyear = {1925},
+  note = {1925},
+	}
+
+
+@case{gitlowus,
+  reportvolume = {268},
+  reportseries = {US},
+  reportpage = {652},
+  crossref = {gitlow},
+}
+
+
+@case{gitlowsc,
+  reportvolume = {45},
+  reportseries = {SCt},
+  reportpage = {625},
+  crossref = {gitlow},
+}
+
+@case{armstrong,
+  partya = {Adam Armstrong's Case},
+  icaseyear = {1823},
+  caseshortname = {Armstrong},
+	}
+
+@case{armstrongmnc,
+  caseyear = {1823},
+  courtname = {EngR},
+  casenumber = {1},
+  crossref = {armstrong},
+}
+
+
+@case{armstronglewin,
+  reportyear = {1823},
+  reportvolume = {1},
+  reportseries = {Lewin},
+  reportpage = {245},
+  crossref = {armstrong},
+}
+
+@case{armstronger,
+  reportvolume = {168},
+  reportseries = {ER},
+  reportpage = {1028},
+  crossref = {armstrong},
+}
+
+
+%Adam Armstrong's Case [1823] EngR 1; (1823) 1 Lewin 245; 168 E.R. 1028 (1 January 1823)
+
+
+@case{alexander,
+  partya = {Alexander},
+  partyb = {Brown},
+  icaseyear = {1823},
+  caseshortname = {Alexander},
+	}
+
+@case{alexandermnc,
+  caseyear = {1823},
+  courtname = {EngR},
+  casenumber = {5},
+  crossref = {alexander},
+}
+
+
+@case{alexandercp,
+  reportyear = {1823-1825},
+  reportvolume = {1},
+  reportseries = {C \& P},
+  reportpage = {288},
+  crossref = {alexander},
+}
+
+@case{alexanderer,
+  reportvolume = {171},
+  reportseries = {ER},
+  reportpage = {1199},
+  crossref = {alexander},
+  note = {A},
+}
+
+
+
+%Alexander v Brown [1823] EngR 5; (1823-1825) 1 Car & P 288; 171 E.R. 1199 (A) (1 January 1823)
+
+@book{bishop,
+author = {Joel Prentiss Bishop},
+title = {The First Book of the Law},
+date = {1868},
+publisher = {Little, Brown, and Company},
+location = {Boston},
+}
+
+
+@case{velocity,
+  partya = {shipname Velocity},
+  icaseyear = {1869},
+  shipname = {Velocity},
+	}
+
+@case{velocitymnc,
+  caseyear = {1869},
+  courtname = {EngR},
+  casenumber = {53},
+  crossref = {velocity},
+}
+
+
+@case{velocitynr,
+  reportyear = {1869},
+  reportvolume = {6},
+  reportseries = {Moo PC NS},
+  reportpage = {263},
+  crossref = {velocity},
+}
+
+@case{velocityer,
+  reportvolume = {16},
+  reportseries = {ER},
+  reportpage = {725},
+  crossref = {velocity},
+}
+
+
+
+%The "Velocity" [1869] EngR 53; (1869) 6 Moo PC NS 263; 16 E.R. 725
+
+
+@case{snail,
+  partya = {Donoghue}, 
+  partyb = {Stevenson},
+  icaseyear = {1932},
+  reportyear={1932},
+%  volyearneeded = {true},
+  reportseries = {AC},
+  reportpage = {562},
+  casenickname = {snail in the bottle},
+  note = {HL},
+	}
+
+%Commonwealth v Tasmania ("Tasmanian Dam case") [1983] HCA 21; (1983) 158 CLR 1
+
+@case{tasdam,
+  partya = {Commonwealth}, 
+  partyb = {Tasmania},
+  icaseyear = {1983},
+  casenickname = {Tasmanian Dam},
+  }
+@case{tasdammnc,
+  caseyear = {1983},
+  courtname = {HCA},
+  casenumber = {2},
+  crossref = {tasdam},
+  }
+@case{tasdamclr,
+  reportyear={1983},
+%  volyearneeded = {true},
+  reportvolume = {158},
+  reportseries = {CLR},
+  reportpage = {1},
+  crossref = {tasdam},
+  	}
+%@case{frame,
+%  partya = {Frame}, 
+%  partyb = {Smith},
+%  icaseyear = {1987},
+%  }
+%@case{framescr,
+%  reportyear = {1987},
+%  volyearneeded = {true},
+%  reportvolume = {2},
+%  reportseries = {SCR},
+%  reportpage = {99},
+%  crossref = {frame},
+%  }
+%@case{framedlr,
+%  reportvolume = {42},
+%  reportseries = {DLR (4th)},
+%  reportpage = {81},
+%  crossref = {frame},
+%  	}
+
+@case{frame,partya = {Frame},partyb = {Smith},icaseyear = {1987},}
+@case{framescr,reportyear = {1987},volyearneeded = {true},reportvolume = {2},reportseries = {SCR},reportpage = {99},crossref = {frame},}
+@case{framedlr,reportvolume = {42},reportseries = {DLR (4th)},reportpage = {81},crossref = {frame},}
+@case{cole,partya = {R},partyb = {Cole},caseyear = {2012},courtname = {SCC},casenumber = {53},}
+@case{bigm,partya = {R},partyb = {Big M Drug Mart },}
+@case{bigmscr,reportyear = {1985},volyearneeded = {true},reportvolume = {1},reportseries = {SCR},reportpage = {295},crossref = {bigm},}
+@case{bigmdlr,reportvolume = {18},reportseries = {DLR (4th)},reportpage = {321},crossref = {bigm},}
+@case{keegstra,partya = {Canadian Broadcasting Corporation },partyb = {Keegstra },decisionyear = {1986},}
+@case{keegstraar,reportvolume = {77},reportseries = {AR},reportpage = {249},crossref = {keegstra},}
+@case{keegstradlr,reportvolume = {35},reportseries = {DLR (4th)},reportpage = {76},crossref = {keegstra},note = {CA},}
+@case{robitaille,partya = {Robitaille },partyb = {Vancouver Hockey Club },}
+@case{robitailledlr,reportvolume = {124},reportseries = {DLR (3d)},reportpage = {228},crossref = {robitaille},}
+@case{robitaillewwr,reportyear = {1981},volyearneeded = {true},reportvolume = {2},reportseries = {WWR},reportpage = {481},crossref = {robitaille},note = {BCCA},}
+
+
+
+
+
+
+
+%Dow Jones and Company Inc v Gutnick [2002] HCA 56; 210 CLR 575; 194 ALR 433; 77 ALJR 255 (10 December 2002)
+
+@case{gutnick,
+  partya = {Dow Jones and Company Inc}, 
+  partyb = {Gutnick},
+  icaseyear = {2002},
+  }
+@case{gutnickmnc,
+  caseyear = {2002},
+  courtname = {HCA},
+  casenumber = {56},
+  crossref = {gutnick},
+  }
+@case{gutnickclr,
+%  reportyear={1983},
+%  volyearneeded = {true},
+  reportvolume = {210},
+  reportseries = {CLR},
+  reportpage = {575},
+  crossref = {gutnick},
+  	}
+@case{gutnickalr,
+%  reportyear={1983},
+%  volyearneeded = {true},
+  reportvolume = {194},
+  reportseries = {ALR},
+  reportpage = {433},
+  crossref = {gutnick},
+  	}
+@case{gutnickaljr,
+%  reportyear={1983},
+%  volyearneeded = {true},
+  reportvolume = {77},
+  reportseries = {ALJR},
+  reportpage = {255},
+  crossref = {gutnick},
+  	}
+
+
+
+
+%Kerr v Baranow, 2011 SCC 10, [2011] 1 SCR 269
+
+@case{kerr,
+  partya = {Kerr}, 
+  partyb = {Baranow},
+  icaseyear = {2011},
+  }
+@case{kerrmnc,
+  caseyear = {2011},
+  courtname = {SCC},
+  casenumber = {10},
+  crossref = {kerr},
+  }
+@case{kerrscr,
+  reportyear={2011},
+  volyearneeded = {true},
+  reportvolume = {1},
+  reportseries = {SCR},
+  reportpage = {269},
+  crossref = {kerr},
+  	}
+
+
+
+%McLean v Pilon (1978), 7 BCLR 99, 1978 CanLII 237 (SC).
+
+
+@case{mclean,
+  partya = {McLean}, 
+  partyb = {Pilon},
+  icaseyear = {1978},
+  decisionyear = {1978},
+  note = {SC},
+  }
+@case{mcleanlii,
+  caseyear = {1978},
+  courtname = {CanLII},
+  casenumber = {237},
+  crossref = {mclean},
+  }
+@case{mcleanbclr,
+%  reportyear={2011},
+%  volyearneeded = {true},
+  reportvolume = {7},
+  reportseries = {BCLR},
+  reportpage = {99},
+  crossref = {mclean},
+  	}
+
+@case{sarg,partya = {Re Sarg Oils Ltd },caseyear = {2011},courtname = {ABERCB },casenumber = {32},}
+@case{clarke,partya = {Clarke Institute of Psychiatry },partyb = {Ontario Nurses' Assn (Adusei Grievance) },decisionyear = {2001},reportvolume = {95},reportseries = {LAC (4th)},reportpage = {154},note = {OLRB},}
+@case{tulk,partya = {Tulk },partyb = {Moxhay },reportyear = {1848},volyearneeded = {true},reportvolume = {1},reportseries = {H \& Tw},reportpage = {105},}
+@case{epa,partya = {Massachusetts },partyb = {Environmental Protection Agency },}
+@case{epaus,reportyear = {2007},reportvolume = {549},reportseries = {US},reportpage = {497},crossref = {epa},}
+@case{epasc,reportvolume = {127},reportseries = {S Ct},reportpage = {1438},crossref = {epa},}
+@case{nic,partya = {Case Concerning Military and Paramilitary Activities in and against Nicaragua (Nicaragua v United States of America) },reportyear = {1986},volyearneeded = {true},reportseries = {ICJ Rep No },reportpage = {14},}
+@case{cbc,partya = {Alliance of Canadian Cinema Television and Radio Artists },partyb = {Canadian Broadcasting Corporation },decisionyear = {1990},reportvolume = {91},reportseries = {CLLC},reportpage = {16},note = {CLRB},}
+@case{vdn,partya = {VDN Cable Inc, on behalf of a corporation to be incorporated, Toronto, Ontario },decisionyear = {January 2005},reportseries = {2005-1, online: CRTC <www.crtc.gc.ca> },reportpage = {[perma.cc/LF5P-5MM3] },}
+@case{syncrude,partya = {R},partyb = {Syncrude Canada Ltd },}
+@case{syncrudeabpc,caseyear = {2010},courtname = {ABPC},casenumber = {154},crossref = {syncrude},}
+@case{syncrudewl,caseyear = {2010},courtname = {CarswellAlta },casenumber = {981},crossref = {syncrude},note = {WL Can},}
+@case{crete,partya = {R},partyb = {Crete },decisionyear = {18 April 1991},reportseries = {Ottawa},reportpage = {97/03674},note = {Ont Prov Ct },}
+@case{iron,partya = {Clearbrook Ironworks Ltd },partyb = {Letourneau },caseyear = {2006},courtname = {FCA},casenumber = {42},}
+
+
+
+
+
+
+
+%Smyth, Russell --- "What do Intermediate Appellate Courts Cite? A Quantitative Study of the Citation Practice of Australian State Supreme Courts" [1999] AdelLawRw 3; (1999) 21 Adelaide Law Review 51
+
+@article{smythsc,
+author = {Russell Smyth},
+title = {What do Intermediate Appellate Courts Cite? A Quantitative Study of the Citation Practice of Australian State Supreme Courts},
+mncyear = {1999},
+mncname = {AdelLawRw},
+mncnumber = {3},
+date = {1999},
+volume = {21},
+journaltitle = {Adelaide Law Review},
+pages = {51},
+keywords = {lj},
+}
+
+
+
+%=================== law journal articles
+
+
+@ljarticle{ljart3,
+options={year-required=true,},
+author={given=qqq, family=rrr},
+title ={A Third Legal Article yr req},
+journaltitle={MNOLR},
+date={2016},
+volume={1},
+pages={458},
+}
+
+@book{b2035,title ={Chitty on Contracts},edition ={26},publisher ={Sweet and Maxwell},date ={1989},}
+@book{b2036,title ={Clerk and Lindsell on Torts},edition ={16},publisher ={Sweet and Maxwell},date ={1989},}
+
+@periodical{j76,journaltitle={Modern Law Review},volume={54},number={1},month={1},date={1991},}
+
+%b2035,
+@article{a104,
+author={Ewan McKendrick},
+related={b2035,b2036},
+relatedtype={reviewof},
+crossref={j76},
+pages={162},
+keywords={otl, lj},
+}
+
+
+%Lawrence Friedman, Robert Kagan, Bliss Cartwright and Stanton
+%Wheeler, 'State Supreme Courts: A Century of Style and Citation' (1981) 33 Stanford Law
+%Review 773 (covering 16 state supreme courts in the period 1870-1970).
+
+
+@article{friedman,
+author = {Lawrence Friedman and Robert Kagan and Bliss Cartwright and Stanton Wheeler},
+title = {State Supreme Courts},
+subtitle = {A Century of Style and Citation},
+%mncyear = {1999},
+%mncname = {AdelLawRw},
+%mncnumber = {3},
+date = {1981},
+volume = {33},
+journaltitle = {Stanford Law Review},
+pages = {773},
+%---
+%reportyear = {1981},
+%repotrvolume = {33},
+%reportname = {Stanford Law Review},
+%reportpage = {773},
+note = {covering 16 state supreme courts in the period 1870-1970},
+keywords = {lj},
+}
+
+
+
+@book{butt,
+author = {Peter Butt},
+title={Legal Usage},
+subtitle={A Modern Style Guide},
+date={2018},
+publisher={LexisNexis Butterworths},
+}
+
+
+@statute{crimnsw,
+statutetitle = {Crimes Act},
+%statutelongtitle = {},
+%statuteshorttitle = {},
+%statutenickname = {},
+%statutevolume = {},
+statutejurisdiction = {NSW},
+%statuteregnalyear = {},
+%statutechapter = {},
+%statuteyear = {},%for the volume
+statutetitleyear = {1900},%for the title
+}
+
+%Criminal Code, RSC 1985, c C-46, s 515
+
+@statute{crimcan,
+statutetitle = {Criminal Code},
+%statutelongtitle = {},
+%statuteshorttitle = {},
+%statutenickname = {},
+%statutevolume = {},
+%statutejurisdiction = {NSW},
+%statuteregnalyear = {},
+%statutechapter = {},
+%statuteyear = {},%for the volume
+statutetitleyear = {RSC 1985, c C-46},%for the title
+}
+
+
+@statute{canreg,
+statutetitle = {Maple Products Regulations},
+%statutelongtitle = {},
+statuteshorttitle = {CRC},
+%statutenickname = {},
+%statutevolume = {},
+%statutejurisdiction = {NSW},
+%statuteregnalyear = {},
+statutechapter = {289},
+%statuteyear = {},%for the volume
+%statutetitleyear = {RSC 1985},%for the title
+}
+
+@statute{testregs,
+statutetitle = {Test Regs},
+statutetitleyear = {2020},%for the title
+keywords = {regulations},
+statutejurisdiction = {NSW},
+}
+
+
+
+
+@statute{crimcodecan,
+citeref = {canleg},
+title = {Criminal Code},
+svjy = {RSC 1985},
+chapter = {C-46},
+}
+
+
+@statute{oescheats,
+citeref = {canleg},
+title = {Escheats Act},
+svjy = {RSO 1980},
+chapter = {142},
+}
+
+@statute{canleg,
+citeref = {canleg},
+title = {Copyright Act},
+chapter = {C-42},
+svjy = {RSC 1985},
+%year = {xxx},
+%regnum = {xxx},
+}
+
+@statute{canregcrc,
+citeref = {crcreg},
+title = {Maple Products Regulations},
+chapter = {289},
+%year = {xxx},
+%regnum = {xxx},
+}
+
+
+@statute{canregsor,
+citeref = {sorreg},
+title = {Regulations Amending the Food and Drug Regulations},
+%chapter = {xxx},
+year = {98},
+regnum = {580},
+}
+
+@statute{canregalta,
+citeref = {altareg},
+%title = {xxx},
+%chapter = {xxx},
+year = {2009},
+regnum = {62},
+}
+
+@statute{canregbc,
+citeref = {bcreg},
+%title = {xxx},
+%chapter = {xxx},
+year = {2008},
+regnum = {278},
+}
+
+@statute{canregman,
+citeref = {manreg},
+%title = {xxx},
+%chapter = {xxx},
+year = {87},
+regnum = {351},
+}
+@statute{canregnb,
+citeref = {nbreg},
+%title = {xxx},
+%chapter = {xxx},
+year = {2006},
+regnum = {23},
+}
+@statute{canregnfld,
+citeref = {nfldreg},
+%title = {xxx},
+%chapter = {xxx},
+year = {97},
+regnum = {19},
+}
+@statute{canregnlr,
+citeref = {nlrreg},
+%title = {xxx},
+%chapter = {xxx},
+year = {09},
+regnum = {4},
+}
+@statute{canregnwt,
+citeref = {nwtreg},
+%title = {xxx},
+%chapter = {xxx},
+year = {2008},
+regnum = {26},
+}
+@statute{canregns,
+citeref = {nsreg},
+%title = {xxx},
+%chapter = {xxx},
+year = {2007},
+regnum = {235},
+}
+@statute{canregnu,
+citeref = {nureg},
+%title = {xxx},
+%chapter = {xxx},
+year = {040},
+regnum = {99},
+}
+@statute{canrego,
+citeref = {oreg},
+%title = {xxx},
+%chapter = {xxx},
+year = {08},
+regnum = {361},
+}
+@statute{canregpei,
+citeref = {peireg},
+%title = {xxx},
+%chapter = {xxx},
+year = {2002},
+regnum = {249},
+}
+
+@statute{canregoc,
+citeref = {ocreg},
+%title = {xxx},
+%chapter = {xxx},
+year = {97},
+regnum = {764},
+fulldate = {25 June 1997},
+gazette = {1997.II.2737},
+}
+
+@statute{canregsask,
+citeref = {saskreg},
+%title = {xxx},
+%chapter = {xxx},
+year = {67},
+regnum = {444},
+}
+
+@statute{canregyoic,
+citeref = {yoicreg},
+%title = {xxx},
+%chapter = {xxx},
+year = {1995},
+regnum = {87},
+}
+
+
+@statute{fla,citeref = {canleg},title = {Family Law Act },svjy = {SA 2003 },chapter = {F-4.5 },}
+@statute{tla,citeref = {canleg},title = {Territorial Lands Act },svjy = {RSC 1985 },chapter = {T-7 },}
+@statute{fair,citeref = {canleg},title = {Fair Trading Act },svjy = {RSA 2000 },chapter = {F-2 },}
+@statute{bears,citeref = {sorreg},title = {Polar Bear Pass Withdrawal Order },year = {84},regnum = {409},}
+@statute{birds,citeref = {crcreg},title = {Migratory Birds Regulations },chapter = {1035},}
+@statute{forests,citeref = {altareg},title = {Alberta Forest Land Use and Management Regulations },year = {1976},regnum = {197},}
+@statute{prop,statutetitle = {Law of Property Act },statutetitleyear = {1969},statutejurisdiction = {UK},}
+
+@statute{water,statutetitle = {Safe Drinking Water Act },statutetitleyear = {42 USC §300f },note = {1974},}
+
+
+
+
+\end{filecontents*}
+
+
+
+
+\documentclass[12pt]{article}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+%------------------
+
+\title{McGill Citation Test}
+\author{}
+\date{}
+\long\gdef\myabstracttext{This document tests the  (\texttt{\textbackslash lawcite}) command against the McGill legal citation guidelines.}
+%------------------
+\usepackage[table]{xcolor}
+\pagecolor{blue!3}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{TeX Gyre Schola}[Scale=1.2]%Gentium Plus}
+\setmonofont{Noto Sans Mono}%[Colour=blue]
+%------------------
+\usepackage[british]{babel}
+\usepackage{csquotes}
+\usepackage{graphicx}
+
+\usepackage{marginnote}
+\usepackage{abstract}
+\usepackage{microtype}
+%\usepackage{makecell}
+
+\newcommand\note[1]{(\texttt{#1})}
+
+
+\newcommand\egcasename{Donoghue v Stevenson}
+\newcommand\egcaseref{[1932] AC 562}
+
+\newcommand\eg[1]{%
+(\texttt{#1})
+}
+
+\newcounter{examplecounter}
+\newcommand\numeg{\refstepcounter{examplecounter}\marginpar{Ex \theexamplecounter\label{ex\theexamplecounter}}}
+
+\newcommand\abibname{lawcite}
+\newcommand\abibstyle{style=\abibname}
+\usepackage[
+	\abibstyle , 
+	lawcitestyle=mcgill,
+   use-toc-parnumrefs=false,
+	indexing=cite,
+	citetracker=true,
+	ibidtracker=false,
+	pagetracker=true,
+	idemtracker=true,
+	opcittracker=true,
+	loccittracker=true,
+	autocite=footnote,
+   datezeros=true,
+		]{biblatex}
+
+\addbibresource{\jobname.bib}
+		
+%=================
+%indexing
+
+\usepackage{splitidx}
+\newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to page numbers.\bigskip}
+\newcommand\dupentries{\ \\\small\mdseries $\to$ Duplicated entries are intentional.}
+\setindexpreamble[cases]{\pagerefindexnote}%\dupentries}
+\setindexpreamble[legislation]{\pagerefindexnote}
+\setindexpreamble[regulations]{\pagerefindexnote}
+
+
+%Print the `preamble' of the index:
+\makeatletter
+ \renewcommand*{\@@printindex}{}
+ \def\@@printindex[#1][#2]{%
+ \begingroup
+ \edef\indexshortcut{#1}%
+ \def\indexname{#2\par \useindexpreamble}%
+ \def\kvtcb@text@index{#2}%
+ \let\index@preamble\relax
+ \expandafter\let\expandafter\index@preamble
+ \csname index@\indexshortcut @preamble\endcsname
+ \if@splitidx
+ \def\@tempa{idx}\def\@tempb{#1}%
+ \ifx\@tempa\@tempb\let\@indexsuffix\@gobble\fi
+ \fi
+\@input@{\jobname\@indexsuffix{#1}.ind}%
+\endgroup
+\csname printindex@endhook\endcsname
+}
+\makeatother
+\makeindex
+\newindex[Table of Cases]{cases}
+\newindex[Table of Statutes]{legislation}
+\newindex[Table of Regulations]{regulations}
+%%%\sindex[cases]{\noindent $\to$ References are to page numbers}
+
+
+%%\AtWriteToIndex splitidx uses \protected@write to write the index entries to its output les. The
+%%\AtWriteToIndex macro lets you execute a piece of code each time an index is
+%%written to a specic index. Usage:
+%%\AtWriteToIndex{hshortcuti}{hcodei}
+%%This may be useful if you want your index entries to reference not the page number
+%%but some other counter instead. For example, in order to make each index entry
+%%in the general index (identied by the idx shortcut) point to the corresponding
+%%section number, you would write
+
+
+%-------------------------------------------------------
+%%\AtWriteToIndex{idx}{\let\thepage\thesection}
+%-------------------------------------------------------
+
+
+
+
+
+\newcommand\optsett[2]{\noindent\texttt{#1} \ifblank{#2}{}{\hfill default: \texttt{\textbf{#2}}}}
+
+\newcommand\bcmd[1]{\{#1\}}
+\newcommand\cmd[1]{\texttt{\textcolor{blue}{\textbackslash #1}}}
+\newcommand\cmdb[1]{\texttt{\textbackslash #1}}
+\newcommand\mcmd[1]{\texttt{\textbackslash #1\{\}}}
+\newcommand\braces[1]{\{#1\}}
+\newcommand\brackets[1]{[#1]}
+\newcommand\parens[1]{(#1)}
+\newcommand\disp[1]{\hfill\fbox{#1}\hfill\ \par}
+\newcommand\dispb[1]{\hfill #1 \hfill\ \par\medskip}
+\newcommand\dispeg[1]{\noindent #1\par}
+
+
+\newcommand\canreg[2]{\lawcite[#2]{#1}}
+
+\newfontface\fcc{Noto Sans Mono}
+\newcommand\attribution[1]{\hspace{2pt}\fcc\tiny\rotatebox{90}{#1}}
+
+
+\usepackage[
+				final=true,
+				bookmarks,
+            colorlinks=true,        
+            allcolors = black,  
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+%================
+
+
+%------------------
+\begin{document}
+%\lcsetdemoon
+\maketitle
+\begin{abstract}
+\myabstracttext
+\end{abstract}
+%\vfill
+%\comment{{\ack}}
+\newpage
+\tableofcontents
+\bigskip
+\hfill\rulesep\hfill\ %\hrule
+%\listoffigures
+%\listoftables
+\bigskip
+\hfill\rulesep\hfill\ %\hrule
+\bigskip
+\newpage
+\iftoggle{printlegtoc}{%
+\let\oldtwocolumn\twocolumn
+\renewcommand{\twocolumn}[1][]{#1}
+\let\oldclearpage\clearpage
+\renewcommand\clearpage{\relax}
+\printindex[cases]
+\printindex[legislation]
+\iftoggle{printregulations}{\printindex[regulations]}{}
+%}
+\renewcommand{\twocolumn}[1][]{\oldtwocolumn}
+\renewcommand\clearpage{\oldclearpage}
+}{}
+\bigskip
+\hfill\rulesep\hfill\ %\hrule%{0.8\linewidth}
+\bigskip
+
+
+%===============================================
+\newpage
+\section{Cases}
+Available commands:
+
+%A
+\disp{key}\numeg
+\disp{\cmd{lawcite}\braces{key}}
+\smallskip
+\dispb{footer, single key}
+\dispeg{\cmdb{lawcite}\braces{cole}}
+
+Text\lawcite{cole}
+\bigskip
+\bigskip
+
+%B
+\disp{key \textit{postnote}}\numeg
+\disp{\cmd{lawcite}\brackets{\textit{postnote}}\braces{key}}
+\smallskip
+\dispb{footer, single key, single cite}
+\dispeg{\cmdb{lawcite}\brackets{\cmdb{nopp} at 67}\braces{cole}}
+
+Text\lawcite[\nopp at 67]{cole}
+\bigskip
+\bigskip
+
+%C
+\disp{\textit{prenote} key}\numeg
+\disp{\cmd{lawcite}\brackets{\textit{prenote}}\brackets{}\braces{key}}
+\smallskip
+\dispb{footer, single key}
+\dispeg{\cmdb{lawcite}\brackets{See also}\brackets{}\braces{cole}}
+
+Text\lawcite[See also][]{cole}
+\bigskip
+\bigskip
+
+%D
+\disp{\textit{prenote} key \textit{postnote}}\numeg
+\disp{\cmd{lawcite}\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key}}
+\smallskip
+\dispb{footer, single key, single cite}
+\dispeg{\cmdb{lawcite}\brackets{See also}\brackets{\cmdb{nopp} at 67}\braces{cole}}
+
+Text\lawcite[See also][\nopp at 67]{cole}
+\bigskip
+\bigskip
+
+
+
+
+%=================================
+\newpage
+%Am
+\disp{key1 key2 \ldots}\numeg
+\disp{\cmd{lawcitesfoot}\braces{key1,key2}}
+\smallskip
+\dispb{footer, multi key}
+\dispeg{\cmdb{lawcitesfoot}\braces{cole,mcleanbclr}}
+
+Text\lawcitesfoot{cole,mcleanbclr}
+\bigskip
+\bigskip
+
+%Bm
+\disp{key1,key2 \textit{postnote}}\numeg
+\disp{\cmd{lawcitesfoot}\brackets{\textit{postnote}}\braces{key1,key2}}
+\smallskip
+\dispb{footer, multi key, single cite}
+\dispeg{\cmdb{lawcitesfoot}\brackets{\cmdb{addcomma}\cmdb{addspace} both on point}\braces{cole,mcleanbclr}}
+
+Text\lawcitesfoot[\addcomma\addspace both on point]{cole,mcleanbclr}
+\bigskip
+\bigskip
+
+%Cm
+\disp{\textit{prenote} key1,key2}\numeg
+\disp{\cmd{lawcitesfoot}\brackets{\textit{prenote}}\brackets{}\braces{key1,key2}}
+\smallskip
+\dispb{footer, multi key}
+\dispeg{\cmdb{lawcitesfoot}\brackets{See also}\brackets{}\braces{cole,mcleanbclr}}
+
+Text\lawcitesfoot[See also][]{cole,mcleanbclr}
+\bigskip
+\bigskip
+
+%Dm
+\disp{\textit{prenote} key1,key2 \textit{postnote}}\numeg
+\disp{\cmd{lawcitesfoot}\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key1,key2}}
+\smallskip
+\dispb{footer, multi key, single cite}
+\dispeg{\cmdb{lawcitesfoot}\brackets{See also}\brackets{\cmdb{addcomma}\cmdb{addspace} both on point}\braces{cole,mcleanbclr}}
+
+Text\lawcitesfoot[See also][\addcomma\addspace both on point]{cole,mcleanbclr}
+\bigskip
+\bigskip
+
+%=================================
+\newpage
+%%Am
+%\disp{key1 key2 \ldots}\numeg
+%\disp{\cmd{lawcitesfoot}\braces{key1,key2}}
+%\smallskip
+%\dispb{footer, multi key}
+%\dispeg{\cmdb{lawcitesfoot}\braces{cole,mcleanbclr}}
+%
+%Text\lawcitesfoot{cole,mcleanbclr}
+%\bigskip
+%\bigskip
+
+%Bmm
+\disp{overall-pre \textit{prenote} key1 \textit{postnote}, \textit{prenote} key2    \textit{postnote} overall-post}\numeg
+\noindent{\cmd{lawcitesfoot}\parens{overall prenote}\parens{overall postnote}\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key1}\\\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key2}}
+\par\smallskip
+\dispb{footer, multi key, multi cite}
+\dispeg{\cmdb{lawcitesfoot}\parens{There are two further cases\cmdb{addcomma}}\parens{\cmdb{addcomma}\cmdb{addspace} but neither case directly applies}\brackets{a criminal matter}\brackets{at para 42}\braces{cole}\brackets{and also}\brackets{101}\braces{mcleanbclr}}
+
+Text\lawcitesfoot(There are two further cases\addcomma)(\addcomma\addspace but neither case directly applies)[a criminal matter][at para 42]{cole}[and also][101]{mcleanbclr}
+\bigskip
+\bigskip
+
+%%Cm
+%\disp{\textit{prenote} key1,key2}\numeg
+%\disp{\cmd{lawcitesfoot}\brackets{\textit{prenote}}\brackets{}\braces{key1,key2}}
+%\smallskip
+%\dispb{footer, multi key}
+%\dispeg{\cmdb{lawcitesfoot}\brackets{See also}\brackets{}\braces{cole,mcleanbclr}}
+%
+%Text\lawcitesfoot[See also][]{cole,mcleanbclr}
+%\bigskip
+%\bigskip
+
+%%Dmm
+%\disp{\textit{prenote} key1,key2 \textit{postnote}}\numeg
+%\disp{\cmd{lawcitesfoot}\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key1,key2}}
+%\smallskip
+%\dispb{footer, multi key, multi cite}
+%\dispeg{\cmdb{lawcitesfoot}\brackets{See also}\brackets{\cmdb{addcomma}\cmdb{addspace} both on point}\braces{cole,mcleanbclr}}
+%
+%Text\lawcitesfoot[See also][\addcomma\addspace both on point]{cole,mcleanbclr}
+%\bigskip
+%\bigskip
+
+
+Corresponding inline commands
+
+\begin{tabular}{ll}
+\cmd{lawcitesfoot} & \cmd{lawcitesinline} \\
+\cmd{lawcitesfootrr} & \cmd{lawcitesinlinerr} \\
+\end{tabular}
+
+
+\begin{quotation}
+\noindent$\rightarrow$ \lawcitesinline(There are two further cases\addcomma)(\addcomma\addspace but neither case directly applies)[a criminal matter][at para 42]{cole}[and also][101]{mcleanbclr}
+\end{quotation}
+
+\begin{quotation}
+\noindent$\rightarrow$ \lawcitesinlinerr[See firstly][\nopp at para 42]{mcleanlii}[and secondly][\nopp at 101]{mcleanbclr}
+\end{quotation}
+
+
+Thre is also:
+
+\begin{tabular}{ll}
+\cmd{lawcitetitle} & \cmd{lawcitetitlerr} \\
+\lawcitetitle{cole} & \lawcitetitlerr{mcleanlii,mcleanbclr} \\
+\end{tabular}
+
+
+
+%=================================
+\newpage
+%Ar
+\disp{key1 key2 \ldots}\numeg
+\disp{\cmd{lawcitesfootrr}\braces{key1,key2}}
+\smallskip
+\dispb{footer, multi key, parallel, multi cite}
+\dispeg{\cmdb{lawcitesfootrr}\braces{mcleanlii,mcleanbclr}}
+
+Text\lawcitesfootrr{mcleanlii,mcleanbclr}
+\bigskip
+\bigskip
+
+%Br
+\disp{key1 \textit{postnote}, key2 \textit{postnote}}\numeg
+\disp{\cmd{lawcitesfootrr}\brackets{\textit{postnote}}\braces{key1}\brackets{\textit{postnote}}\braces{key2}}
+\smallskip
+\dispb{footer, multi key, parallel, multi cite}
+\dispeg{\cmdb{lawcitesfootrr}\brackets{\cmdb{nopp} at para 42}\braces{mcleanlii}\brackets{\cmdb{nopp} at 101}\braces{mcleanbclr}}
+
+Text\lawcitesfootrr[\nopp at para 42]{mcleanlii}[\nopp at 101]{mcleanbclr}
+\bigskip
+\bigskip
+
+%Cr
+\disp{\textit{prenote} key1, \textit{prenote} key2}\numeg
+\disp{\cmd{lawcitesfootrr}\brackets{\textit{prenote}}\brackets{}\braces{key1}\brackets{\textit{prenote}}\brackets{}\braces{key2}}
+\smallskip
+\dispb{footer, multi key, parallel, multi cite}
+\dispeg{\cmdb{lawcitesfootrr}\brackets{See firstly}\brackets{}\braces{mcleanlii}\brackets{and secondly}\brackets{}\braces{mcleanbclr}}
+
+Text\lawcitesfootrr[See firstly][]{mcleanlii}[and secondly][]{mcleanbclr}
+\bigskip
+\bigskip
+
+%Dr
+\disp{\textit{prenote} key1 \textit{postnote}, \textit{prenote} key2 \textit{postnote}}\numeg
+\disp{\cmd{lawcitesfootrr}\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key1}\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key2}}
+\smallskip
+\dispb{footer, multi key, parallel, multi cite}
+\dispeg{\cmdb{lawcitesfootrr}\brackets{See firstly}\brackets{\cmdb{nopp} at para 42}\braces{mcleanlii}\brackets{and secondly}\brackets{\cmdb{nopp} at 101}\braces{mcleanbclr}}
+
+Text\lawcitesfootrr[See firstly][\nopp at para 42]{mcleanlii}[and secondly][\nopp at 101]{mcleanbclr}
+\bigskip
+\bigskip
+
+\newpage
+\lawcitesinline{sarg}\par\bigskip
+\lawcitesinline{clarke}\par\bigskip
+\lawcitesinline{tulk}\par\bigskip
+\lawcitesinlinerr{epaus,epasc}\par\bigskip
+\lawcitesinline{nic}\par\bigskip
+\lawcitesinline{cbc}\par\bigskip
+\lawcitesinline{vdn}\par\bigskip
+\lawcitesinlinerr{syncrudeabpc,syncrudewl}\par\bigskip
+\lawcitesinline{crete}\par\bigskip
+\lawcitesinline[at para 3, Sexton JA]{iron}\par\bigskip
+
+
+%=================
+%\mcmd{lawcitesfootrr} -- footer, parallel references, single cite
+%
+%Text\lawcitesfootrr{mcleanlii,mcleanbclr}
+%\bigskip
+%
+%\mcmd{lawcitesfootrr} -- footer, parallel references, multi cites
+%
+%Text\lawcitesfootrr[\nopp at para 42]{mcleanlii}[\nopp at 101]{mcleanbclr}
+%\bigskip
+%
+%
+%\mcmd{lawcitesinlinerr} -- inline, parallel references, single cite
+%
+%\lawcitesinlinerr[\nopp at 315]{bigmscr}{bigmdlr}
+%
+%\lawcitesinlinerr{framescr,framedlr}
+%
+%\lawcitesinlinerr{keegstraar,keegstradlr}
+%
+%\lawcitesinlinerr[\nopp at 229]{robitailledlr}{robitaillewwr}
+%\bigskip
+
+
+\section{Statutes}
+
+Using the citeref field in the @statute bibentry is the more flexible method since it can process both (Canadian) statutes and regulations; the `traditional' statute fields can still be used, but operate only at the level of statutes, and regulations that look like statutes.
+
+\ \\
+(using citeref field)\\
+ \lawcite[\addcomma\addspace\bibstring{section} 515]{crimcodecan} provides that ...\\
+(using statute bibentry fields) \\
+\lawcite[\addcomma\addspace\bibstring{section} 515]{crimcan} provides that ...
+\par\bigskip
+
+\lawcite{fla}\par\bigskip
+\lawcite[\addcomma\addspace\lcsec{3}]{tla}\par\bigskip
+\lawcite{fair}\par\bigskip
+\noindent To display the jurisdiction for non-Canadian statutes, do:\\
+	{\footnotesize\textcolor{blue}{\cmd{toggletrue}\braces{statjurisdiction}}}
+	or
+	{\footnotesize\textcolor{blue}{\cmd{setstatjurison}}}
+   \toggletrue{statjurisdiction}
+
+   \lawcite{prop}\\
+	{\footnotesize\textcolor{blue}{\cmd{togglefalse}\braces{statjurisdiction}}}
+	or
+	{\footnotesize\textcolor{blue}{\cmd{setstatjurisoff}}}
+	\togglefalse{statjurisdiction}\par\bigskip
+\lawcite{water}\par\bigskip
+
+This last uses the semantic structure of the @statute bibentry:\medskip
+
+\fbox{\strut\textit{title}}, \fbox{\strut year} \fbox{\strut (jurisdiction)} \fbox{\strut (note)}\medskip
+
+to store\medskip
+
+\fbox{\strut\textit{Safe Drinking Water Act}}, \fbox{\strut 42 USC §300f} \fbox{\strut \ } \fbox{\strut (1974)}\medskip
+
+The year value 1974 could just as easily have been stored in the jurisdiction field, with no note field, to produce an identical result.
+%\lccitedemostat{canleg}
+%\noindent *{\small \textsc{Note}: A \texttt{citeref} has priority over any style settings.\footnote{Only Canadian *leg and *reg \texttt{citeref}s have been defined, so far.}}
+%\bigskip 
+
+
+\subsection{Regulations}
+\lawcite{canregnb}\par\bigskip
+\lawcite{bears}\par\bigskip
+\lawcite[\addcomma\addspace\lcsec{9}]{birds}\par\bigskip
+\lawcite[\addcomma\addspace\lcsec{2}]{forests}\par\bigskip
+
+
+%\lccitedemostat{canregbc}
+%\bigskip 
+
+\subsection{Currently not covered}
+\begin{itemize}
+\item Bills
+\item Constitutions and Charters
+\item Treaties, Agreements, and Accords
+\end{itemize}
+
+
+\section{Law Journals}
+
+
+``it has been argued\footnote{By \ljcite[\nopp 785]{friedman}, as cited by \lcljauthor{smythsc}.} that, stylistically,
+dissents are often looser than majority judgments.''\footnote{\ljcite[\nopp 59]{smythsc}.}\bigskip 
+
+
+
+%-------------------------------------
+\bigskip
+\hfill\rulesep\hfill\ %\hrule
+\bigskip
+%
+\printbibliography[
+	nottype=case,
+	nottype=statute,
+	notkeyword=lj,
+		]
+\printindex
+
+
+%
+\bigskip 
+
+\hfill ----oooOooo---- \hfill\ 
+\end{document}

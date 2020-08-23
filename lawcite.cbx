@@ -470,105 +470,119 @@ xxx}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{altareg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  Alta Reg%
 \addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{Alta Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Alta Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{bcreg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  BC Reg%
 \addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{BC Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }BC Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{manreg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  Man Reg%
 \addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{Man Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Man Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nbreg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  NB Reg%
 \addspace\printfield{year}-\printfield{regnum}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{NB Reg \thefield{year}-\thefield{regnum}\lcparnumrefsencap}}{}
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NB Reg \thefield{year}-\thefield{regnum}\lcparnumrefsencap}}{}
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nfldreg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  Nfld Reg%
 \addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{Nfld \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Nfld \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nlrreg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  NLR%
 \addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{NLR \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NLR \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nwtreg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  NWT Reg%
 \addspace\printfield{regnum}-\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{NWT Reg \thefield{regnum}-\thefield{year}\lcparnumrefsencap}}{} 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NWT Reg \thefield{regnum}-\thefield{year}\lcparnumrefsencap}}{} 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nsreg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  NS Reg%
 \addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{NS Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NS Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nureg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  Nu Reg%
 \addspace\printfield{regnum}-\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{Nu Reg \thefield{regnum}-\thefield{year}\lcparnumrefsencap}}{} 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Nu Reg \thefield{regnum}-\thefield{year}\lcparnumrefsencap}}{} 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{oreg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  O Reg%
 \addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{O Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }O Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{peireg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  PEI Reg%
 \addspace EC\printfield{year}-\printfield{regnum}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{PEI Reg \thefield{year}-\thefield{regnum}\lcparnumrefsencap}}{}
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }PEI Reg \thefield{year}-\thefield{regnum}\lcparnumrefsencap}}{}
  }{}%endif
 %----
 \iffieldequalstr{citeref}{ocreg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  OC%
 \addspace\printfield{regnum}-\printfield{year}%
 \addcomma\addspace\printfield{fulldate}%
 \addcomma\addspace GOQ\addspace\printfield{gazette}
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{OC Reg \thefield{regnum}-\thefield{year}%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }OC Reg \thefield{regnum}-\thefield{year}%
  , \thefield{fulldate}, GOQ \thefield{gazette}%
 \lcparnumrefsencap}}{} 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{saskreg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  Sask Reg%
 \addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{Sask Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Sask Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{yoicreg}{%
+   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
  YOIC Reg%
 \addspace\printfield{year}/\printfield{regnum}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{YOIC Reg \thefield{year}/\thefield{regnum}\lcparnumrefsencap}}{}
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }YOIC Reg \thefield{year}/\thefield{regnum}\lcparnumrefsencap}}{}
  }{}%endif
 }
 
@@ -658,9 +672,12 @@ test {\ifentrytype{statute}}%
 \iffieldundef{citeref}{%
   \iffieldundef{statutechapter}{%
   \usebibmacro{getstatutenameref}%
+  \usebibmacro{getnote}%
   \ifkeyword{regulations}{\toggletrue{printxregulations}}{\togglefalse{printxregulations}}%
 \iftoggle{lcindexing}{%
-  \sindex[\lctor]{\thefield{statutetitle}\iftoggle{stattycomma}{,}{} \thefield{statutetitleyear}\iftoggle{statjurisdiction}{ (\thefield{statutejurisdiction})}{}\lcparnumrefsencap}}{}%
+  \sindex[\lctor]{\thefield{statutetitle}\iftoggle{stattycomma}{,}{} \thefield{statutetitleyear}\iftoggle{statjurisdiction}{\iffieldundef{statutejurisdiction}{}{ (\thefield{statutejurisdiction})}}{}%\usebibmacro{getnote}%
+\iffieldundef{note}{}{ (\thefield{note})}%
+\lcparnumrefsencap}}{}%
   \togglefalse{printxregulations}
    }{\usebibmacro{getcanreg}}%end canreg
 }%end: no citeref
