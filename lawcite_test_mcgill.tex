@@ -131,7 +131,7 @@ publisher={Bompiani},
 date={2004},
 origdate={1977},
 edition={15},
-options={skipbib=true},
+%options={skipbib=true},
 %isbn={9788845246310},
 }
 
@@ -141,6 +141,7 @@ title={Annotated Criminal Legislation New South Wales},
 publisher={LexisNexis Butterworths},
 date={2015},
 edition={2014-2015},
+keywords = {lawbook},
 }
 
 @case{columbus,
@@ -324,6 +325,7 @@ title = {The First Book of the Law},
 date = {1868},
 publisher = {Little, Brown, and Company},
 location = {Boston},
+keywords = {lawbook},
 }
 
 
@@ -548,7 +550,7 @@ location = {Boston},
 
 %Smyth, Russell --- "What do Intermediate Appellate Courts Cite? A Quantitative Study of the Citation Practice of Australian State Supreme Courts" [1999] AdelLawRw 3; (1999) 21 Adelaide Law Review 51
 
-@article{smythsc,
+@ljarticle{smythsc,
 author = {Russell Smyth},
 title = {What do Intermediate Appellate Courts Cite? A Quantitative Study of the Citation Practice of Australian State Supreme Courts},
 mncyear = {1999},
@@ -558,7 +560,7 @@ date = {1999},
 volume = {21},
 journaltitle = {Adelaide Law Review},
 pages = {51},
-keywords = {lj},
+%keywords = {lj},
 }
 
 
@@ -597,7 +599,7 @@ keywords={otl, lj},
 %Review 773 (covering 16 state supreme courts in the period 1870-1970).
 
 
-@article{friedman,
+@ljarticle{friedman,
 author = {Lawrence Friedman and Robert Kagan and Bliss Cartwright and Stanton Wheeler},
 title = {State Supreme Courts},
 subtitle = {A Century of Style and Citation},
@@ -938,6 +940,7 @@ regnum = {87},
 \newindex[Table of Cases]{cases}
 \newindex[Table of Statutes]{legislation}
 \newindex[Table of Regulations]{regulations}
+\newindex[General Index]{general}
 %%%\sindex[cases]{\noindent $\to$ References are to page numbers}
 
 
@@ -1344,25 +1347,75 @@ The year value 1974 could just as easily have been stored in the jurisdiction fi
 
 
 ``it has been argued\footnote{By \ljcite[\nopp 785]{friedman}, as cited by \lcljauthor{smythsc}.} that, stylistically,
-dissents are often looser than majority judgments.''\footnote{\ljcite[\nopp 59]{smythsc}.}\bigskip 
+dissents are often looser than majority judgments.''\sindex[general]{dissents}\footnote{\ljcite[\nopp 59]{smythsc}.}\bigskip 
+
+\section{Other Material}
+
+Text\autocite[110]{eco} Text\autocite[42]{butt} Text\autocite[para \brackets{2.4}]{anncrimnsw} Text\autocite[\nopp c 1]{bishop} %Text\autocite{ljart3}
+
+%
+\bigskip 
+
+\hfill ----oooOooo---- \hfill\ 
 
 
+
+%\"O\"o\c c
+
+%======================================= Bibliography
+\newpage
+{\center
+\printbibheading[title=Bibliography]
+}
+%------------------------------- Legislation
+\newrefcontext[sorting=statsort]
+\printbibliography[
+	title=\center Legislation,
+	heading=subbibliography,%
+	type=statute,
+	]
+%------------------------------- Cases
+\newrefcontext[sorting=casesort]
+\printbibliography[
+	title=\center Jurisprudence,
+	heading=subbibliography,%
+	type=case,
+	]
+%------------------------------- Monographs
+\newrefcontext[sorting=nty]
+\printbibliography[
+	heading=subbibliography,%
+%	nottype=case,
+%	nottype=statute,
+%	nottype=article,
+%	nottype=ljarticle,
+	keyword=lawbook,
+	title={\center Secondary Materials: Monographs},
+%	postnote={bibcolophon},
+	]
+%------------------------------- Legal Articles, Law Reviews
+\printbibliography[
+	heading=subbibliography,%
+	title={\center Secondary Materials: Articles},
+	type=ljarticle,
+	]
+%	postnote={bibcolophon},
 
 %-------------------------------------
 \bigskip
 \hfill\rulesep\hfill\ %\hrule
 \bigskip
 %
+%------------------------------- General Material
 \printbibliography[
+	heading=subbibliography,%
 	nottype=case,
 	nottype=statute,
-	notkeyword=lj,
+	nottype=ljarticle,
+	notkeyword=lawbook,
+	title={\center General Material},
 		]
-\printindex
+\printindex[general]
 
 
-%
-\bigskip 
-
-\hfill ----oooOooo---- \hfill\ 
 \end{document}

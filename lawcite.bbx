@@ -266,19 +266,21 @@
 
 %
 \DeclareBibliographyOption[string]{lawcitestyle}[mlr]{%
-\ifstrempty{#1}{}{}
+\ifstrempty{#1}{}{%
 \ifstrequal{#1}{default}{%
    %xxx
    \lcsetstyledefault
-}{}
+}{%
 \ifstrequal{#1}{mlr}{%
    %xxx
    \lcsetstylemlr
-}{}
+}{%
 \ifstrequal{#1}{mcgill}{%
    %xxx
    \lcsetstylemcgill
-}{}
+}{%
+\lcsetstylemlr
+}}}}
 }
 
 
@@ -291,13 +293,15 @@
 %
 \DeclareBibliographyDriver{statute}{%
  \usebibmacro{begentry}%
-   \usebibmacro{getstatutenameref}
+   \usebibmacro{getstatutenameref}%
+   \usebibmacro{getcanleg}%citeref method
+   \usebibmacro{getcanreg2}%citeref method
  \usebibmacro{finentry}
 }
 
 \DeclareBibliographyDriver{ljarticle}{%
  \usebibmacro{begentry}%
- \usebibmacro{ljb-generic}
+ \usebibmacro{getljarticle}%ljb-generic}
  \usebibmacro{finentry}
 }
 
@@ -329,12 +333,21 @@
 \DeclareSortingTemplate{statsort}{
 \sort{
  \field{statutetitle}
+ \field{title}
+% \field{citeref}%citeref method: if no title: no effect
  }
 \sort{
  \field{statutejurisdiction}
+ \field{citeref}%citeref method
  }
 \sort{
  \field{statutetitleyear}
+ \field{svjy}
+ \field{year}
+ }
+\sort{
+ \field{regnum}%other Canadian provinces
+ \field{gazette}%Quebec
  }
 }
 
