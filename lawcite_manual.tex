@@ -1276,6 +1276,7 @@ note,
 \sort{
 	\field{statutetitle}
 	\field{title}
+	\field{sorttitle}
 %	\field{citeref}%citeref method: if no title: no effect
 	}
 \sort{
@@ -3016,6 +3017,19 @@ test {\ifentrytype{case}}%
 {\usebibmacro{postnote}\iffieldundef{note}{}{\addspace\printfield[parens]{note}}%
 }
 
+
+%============= lcpostnote
+\DeclareCiteCommand{lcpostnote}%
+%@@@@@@@@@@@@@@@@ prenote
+{}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{postnote}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{}%
+%@@@@@@@@@@@@@@@@ postnote
+{}%
 
 
 %============= lcljauthor
