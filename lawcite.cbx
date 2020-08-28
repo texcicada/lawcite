@@ -58,15 +58,16 @@
 \DeclareFieldFormat{decisionyear}{\mkbibparens{#1}}
 
 
-\DeclareFieldFormat{partysep}
-{\iftoggle{partysepitalic}
-{%true
+\DeclareFieldFormat{partysep}{%
+%#1
+\iftoggle{partysepitalic}{%true
 \mkbibemph{#1}{\iftoggle{partysepdotted}{\adddot}{}}%
 }%end true
 {%false
 #1{\iftoggle{partysepdotted}{\adddot}{}}%
 }%end false
 }%end
+
 
 \DeclareFieldFormat{caseyear}{%
 \iffieldundef{casenumber}{#1}{\iftoggle{mncbrackets}{\mkbibbrackets{#1}}{#1}}}%make option
@@ -122,10 +123,11 @@
  \iftoggle{partysepdotted}{\adddot}{}%
  }%
  {%
- \iftoggle{partysepitalic}%
-  {\mkbibemph{\printfield{partysep}}}%
-  {\printfield{partysep}}%
- \iftoggle{partysepdotted}{\adddot}{}%
+ \printfield{partysep}
+% \iftoggle{partysepitalic}%
+%  {\mkbibemph{\printfield{partysep}}}%
+%  {\printfield{partysep}}%
+% \iftoggle{partysepdotted}{\adddot}{}%
  }%
 }
 
@@ -467,6 +469,138 @@ xxx}%
 % \ifkeyword upsets sindex[] (timing of the loop?), but \iftoggle is OK.
 
 
+
+
+
+
+%=============== cs helpers for citeref
+\newcommand\lcregstring{Reg}
+\newcommand\lcforwardslash{/}
+\newcommand\lchyphen{-}
+
+%num/year:
+%\newcommand\altaregabbrevdiv{\lcforwardslash}
+\newcommand\altaregabbrevjur{Alta}
+\newcommand\altaregabbrevreg{\lcregstring}
+\newcommand\bcregabbrevjur{BC}
+\newcommand\bcregabbrevreg{\lcregstring}
+\newcommand\manregabbrevjur{Man}
+\newcommand\manregabbrevreg{\lcregstring}
+\newcommand\nfldregabbrevjur{Nfld}
+\newcommand\nfldregabbrevreg{\lcregstring}
+\newcommand\nlrregabbrevjur{NLR}
+\newcommand\nlrregabbrevreg{\lcregstring}
+\newcommand\nsregabbrevjur{NS}
+\newcommand\nsregabbrevreg{\lcregstring}
+\newcommand\nwtregabbrevjur{NWT}
+\newcommand\nwtregabbrevreg{\lcregstring}
+\newcommand\oregabbrevjur{O}
+\newcommand\oregabbrevreg{\lcregstring}
+\newcommand\saskregabbrevjur{Sask}
+\newcommand\saskregabbrevreg{\lcregstring}
+
+%year/num
+\newcommand\nbregabbrevjur{NB}
+\newcommand\nbregabbrevreg{\lcregstring}
+\newcommand\nuregabbrevjur{Nu}
+\newcommand\nuregabbrevreg{\lcregstring}
+\newcommand\peiregabbrevjur{PEI}
+\newcommand\peiregabbrevreg{\lcregstring\ EC}
+\newcommand\yoicregabbrevjur{YOIC}
+\newcommand\yoicregabbrevreg{\lcregstring}
+
+
+%bibmacros can take parameters
+
+%Create the regulation's formatted definition: regnum-year:
+\newbibmacro{make-reg-num-year-format}[2]{%1=abbrev, 2=num/year delimiter
+%#1xxx#2%
+%title
+\csxdef{#1regfielddelim1}{\addcomma\addspace}%
+\csxdef{#1regfield1}{\iffieldundef{title}{}{\printfield{title}\csuse{#1regfielddelim1}}}%
+%jurisdiction
+\csxdef{#1regfielddelim2}{\addspace}%
+\csxdef{#1regfield2}{\csuse{#1regabbrevjur}\csuse{#1regfielddelim2}}%
+%regulation label
+\csxdef{#1regfielddelim3}{\addspace}%
+\csxdef{#1regfield3}{\csuse{#1regabbrevreg}\csuse{#1regfielddelim3}}%
+%regulation's format: num-div-...:
+\csxdef{#1regabbrevdiv}{#2}%
+\csxdef{#1regfielddelim4}{\csuse{#1regabbrevdiv}}%
+\csxdef{#1regfield4}{\printfield{regnum}\csuse{#1regfielddelim4}}%
+%regulation's format: ...-year:
+\csxdef{#1regfielddelim5}{}%
+\csxdef{#1regfield5}{\printfield{year}\csuse{#1regfielddelim5}}%
+%assembled:
+\csxdef{#1reg}{\csuse{#1regfield1}\csuse{#1regfield2}\csuse{#1regfield3}\csuse{#1regfield4}\csuse{#1regfield5}}%
+}
+
+%
+\newbibmacro{use-regnum-year}[2]{%1=jurisdiction tag, 2=reg-year divider
+ \usebibmacro{make-reg-num-year-format}{#1}{#2}%
+   \csuse{#1reg}%
+}
+
+%---------------
+%Create the regulation's formatted definition: year-regnum:
+\newbibmacro{make-year-reg-num-format}[2]{%1=abbrev, 2=year/num delimiter
+%#1xxx#2%
+%title
+\csxdef{#1regfielddelim1}{\addcomma\addspace}%
+\csxdef{#1regfield1}{\iffieldundef{title}{}{\printfield{title}\csuse{#1regfielddelim1}}}%
+%jurisdiction
+\csxdef{#1regfielddelim2}{\addspace}%
+\csxdef{#1regfield2}{\csuse{#1regabbrevjur}\csuse{#1regfielddelim2}}%
+%regulation label
+\csxdef{#1regfielddelim3}{\addspace}%
+\csxdef{#1regfield3}{\csuse{#1regabbrevreg}\csuse{#1regfielddelim3}}%
+%regulation's format: year-div-...:
+\csxdef{#1regabbrevdiv}{#2}%
+\csxdef{#1regfielddelim4}{\csuse{#1regabbrevdiv}}%
+\csxdef{#1regfield4}{\printfield{year}\csuse{#1regfielddelim4}}%
+%regulation's format: ...-num:
+\csxdef{#1regfielddelim5}{}%
+\csxdef{#1regfield5}{\printfield{regnum}\csuse{#1regfielddelim5}}%
+%assembled:
+\csxdef{#1reg}{\csuse{#1regfield1}\csuse{#1regfield2}\csuse{#1regfield3}\csuse{#1regfield4}\csuse{#1regfield5}}%
+}
+
+%
+\newbibmacro{use-year-regnum}[2]{%1=jurisdiction tag, 2=reg-year divider
+ \usebibmacro{make-year-reg-num-format}{#1}{#2}%
+   \csuse{#1reg}%
+}
+
+
+
+
+
+
+
+%-------------- can-alta-reg
+\newbibmacro{can-alta-reg}{%
+\csxdef{altaregfielddelim1}{\addcomma\addspace}%
+\csxdef{altaregfield1}{\iffieldundef{title}{}{\printfield{title}\csuse{\altaregfielddelim1}}}%
+\csxdef{altaregfielddelim2}{\addspace}%
+\csxdef{altaregfield2}{\altaregabbrevjur\csuse{altaregfielddelim2}}%
+\csxdef{altaregfielddelim3}{\addspace}%
+\csxdef{altaregfield3}{\altaregabbrevreg\csuse{altaregfielddelim3}}%
+\csxdef{altaregfielddelim4}{\altaregabbrevdiv}%
+%regulation's format:
+\csxdef{altaregfield4}{\printfield{regnum}\csuse{altaregfielddelim4}}%
+\csxdef{altaregfielddelim5}{}%
+\csxdef{altaregfield5}{\printfield{year}\csuse{altaregfielddelim5}}%
+\csxdef{altareg}{\csuse{altaregfield1}\csuse{altaregfield2}\csuse{altaregfield3}\csuse{altaregfield4}\csuse{altaregfield5}}%
+\csuse{altareg}%
+\usebibmacro{make-reg-num-year-format}{A}{B}
+}
+
+
+
+
+
+
+
 %======================= canreg2
 \newbibmacro{getcanreg2}{%
 %----
@@ -485,89 +619,101 @@ xxx}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{altareg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- Alta Reg%
-\addspace\printfield{regnum}/\printfield{year}%
+ \usebibmacro{use-regnum-year}{alta}{\lcforwardslash}%
+% \usebibmacro{can-alta-reg}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% Alta Reg%
+%\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Alta Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} %
  }{}%endif
 %----
 \iffieldequalstr{citeref}{bcreg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- BC Reg%
-\addspace\printfield{regnum}/\printfield{year}%
+ \usebibmacro{use-regnum-year}{bc}{\lcforwardslash}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% BC Reg%
+%\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }BC Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}% 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{manreg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- Man Reg%
-\addspace\printfield{regnum}/\printfield{year}%
+ \usebibmacro{use-regnum-year}{man}{\lcforwardslash}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% Man Reg%
+%\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Man Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}% 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nbreg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- NB Reg%
-\addspace\printfield{year}-\printfield{regnum}%
+ \usebibmacro{use-year-regnum}{nb}{\lchyphen}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% NB Reg%
+%\addspace\printfield{year}-\printfield{regnum}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NB Reg \thefield{year}-\thefield{regnum}\lcparnumrefsencap}}{}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nfldreg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- Nfld Reg%
-\addspace\printfield{regnum}/\printfield{year}%
+ \usebibmacro{use-regnum-year}{nfld}{\lcforwardslash}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% Nfld Reg%
+%\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Nfld \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}% 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nlrreg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- NLR%
-\addspace\printfield{regnum}/\printfield{year}%
+ \usebibmacro{use-regnum-year}{nlr}{\lcforwardslash}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% NLR%
+%\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NLR \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}% 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nwtreg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- NWT Reg%
-\addspace\printfield{regnum}-\printfield{year}%
+ \usebibmacro{use-regnum-year}{nwt}{\lchyphen}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% NWT Reg%
+%\addspace\printfield{regnum}-\printfield{year}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NWT Reg \thefield{regnum}-\thefield{year}\lcparnumrefsencap}}{}% 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nsreg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- NS Reg%
-\addspace\printfield{regnum}/\printfield{year}%
+ \usebibmacro{use-regnum-year}{ns}{\lcforwardslash}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% NS Reg%
+%\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NS Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}% 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nureg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- Nu Reg%
-\addspace\printfield{regnum}-\printfield{year}%
+ \usebibmacro{use-year-regnum}{nu}{\lchyphen}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% Nu Reg%
+%\addspace\printfield{regnum}-\printfield{year}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Nu Reg \thefield{regnum}-\thefield{year}\lcparnumrefsencap}}{}% 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{oreg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- O Reg%
-\addspace\printfield{regnum}/\printfield{year}%
+ \usebibmacro{use-regnum-year}{o}{\lcforwardslash}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% O Reg%
+%\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }O Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{} %
  }{}%endif
 %----
 \iffieldequalstr{citeref}{peireg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- PEI Reg%
-\addspace EC\printfield{year}-\printfield{regnum}%
+ \usebibmacro{use-year-regnum}{pei}{\lchyphen}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% PEI Reg%
+%\addspace EC\printfield{year}-\printfield{regnum}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }PEI Reg \thefield{year}-\thefield{regnum}\lcparnumrefsencap}}{}%
  }{}%endif
@@ -585,17 +731,19 @@ xxx}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{saskreg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- Sask Reg%
-\addspace\printfield{regnum}/\printfield{year}%
+ \usebibmacro{use-regnum-year}{sask}{\lcforwardslash}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% Sask Reg%
+%\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Sask Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}% 
  }{}%endif
 %----
 \iffieldequalstr{citeref}{yoicreg}{%
-   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
- YOIC Reg%
-\addspace\printfield{year}/\printfield{regnum}%
+ \usebibmacro{use-year-regnum}{yoic}{\lcforwardslash}%
+%   \iffieldundef{title}{}{\printfield{title}\addcomma\addspace}%
+% YOIC Reg%
+%\addspace\printfield{year}/\printfield{regnum}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }YOIC Reg \thefield{year}/\thefield{regnum}\lcparnumrefsencap}}{}%
  }{}%endif
@@ -638,6 +786,29 @@ xxx}%
 %%%%%%%  \autocite[\usebibmacro{prenote}][\usebibmacro{postnote}]{#1}%
 %% }%
 
+
+
+
+
+
+%%%======================= label the footnote
+%%\newbibmacro{setfnlabel}{%
+%%%%\iffootnote
+%%%%    {%
+%%%%%    \ifciteseen{xseenx}{\printtext{\thefield{entrykey}}\protect\label{f\thefield{entrykey}}}%
+%%    \ifnumequal{\value{citecounter}}{1}{xfirstx}{\thecitecounter yyotheryy\protect\label{f\thefield{entrykey}}}
+%%%%     }%
+%%%%    {}%
+%%}
+
+%%%\iffootnote
+%%%    {%
+%%%    \ifciteseen{}{\csxdef{f\thefield{entrykey}}{\the\value{instcount}}%
+%%%%     \label{f\the\value{instcount}}}%
+%%%     \label{f\thefield{entrykey}}}%
+%%%     }
+%%%    {}%
+%%%}
 
 
 
@@ -1162,6 +1333,20 @@ test {\ifentrytype{case}}%
 {\addcomma\space}
 {}}
 
+\DeclareNameFormat{authorsc}{%
+\textsc{\namepartfamily}%
+}
+%\ifthenelse{\value{listcount}=1}
+%{\namepartfamily%
+%\ifdefvoid{\namepartgiven}{}{
+%,! \addcomma\space\namepartgiven}}
+%{%
+%\ifdefvoid{\namepartgiven}{}{\namepartgiven\space}%
+%\namepartfamily}%
+%\ifthenelse{\value{listcount}=1}
+%{\textsc{\namepartfamily}}
+%{}}
+
 
 %\newcommand*{\begrelateddelimmultivolume}{\newunitpunct\par\nobreak}
 %\renewcommand*{\begrelateddelimmultivolume}{\newunitpunct\addspace}
@@ -1171,6 +1356,11 @@ test {\ifentrytype{case}}%
 \newbibmacro{getljarticleauthor}{%
 \printnames[authorplain][-\value{listtotal}]{author}%
 }
+
+\newbibmacro{getljarticleauthorsc}{%
+\printnames[authorsc][-1]{author}%
+}
+
 
 \newbibmacro{getljarticletitle}{%
 \iftoggle{ljarttitleitalic}{%
@@ -1374,6 +1564,25 @@ test {\ifentrytype{case}}%
 \newcommand\setlcinlinerrcoloursc[1]{\renewcommand\lcinlinerrcoloursc{#1}}
 
 \lcsetdemooff
+
+
+
+%============= lcljauthorfn
+\DeclareCiteCommand{lcljauthorfn}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getljarticleauthorsc}%
+\usebibmacro{fullstepindex}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
 
 
 

@@ -285,9 +285,12 @@
 
 
 %
-\DeclareBibliographyDriver{case}{%
+\DeclareBibliographyDriver{case}{% bib is a list; cite is a loop.
  \usebibmacro{begentry}%
-   \usebibmacro{getcasenameref}
+% \iffieldundef{crossref}{%
+   \usebibmacro{getcasenameref}%
+%    }%code for no crossref
+%   {\usebibmacro{getcasenameref}}%code for crossref
  \usebibmacro{finentry}
 }
 %

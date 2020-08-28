@@ -450,6 +450,9 @@ keywords = {lawbook},
 @case{graham,partya = {Graham},partyb = {R},options = {skipbib=true},}
 @case{grahamwwr,reportyear = {1978},volyearneeded = {true},reportvolume = {6},reportseries = {WWR},reportpage = {48},options = {skipbib=true},crossref = {graham},}
 @case{grahamdlr,reportvolume = {90},reportseries = {DLR (3d)},reportpage = {223},crossref = {graham},note = {Sask QB},}
+@case{arbia,partya = {Arbia},
+partysep = {c},
+partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
 
 
 
@@ -813,7 +816,8 @@ regnum = {580},
    use-toc-parnumrefs=false,
 	indexing=cite,
 	citetracker=true,
-	ibidtracker=false,
+	citecounter=context,
+	ibidtracker=false,%option setting for footnotes: assumes single refs
 	pagetracker=true,
 	idemtracker=true,
 	opcittracker=true,
@@ -829,8 +833,8 @@ regnum = {580},
 
 \usepackage{splitidx}
 \newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to page numbers.\bigskip}
-\newcommand\dupentries{\ \\\small\mdseries $\to$ Duplicated entries are intentional.}
-\setindexpreamble[cases]{\pagerefindexnote}%\dupentries}
+\newcommand\dupentries{\ \\\small\mdseries $\to$ `Duplicated' entries are intentional.}
+\setindexpreamble[cases]{\pagerefindexnote\dupentries}
 \setindexpreamble[legislation]{\pagerefindexnote}
 \setindexpreamble[regulations]{\pagerefindexnote}
 
@@ -935,8 +939,71 @@ regnum = {580},
 \section{Getting Ready}
 \subsection{What you will need}
 \subsection{Installing the files}
+Place the lawcite Biblatex definition files (lawcite.dbx, lawcite.bbx, lawcite.cbx, english-lawcite.lbx), and an index style file for SplitIndex to use (e.g., plain.ist), in a location where \TeX\ can find them, for example, in the current folder.
+
+McGill-style is activated via option settings when calling the Biblatex package.
+
+\begin{verbatim}
+\usepackage[
+	style=lawcite, 
+	lawcitestyle=mcgill,
+   use-toc-parnumrefs=false,
+	...
+		]{biblatex}
+\end{verbatim}
+
+Settings used by \texttt{lawcite} may be changed inside the document, as well.
+
 \subsection{The Workflow}
+To compile a file \textit{foo.tex}, do:
+\begin{itemize}
+\item xelatex/lualatex/pdflatex
+\item biber (collect bibliographic data)
+\item xelatex/lualatex/pdflatex (resolve citations, insert Table of Contents, Bibliography; page numbers change)
+\item splitindex (create the ToC etc files)
+\begin{itemize}
+\item[] \texttt{splitindex \textit{foo} -- -s plain.ist -c}
+\end{itemize}
+\item xelatex/lualatex/pdflatex (Table of Cases is inserted; page numbers change)
+\item splitindex (pick up the new page numbers)
+\item xelatex/lualatex/pdflatex (refresh the ToC, and any cross-references)
+\end{itemize}
+The index style file (for the Table of Cases, etc), is a plain dot-fill style:
+\begin{verbatim}
+delim_0 "\\space\\dotfill\\space "\hss
+delim_1 "\\space\\dotfill\\space "\hss
+delim_2 "\\space\\dotfill\\space "\hss
+delim_n ", "
+delim_r "--"
+delim_t ""
+encap_prefix ""
+encap_suffix ""
+\end{verbatim}
+
 \section{How \cmdc{lawcite} works}
+\subsection{McGill settings}
+For a behind-the-scenes look, in terms of on/off switches (that is, where there is a typographical choice), the McGill style is defined as follows: party names are italic, party separator (the ``v'') is also italic, and not dotted, main citation method is footnoting, square brackets are not used for the year component of medium neutral citations, and so on\ldots
+\begin{verbatim}
+\newcommand\lcsetstylemcgill{%
+   \togglefalse{partysepdotted}
+   \toggletrue{partysepitalic}
+   \toggletrue{partynamesitalic}
+   \setcounter{reftypemode}{3}
+   \togglefalse{mncbrackets}
+   \toggletrue{stattycomma}%after the title
+   \togglefalse{stattyitalic}
+   \togglefalse{statjurisdiction}
+%   \toggletrue{statutecomma}%after the title
+	\toggletrue{commainindex}
+	\toggletrue{multicitecomma}
+	\toggletrue{casenamecomma}
+	\renewcommand\postnotedelim{\ }
+   \togglefalse{ljarttitleitalic}
+   \toggletrue{ljjnltitleitalic}
+}
+\end{verbatim}
+\bigskip
+Other components of style depend on data input and/or user choice (the decision year if different to the reporting year); or `fixed', in the sense that there is only one layout (like using ``/'' for some provincial regulation formats to separate regulation number and year, or year and regulation number). Coding can be done to the $n\textsuperscript{th}$ degree, but, at some point, practicality switches on.
 \subsection{The Data}
 \subsection{The Data Model}
 \subsection{The Option Settings}
@@ -971,7 +1038,7 @@ regnum = {580},
 \section{Cases}
 \subsection{Bibentries}
 
-Medium Neutral Citation:\\
+Medium Neutral Citation: \cmd{lcinline}\braces{cole}\par\bigskip
  \lcinline{cole}
 \begin{verbatim}
 @case{cole,
@@ -982,6 +1049,22 @@ Medium Neutral Citation:\\
 	casenumber = {53},
 }
 \end{verbatim}
+
+The default party separator is ``v''. Use the \textit{partysep=} field to specify a different party separator, e.g., \textit{contre}: \cmd{lcinline}\braces{arbia}\par\bigskip
+ \lcinline{arbia}
+ 
+\begin{verbatim}
+@case{arbia,
+	partya = {Arbia},
+	partysep = {c},
+	partyb = {Brousseau},
+	caseyear = {2020},
+	courtname = {QCCA},
+	casenumber = {1073},
+}
+\end{verbatim}
+
+
 
 
 Printed report, by year: \cmd{lcinline}\braces{hopp}\par\bigskip
@@ -1070,7 +1153,8 @@ Available commands:
 \dispb{footer, single key}
 \dispeg{\cmdb{lawcite}\braces{cole}}
 
-Text\lawcite{cole}
+%Text\lawcite[\protect\label{fcoleb}\unskip]{cole}
+Text\lawcite[\protect\label{fcoleb}][]{cole}
 \bigskip
 \bigskip
 
@@ -1238,7 +1322,7 @@ Thre is also:
 \dispb{footer, multi key, parallel, multi cite}
 \dispeg{\cmdb{lawcitesfootrr}\braces{mcleanlii,mcleanbclr}}
 
-Text\lawcitesfootrr{mcleanlii,mcleanbclr}
+Text\lawcitesfootrr[\protect\label{fmcleanbclr}][]{mcleanlii,mcleanbclr}
 \bigskip
 \bigskip
 
@@ -1320,7 +1404,20 @@ Text\lawcitesfootrr[See firstly][\nopp at para 42]{mcleanlii}[and secondly][\nop
 
 %------------------------------
 \section{Statutes}
+\subsection{Bibentries}
 
+Ordinary statutes: \cmd{lawcite}\braces{fla}\par\bigskip
+ \lawcite{fla}
+\begin{verbatim}
+@statute{fla,
+	citeref = {canleg},
+	title = {Family Law Act},
+	svjy = {SA 2003},
+	chapter = {F-4.5},
+}
+\end{verbatim}
+
+\subsection{Citations}
 
 \optsett{\cmdb{lawcite\braces{key}}}{}\bigskip
 
@@ -1352,15 +1449,6 @@ The year value 1974 could just as easily have been stored in the jurisdiction fi
 	{\footnotesize\textcolor{blue}{\cmd{setstatjurisoff}}}
 	\togglefalse{statjurisdiction}\par\bigskip
 
-Because of the multiplicity of regulation format types, in the data structure, using the citeref field in the @statute bibentry is the more flexible method since it can process both (Canadian) statutes and regulations in one sweep; although, the `traditional' statute fields can still be used, but operate only at the level of statutes, and regulations that look like statutes.
-
-\ \\
-(using citeref field)\\
- \lawcite[\addcomma\addspace\bibstring{section} 515]{crimcodecan} provides that ...\\
-(using statute bibentry fields) \\
-\lawcite[\addcomma\addspace\bibstring{section} 515]{crimcan} provides that ...
-\par\bigskip
-
 
 %\lccitedemostat{canleg}
 %\noindent *{\small \textsc{Note}: A \texttt{citeref} has priority over any style settings.\footnote{Only Canadian *leg and *reg \texttt{citeref}s have been defined, so far.}}
@@ -1371,6 +1459,21 @@ Because of the multiplicity of regulation format types, in the data structure, u
 
 %------------------------------
 \subsection{Regulations}
+\subsubsection{Bibentries}
+
+Ordinary regulations: \cmd{lawcite}\braces{canregnb}\par\bigskip
+ \lawcite{canregnb}
+\begin{verbatim}
+@statute{canregnb,
+	citeref = {nbreg},
+	year = {2006},
+	regnum = {23},
+	sorttitle = {nbreg200623},
+}
+
+\end{verbatim}
+
+\subsubsection{Citations}
 
 
 \optsett{\cmdb{lawcite\braces{key}}}{}
@@ -1379,6 +1482,15 @@ Because of the multiplicity of regulation format types, in the data structure, u
 \lawcite{bears}\par\bigskip
 \lawcite[\addcomma\addspace\lcsec{9}]{birds}\par\bigskip
 \lawcite[\addcomma\addspace\lcsec{2}]{forests}\par\bigskip
+
+Because of the multiplicity of regulation format types, in the data structure, using the citeref field in the @statute bibentry is the more flexible method since it can process both (Canadian) statutes and regulations in one sweep; although, the `traditional' statute fields can still be used, but operate only at the level of statutes, and regulations that look like statutes.
+
+\ \\
+(using citeref field)\\
+ \lawcite[\addcomma\addspace\bibstring{section} 515]{crimcodecan} provides that ...\\
+(using statute bibentry fields) \\
+\lawcite[\addcomma\addspace\bibstring{section} 515]{crimcan} provides that ...
+\par\bigskip
 
 The available citeref values are:
 
@@ -1391,17 +1503,18 @@ sor & \lawcite{canregsor} \\
 alta & \lawcite{canregalta} \\
 bc & \lawcite{canregbc} \\
 man & \lawcite{canregman} \\
-nb & \lawcite{canregnb} \\
-nfld & \lawcite{canregnfld} \\
-nlr & \lawcite{canregnlr} \\
-nwt & \lawcite{canregnwt} \\
-ns & \lawcite{canregns} \\
+nb & \lawcite{canregnb} \\%York-Sunbury-Charlotte Forest Products Marketing Board Regulation, NB Reg 2005-148
+%Wildlife Refuges and Wildlife Management Areas Regulation, NB Reg 94-43
+nfld & \lawcite{canregnfld} \\ %Offshore Petroleum Drilling Newfoundland Regulations (Amendment)
+nlr & \lawcite{canregnlr} \\ %Colliers Municipal Planning Area, NLR 4/98
+nwt & \lawcite{canregnwt} \\%Archives Regulations
+ns & \lawcite{canregns} \\%Involuntary Psychiatric Treatment Regulations
 nu & \lawcite{canregnu} \\
 o & \lawcite{canrego} \\
-pei & \lawcite{canregpei} \\
+pei & \lawcite{canregpei} \\ %Companion Animal Protection Act Regulations, PEI Reg EC249/02
 qc & \lawcite{canregoc} \\
-sask & \lawcite{canregsask} \\
-yoic & \lawcite{canregyoic} \\
+sask & \lawcite{canregsask} \\ %Alkali Mining Regulations
+yoic & \lawcite{canregyoic} \\%lChild Care Centre Program Regulation
 \end{tabular}
 \bigskip
 
@@ -1444,6 +1557,27 @@ For the non-federal regulations, if a title field is available, it will be print
 
 %------------------------------
 \section{Law Journals}
+\subsection{Bibentries}
+
+Law Review articles: \cmd{ljcite}\braces{renaud}\par\bigskip
+ \ljcite{renaud}
+\begin{verbatim}
+@ljarticle{renaud,
+	author = {Matthew Renaud},
+	subtitle = {The Development of Legal Education 
+		in the Province of Manitoba, 1877–1968},
+	title = {From Reading Courses to Robson Hall},
+	mncyear = {2019},
+	mncname = {CanLIIDocs},
+	mncnumber = {4192},
+	date = {2019},
+	volume = {42},
+	journaltitle = {Manitoba Law Journal},
+	pages = {286},
+}
+\end{verbatim}
+
+\subsection{Citations}
 
 \optsett{\cmdb{footnote}\braces{\cmdb{ljcite\braces{key}}}}{}
 
@@ -1463,19 +1597,24 @@ constitution and its meanings as a whole''
 %\lcpostnote[at p 318]{adams}
 %xxx
 
-The author, \lcljauthor{adams}, uses the word, `amorphous', a second time, \lcpostnote[at p 318]{adams}: ``sub-national provinces with
+$\rightarrow$ The author, \lcljauthor{adams}, uses the word, `amorphous', a second time, \lcpostnote[at p 318]{adams}: ``sub-national provinces with
 amorphous constitutional roles''.\footnote{\ljcite[at p 318]{adams}}
 
 It may indeed seem long-winded rigmarole, typing\\
 < \cmd{lcljauthor}\braces{adams} > and < \cmd{lcpostnote}[at p 318]\braces{adams}>,\\ to get\\ <\lcljauthor{adams}> and <\lcpostnote[at p 318]{adams}>,\\ instead of typing plain text, but \ldots
 
+\lcljauthorfn{adams}, in a recent issue of the \lcljjournaltitle{adams}, has stated that \ldots
 
+\lcljauthor{friedman}, in their classic article in the \lcljjournaltitle{friedman}, \ldots
+
+The \lcljauthorfn{friedman} paper in the \lcljjournaltitle{friedman}, for example, \ldots
 
 %------------------------------
 \section{Other Material}
 
 Text\autocite[110]{eco} Text\autocite[42]{butt} Text\autocite[para \brackets{2.4}]{anncrimnsw} Text\autocite[\nopp c 1]{bishop} %Text\autocite{ljart3}
 
+For \lawcitetitle{cole}, see supra, n \ref{fcoleb}, and n \ref{fmcleanbclr} for \lawcitetitle{mcleanbclr}.
 %
 \bigskip 
 
@@ -1539,9 +1678,8 @@ Text\autocite[110]{eco} Text\autocite[42]{butt} Text\autocite[para \brackets{2.4
 	title={\center General Material},
 		]
 
-
+%\newpage
 \printindex[general]
-
 
 \end{document}
 
