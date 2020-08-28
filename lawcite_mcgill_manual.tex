@@ -1013,6 +1013,7 @@ Other components of style depend on data input and/or user choice (the decision 
 \subsection{Bibliographies}
 
 \newpage
+\let\xoldtwocolumn\twocolumn
 \iftoggle{printlegtoc}{%
 \let\oldtwocolumn\twocolumn
 \renewcommand{\twocolumn}[1][]{#1}
@@ -1021,7 +1022,8 @@ Other components of style depend on data input and/or user choice (the decision 
 \printindex[cases]
 \printindex[legislation]
 \iftoggle{printregulations}{\printindex[regulations]}{}
-%}
+%%%\printindex[general]
+%%%
 \renewcommand{\twocolumn}[1][]{\oldtwocolumn}
 \renewcommand\clearpage{\oldclearpage}
 }{}
@@ -1581,7 +1583,7 @@ Law Review articles: \cmd{ljcite}\braces{renaud}\par\bigskip
 
 \optsett{\cmdb{footnote}\braces{\cmdb{ljcite\braces{key}}}}{}
 
-* Looking at the 1914 Manitoba Law School lecture schedule,\footnote{\ljcite[Reproduced in][295]{renaud}} -- Contracts, Torts, Real Property, Criminal Law, Evidence, Equity, and so on -- it becomes obvious that things haven't changed much, for any law school.
+* Looking at the 1914 Manitoba Law School lecture schedule\sindex[general]{lecture schedule},\footnote{\ljcite[Reproduced in][295]{renaud}} -- Contracts, Torts, Real Property, Criminal Law, Evidence, Equity, and so on -- it becomes obvious that things haven't changed much, for any law school.
 
 * ``it has been argued\footnote{By \ljcite[\nopp 785]{friedman}, as cited by \lcljauthor{smythsc}.} that, stylistically,
 dissents are often looser than majority judgments.''\sindex[general]{dissents}\footnote{\ljcite[\nopp 59]{smythsc}.}\bigskip 
@@ -1597,7 +1599,7 @@ constitution and its meanings as a whole''
 %\lcpostnote[at p 318]{adams}
 %xxx
 
-$\rightarrow$ The author, \lcljauthor{adams}, uses the word, `amorphous', a second time, \lcpostnote[at p 318]{adams}: ``sub-national provinces with
+$\rightarrow$ The author, \lcljauthor{adams}, uses the word, `amorphous'\sindex[general]{amorphous}, a second time, \lcpostnote[at p 318]{adams}: ``sub-national provinces with
 amorphous constitutional roles''.\footnote{\ljcite[at p 318]{adams}}
 
 It may indeed seem long-winded rigmarole, typing\\
@@ -1679,7 +1681,32 @@ For \lawcitetitle{cole}, see supra, n \ref{fcoleb}, and n \ref{fmcleanbclr} for 
 		]
 
 %\newpage
-\printindex[general]
+%%\printsubindex[general][General Index]
+%\twocolumn[% set the title onecolumn
+%\section*{General Index} % the section with the indices %
+%%\markbothfIndicesgfIndicesg % setting up the running headline %
+%]% 
+%%%\section*{General Index}
+%%%\twocolumn
+%%\renewcommand{\twocolumn}[1][]{\xoldtwocolumn}
+%%\renewcommand{\indexname}{General Index}
+%%\twocolumn[\section*{\indexname}]
+%\printindex[general]
+\begingroup % hold following extension local to this group
+\makeatletter % allow @ at macro names
+\extendtheindex% some changes of theindex environment
+{
+\let\twocolumn\@firstoptofone % deactivate \twocolumn
+%\let\onecolumn\@firstoptofone % deactivate \twocolumn
+\let\clearpage\relax % deactivate \clearpage
+\xoldtwocolumn
+}% changes before beginning
+{}% no change after beginning
+{}% no change before ending
+{}% no change after ending
+\makeatother % deactivate \makeatletter
+\printindex[general] % print index
+\endgroup % end group with extended theindex environment
 
 \end{document}
 
