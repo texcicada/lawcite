@@ -1321,6 +1321,16 @@ test {\ifentrytype{case}}%
 \DeclareFieldFormat{emph}{\mkbibemph{#1}}
 \DeclareFieldFormat{plain}{#1}
 
+\DeclareNameFormat{authorinbib}{%
+   \ifthenelse{\value{listcount}=1}{%true
+    \namepartfamily%
+    \ifdefvoid{\namepartgiven}{}{\addcomma\space\namepartgiven}}%end true
+    {%false
+    \ifdefvoid{\namepartgiven}{}{\namepartgiven\space}%
+    \namepartfamily}%end false
+   \ifthenelse{\value{listcount}<\value{liststop}}{\addcomma\space}{}%
+}
+
 \DeclareNameFormat{authorplain}{%
 %\ifthenelse{\value{listcount}=1}
 %{\namepartfamily%
@@ -1354,7 +1364,16 @@ test {\ifentrytype{case}}%
 \renewcommand*{\relateddelim}{\adddot\addspace}
 
 \newbibmacro{getljarticleauthor}{%
-\printnames[authorplain][-\value{listtotal}]{author}%
+ \ifbibliography{%inbib true
+  \ifnameundef{author}{}%no author true
+  %no author details to get; end no author true
+  {% no author false: there is an author field
+   \printnames[authorinbib]{author}%
+  }%end no author false
+ }%end inbib true
+ {%inbib false
+ \printnames[authorplain][-\value{listtotal}]{author}%
+ }
 }
 
 \newbibmacro{getljarticleauthorsc}{%
@@ -1399,7 +1418,7 @@ test {\ifentrytype{case}}%
 
 \newbibmacro{getljarticle}{%
 \usebibmacro{getljarticleauthor}%
-\addcomma\addspace%
+\ifbibliography{\adddot\space}{\addcomma\addspace}%
 \usebibmacro{getljarticletitle}%
 \addcomma\addspace%
 \usebibmacro{getljarticleyear}%

@@ -577,6 +577,10 @@ pages = {51},
 
 @ljarticle{adams,author = {Eric M Adams},title = {Canadian Constitutional Identities},date = {2015},volume = {38},journaltitle = {Dalhousie Law Journal},pages = {311},}
 
+@ljarticle{otis,author = {Ghislain Otis},subtitle = {le cas de l’industrie extractive},title = {Les droits ancestraux des peuples autochtones au carrefour du droit public et du droit privé},mncyear = {2019},mncname = {CanLIIDocs},mncnumber = {4154},date = {2019},volume = {60},journaltitle = {Les Cahiers de droit},pages = {451},}
+
+@ljarticle{jukier,author = {Rosalie Jukier},subtitle = {A Judicial Dialogue Between Common Law Canada and Québec},title = {Good Faith in Contract},mncyear = {2019},mncname = {CanLIIDocs},mncnumber = {1767},date = {2019},volume = {1},journaltitle = {Journal of Commonwealth Law},pages = {1},}
+
 %=================== law journal articles
 
 
@@ -824,6 +828,8 @@ regnum = {580},
 	loccittracker=true,
 	autocite=footnote,
    datezeros=true,
+   minnames=5,
+   maxnames=5,%more names than this are truncated to minnames
 		]{biblatex}
 
 \addbibresource{\jobname.bib}
@@ -837,6 +843,7 @@ regnum = {580},
 \setindexpreamble[cases]{\pagerefindexnote\dupentries}
 \setindexpreamble[legislation]{\pagerefindexnote}
 \setindexpreamble[regulations]{\pagerefindexnote}
+\setindexpreamble[general]{\pagerefindexnote}
 
 
 %Print the `preamble' of the index:
@@ -1020,6 +1027,7 @@ Other components of style depend on data input and/or user choice (the decision 
 \let\oldclearpage\clearpage
 \renewcommand\clearpage{\relax}
 \printindex[cases]
+\sindex[general]{Table of Cases}
 \printindex[legislation]
 \iftoggle{printregulations}{\printindex[regulations]}{}
 %%%\printindex[general]
@@ -1494,7 +1502,29 @@ Because of the multiplicity of regulation format types, in the data structure, u
 \lawcite[\addcomma\addspace\bibstring{section} 515]{crimcan} provides that ...
 \par\bigskip
 
-The available citeref values are:
+The corresponding bibentries are:
+
+\begin{verbatim}
+@statute{crimcodecan,
+	citeref = {canleg},
+	title = {Criminal Code},
+	svjy = {RSC 1985},
+	chapter = {C-46},
+}
+
+\end{verbatim}
+
+versus
+
+\begin{verbatim}
+@statute{crimcan,
+	statutetitle = {Criminal Code},
+	statutetitleyear = {RSC 1985, c C-46},%for the title
+}
+\end{verbatim}
+
+
+The available citeref values for regulations are:
 
 \bigskip
 
@@ -1610,13 +1640,18 @@ It may indeed seem long-winded rigmarole, typing\\
 \lcljauthor{friedman}, in their classic article in the \lcljjournaltitle{friedman}, \ldots
 
 The \lcljauthorfn{friedman} paper in the \lcljjournaltitle{friedman}, for example, \ldots
+\bigskip
+
+``l’exercice par un peuple autochtone de
+ses droits possède une dimension de droit public''\footnote{\ljcite[at p 456]{otis}. \ljcite[See also][]{jukier}.}
+
 
 %------------------------------
 \section{Other Material}
 
 Text\autocite[110]{eco} Text\autocite[42]{butt} Text\autocite[para \brackets{2.4}]{anncrimnsw} Text\autocite[\nopp c 1]{bishop} %Text\autocite{ljart3}
 
-For \lawcitetitle{cole}, see supra, n \ref{fcoleb}, and n \ref{fmcleanbclr} for \lawcitetitle{mcleanbclr}.
+For \lawcitetitle{cole}, see supra\sindex[general]{supra, manual}, n \ref{fcoleb}, and n \ref{fmcleanbclr} for \lawcitetitle{mcleanbclr}.
 %
 \bigskip 
 
@@ -1658,6 +1693,7 @@ For \lawcitetitle{cole}, see supra, n \ref{fcoleb}, and n \ref{fmcleanbclr} for 
 %	postnote={bibcolophon},
 	]
 %------------------------------- Legal Articles, Law Reviews
+\newrefcontext[sorting=nty]
 \printbibliography[
 	heading=subbibliography,%
 	title={\center Secondary Materials: Articles},
@@ -1697,8 +1733,8 @@ For \lawcitetitle{cole}, see supra, n \ref{fcoleb}, and n \ref{fmcleanbclr} for 
 \extendtheindex% some changes of theindex environment
 {
 \let\twocolumn\@firstoptofone % deactivate \twocolumn
-%\let\onecolumn\@firstoptofone % deactivate \twocolumn
-\let\clearpage\relax % deactivate \clearpage
+%\let\onecolumn\@firstoptofone % deactivate \onecolumn
+%\let\clearpage\relax % deactivate \clearpage
 \xoldtwocolumn
 }% changes before beginning
 {}% no change after beginning
@@ -1707,6 +1743,8 @@ For \lawcitetitle{cole}, see supra, n \ref{fcoleb}, and n \ref{fmcleanbclr} for 
 \makeatother % deactivate \makeatletter
 \printindex[general] % print index
 \endgroup % end group with extended theindex environment
+%\onecolumn
+%\hfill--ooOoo--\hfill\ 
 
 \end{document}
 
