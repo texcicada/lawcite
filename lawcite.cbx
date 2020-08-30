@@ -140,6 +140,8 @@
 }%no shipname
 {The \printfield{shipname}}%
 \iffieldundef{decisionyear}{}{\addspace\printfield{decisionyear}}%
+\newunit
+\newblock
 }%
 
 
@@ -249,8 +251,9 @@ xxx}%
  \setunit*{\addcomma\addspace}%
 %   \newunit
 %    \newblock
-   \iffieldundef{reportpage}{}{\setunit*{\addcomma\space}\usebibmacro{getreportref}}%
+   \iffieldundef{reportpage}{}{\usebibmacro{getreportref}}%
    \iffieldundef{parallel}{}{\setunit*{\addcomma\space}}%
+%   \usebibmacro{getnote}%
 %   \newunit
 %   \newblock%
 }
@@ -328,15 +331,19 @@ xxx}%
   }%
   {ibid\addspace}{%
  \usebibmacro{getcasename}%
+% \iftoggle{casenamecomma}{\setunit*{\addcomma\addspace}}{\setunit*{\addspace}}%
  \ifboolexpr{%
   not test {\iffieldundef{casenumber}}
   or
   not test {\iffieldundef{reportpage}}
   }%
- {\iftoggle{casenamecomma}{\lcnamerefcommadelim}{\lcnamerefdelim}}%
- {\lcparentchilddelim}%
+% {\iftoggle{casenamecomma}{\lcnamerefcommadelim}{\lcnamerefdelim}}%
+% {\lcparentchilddelim}%
+ {\iftoggle{casenamecomma}{\setunit*{\addcomma\addspace}}{\setunit*{\addspace}}}%true
+ {\setunit*{\addspace}}%false
  \usebibmacro{getcaseref}%
  \usebibmacro{getparallelreports}%
+% \usebibmacro{getnote}%
 %    \finentry
  }%ifciteibid false
 }
@@ -887,9 +894,9 @@ test {\ifentrytype{statute}}%
 }%end statute true
 {%
  \ifcase\thereftypemode%
- \or\usebibmacro{getcasenameref}%
- \or\usebibmacro{prenote}\usebibmacro{getcasename}\mkbibfootnote{\usebibmacro{getcaseref}\usebibmacro{postnote}}%
- \or\mkbibfootnote{\usebibmacro{prenote}\usebibmacro{getcasenameref}\usebibmacro{postnote}}%
+ \or\usebibmacro{getcasenameref}\usebibmacro{getnote}%
+ \or\usebibmacro{prenote}\usebibmacro{getcasename}\mkbibfootnote{\usebibmacro{getcaseref}\usebibmacro{getnote}\usebibmacro{postnote}}%
+ \or\mkbibfootnote{\usebibmacro{prenote}\usebibmacro{getcasenameref}\usebibmacro{getnote}\usebibmacro{postnote}}%
  \or\usebibmacro{getcasename}%
  \fi%
 \iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
