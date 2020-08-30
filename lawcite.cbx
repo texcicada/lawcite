@@ -217,22 +217,23 @@
 \newbibmacro{getreportref}{%
 \iffieldundef{reportpage}{}%
 {%
- \iffieldundef{casenumber}{}{\addsemicolon\addspace}%
+% \iffieldundef{casenumber}{}{\setunit*{\addcomma\addspace}}%
  \usebibmacro{getreportyear}%
  \usebibmacro{getreportvolume}%
  \usebibmacro{getreportseries}%
  \usebibmacro{getreportpage}%
+ \setunit*{\addcomma\addspace}%
 }}
 
 %======== getnote
 \newbibmacro{getnote}{%
-\iffieldundef{note}{}%
+\iffieldundef{note}
+{}%
 {%false
- \addspace\printtext{\mkbibparens{%
-%    \iffieldundef{year}{}{\thefield{year}\addcomma\space}%
+ \setunit*{\addspace}%
+ \printtext[parens]{%
  \printfield{note}%
- }}%
-}}
+}}}
 
 
 %======= casexxx
@@ -245,10 +246,13 @@ xxx}%
  \usebibmacro{getcaseyear}%
  \usebibmacro{getcourtname}%
  \usebibmacro{getcasenumber}%
-   \newblock
-   \usebibmacro{getreportref}%
-   \newunit
-   \newblock
+ \setunit*{\addcomma\addspace}%
+%   \newunit
+%    \newblock
+   \iffieldundef{reportpage}{}{\setunit*{\addcomma\space}\usebibmacro{getreportref}}%
+   \iffieldundef{parallel}{}{\setunit*{\addcomma\space}}%
+%   \newunit
+%   \newblock%
 }
 
 %====================================== toggle commands
@@ -332,6 +336,7 @@ xxx}%
  {\iftoggle{casenamecomma}{\lcnamerefcommadelim}{\lcnamerefdelim}}%
  {\lcparentchilddelim}%
  \usebibmacro{getcaseref}%
+ \usebibmacro{getparallelreports}%
 %    \finentry
  }%ifciteibid false
 }
@@ -571,7 +576,9 @@ xxx}%
    \csuse{#1reg}%
 }
 
-
+\newbibmacro{use-verbreg}{%
+ \printtext{\thefield{regnum}}%
+}
 
 
 
@@ -746,6 +753,12 @@ xxx}%
 %\addspace\printfield{year}/\printfield{regnum}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }YOIC Reg \thefield{year}/\thefield{regnum}\lcparnumrefsencap}}{}%
+ }{}%endif
+%----user-defined
+\iffieldequalstr{citeref}{verbreg}{%
+ \usebibmacro{use-verbreg}%
+\iftoggle{lcindexing}{%
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }\thefield{regnum}\lcparnumrefsencap}}{}%
  }{}%endif
 }
 
@@ -1356,6 +1369,21 @@ test {\ifentrytype{case}}%
 %\ifthenelse{\value{listcount}=1}
 %{\textsc{\namepartfamily}}
 %{}}
+
+
+\DeclareListFormat[case]{parallel}{%
+#1%
+\ifthenelse{\value{listcount}<\value{listtotal}}
+{\addcomma\space}
+{}}
+
+
+\newbibmacro{getparallelreports}{%
+\iflistundef{parallel}{}{\printlist[][-\value{listtotal}]{parallel}\newunit\newblock}%
+}
+
+
+
 
 
 %\newcommand*{\begrelateddelimmultivolume}{\newunitpunct\par\nobreak}

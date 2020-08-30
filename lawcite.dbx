@@ -30,6 +30,12 @@
 
 
 \DeclareDatamodelEntrytypes{case,statute,ljarticle}
+
+\DeclareDatamodelFields[type=list, datatype=literal]{%
+parallel,
+}
+
+
 \DeclareDatamodelFields[type=field, datatype=literal]{
 % case fields
   partya,
@@ -80,7 +86,7 @@ mncnumber,
 \DeclareDatamodelEntryfields[case]{%
 partya,partyb,partysep,partysepx,caseyear,reportyear,reportvolume,%
 volyearneeded,reportseries,reportpage,courtname,casenumber,note,shipname,%
-icaseyear,caseshortname,casenickname,decisionyear}
+icaseyear,caseshortname,casenickname,decisionyear,parallel}
 
 
 \DeclareDatamodelEntryfields[statute]{%

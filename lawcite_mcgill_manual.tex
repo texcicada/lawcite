@@ -453,6 +453,19 @@ keywords = {lawbook},
 @case{arbia,partya = {Arbia},
 partysep = {c},
 partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
+@case{jimenez,partya = {Jimenez },partyb = {Romeo },caseyear = {2009},courtname = {CanLII },casenumber = {68472},note = {ON SC},}
+@case{seib,partya = {Seib Estate},caseyear = {2012},courtname = {ABQB},casenumber = {126},}
+@case{kristel,partya = {Kristel Homes Ltd},partyb = {Edmonton (City of)},caseyear = {2001},courtname = {ABCA},casenumber = {317},note = {TRANSCRIPT OF ORAL REASONS},}
+@case{anderson,partya = {Anderson},partyb = {Fawthrop },caseyear = {2018},courtname = {ABPC},casenumber = {226},}
+@case{ludmer,partya = {Ludmer},partyb = {Ludmer},caseyear = {2012},courtname = {ONSC},casenumber = {5738},parallel = {[2012] CarswellOnt 16100},}
+@case{sheen,partya = {Sheen},partyb = {Sheen},caseyear = {2003},courtname = {MBCA},casenumber = {93},parallel = {[2003] MJ No 230 (QL)},}
+@case{cibc,partya = {CIBC Mortgages Inc},partyb = {Dima Estate},caseyear = {2019},courtname = {NSSC},casenumber = {61},}
+@case{litz,partya = {Litz},partyb = {Litz},reportvolume = {180},reportseries = {WAC},reportpage = {116},parallel = {[1998] 10 WWR 145 and 129 Man R (2d) 121},}
+@case{naraine,partya = {Naraine},partyb = {The Ford Motor Company},caseyear = {2006},courtname = {HRTO},casenumber = {25},reportvolume = {58},reportseries = {CHRR},reportpage = {87},}
+@case{betts,partya = {Betts},partyb = {Norris},reportvolume = {120},reportseries = {NBR (2d)},reportpage = {384},parallel = {302 APR 384 and [1991] CarswellNB 51 and [1991] NBJ No 1036 (QL)},}
+@case{walmart,partya = {Saskatoon (City)},partyb = {Wal-Mart Canada Corp},caseyear = {2019},courtname = {SKCA},casenumber = {3},reportyear = {2019},volyearneeded = {true},reportvolume = {3},reportseries = {WWR},reportpage = {284},}
+@case{tiesmaki,partya = {Tiesmaki},partyb = {Wilson},decisionyear = {1971},reportvolume = {23},reportseries = {DLR (3d)},reportpage = {179},parallel = {[1972] 2 WWR 214 and [1971] AJ No 145 (QL)},note = {AB SC AppDiv, 1971},}
+@case{kybich,partya = {Kybich},partyb = {Mangus},reportyear = {1919},volyearneeded = {true},reportvolume = {3},reportseries = {WWR},reportpage = {532},note = {AB QB, Chambers},}
 
 
 
@@ -765,6 +778,7 @@ regnum = {580},
 
 @statute{water,statutetitle = {Safe Drinking Water Act },statutetitleyear = {42 USC §300f },note = {1974},}
 
+@statute{anyregverb,citeref = {verbreg},regnum = {Road Rules 2008 -- \textcolor{red}{\textbf{Reg 15}} What is a vehicle (New South Wales)},sorttitle = {Road Rules 2008},}
 
 
 
@@ -1386,6 +1400,24 @@ Text\lawcitesfootrr[See firstly][\nopp at para 42]{mcleanlii}[and secondly][\nop
 \lawcitesinlinerr{epaus,epasc}\par\bigskip
 \lawcitesinlinerr{syncrudeabpc,syncrudewl}\par\bigskip
 
+\subsection{MNC \& printed combination}
+\lawcitesinline{walmart}
+\begin{verbatim}
+@case{walmart,
+	partya = {Saskatoon (City)},
+	partyb = {Wal-Mart Canada Corp},
+	caseyear = {2019},
+	courtname = {SKCA},
+	casenumber = {3},
+	reportyear = {2019},
+	volyearneeded = {true},
+	reportvolume = {3},
+	reportseries = {WWR},
+	reportpage = {284},
+}
+
+\end{verbatim}
+
 %=================
 %\mcmd{lawcitesfootrr} -- footer, parallel references, single cite
 %
@@ -1571,10 +1603,30 @@ pei &  && year & regnum && \\
 qc &  && year & regnum & fulldate & gazette\\
 sask &  && year & regnum && \\
 yoic &  && year & regnum && \\
+\\
+verb &  &&  & regnum && \\
 \end{tabular}
+\bigskip
 
 For the non-federal regulations, if a title field is available, it will be printed.
 \bigskip
+
+For regulations with no available pre-set format, use the \texttt{verbreg} citeref, and type the full reference into the \texttt{regnum} field, and it will be printed as-is:
+
+%`"parking area" means a length of road or area designed for parking vehicles'
+%Road Rules 2008, Schedule 99 Dictionary
+%(NSW) Road Rules 2008 -- Reg 15 What is a vehicle
+\lawcite{anyregverb}
+
+\begin{verbatim}
+@statute{anyregverb,
+citeref = {verbreg},
+regnum = {Road Rules 2008 -- \textcolor{red}{\textbf{Reg 15}} 
+What is a vehicle (New South Wales)},
+sorttitle = {Road Rules 2008},
+}
+
+\end{verbatim}
 
 %\lccitedemostat{canregbc}
 %\bigskip 
@@ -1654,6 +1706,106 @@ Text\autocite[110]{eco} Text\autocite[42]{butt} Text\autocite[para \brackets{2.4
 For \lawcitetitle{cole}, see supra\sindex[general]{supra, manual}, n \ref{fcoleb}, and n \ref{fmcleanbclr} for \lawcitetitle{mcleanbclr}.
 %
 \bigskip 
+
+
+\subsection{Parallel Reports}
+
+Text\lawcite{litz}
+\begin{verbatim}
+@case{litz,
+	partya = {Litz},
+	partyb = {Litz},
+	reportvolume = {180},
+	reportseries = {WAC},
+	reportpage = {116},
+	parallel = {[1998] 10 WWR 145 and 129 Man R (2d) 121},
+}
+\end{verbatim}
+
+
+\lcinline{ludmer}
+
+\lcinline{sheen}
+
+\lcinline{betts}
+
+\lcinline{tiesmaki}
+
+\lcinline{walmart}
+
+%------------------------------
+\section{This Odyssey}
+\ 
+
+\textbf{Absence of Authority}
+
+``Perhaps the reason for my being unable to find authority touching the present application is because the matter is too simple and plain.'' -- Clarry, MC.\lawcite{kybich}
+\bigskip
+
+\textbf{Bleak House}
+
+``If ever there was a case that demonstrates the need for the court’s 
+involvement to ensure it moves forward, this is that case.''\lawcite[Master DE Short][at para 55]{jimenez}
+
+``It is 125 years since Charles Dickens in the opening chapter of \textit{Bleak House} chronicled the sorry saga of the litigation before the English Court of Chancery in Jarndyce and Jarndyce. (see \textit{Bleak House}, (1884) full text available on line via http://books.google.ca/books )''\lawcite[at para 60]{jimenez}
+ 
+``The entire Twentieth Century intervenes between Dickens’ fictional case and this real one.''\lawcite[at para 61]{jimenez}
+
+``This Master is not going to permit these files to become any dustier.''\lawcite[at para 63]{jimenez}
+\bigskip
+
+
+``Because the will must be proved in solemn form, it is expected that some considerable pre-trial process will be undertaken: questioning on affidavits, assessment of expert evidence, etc.  Perhaps having in mind the ominous warning about the Court of Chancery in Charles Dickens’ Bleak House, “Suffer any wrong that can be done you, rather than come here”, prudently, the parties have agreed to provide \ldots ''\lawcite[at para 2, Veit J]{seib}
+\bigskip
+
+
+
+%-------------
+%kristel
+%CÔTÉ JA
+%
+%The injunction asked for would bar demolition of a property in Edmonton.
+%1
+
+This matter\footnote{An injunction asking for the barring of demolition of a property in Edmonton.} has a somewhat Dickensian history, and I am beginning to feel some sympathy for the Lord Chancellor in \textit{Bleak House}.\lawcite[at para 3, Côté JA]{kristel}\bigskip
+
+
+
+``This has become an unusually and perhaps unnecessarily complex family file involving jurisdictions in Alberta and Nevada, as well as a virtual smorgasbord of legislation. The parties, whether deliberately or through misadventure, have developed a voracious appetite for filing affidavits and court applications. The resulting legal carnage has created our own “bleak house”.''\lawcite[at para 4, O'Gorman ACJ]{anderson}
+
+%the bloated record
+%4
+
+%O’Gorman
+%Assistant Chief Judge
+
+
+%------------
+%Ludmer
+%fl+
+% In this modern version of Dickens’s iiBleak Houseii, the applicant wife seeks an adjournment of her trial.
+% 1
+ 
+``Further, the non-financial toll on the parties, and the need to bring this odyssey to an end, are significant considerations.  There has been seven years of litigation and at least two prior adjournments of this trial.  The issues are clear and have been reasonably well-defined since at least 2008.  People have to get on with their lives.  In addition, my earlier allusion to the famous \textit{Jarndyce v. Jarndyce} case from \textit{Bleak House} was not without purpose.  This is a case where the parties’ dissipation of assets on the mere cost of litigation alone is staggering.''\lawcite[at para 49, Penny~J]{ludmer}
+\bigskip
+
+
+``\textit{Bleak House} by Charles Dickens is a family chronicle in which a disputed estate is exhausted by the payment of legal costs before the dispute is finally resolved.  The parties to these proceedings are either unaware of that classic novel’s lesson or unenlightened by it.''\lawcite[at para 1, Twaddle JA]{sheen}
+\bigskip
+
+%An argument can be made that the estate remain frozen until all issues between these parties have been resolved.  It may already be too late for these parties to avoid the fate of the parties in the fictitious case of iiJarndyce v. Jarndyceii, but, by freezing the estate assets for the time being, the eventually successful party will have some prospect of recovering a small part of his or their entitlement.
+%17
+
+
+%------------
+%CIBC Mortgages Inc
+``Equity stepped in. The courts of equity, despite the reputation they got from works like Dickens’ \textit{Bleak House}, tried to mitigate some of the harshness of the common law. That is where the concept of an equitable right to redeem, or the equity of redemption, came from. The mortgage was then treated as a form of security only and the rights that remained after the mortgage was granted were protected by equity, in the Courts of Chancery .''\lawcite[at para 14, Campbell J]{cibc}
+%  The question is whether simple foreclosure is legally available as a remedy in Nova Scotia.
+%  3
+%  The distinctions between law and equity and the courts that dealt with them may actually make a difference in this case. 
+%  12
+
+
 
 \hfill ----oooOooo---- \hfill\ 
 
@@ -1894,4 +2046,18 @@ Copyright : 	© 2019, Manitoba Law Journal
 License : 	This work is licensed under the CanLII user license which includes the right of the User to make copies of the work for legal research purposes, in the practice of law or in the exercise of their legal rights.
 Citation : 	Matthew Renaud, From Reading Courses to Robson Hall: The Development of Legal Education in the Province of Manitoba, 1877–1968, 2019 42-2 Manitoba Law Journal 286, 2019 CanLIIDocs 4192, <http://www.canlii.org/t/svmg>,
 
+
+
+
+To do:
+static parallel references: parallel={},
+useljjournaaltitleabbrev, e.g., MLR
+
+
+https://www.kjvsayings.com/phrase/of-making-many-books-there-is-no-end
+
+“Of making many books there is no end”
+Source:
+
+This phrase has its origins in Ecclesiastes 12:12 of the King James Version of the Bible
 
