@@ -650,13 +650,18 @@ keywords = {lj},
 
 
 
-@book{butt,
-author = {Peter Butt},
-title={Legal Usage},
-subtitle={A Modern Style Guide},
-date={2018},
-publisher={LexisNexis Butterworths},
-}
+%%@book{butt,
+%%crossref={buttb},
+%%%author = {Peter Butt},
+%%%title={Legal Usage},
+%%%subtitle={A Modern Style Guide},
+%%%date={2018},
+%%%publisher={LexisNexis Butterworths},
+%%}
+
+@book{buttb,author = {Peter Butt},title = {Legal Usage},subtitle = {A Modern Style Guide},date = {2018},publisher = {LexisNexis Butterworths},location = {Australia},isbn = {9780409341461},jurisdiction = {Australia},}
+
+@book{addison,author = {C G Addison},title = {The Law of Torts},edition = {2},date = {1872},publisher = {Little, Brown, and Company},location = {Boston},shorttitle = {Torts},note = {Abridgement},keywords = {lawbook},}
 
 
 @statute{crimnsw,
@@ -780,7 +785,11 @@ regnum = {580},
 
 @statute{anyregverb,citeref = {verbreg},regnum = {Road Rules 2008 -- \textcolor{red}{\textbf{Reg 15}} What is a vehicle (New South Wales)},sorttitle = {Road Rules 2008},}
 
-
+@book{candl,
+author={A B C Clerk and X Y Z Lindsell},
+shorttitle={Torts},
+options={skipbib=true,},
+}
 
 \end{filecontents*}
 
@@ -1700,8 +1709,27 @@ ses droits possède une dimension de droit public''\footnote{\ljcite[at p 456]{o
 
 %------------------------------
 \section{Other Material}
-\subsection{Non-legal citations}
-Text\autocite[110]{eco} Text\autocite[42]{butt} Text\autocite[para \brackets{2.4}]{anncrimnsw} Text\autocite[\nopp c 1]{bishop} %Text\autocite{ljart3}
+\subsection{Epigraphs}
+\begin{quotation}
+\noindent ``The methods for citing cases vary from country to country, from court to court, and from publisher to publisher.''
+
+ \hfill --- \lcepigraph[93]{buttb}
+\end{quotation}
+
+\begin{quotation}
+\noindent ``Questions of proprietary right often involve nice distinctions.''
+
+ \hfill --- \lcepigraph[12]{addison}
+\end{quotation}
+
+For \lcepigraph{candl}-type referencing. %\lcepigraph{friedman}
+\bigskip
+
+\cmd{lcepigraph} looks in the bibentry for shortitle (or title), and, optionally, author(s), edition, and date.
+
+
+\subsection{Book citations}
+Just the standard built-in commands: Text\autocite[110]{eco} Text\autocite[42]{buttb} Text\autocite[para \brackets{2.4}]{anncrimnsw} Text\autocite[\nopp c 1]{bishop} %Text\autocite{ljart3}
 
 \subsection{Supra}
 For \lawcitetitle{cole}, see supra\sindex[general]{supra, manual}, n \ref{fcoleb}, and n \ref{fmcleanbclr} for \lawcitetitle{mcleanbclr}.
@@ -1772,8 +1800,8 @@ This matter\footnote{An injunction asking for the barring of demolition of a pro
 
 
 
-``This has become an unusually and perhaps unnecessarily complex family file involving jurisdictions in Alberta and Nevada, as well as a virtual smorgasbord of legislation. The parties, whether deliberately or through misadventure, have developed a voracious appetite for filing affidavits and court applications. The resulting legal carnage has created our own “bleak house”.''\lawcite[at para 4, O'Gorman ACJ]{anderson}
-
+``This has become an unusually and perhaps unnecessarily complex family file involving jurisdictions in Alberta and Nevada, as well as a virtual smorgasbord of legislation. The parties, whether deliberately or through misadventure, have developed a voracious appetite for filing affidavits and court applications. The resulting legal carnage has created our own `bleak house'.''\lawcite[at para 4, O'Gorman ACJ]{anderson}
+\bigskip
 %the bloated record
 %4
 
@@ -2051,7 +2079,7 @@ Citation : 	Matthew Renaud, From Reading Courses to Robson Hall: The Development
 
 
 To do:
-static parallel references: parallel={},
+static parallel references: parallel={},: done
 useljjournaaltitleabbrev, e.g., MLR
 
 

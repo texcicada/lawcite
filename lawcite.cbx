@@ -1363,6 +1363,45 @@ test {\ifentrytype{case}}%
 {\addcomma\space}
 {}}
 
+
+\DeclareNameFormat{authorplainlast}{%
+\mkbibemph{%
+\ifthenelse{\value{listcount}=1}%
+  {}%add nothing
+  {%otherwise
+ \ifthenelse{\value{listcount}<\value{liststop}}%
+    {\addcomma}%
+    {\addspace\bibstring{and}}%
+  \addspace%
+  }% 
+  \namepartfamily%
+}}
+
+
+%\DeclareNameFormat{authorplainlast}{%
+%\mkbibemph{\namepartfamily%
+%\ifboolexpr{%
+%  test {\value{liststop}=1}
+%  }%
+%  {}%nothing
+%  {%otherwise
+% \ifboolexpr{%
+%   test {\value{listcount}<\value{liststop}}
+%   }%
+%    {\addcomma}%
+%    {\addspace\bibstring{and}}
+%  \addspace}%
+%  }%
+%}
+
+%\DeclareNameFormat{authorplainlast}{%
+%\mkbibemph{\namepartfamily%
+%\ifthenelse{\value{listcount}<\value{liststop}}%
+%{\ifthenelse{\value{listcount}=\value{liststop}}%
+%{\bibstring{and}}{\addcomma}%
+%\space}%
+%{}}}
+
 \DeclareNameFormat{authorsc}{%
 \textsc{\namepartfamily}%
 }
@@ -1924,6 +1963,74 @@ test {\ifentrytype{case}}%
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}%
+
+
+
+
+
+%----------------------------------- Epigraph
+\newbibmacro{getlastnames}{%
+ \printnames[authorplainlast][-\value{listtotal}]{author}%
+ }
+ 
+
+\newbibmacro{gettitle}{%
+\iffieldundef{shorttitle}{%
+\printfield{title}}%
+{\printfield[emph]{shorttitle}%
+}
+}
+
+\newbibmacro{geteditionyear}{%
+ \ifboolexpr{%
+  not test {\iffieldundef{edition}}%if there is an edition
+  or
+  not test {\iffieldundef{year}}%or a year
+  }%
+{%true
+\addspace%
+\mkbibparens{%
+\iffieldundef{edition}{}{%
+\printfield{edition}%\textsuperscript{\bibstring{legaled}}%
+\iffieldundef{year}{}{\addspace}}%end edition
+\iffieldundef{year}{}{\printfield{year}}%
+}%end psrens
+}%end true
+{}%false
+}
+
+
+
+\newbibmacro{getlcepigraph}{%
+\ifbibliography{}{%otherwise
+\ifnameundef{author}{}{%otherwise
+\usebibmacro{getlastnames}%
+\addspace%
+\mkbibemph{\bibstring{legalon}}
+\addspace%
+}%end name defined
+\usebibmacro{gettitle}%
+\usebibmacro{geteditionyear}%
+}%end inbib=false
+}
+
+
+
+
+
+%============= lcepigraph
+\DeclareCiteCommand{lcepigraph}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getlcepigraph}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
+
 
 
 
