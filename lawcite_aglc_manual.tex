@@ -1,0 +1,2180 @@
+
+
+\begin{filecontents*}{\jobname.bib}
+
+@case{keyabc,
+  partya = {ABC}, 
+  partyb = {XYZ*},
+  caseyear = {2016},
+  reportyear={2020},
+  reportvolume = {3},
+  volyearneeded = {true},
+  reportseries = {WLR},
+  reportpage = {123},
+  courtname = {XYZCA},
+  casenumber = {456},
+	}
+
+@case{case2,
+  partya = {DDA}, 
+  partyb = {MNO*},
+  caseyear = {2019},
+%  reportvolume = {3},
+%  volyearneeded = {true},
+%  reportseries = {WLR},
+%  reportpage = {123},
+  courtname = {HACCA},
+  casenumber = {14},
+	}
+@case{case3,
+  partya = {Efg}, 
+  partyb = {Hij*},
+  caseyear = {2018},
+%  reportvolume = {3},
+%  volyearneeded = {true},
+%  reportseries = {WLR},
+%  reportpage = {123},
+  courtname = {VFC},
+  casenumber = {1},
+	}
+@case{case4,
+  partya = {Klm}, 
+  partyb = {Nop*},
+  caseyear = {2015},
+  reportyear={2016},
+  reportvolume = {2},
+  volyearneeded = {true},
+  reportseries = {WLR},
+  reportpage = {25},
+  courtname = {MBC},
+  casenumber = {21},
+	}
+@case{case5,
+  partya = {No MNC A}, 
+  partyb = {No MNC B*},
+  reportyear={1757},
+  reportvolume = {1},
+%  volyearneeded = {true},
+  reportseries = {Co},
+  reportpage = {25},
+	}
+@book{book1,
+	title={A Title*},
+	author={B Auctoritas},
+	year={1828},
+	publisher={Holmes and Sons},
+	}
+
+
+
+@case{becher,
+  partya = {City of Columbus}, 
+  partyb = {Becher},
+%  reportyear={},
+  reportvolume = {180},
+%  volyearneeded = {true},
+  reportseries = {NE 2d},
+  reportpage = {836},
+  year = {1962},
+  note = {Ohio, Zimmerman J},
+	}
+
+
+@case{cassie,
+  partya = {Cassie}, 
+  partyb = {Koumans},
+  caseshortname = {Cassie},
+  caseyear = {2007},
+%	  reportyear={2016},
+%	  reportvolume = {2},
+%	  volyearneeded = {true},
+%	  reportseries = {WLR},
+%	  reportpage = {25},
+  courtname = {NSWSC},
+  casenumber = {481},
+	}
+
+
+@case{becker,
+  partya = {City of Marion}, 
+  partyb = {Becker},
+  caseshortname = {Becker},
+%  caseyear = {2007},
+  reportyear={1973},
+  reportvolume = {6},
+%  volyearneeded = {},
+  reportseries = {SASR},
+  reportpage = {13},
+%  courtname = {NSWSC},
+%  casenumber = {481},
+	}
+
+%R v Morgan [1970] 3 All ER 1053
+@case{rmorgan,
+  partya = {R}, 
+  partyb = {Morgan},
+  caseshortname = {Morgan},
+  reportyear={1970},
+  reportvolume = {3},
+  volyearneeded = {true},
+  reportseries = {All ER},
+  reportpage = {1053},
+	}
+
+
+@book{eco,
+author={Umberto Eco},
+title={Come si fa una tesi di laurea},
+subtitle={Le materie umanistiche},
+title+an = {How to write a Thesis for an Arts Degree},
+publisher={Bompiani},
+date={2004},
+origdate={1977},
+edition={15},
+%options={skipbib=true},
+%isbn={9788845246310},
+}
+
+@book{anncrimnsw,
+author={Roderick N Howie and Peter A Johnson},
+title={Annotated Criminal Legislation New South Wales},
+publisher={LexisNexis Butterworths},
+date={2015},
+edition={2014-2015},
+keywords = {lawbook},
+}
+
+@case{columbus,
+  partya = {City of Columbus},
+  partyashortname = {Columbus}, 
+  partyb = {Becher},
+  caseshortname = {Becher},
+  icaseyear = {1962},
+  jurisdiction = {Ohio},
+  courtfullname = {Supreme Court of Ohio},
+  note = {Ohio SC, 1962},
+	}
+@case{columbussr,
+  reportvolume = {173},
+  reportseries = {Ohio St},
+  reportpage = {197},
+  crossref = {columbus},
+}
+
+@case{columbusne,
+  reportvolume = {180},
+  reportseries = {NE 2d},
+  reportseriesseries = {2d},
+  reportpage = {836},
+  crossref = {columbus},
+}
+%%%%%%%%%%%%%
+
+@xdata{xcolumbus,
+  partya = {xCity of Columbus},
+  partyashortname = {Columbus}, 
+  partyb = {Becher},
+  year = {1962},
+  jurisdiction = {Ohio},
+  courtfullname = {Supreme Court of Ohio},
+  note = {Ohio SC, 1962},
+	}
+	
+@case{xcolumbussr,
+  reportvolume = {173},
+  reportseries = {Ohio St},
+  reportpage = {197},
+  xdata = {xcolumbus},
+}
+
+@case{xcolumbusne,
+  reportvolume = {180},
+  reportseries = {NE 2d},
+  reportseriesseries = {2d},
+  reportpage = {836},
+  xdata = {xcolumbus},
+}
+
+
+%%%%%%%%%%%%%
+@case{thomas,
+  partya = {Thomas},
+  partyb = {Newton*},
+  icaseyear = {1827},
+	}
+
+@case{thomascar,
+  reportyear = {1827},
+  reportvolume = {2},
+  reportseries = {Car \& P},
+  reportpage = {606},
+  crossref = {thomas},
+}
+
+@case{thomaser,
+  reportvolume = {?},
+  reportseries = {ER},
+  reportpage = {276},
+  crossref = {thomas},
+}
+
+@case{thomasermnc,
+  caseyear = {1827},
+  courtname = {EngRep},
+  casenumber = {503},
+  crossref = {thomas},
+}
+
+
+@case{gitlow,
+  partya = {Gitlow},
+  partyb = {New York},%People of New York
+  partyashortname = {New York}, 
+  caseshortname = {Gitlow},
+  icaseyear = {1925},
+  note = {1925},
+	}
+
+
+@case{gitlowus,
+  reportvolume = {268},
+  reportseries = {US},
+  reportpage = {652},
+  crossref = {gitlow},
+}
+
+
+@case{gitlowsc,
+  reportvolume = {45},
+  reportseries = {SCt},
+  reportpage = {625},
+  crossref = {gitlow},
+}
+
+@case{armstrong,
+  partya = {Adam Armstrong's Case},
+  icaseyear = {1823},
+  caseshortname = {Armstrong},
+	}
+
+@case{armstrongmnc,
+  caseyear = {1823},
+  courtname = {EngR},
+  casenumber = {1},
+  crossref = {armstrong},
+}
+
+
+@case{armstronglewin,
+  reportyear = {1823},
+  reportvolume = {1},
+  reportseries = {Lewin},
+  reportpage = {245},
+  crossref = {armstrong},
+}
+
+@case{armstronger,
+  reportvolume = {168},
+  reportseries = {ER},
+  reportpage = {1028},
+  crossref = {armstrong},
+}
+
+
+%Adam Armstrong's Case [1823] EngR 1; (1823) 1 Lewin 245; 168 E.R. 1028 (1 January 1823)
+
+
+@case{alexander,
+  partya = {Alexander},
+  partyb = {Brown},
+  icaseyear = {1823},
+  caseshortname = {Alexander},
+	}
+
+@case{alexandermnc,
+  caseyear = {1823},
+  courtname = {EngR},
+  casenumber = {5},
+  crossref = {alexander},
+}
+
+
+@case{alexandercp,
+  reportyear = {1823-1825},
+  reportvolume = {1},
+  reportseries = {C \& P},
+  reportpage = {288},
+  crossref = {alexander},
+}
+
+@case{alexanderer,
+  reportvolume = {171},
+  reportseries = {ER},
+  reportpage = {1199},
+  crossref = {alexander},
+  note = {A},
+}
+
+
+
+%Alexander v Brown [1823] EngR 5; (1823-1825) 1 Car & P 288; 171 E.R. 1199 (A) (1 January 1823)
+
+@book{bishop,
+author = {Joel Prentiss Bishop},
+title = {The First Book of the Law},
+date = {1868},
+publisher = {Little, Brown, and Company},
+location = {Boston},
+keywords = {lawbook},
+}
+
+
+@case{velocity,
+  partya = {shipname Velocity},
+  icaseyear = {1869},
+  shipname = {Velocity},
+	}
+
+@case{velocitymnc,
+  caseyear = {1869},
+  courtname = {EngR},
+  casenumber = {53},
+  crossref = {velocity},
+}
+
+
+@case{velocitynr,
+  reportyear = {1869},
+  reportvolume = {6},
+  reportseries = {Moo PC NS},
+  reportpage = {263},
+  crossref = {velocity},
+}
+
+@case{velocityer,
+  reportvolume = {16},
+  reportseries = {ER},
+  reportpage = {725},
+  crossref = {velocity},
+}
+
+
+
+%The "Velocity" [1869] EngR 53; (1869) 6 Moo PC NS 263; 16 E.R. 725
+
+
+@case{snail,
+  partya = {Donoghue}, 
+  partyb = {Stevenson},
+  icaseyear = {1932},
+  reportyear={1932},
+%  volyearneeded = {true},
+  reportseries = {AC},
+  reportpage = {562},
+  casenickname = {snail in the bottle},
+  note = {HL},
+	}
+
+%Commonwealth v Tasmania ("Tasmanian Dam case") [1983] HCA 21; (1983) 158 CLR 1
+
+@case{tasdam,
+  partya = {Commonwealth}, 
+  partyb = {Tasmania},
+  icaseyear = {1983},
+  casenickname = {Tasmanian Dam},
+  }
+@case{tasdammnc,
+  caseyear = {1983},
+  courtname = {HCA},
+  casenumber = {2},
+  crossref = {tasdam},
+  }
+@case{tasdamclr,
+  reportyear={1983},
+%  volyearneeded = {true},
+  reportvolume = {158},
+  reportseries = {CLR},
+  reportpage = {1},
+  crossref = {tasdam},
+  	}
+%@case{frame,
+%  partya = {Frame}, 
+%  partyb = {Smith},
+%  icaseyear = {1987},
+%  }
+%@case{framescr,
+%  reportyear = {1987},
+%  volyearneeded = {true},
+%  reportvolume = {2},
+%  reportseries = {SCR},
+%  reportpage = {99},
+%  crossref = {frame},
+%  }
+%@case{framedlr,
+%  reportvolume = {42},
+%  reportseries = {DLR (4th)},
+%  reportpage = {81},
+%  crossref = {frame},
+%  	}
+
+@case{frame,partya = {Frame},partyb = {Smith},icaseyear = {1987},}
+@case{framescr,reportyear = {1987},volyearneeded = {true},reportvolume = {2},reportseries = {SCR},reportpage = {99},crossref = {frame},}
+@case{framedlr,reportvolume = {42},reportseries = {DLR (4th)},reportpage = {81},crossref = {frame},}
+@case{cole,partya = {R},partyb = {Cole},caseyear = {2012},courtname = {SCC},casenumber = {53},}
+@case{bigm,partya = {R},partyb = {Big M Drug Mart },}
+@case{bigmscr,reportyear = {1985},volyearneeded = {true},reportvolume = {1},reportseries = {SCR},reportpage = {295},crossref = {bigm},}
+@case{bigmdlr,reportvolume = {18},reportseries = {DLR (4th)},reportpage = {321},crossref = {bigm},}
+@case{keegstra,partya = {Canadian Broadcasting Corporation },partyb = {Keegstra },decisionyear = {1986},}
+@case{keegstraar,reportvolume = {77},reportseries = {AR},reportpage = {249},crossref = {keegstra},}
+@case{keegstradlr,reportvolume = {35},reportseries = {DLR (4th)},reportpage = {76},crossref = {keegstra},note = {CA},}
+@case{robitaille,partya = {Robitaille },partyb = {Vancouver Hockey Club },options = {skipbib=true},}
+@case{robitailledlr,reportvolume = {124},reportseries = {DLR (3d)},reportpage = {228},crossref = {robitaille},note = {BCCA},}
+@case{robitaillewwr,reportyear = {1981},volyearneeded = {true},reportvolume = {2},reportseries = {WWR},reportpage = {481},options = {skipbib=true},crossref = {robitaille},}
+@case{sarg,partya = {Re Sarg Oils Ltd },caseyear = {2011},courtname = {ABERCB },casenumber = {32},}
+@case{clarke,partya = {Clarke Institute of Psychiatry },partyb = {Ontario Nurses' Assn (Adusei Grievance) },decisionyear = {2001},reportvolume = {95},reportseries = {LAC (4th)},reportpage = {154},note = {OLRB},}
+@case{tulk,partya = {Tulk },partyb = {Moxhay },reportyear = {1848},volyearneeded = {true},reportvolume = {1},reportseries = {H \& Tw},reportpage = {105},}
+@case{epa,partya = {Massachusetts },partyb = {Environmental Protection Agency },options = {skipbib=true},}
+@case{epaus,reportyear = {2007},reportvolume = {549},reportseries = {US},reportpage = {497},crossref = {epa},}
+@case{epasc,reportvolume = {127},reportseries = {S Ct},reportpage = {1438},options = {skipbib=true},crossref = {epa},}
+@case{nic,partya = {Case Concerning Military and Paramilitary Activities in and against Nicaragua (Nicaragua v United States of America) },reportyear = {1986},volyearneeded = {true},reportseries = {ICJ Rep No },reportpage = {14},}
+@case{cbc,partya = {Alliance of Canadian Cinema Television and Radio Artists },partyb = {Canadian Broadcasting Corporation },decisionyear = {1990},reportvolume = {91},reportseries = {CLLC},reportpage = {16},note = {CLRB},}
+@case{vdn,partya = {VDN Cable Inc, on behalf of a corporation to be incorporated, Toronto, Ontario },decisionyear = {January 2005},reportseries = {2005-1, online: CRTC <www.crtc.gc.ca> },reportpage = {[perma.cc/LF5P-5MM3] },}
+@case{syncrude,partya = {R},partyb = {Syncrude Canada Ltd },options = {skipbib=true},}
+@case{syncrudeabpc,caseyear = {2010},courtname = {ABPC},casenumber = {154},crossref = {syncrude},}
+@case{syncrudewl,caseyear = {2010},courtname = {CarswellAlta },casenumber = {981},crossref = {syncrude},options = {skipbib=true},note = {WL Can},}
+@case{crete,partya = {R},partyb = {Crete },decisionyear = {18 April 1991},reportseries = {Ottawa},reportpage = {97/03674},note = {Ont Prov Ct },}
+@case{iron,partya = {Clearbrook Ironworks Ltd },partyb = {Letourneau },caseyear = {2006},courtname = {FCA},casenumber = {42},}
+@case{hopp,partya = {Hopp},partyb = {Lepp},reportyear = {1980},volyearneeded = {true},reportvolume = {2},reportseries = {SCR},reportpage = {192},}
+@case{fucella,partya = {Fucella },partyb = {Ricker },decisionyear = {1982},reportvolume = {35},reportseries = {OR (2d)},reportpage = {423},note = {H Ct J},}
+@case{swissair,partya = {Swiss Bank Corp},partyb = {Air Canada},decisionyear = {1987},reportyear = {1988},volyearneeded = {true},reportvolume = {1},reportseries = {FC},reportpage = {71},}
+@case{graham,partya = {Graham},partyb = {R},options = {skipbib=true},}
+@case{grahamwwr,reportyear = {1978},volyearneeded = {true},reportvolume = {6},reportseries = {WWR},reportpage = {48},options = {skipbib=true},crossref = {graham},}
+@case{grahamdlr,reportvolume = {90},reportseries = {DLR (3d)},reportpage = {223},crossref = {graham},note = {Sask QB},}
+@case{arbia,partya = {Arbia},
+partysep = {c},
+partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
+@case{jimenez,partya = {Jimenez },partyb = {Romeo },caseyear = {2009},courtname = {CanLII },casenumber = {68472},note = {ON SC},}
+@case{seib,partya = {Seib Estate},caseyear = {2012},courtname = {ABQB},casenumber = {126},}
+@case{kristel,partya = {Kristel Homes Ltd},partyb = {Edmonton (City of)},caseyear = {2001},courtname = {ABCA},casenumber = {317},note = {TRANSCRIPT OF ORAL REASONS},}
+@case{anderson,partya = {Anderson},partyb = {Fawthrop },caseyear = {2018},courtname = {ABPC},casenumber = {226},}
+@case{ludmer,partya = {Ludmer},partyb = {Ludmer},caseyear = {2012},courtname = {ONSC},casenumber = {5738},parallel = {[2012] CarswellOnt 16100},}
+@case{sheen,partya = {Sheen},partyb = {Sheen},caseyear = {2003},courtname = {MBCA},casenumber = {93},parallel = {[2003] MJ No 230 (QL)},}
+@case{cibc,partya = {CIBC Mortgages Inc},partyb = {Dima Estate},caseyear = {2019},courtname = {NSSC},casenumber = {61},}
+@case{litz,partya = {Litz},partyb = {Litz},reportvolume = {180},reportseries = {WAC},reportpage = {116},parallel = {[1998] 10 WWR 145 and 129 Man R (2d) 121},}
+@case{naraine,partya = {Naraine},partyb = {The Ford Motor Company},caseyear = {2006},courtname = {HRTO},casenumber = {25},reportvolume = {58},reportseries = {CHRR},reportpage = {87},}
+@case{betts,partya = {Betts},partyb = {Norris},reportvolume = {120},reportseries = {NBR (2d)},reportpage = {384},parallel = {302 APR 384 and [1991] CarswellNB 51 and [1991] NBJ No 1036 (QL)},}
+@case{walmart,partya = {Saskatoon (City)},partyb = {Wal-Mart Canada Corp},caseyear = {2019},courtname = {SKCA},casenumber = {3},reportyear = {2019},volyearneeded = {true},reportvolume = {3},reportseries = {WWR},reportpage = {284},}
+@case{tiesmaki,partya = {Tiesmaki},partyb = {Wilson},decisionyear = {1971},reportvolume = {23},reportseries = {DLR (3d)},reportpage = {179},parallel = {[1972] 2 WWR 214 and [1971] AJ No 145 (QL)},note = {AB SC AppDiv, 1971},}
+@case{kybich,partya = {Kybich},partyb = {Mangus},reportyear = {1919},volyearneeded = {true},reportvolume = {3},reportseries = {WWR},reportpage = {532},note = {AB QB, Chambers},}
+
+
+
+
+
+
+
+%Dow Jones and Company Inc v Gutnick [2002] HCA 56; 210 CLR 575; 194 ALR 433; 77 ALJR 255 (10 December 2002)
+
+@case{gutnick,
+  partya = {Dow Jones and Company Inc}, 
+  partyb = {Gutnick},
+  icaseyear = {2002},
+  }
+@case{gutnickmnc,
+  caseyear = {2002},
+  courtname = {HCA},
+  casenumber = {56},
+  crossref = {gutnick},
+  }
+@case{gutnickclr,
+%  reportyear={1983},
+%  volyearneeded = {true},
+  reportvolume = {210},
+  reportseries = {CLR},
+  reportpage = {575},
+  crossref = {gutnick},
+  	}
+@case{gutnickalr,
+%  reportyear={1983},
+%  volyearneeded = {true},
+  reportvolume = {194},
+  reportseries = {ALR},
+  reportpage = {433},
+  crossref = {gutnick},
+  	}
+@case{gutnickaljr,
+%  reportyear={1983},
+%  volyearneeded = {true},
+  reportvolume = {77},
+  reportseries = {ALJR},
+  reportpage = {255},
+  crossref = {gutnick},
+  	}
+
+
+
+
+%Kerr v Baranow, 2011 SCC 10, [2011] 1 SCR 269
+
+@case{kerr,
+  partya = {Kerr}, 
+  partyb = {Baranow},
+  icaseyear = {2011},
+  }
+@case{kerrmnc,
+  caseyear = {2011},
+  courtname = {SCC},
+  casenumber = {10},
+  crossref = {kerr},
+  }
+@case{kerrscr,
+  reportyear={2011},
+  volyearneeded = {true},
+  reportvolume = {1},
+  reportseries = {SCR},
+  reportpage = {269},
+  crossref = {kerr},
+  	}
+
+
+
+%McLean v Pilon (1978), 7 BCLR 99, 1978 CanLII 237 (SC).
+
+
+@case{mclean,
+  partya = {McLean}, 
+  partyb = {Pilon},
+  icaseyear = {1978},
+  decisionyear = {1978},
+  note = {SC},
+  options={skipbib=true},
+  }
+@case{mcleanlii,
+  caseyear = {1978},
+  courtname = {CanLII},
+  casenumber = {237},
+  crossref = {mclean},
+  options={skipbib=true},
+  }
+@case{mcleanbclr,
+%  reportyear={2011},
+%  volyearneeded = {true},
+  reportvolume = {7},
+  reportseries = {BCLR},
+  reportpage = {99},
+  crossref = {mclean},
+  	}
+
+
+
+
+
+
+
+%Smyth, Russell --- "What do Intermediate Appellate Courts Cite? A Quantitative Study of the Citation Practice of Australian State Supreme Courts" [1999] AdelLawRw 3; (1999) 21 Adelaide Law Review 51
+
+@ljarticle{smythsc,
+author = {Russell Smyth},
+title = {What do Intermediate Appellate Courts Cite? A Quantitative Study of the Citation Practice of Australian State Supreme Courts},
+mncyear = {1999},
+mncname = {AdelLawRw},
+mncnumber = {3},
+date = {1999},
+volume = {21},
+journaltitle = {Adelaide Law Review},
+pages = {51},
+%keywords = {lj},
+}
+
+@ljarticle{renaud,author = {Matthew Renaud},subtitle = {The Development of Legal Education in the Province of Manitoba, 1877–1968},title = {From Reading Courses to Robson Hall},mncyear = {2019},mncname = {CanLIIDocs},mncnumber = {4192},date = {2019},volume = {42},journaltitle = {Manitoba Law Journal},pages = {286},}
+
+@ljarticle{adams,author = {Eric M Adams},title = {Canadian Constitutional Identities},date = {2015},volume = {38},journaltitle = {Dalhousie Law Journal},pages = {311},}
+
+@ljarticle{otis,author = {Ghislain Otis},subtitle = {le cas de l’industrie extractive},title = {Les droits ancestraux des peuples autochtones au carrefour du droit public et du droit privé},mncyear = {2019},mncname = {CanLIIDocs},mncnumber = {4154},date = {2019},volume = {60},journaltitle = {Les Cahiers de droit},pages = {451},}
+
+@ljarticle{jukier,author = {Rosalie Jukier},subtitle = {A Judicial Dialogue Between Common Law Canada and Québec},title = {Good Faith in Contract},mncyear = {2019},mncname = {CanLIIDocs},mncnumber = {1767},date = {2019},volume = {1},journaltitle = {Journal of Commonwealth Law},pages = {1},}
+
+%=================== law journal articles
+
+
+@ljarticle{ljart3,
+options={year-required=true,},
+author={given=qqq, family=rrr},
+title ={A Third Legal Article yr req},
+journaltitle={MNOLR},
+date={2016},
+volume={1},
+pages={458},
+}
+
+@book{b2035,title ={Chitty on Contracts},edition ={26},publisher ={Sweet and Maxwell},date ={1989},}
+@book{b2036,title ={Clerk and Lindsell on Torts},edition ={16},publisher ={Sweet and Maxwell},date ={1989},}
+
+@periodical{j76,journaltitle={Modern Law Review},volume={54},number={1},month={1},date={1991},}
+
+%b2035,
+@article{a104,
+author={Ewan McKendrick},
+related={b2035,b2036},
+relatedtype={reviewof},
+crossref={j76},
+pages={162},
+keywords={otl, lj},
+}
+
+
+%Lawrence Friedman, Robert Kagan, Bliss Cartwright and Stanton
+%Wheeler, 'State Supreme Courts: A Century of Style and Citation' (1981) 33 Stanford Law
+%Review 773 (covering 16 state supreme courts in the period 1870-1970).
+
+
+@ljarticle{friedman,
+author = {Lawrence Friedman and Robert Kagan and Bliss Cartwright and Stanton Wheeler},
+title = {State Supreme Courts},
+subtitle = {A Century of Style and Citation},
+%mncyear = {1999},
+%mncname = {AdelLawRw},
+%mncnumber = {3},
+date = {1981},
+volume = {33},
+journaltitle = {Stanford Law Review},
+pages = {773},
+%---
+%reportyear = {1981},
+%repotrvolume = {33},
+%reportname = {Stanford Law Review},
+%reportpage = {773},
+note = {covering 16 state supreme courts in the period 1870-1970},
+keywords = {lj},
+}
+
+
+
+%%@book{butt,
+%%crossref={buttb},
+%%%author = {Peter Butt},
+%%%title={Legal Usage},
+%%%subtitle={A Modern Style Guide},
+%%%date={2018},
+%%%publisher={LexisNexis Butterworths},
+%%}
+
+@book{buttb,author = {Peter Butt},title = {Legal Usage},subtitle = {A Modern Style Guide},date = {2018},publisher = {LexisNexis Butterworths},location = {Australia},isbn = {9780409341461},jurisdiction = {Australia},}
+
+@book{addison,author = {C G Addison},title = {The Law of Torts},edition = {2},date = {1872},publisher = {Little, Brown, and Company},location = {Boston},shorttitle = {Torts},note = {Abridgement},keywords = {lawbook},}
+
+
+@statute{crimnsw,
+statutetitle = {Crimes Act},
+%statutelongtitle = {},
+%statuteshorttitle = {},
+%statutenickname = {},
+%statutevolume = {},
+statutejurisdiction = {NSW},
+%statuteregnalyear = {},
+%statutechapter = {},
+%statuteyear = {},%for the volume
+statutetitleyear = {1900},%for the title
+}
+
+%Criminal Code, RSC 1985, c C-46, s 515
+
+@statute{crimcan,
+statutetitle = {Criminal Code},
+%statutelongtitle = {},
+%statuteshorttitle = {},
+%statutenickname = {},
+%statutevolume = {},
+%statutejurisdiction = {NSW},
+%statuteregnalyear = {},
+%statutechapter = {},
+%statuteyear = {},%for the volume
+statutetitleyear = {RSC 1985, c C-46},%for the title
+}
+
+
+@statute{canreg,
+statutetitle = {Maple Products Regulations},
+%statutelongtitle = {},
+statuteshorttitle = {CRC},
+%statutenickname = {},
+%statutevolume = {},
+%statutejurisdiction = {NSW},
+%statuteregnalyear = {},
+statutechapter = {289},
+%statuteyear = {},%for the volume
+%statutetitleyear = {RSC 1985},%for the title
+}
+
+@statute{testregs,
+statutetitle = {Test Regs},
+statutetitleyear = {2020},%for the title
+keywords = {regulations},
+statutejurisdiction = {NSW},
+}
+
+
+
+
+@statute{crimcodecan,
+citeref = {canleg},
+title = {Criminal Code},
+svjy = {RSC 1985},
+chapter = {C-46},
+}
+
+
+@statute{oescheats,
+citeref = {canleg},
+title = {Escheats Act},
+svjy = {RSO 1980},
+chapter = {142},
+}
+
+@statute{canleg,
+citeref = {canleg},
+title = {Copyright Act},
+chapter = {C-42},
+svjy = {RSC 1985},
+%year = {xxx},
+%regnum = {xxx},
+}
+
+@statute{canregcrc,
+citeref = {crcreg},
+title = {Maple Products Regulations},
+chapter = {289},
+%year = {xxx},
+%regnum = {xxx},
+}
+
+
+@statute{canregsor,
+citeref = {sorreg},
+title = {Regulations Amending the Food and Drug Regulations},
+%chapter = {xxx},
+year = {98},
+regnum = {580},
+}
+
+@statute{canregalta,citeref = {altareg},year = {2009},regnum = {62},sorttitle = {altareg200962},}
+@statute{canregbc,citeref = {bcreg},year = {2008},regnum = {278},sorttitle = {bcreg2008278},}
+@statute{canregman,citeref = {manreg},year = {87},regnum = {351},sorttitle = {manreg87351},}
+@statute{canregnb,citeref = {nbreg},year = {2006},regnum = {23},sorttitle = {nbreg200623},}
+@statute{canregnfld,citeref = {nfldreg},year = {97},regnum = {19},sorttitle = {nfldreg9719},}
+@statute{canregnlr,citeref = {nlrreg},year = {9},regnum = {4},sorttitle = {nlrreg94},}
+@statute{canregnwt,citeref = {nwtreg},year = {2008},regnum = {26},sorttitle = {nwtreg200826},}
+@statute{canregns,citeref = {nsreg},year = {2007},regnum = {235},sorttitle = {nsreg2007235},}
+@statute{canregnu,citeref = {nureg},year = {40},regnum = {99},sorttitle = {nureg4099},}
+@statute{canrego,citeref = {oreg},year = {8},regnum = {361},sorttitle = {oreg8361},}
+@statute{canregpei,citeref = {peireg},year = {2002},regnum = {249},sorttitle = {peireg2002249},}
+@statute{canregoc,citeref = {ocreg},year = {97},regnum = {764},fulldate = {25 June 1997},gazette = { 1997.II.2737},sorttitle = {ocreg97764},}
+@statute{canregsask,citeref = {saskreg},year = {67},regnum = {444},sorttitle = {saskreg67444},}
+@statute{canregyoic,citeref = {yoicreg},year = {1995},regnum = {87},sorttitle = {yoicreg199587},}
+
+
+@statute{fla,citeref = {canleg},title = {Family Law Act },svjy = {SA 2003 },chapter = {F-4.5 },}
+@statute{tla,citeref = {canleg},title = {Territorial Lands Act },svjy = {RSC 1985 },chapter = {T-7 },}
+@statute{fair,citeref = {canleg},title = {Fair Trading Act },svjy = {RSA 2000 },chapter = {F-2 },}
+@statute{bears,citeref = {sorreg},title = {Polar Bear Pass Withdrawal Order },year = {84},regnum = {409},}
+@statute{birds,citeref = {crcreg},title = {Migratory Birds Regulations },chapter = {1035},}
+@statute{forests,citeref = {altareg},title = {Alberta Forest Land Use and Management Regulations },year = {1976},regnum = {197},}
+@statute{prop,statutetitle = {Law of Property Act },statutetitleyear = {1969},statutejurisdiction = {UK},}
+
+@statute{water,statutetitle = {Safe Drinking Water Act },statutetitleyear = {42 USC §300f },note = {1974},}
+
+@statute{anyregverb,citeref = {verbreg},regnum = {Road Rules 2008 -- \textcolor{red}{\textbf{Reg 15}} What is a vehicle (New South Wales)},sorttitle = {Road Rules 2008},}
+
+@book{candl,
+author={A B C Clerk and X Y Z Lindsell},
+shorttitle={Torts},
+options={skipbib=true,},
+}
+
+
+@case{finn,partya = {Director of Public Prosecutions},partyb = {Finn},partyasn = {DPP},partyajur = {Vic},reportyear = {2008},reportvolume = {186},reportseries = {A Crim R},reportpage = {235},}
+@case{bradshaw,partya = {Bradshaw},partyb = {Attorney-General},partybsn = {A-G},partybjur = {Qld},reportyear = {2000},volyearneeded = {true},reportvolume = {2},reportseries = {Qd R},reportpage = {7},}
+
+@case{thomasmowbray,partya = {Thomas},partyb = {Mowbray},reportyear = {2007},reportvolume = {233},reportseries = {CLR},reportpage = {307},}
+@book{aglc,title = {Australian Guide to Legal Citation},edition = {4},date = {2019},publisher = {Melbourne University Law Review Association Inc},location = {Melbourne},isbn = {9780646976389},shorttitle = {AGLC},}
+
+@statute{cca,statutetitle = {Criminal Code Act},statutetitleyear = {1995},statutejurisdiction = {Cth},}
+
+
+
+
+
+\end{filecontents*}
+
+
+
+
+\documentclass[12pt]{article}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+%------------------
+
+\title{AGLC Legal Citation\\Usage Guide\\ \ \\{\normalsize for \\ the \texttt{lawcite} \textsc{Biblatex} style}}
+\author{}
+\date{}
+\long\gdef\myabstracttext{\noindent This is the instruction manual for using the  (\cmdc{lawcite})  \textsc{Biblatex} format to produce AGLC-style legal citations.}
+%------------------
+\usepackage[table]{xcolor}
+\pagecolor{blue!3}
+\rowcolors{1}{blue!5}{blue!9}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{TeX Gyre Schola}[Scale=1.2]%Gentium Plus}
+\setmonofont{Noto Sans Mono}%[Colour=blue]
+%------------------
+\usepackage[british]{babel}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\usepackage{marginnote}
+\usepackage{abstract}
+\usepackage{microtype}
+%\usepackage{makecell}
+
+\newcommand\note[1]{(\texttt{#1})}
+
+
+\newcommand\egcasename{Donoghue v Stevenson}
+\newcommand\egcaseref{[1932] AC 562}
+
+\newcommand\eg[1]{%
+(\texttt{#1})
+}
+
+\newcounter{examplecounter}
+\newcommand\numeg{\refstepcounter{examplecounter}\marginpar{Ex \theexamplecounter\label{ex\theexamplecounter}}}
+
+\newcommand\abibname{lawcite}
+\newcommand\abibstyle{style=\abibname}
+\usepackage[
+	\abibstyle , 
+	lawcitestyle=aglc,
+   use-toc-parnumrefs=false,
+	indexing=cite,
+	citetracker=true,
+	citecounter=context,
+	ibidtracker=false,%option setting for footnotes: assumes single refs
+	pagetracker=true,
+	idemtracker=true,
+	opcittracker=true,
+	loccittracker=true,
+	autocite=footnote,
+   datezeros=true,
+   minnames=5,
+   maxnames=5,%more names than this are truncated to minnames
+		]{biblatex}
+
+\addbibresource{\jobname.bib}
+		
+%=================
+%indexing
+
+\usepackage{splitidx}
+\newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to page numbers.\bigskip}
+\newcommand\dupentries{\ \\\small\mdseries $\to$ `Duplicated' entries are intentional.}
+\setindexpreamble[cases]{\pagerefindexnote\dupentries}
+\setindexpreamble[legislation]{\pagerefindexnote}
+\setindexpreamble[regulations]{\pagerefindexnote}
+\setindexpreamble[general]{\pagerefindexnote}
+
+
+%Print the `preamble' of the index:
+\makeatletter
+ \renewcommand*{\@@printindex}{}
+ \def\@@printindex[#1][#2]{%
+ \begingroup
+ \edef\indexshortcut{#1}%
+ \def\indexname{#2\par \useindexpreamble}%
+ \def\kvtcb@text@index{#2}%
+ \let\index@preamble\relax
+ \expandafter\let\expandafter\index@preamble
+ \csname index@\indexshortcut @preamble\endcsname
+ \if@splitidx
+ \def\@tempa{idx}\def\@tempb{#1}%
+ \ifx\@tempa\@tempb\let\@indexsuffix\@gobble\fi
+ \fi
+\@input@{\jobname\@indexsuffix{#1}.ind}%
+\endgroup
+\csname printindex@endhook\endcsname
+}
+\makeatother
+\makeindex
+\newindex[Table of Cases]{cases}
+\newindex[Table of Statutes]{legislation}
+\newindex[Table of Regulations]{regulations}
+\newindex[General Index]{general}
+%%%\sindex[cases]{\noindent $\to$ References are to page numbers}
+
+
+%%\AtWriteToIndex splitidx uses \protected@write to write the index entries to its output les. The
+%%\AtWriteToIndex macro lets you execute a piece of code each time an index is
+%%written to a specic index. Usage:
+%%\AtWriteToIndex{hshortcuti}{hcodei}
+%%This may be useful if you want your index entries to reference not the page number
+%%but some other counter instead. For example, in order to make each index entry
+%%in the general index (identified by the idx shortcut) point to the corresponding
+%%section number, you would write
+
+
+%-------------------------------------------------------
+%%\AtWriteToIndex{idx}{\let\thepage\thesection}
+%-------------------------------------------------------
+
+
+
+
+%Some commands to display commands:
+\newcommand\optsett[2]{\noindent\textcolor{blue}{\texttt{#1} \ifblank{#2}{}{\hfill default: \texttt{\textbf{#2}}}}}
+
+\newcommand\bcmd[1]{\{#1\}}
+\newcommand\cmd[1]{\texttt{\textcolor{blue}{\textbackslash #1}}}
+\newcommand\cmdb[1]{\texttt{\textbackslash #1}}
+\newcommand\cmdc[1]{\texttt{\textcolor{blue}{#1}}}
+\newcommand\mcmd[1]{\texttt{\textbackslash #1\{\}}}
+\newcommand\braces[1]{\{#1\}}
+\newcommand\brackets[1]{[#1]}
+\newcommand\parens[1]{(#1)}
+\newcommand\disp[1]{\hfill\fbox{#1}\hfill\ \par}
+\newcommand\dispb[1]{\hfill #1 \hfill\ \par\medskip}
+\newcommand\dispeg[1]{\noindent #1\par}
+
+
+\newcommand\canreg[2]{\lawcite[#2]{#1}}
+
+\newfontface\fcc{Noto Sans Mono}
+\newcommand\attribution[1]{\hspace{2pt}\fcc\tiny\rotatebox{90}{#1}}
+
+
+\usepackage[
+				final=true,
+				bookmarks,
+            colorlinks=true,        
+            allcolors = black,  
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+%================
+
+
+\DeclareBibliographyCategory{yesinbib}
+\DeclareBibliographyCategory{notinbib}
+
+\newtoggle{putinbib}
+\toggletrue{putinbib}
+
+\newcommand\qcite[2]{%
+\togglefalse{putinbib}%
+\footfullcite[#2]{#1}%
+\toggletrue{putinbib}%
+}
+
+\AtEveryCitekey{%
+\iftoggle{putinbib}{%true
+   \addtocategory{yesinbib}{\thefield{entrykey}}
+}{%false
+   \addtocategory{notinbib}{\thefield{entrykey}}
+}%
+}
+
+\newcommand\theball{\tikz \shade[ball color=green!40] (0,0) circle (0.75ex);\hspace{0.75em}}
+
+
+%------------------
+\begin{document}
+%\lcsetdemoon
+\maketitle
+\begin{abstract}
+\myabstracttext
+\end{abstract}
+%\vfill
+%\comment{{\ack}}
+\newpage
+\tableofcontents
+\bigskip
+\hfill\rulesep\hfill\ %\hrule
+%\listoffigures
+%\listoftables
+\bigskip
+\hfill\rulesep\hfill\ %\hrule
+\bigskip
+\section{Getting Ready}
+\subsection{What you will need}
+\subsection{Installing the files}
+Place the lawcite Biblatex definition files (lawcite.dbx, lawcite.bbx, lawcite.cbx, english-lawcite.lbx), and an index style file for SplitIndex to use (e.g., plain.ist), in a location where \TeX\ can find them, for example, in the current folder.
+
+AGLC-style is activated via option settings when calling the Biblatex package.
+
+\begin{verbatim}
+\usepackage[
+	style=lawcite, 
+	lawcitestyle=aglc,
+   use-toc-parnumrefs=false,
+	...
+		]{biblatex}
+\end{verbatim}
+
+Settings used by \texttt{lawcite} may be changed inside the document, as well.
+
+\subsection{The Workflow}
+To compile a file \textit{foo.tex}, do:
+\begin{itemize}
+\item xelatex/lualatex/pdflatex
+\item biber (collect bibliographic data)
+\item xelatex/lualatex/pdflatex (resolve citations, insert Table of Contents, Bibliography; page numbers change)
+\item splitindex (create the ToC etc files)
+\begin{itemize}
+\item[] \texttt{splitindex \textit{foo} -- -s plain.ist -c}
+\end{itemize}
+\item xelatex/lualatex/pdflatex (Table of Cases is inserted; page numbers change)
+\item splitindex (pick up the new page numbers)
+\item xelatex/lualatex/pdflatex (refresh the ToC, and any cross-references)
+\end{itemize}
+The index style file (for the Table of Cases, etc), is a plain dot-fill style:
+\begin{verbatim}
+delim_0 "\\space\\dotfill\\space "\hss
+delim_1 "\\space\\dotfill\\space "\hss
+delim_2 "\\space\\dotfill\\space "\hss
+delim_n ", "
+delim_r "--"
+delim_t ""
+encap_prefix ""
+encap_suffix ""
+\end{verbatim}
+
+\section{How \cmdc{lawcite} works}
+\subsection{AGLC settings}
+For a behind-the-scenes look, in terms of on/off switches (that is, where there is a typographical choice), the AGLC style is defined as follows: party names are italic, party separator (usually a ``v'') is also italic, and not dotted, main citation method is footnoting, square brackets are used for the year component of medium neutral citations, and so on\ldots
+\begin{verbatim}
+\newcommand\lcsetstyleaglc{%
+   \toggletrue{partynamesitalic}
+   \toggletrue{partysepitalic}
+   \togglefalse{partysepdotted}
+   \toggletrue{mncbrackets}
+   \setcounter{reftypemode}{3}
+   \toggletrue{printlegtoc}
+   \toggletrue{statjurisdiction}
+   \togglefalse{stattycomma}
+   \toggletrue{stattyitalic}
+   \toggletrue{commainindex}
+   \togglefalse{multicitecomma}
+   \togglefalse{casenamecomma}
+   \toggletrue{ljarttitleitalic}
+   \togglefalse{ljjnltitleitalic}
+}
+\end{verbatim}
+\bigskip
+Other components of style depend on data input and/or user choice (the decision year if different to the reporting year); or `fixed', in the sense that there is only one layout (like using ``/'' for some provincial regulation formats to separate regulation number and year, or year and regulation number). Coding can be done to the $n\textsuperscript{th}$ degree, but, at some point, practicality switches on.
+\subsection{The Data}
+\subsection{The Data Model}
+\subsection{The Option Settings}
+\subsection{Changing Settings}
+\subsection{Bibentries}
+\subsection{Citations}
+\subsection{Bibliographies}
+
+\newpage
+\let\xoldtwocolumn\twocolumn
+\iftoggle{printlegtoc}{%
+\let\oldtwocolumn\twocolumn
+\renewcommand{\twocolumn}[1][]{#1}
+\let\oldclearpage\clearpage
+\renewcommand\clearpage{\relax}
+\printindex[cases]
+\sindex[general]{Table of Cases}
+\printindex[legislation]
+\iftoggle{printregulations}{\printindex[regulations]}{}
+%%%\printindex[general]
+%%%
+\renewcommand{\twocolumn}[1][]{\oldtwocolumn}
+\renewcommand\clearpage{\oldclearpage}
+}{}
+\bigskip
+\hfill\rulesep\hfill\ %\hrule%{0.8\linewidth}
+\bigskip
+
+
+%===============================================
+\newpage
+
+
+%------------------------------
+\section{Cases}
+\subsection{Bibentries}
+This subsection illustrates the bibentry data fields driving the citations,
+\bigskip
+
+\theball Short name in footer: \cmd{lawcitetitle}\braces{bradshaw}\cmd{lawcite}\braces{bradshaw}
+
+
+In \lawcitetitle{bradshaw}\lawcite{bradshaw} \ldots ({\small AGLC example})
+
+
+\begin{verbatim}
+@case{bradshaw,
+	partya = {Bradshaw},
+	partyb = {Attorney-General},
+	partybsn = {A-G},
+	partybjur = {Qld},
+	reportyear = {2000},
+	volyearneeded = {true},
+	reportvolume = {2},
+	reportseries = {Qd R},
+	reportpage = {7},
+}
+\end{verbatim}
+
+
+\cmd{lawcite} is a footer style under AGLC. Use the \cmd{lawcitehf} command to explicitly place the case name inline and have the reference in a footer with one command, like so:\footcite[The example is from][r 2.1.15 `Omitting the Case Name' p 48]{aglc}
+\begin{quotation}
+In \lawcitehf{thomasmowbray}, the control order regime established under the schedule to the \lawcite{cca} survived a constitutional challenge. 
+\end{quotation}
+\bigskip
+
+Use \cmd{lawcitehfn} for the short name in the footer.
+
+In \lawcitehfn{finn} \ldots
+\bigskip
+
+
+\theball Medium Neutral Citation: \cmd{lcinline}\braces{cole}\par\bigskip
+ \lcinline{cole}
+\begin{verbatim}
+@case{cole,
+	partya = {R},
+	partyb = {Cole},
+	caseyear = {2012},
+	courtname = {SCC},
+	casenumber = {53},
+}
+\end{verbatim}
+
+\theball The default party separator is ``v''. Use the \textit{partysep=} field to specify a different party separator, e.g., \textit{contre}: \cmd{lcinline}\braces{arbia}\par\bigskip
+ \lcinline{arbia}
+ 
+\begin{verbatim}
+@case{arbia,
+	partya = {Arbia},
+	partysep = {c},
+	partyb = {Brousseau},
+	caseyear = {2020},
+	courtname = {QCCA},
+	casenumber = {1073},
+}
+\end{verbatim}
+
+
+
+
+\theball Printed report, by year: \cmd{lcinline}\braces{hopp}\par\bigskip
+ \lcinline{hopp}
+\begin{verbatim}
+@case{hopp,
+	partya = {Hopp},
+	partyb = {Lepp},
+	reportyear = {1980},
+	volyearneeded = {true},
+	reportvolume = {2},
+	reportseries = {SCR},
+	reportpage = {192},
+}
+\end{verbatim}
+
+\theball Printed report, by volume: \cmd{lcinline}\braces{fucella}\par\bigskip
+ \lcinline{fucella}
+\begin{verbatim}
+@case{fucella,
+	partya = {Fucella},
+	partyb = {Ricker},
+	decisionyear = {1982},
+	reportvolume = {35},
+	reportseries = {OR (2d)},
+	reportpage = {423},
+	note = {H Ct J},
+}
+\end{verbatim}
+
+\theball Printed report, by year, decided and published in different years: \cmd{lcinline}\braces{swissair}\par\bigskip
+\lcinline{swissair}
+\begin{verbatim}
+@case{swissair,
+	partya = {Swiss Bank Corp},
+	partyb = {Air Canada},
+	decisionyear = {1987},
+	reportyear = {1988},
+	volyearneeded = {true},
+	reportvolume = {1},
+	reportseries = {FC},
+	reportpage = {71},
+}
+\end{verbatim}
+\newpage
+\theball Parallel reports: \cmd{lawcitesinlinerr}\braces{grahamwwr,grahamdlr}\par\bigskip
+ \lawcitesinlinerr{grahamwwr,grahamdlr}
+\begin{verbatim}
+@case{graham,
+	partya = {Graham},
+	partyb = {R},
+	options = {skipbib=true},
+}
+@case{grahamwwr,
+	reportyear = {1978},
+	volyearneeded = {true},
+	reportvolume = {6},
+	reportseries = {WWR},
+	reportpage = {48},
+	options = {skipbib=true},
+	crossref = {graham},
+}
+@case{grahamdlr,
+	reportvolume = {90},
+	reportseries = {DLR (3d)},
+	reportpage = {223},
+	crossref = {graham},
+	note = {Sask QB},
+}
+\end{verbatim}
+
+%------------------------------
+\newpage
+\subsection{Citations}
+{\footnotesize\textsc{Note}: Pinpoints are illustrative only.}
+\bigskip
+\bigskip
+
+
+Available commands:
+
+%A
+\disp{key}\numeg
+\disp{\cmd{lawcite}\braces{key}}
+\smallskip
+\dispb{footer, single key}
+\dispeg{\cmdb{lawcite}\braces{cole}}
+
+%Text\lawcite[\protect\label{fcoleb}\unskip]{cole}
+Text\lawcite[\protect\label{fcoleb}][]{cole}
+\bigskip
+\bigskip
+
+%B
+\disp{key \textit{postnote}}\numeg
+\disp{\cmd{lawcite}\brackets{\textit{postnote}}\braces{key}}
+\smallskip
+\dispb{footer, single key, single cite}
+\dispeg{\cmdb{lawcite}\brackets{\cmdb{nopp} at 67}\braces{cole}}
+
+Text\lawcite[\nopp at 67]{cole}
+\bigskip
+\bigskip
+
+%C
+\disp{\textit{prenote} key}\numeg
+\disp{\cmd{lawcite}\brackets{\textit{prenote}}\brackets{}\braces{key}}
+\smallskip
+\dispb{footer, single key}
+\dispeg{\cmdb{lawcite}\brackets{See also}\brackets{}\braces{cole}}
+
+Text\lawcite[See also][]{cole}
+\bigskip
+\bigskip
+
+%D
+\disp{\textit{prenote} key \textit{postnote}}\numeg
+\disp{\cmd{lawcite}\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key}}
+\smallskip
+\dispb{footer, single key, single cite}
+\dispeg{\cmdb{lawcite}\brackets{See also}\brackets{\cmdb{nopp} at 67}\braces{cole}}
+
+Text\lawcite[See also][\nopp at 67]{cole}
+\bigskip
+\bigskip
+
+
+
+
+%=================================
+\newpage
+%Am
+\disp{key1 key2 \ldots}\numeg
+\disp{\cmd{lawcitesfoot}\braces{key1,key2}}
+\smallskip
+\dispb{footer, multi key}
+\dispeg{\cmdb{lawcitesfoot}\braces{cole,mcleanbclr}}
+
+Text\lawcitesfoot{cole,mcleanbclr}
+\bigskip
+\bigskip
+
+%Bm
+\disp{key1,key2 \textit{postnote}}\numeg
+\disp{\cmd{lawcitesfoot}\brackets{\textit{postnote}}\braces{key1,key2}}
+\smallskip
+\dispb{footer, multi key, single cite}
+\dispeg{\cmdb{lawcitesfoot}\brackets{\cmdb{addcomma}\cmdb{addspace} both on point}\braces{cole,mcleanbclr}}
+
+Text\lawcitesfoot[\addcomma\addspace both on point]{cole,mcleanbclr}
+\bigskip
+\bigskip
+
+%Cm
+\disp{\textit{prenote} key1,key2}\numeg
+\disp{\cmd{lawcitesfoot}\brackets{\textit{prenote}}\brackets{}\braces{key1,key2}}
+\smallskip
+\dispb{footer, multi key}
+\dispeg{\cmdb{lawcitesfoot}\brackets{See also}\brackets{}\braces{cole,mcleanbclr}}
+
+Text\lawcitesfoot[See also][]{cole,mcleanbclr}
+\bigskip
+\bigskip
+
+%Dm
+\disp{\textit{prenote} key1,key2 \textit{postnote}}\numeg
+\disp{\cmd{lawcitesfoot}\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key1,key2}}
+\smallskip
+\dispb{footer, multi key, single cite}
+\dispeg{\cmdb{lawcitesfoot}\brackets{See also}\brackets{\cmdb{addcomma}\cmdb{addspace} both on point}\braces{cole,mcleanbclr}}
+
+Text\lawcitesfoot[See also][\addcomma\addspace both on point]{cole,mcleanbclr}
+\bigskip
+\bigskip
+
+%=================================
+\newpage
+%%Am
+%\disp{key1 key2 \ldots}\numeg
+%\disp{\cmd{lawcitesfoot}\braces{key1,key2}}
+%\smallskip
+%\dispb{footer, multi key}
+%\dispeg{\cmdb{lawcitesfoot}\braces{cole,mcleanbclr}}
+%
+%Text\lawcitesfoot{cole,mcleanbclr}
+%\bigskip
+%\bigskip
+
+%Bmm
+\disp{overall-pre \textit{prenote} key1 \textit{postnote}, \textit{prenote} key2    \textit{postnote} overall-post}\numeg
+\noindent{\cmd{lawcitesfoot}\parens{overall prenote}\parens{overall postnote}\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key1}\\\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key2}}
+\par\smallskip
+\dispb{footer, multi key, multi cite}
+\dispeg{\cmdb{lawcitesfoot}\parens{There are two further cases\cmdb{addcomma}}\parens{\cmdb{addcomma}\cmdb{addspace} but neither case directly applies}\brackets{a criminal matter}\brackets{at para 42}\braces{cole}\brackets{and also}\brackets{101}\braces{mcleanbclr}}
+
+Text\lawcitesfoot(There are two further cases\addcomma)(\addcomma\addspace but neither case directly applies)[a criminal matter][at para 42]{cole}[and also][101]{mcleanbclr}
+\bigskip
+\bigskip
+
+%%Cm
+%\disp{\textit{prenote} key1,key2}\numeg
+%\disp{\cmd{lawcitesfoot}\brackets{\textit{prenote}}\brackets{}\braces{key1,key2}}
+%\smallskip
+%\dispb{footer, multi key}
+%\dispeg{\cmdb{lawcitesfoot}\brackets{See also}\brackets{}\braces{cole,mcleanbclr}}
+%
+%Text\lawcitesfoot[See also][]{cole,mcleanbclr}
+%\bigskip
+%\bigskip
+
+%%Dmm
+%\disp{\textit{prenote} key1,key2 \textit{postnote}}\numeg
+%\disp{\cmd{lawcitesfoot}\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key1,key2}}
+%\smallskip
+%\dispb{footer, multi key, multi cite}
+%\dispeg{\cmdb{lawcitesfoot}\brackets{See also}\brackets{\cmdb{addcomma}\cmdb{addspace} both on point}\braces{cole,mcleanbclr}}
+%
+%Text\lawcitesfoot[See also][\addcomma\addspace both on point]{cole,mcleanbclr}
+%\bigskip
+%\bigskip
+
+
+Corresponding inline commands
+
+\begin{tabular}{ll}
+\cmd{lawcitesfoot} & \cmd{lawcitesinline} \\
+\cmd{lawcitesfootrr} & \cmd{lawcitesinlinerr} \\
+\end{tabular}
+
+
+\begin{quotation}
+\noindent$\rightarrow$ \lawcitesinline(There are two further cases\addcomma)(\addcomma\addspace but neither case directly applies)[a criminal matter][at para 42]{cole}[and also][101]{mcleanbclr}
+\end{quotation}
+
+\begin{quotation}
+\noindent$\rightarrow$ \lawcitesinlinerr[See firstly][\nopp at para 42]{mcleanlii}[and secondly][\nopp at 101]{mcleanbclr}
+\end{quotation}
+
+
+Thre is also:
+
+\begin{tabular}{ll}
+\cmd{lawcitetitle} & \cmd{lawcitetitlerr} \\
+\lawcitetitle{cole} & \lawcitetitlerr{mcleanlii,mcleanbclr} \\
+\end{tabular}
+
+
+
+%=================================
+\newpage
+%Ar
+\disp{key1 key2 \ldots}\numeg
+\disp{\cmd{lawcitesfootrr}\braces{key1,key2}}
+\smallskip
+\dispb{footer, multi key, parallel, multi cite}
+\dispeg{\cmdb{lawcitesfootrr}\braces{mcleanlii,mcleanbclr}}
+
+Text\lawcitesfootrr[\protect\label{fmcleanbclr}][]{mcleanlii,mcleanbclr}
+\bigskip
+\bigskip
+
+%Br
+\disp{key1 \textit{postnote}, key2 \textit{postnote}}\numeg
+\disp{\cmd{lawcitesfootrr}\brackets{\textit{postnote}}\braces{key1}\brackets{\textit{postnote}}\braces{key2}}
+\smallskip
+\dispb{footer, multi key, parallel, multi cite}
+\dispeg{\cmdb{lawcitesfootrr}\brackets{\cmdb{nopp} at para 42}\braces{mcleanlii}\brackets{\cmdb{nopp} at 101}\braces{mcleanbclr}}
+
+Text\lawcitesfootrr[\nopp at para 42]{mcleanlii}[\nopp at 101]{mcleanbclr}
+\bigskip
+\bigskip
+
+%Cr
+\disp{\textit{prenote} key1, \textit{prenote} key2}\numeg
+\disp{\cmd{lawcitesfootrr}\brackets{\textit{prenote}}\brackets{}\braces{key1}\brackets{\textit{prenote}}\brackets{}\braces{key2}}
+\smallskip
+\dispb{footer, multi key, parallel, multi cite}
+\dispeg{\cmdb{lawcitesfootrr}\brackets{See firstly}\brackets{}\braces{mcleanlii}\brackets{and secondly}\brackets{}\braces{mcleanbclr}}
+
+Text\lawcitesfootrr[See firstly][]{mcleanlii}[and secondly][]{mcleanbclr}
+\bigskip
+\bigskip
+
+%Dr
+\disp{\textit{prenote} key1 \textit{postnote}, \textit{prenote} key2 \textit{postnote}}\numeg
+\disp{\cmd{lawcitesfootrr}\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key1}\brackets{\textit{prenote}}\brackets{\textit{postnote}}\braces{key2}}
+\smallskip
+\dispb{footer, multi key, parallel, multi cite}
+\dispeg{\cmdb{lawcitesfootrr}\brackets{See firstly}\brackets{\cmdb{nopp} at para 42}\braces{mcleanlii}\brackets{and secondly}\brackets{\cmdb{nopp} at 101}\braces{mcleanbclr}}
+
+Text\lawcitesfootrr[See firstly][\nopp at para 42]{mcleanlii}[and secondly][\nopp at 101]{mcleanbclr}
+\bigskip
+\bigskip
+
+\newpage
+
+\optsett{\cmdb{lawcitesinline\braces{key}}}{}\bigskip
+
+\lawcitesinline{sarg}\par\bigskip
+\lawcitesinline{clarke}\par\bigskip
+\lawcitesinline{tulk}\par\bigskip
+\lawcitesinline{nic}\par\bigskip
+\lawcitesinline{cbc}\par\bigskip
+\lawcitesinline{vdn}\par\bigskip
+\lawcitesinline{crete}\par\bigskip
+\lawcitesinline[at para 3, Sexton JA]{iron}\par\bigskip\bigskip
+
+\optsett{\cmdb{lawcitesinlinerr\braces{key}}}{}\par\bigskip
+\lawcitesinlinerr{epaus,epasc}\par\bigskip
+\lawcitesinlinerr{syncrudeabpc,syncrudewl}\par\bigskip
+
+\subsection{MNC \& printed combination}
+\lawcitesinline{walmart}
+\begin{verbatim}
+@case{walmart,
+	partya = {Saskatoon (City)},
+	partyb = {Wal-Mart Canada Corp},
+	caseyear = {2019},
+	courtname = {SKCA},
+	casenumber = {3},
+	reportyear = {2019},
+	volyearneeded = {true},
+	reportvolume = {3},
+	reportseries = {WWR},
+	reportpage = {284},
+}
+
+\end{verbatim}
+
+%=================
+%\mcmd{lawcitesfootrr} -- footer, parallel references, single cite
+%
+%Text\lawcitesfootrr{mcleanlii,mcleanbclr}
+%\bigskip
+%
+%\mcmd{lawcitesfootrr} -- footer, parallel references, multi cites
+%
+%Text\lawcitesfootrr[\nopp at para 42]{mcleanlii}[\nopp at 101]{mcleanbclr}
+%\bigskip
+%
+%
+%\mcmd{lawcitesinlinerr} -- inline, parallel references, single cite
+%
+%\lawcitesinlinerr[\nopp at 315]{bigmscr}{bigmdlr}
+%
+%\lawcitesinlinerr{framescr,framedlr}
+%
+%\lawcitesinlinerr{keegstraar,keegstradlr}
+%
+%\lawcitesinlinerr[\nopp at 229]{robitailledlr}{robitaillewwr}
+%\bigskip
+
+
+
+
+%------------------------------
+\section{Statutes}
+\subsection{Bibentries}
+
+Ordinary statutes: \cmd{lawcite}\braces{fla}\par\bigskip
+ \lawcite{fla}
+\begin{verbatim}
+@statute{fla,
+	citeref = {canleg},
+	title = {Family Law Act},
+	svjy = {SA 2003},
+	chapter = {F-4.5},
+}
+\end{verbatim}
+
+\subsection{Citations}
+
+\optsett{\cmdb{lawcite\braces{key}}}{}\bigskip
+
+
+\lawcite{fla}\par\bigskip
+\lawcite[\addcomma\addspace\lcsec{3}]{tla}\par\bigskip
+\lawcite{fair}\par\bigskip
+\lawcite{water}\par\bigskip
+
+This last uses the semantic structure of the @statute bibentry:\medskip
+
+\fbox{\strut\textit{title}}, \fbox{\strut year} \fbox{\strut (jurisdiction)} \fbox{\strut (note)}\medskip
+
+to store\medskip
+
+\fbox{\strut\textit{Safe Drinking Water Act}}, \fbox{\strut 42 USC §300f} \fbox{\strut \ } \fbox{\strut (1974)}\medskip
+
+The year value 1974 could just as easily have been stored in the jurisdiction field, with no note field, to produce an identical result.\bigskip
+
+\noindent To display the jurisdiction for non-Canadian statutes, do:\\
+	{\footnotesize\textcolor{blue}{\cmd{toggletrue}\braces{statjurisdiction}}}
+	or
+	{\footnotesize\textcolor{blue}{\cmd{setstatjurison}}}
+   \toggletrue{statjurisdiction}
+
+   \lawcite{prop}\\
+	{\footnotesize\textcolor{blue}{\cmd{togglefalse}\braces{statjurisdiction}}}
+	or
+	{\footnotesize\textcolor{blue}{\cmd{setstatjurisoff}}}
+	\togglefalse{statjurisdiction}\par\bigskip
+
+
+%\lccitedemostat{canleg}
+%\noindent *{\small \textsc{Note}: A \texttt{citeref} has priority over any style settings.\footnote{Only Canadian *leg and *reg \texttt{citeref}s have been defined, so far.}}
+%\bigskip 
+
+
+
+
+%------------------------------
+\subsection{Regulations}
+\subsubsection{Bibentries}
+
+Ordinary regulations: \cmd{lawcite}\braces{canregnb}\par\bigskip
+ \lawcite{canregnb}
+\begin{verbatim}
+@statute{canregnb,
+	citeref = {nbreg},
+	year = {2006},
+	regnum = {23},
+	sorttitle = {nbreg200623},
+}
+
+\end{verbatim}
+
+\subsubsection{Citations}
+
+
+\optsett{\cmdb{lawcite\braces{key}}}{}
+
+\lawcite{canregnb}\par\bigskip
+\lawcite{bears}\par\bigskip
+\lawcite[\addcomma\addspace\lcsec{9}]{birds}\par\bigskip
+\lawcite[\addcomma\addspace\lcsec{2}]{forests}\par\bigskip
+
+Because of the multiplicity of regulation format types, in the data structure, using the citeref field in the @statute bibentry is the more flexible method since it can process both (Canadian) statutes and regulations in one sweep; although, the `traditional' statute fields can still be used, but operate only at the level of statutes, and regulations that look like statutes.
+
+\ \\
+(using citeref field)\\
+ \lawcite[\addcomma\addspace\bibstring{section} 515]{crimcodecan} provides that ...\\
+(using statute bibentry fields) \\
+\lawcite[\addcomma\addspace\bibstring{section} 515]{crimcan} provides that ...
+\par\bigskip
+
+The corresponding bibentries are:
+
+\begin{verbatim}
+@statute{crimcodecan,
+	citeref = {canleg},
+	title = {Criminal Code},
+	svjy = {RSC 1985},
+	chapter = {C-46},
+}
+
+\end{verbatim}
+
+versus
+
+\begin{verbatim}
+@statute{crimcan,
+	statutetitle = {Criminal Code},
+	statutetitleyear = {RSC 1985, c C-46},%for the title
+}
+\end{verbatim}
+
+
+The available citeref values for regulations are:
+
+\bigskip
+
+\begin{tabular}{ll}
+...reg & Example of format (from AGLC3)\\
+crc & \lawcite{canregcrc} \\
+sor & \lawcite{canregsor} \\
+alta & \lawcite{canregalta} \\
+bc & \lawcite{canregbc} \\
+man & \lawcite{canregman} \\
+nb & \lawcite{canregnb} \\%York-Sunbury-Charlotte Forest Products Marketing Board Regulation, NB Reg 2005-148
+%Wildlife Refuges and Wildlife Management Areas Regulation, NB Reg 94-43
+nfld & \lawcite{canregnfld} \\ %Offshore Petroleum Drilling Newfoundland Regulations (Amendment)
+nlr & \lawcite{canregnlr} \\ %Colliers Municipal Planning Area, NLR 4/98
+nwt & \lawcite{canregnwt} \\%Archives Regulations
+ns & \lawcite{canregns} \\%Involuntary Psychiatric Treatment Regulations
+nu & \lawcite{canregnu} \\
+o & \lawcite{canrego} \\
+pei & \lawcite{canregpei} \\ %Companion Animal Protection Act Regulations, PEI Reg EC249/02
+qc & \lawcite{canregoc} \\
+sask & \lawcite{canregsask} \\ %Alkali Mining Regulations
+yoic & \lawcite{canregyoic} \\%lChild Care Centre Program Regulation
+\end{tabular}
+\bigskip
+
+The bibentry data fields required by the various Canadian regulation types are:
+\bigskip
+
+\begin{tabular}{lllllll}
+Reg Type &  & &&&& \\
+crc & title & chapter &&&& \\
+sor & title && year & regnum && \\
+alta & && year & regnum && \\
+bc &  && year & regnum && \\
+man & && year & regnum && \\
+nb &  && year & regnum && \\
+nfld &  && year & regnum && \\
+nlr &  && year & regnum && \\
+nwt &  && year & regnum && \\
+ns &  && year & regnum && \\
+nu &  && year & regnum && \\
+o &  && year & regnum && \\
+pei &  && year & regnum && \\
+qc &  && year & regnum & fulldate & gazette\\
+sask &  && year & regnum && \\
+yoic &  && year & regnum && \\
+\\
+verb &  &&  & regnum && \\
+\end{tabular}
+\bigskip
+
+For the non-federal regulations, if a title field is available, it will be printed.
+\bigskip
+
+For regulations with no available pre-set format, use the \texttt{verbreg} citeref, and type the full reference into the \texttt{regnum} field, and it will be printed as-is:
+
+%`"parking area" means a length of road or area designed for parking vehicles'
+%Road Rules 2008, Schedule 99 Dictionary
+%(NSW) Road Rules 2008 -- Reg 15 What is a vehicle
+\lawcite{anyregverb}
+
+\begin{verbatim}
+@statute{anyregverb,
+citeref = {verbreg},
+regnum = {Road Rules 2008 -- \textcolor{red}{\textbf{Reg 15}} 
+What is a vehicle (New South Wales)},
+sorttitle = {Road Rules 2008},
+}
+
+\end{verbatim}
+
+%\lccitedemostat{canregbc}
+%\bigskip 
+
+\subsection{Currently not covered}
+\begin{itemize}
+\item Bills
+\item Constitutions and Charters
+\item Treaties, Agreements, and Accords
+\end{itemize}
+
+
+%------------------------------
+\section{Law Journals}
+\subsection{Bibentries}
+
+Law Review articles: \cmd{ljcite}\braces{renaud}\par\bigskip
+ \ljcite{renaud}
+\begin{verbatim}
+@ljarticle{renaud,
+	author = {Matthew Renaud},
+	subtitle = {The Development of Legal Education 
+		in the Province of Manitoba, 1877–1968},
+	title = {From Reading Courses to Robson Hall},
+	mncyear = {2019},
+	mncname = {CanLIIDocs},
+	mncnumber = {4192},
+	date = {2019},
+	volume = {42},
+	journaltitle = {Manitoba Law Journal},
+	pages = {286},
+}
+\end{verbatim}
+
+\subsection{Citations}
+
+\optsett{\cmdb{footnote}\braces{\cmdb{ljcite\braces{key}}}}{}
+
+* Looking at the 1914 Manitoba Law School lecture schedule\sindex[general]{lecture schedule},\footnote{\ljcite[Reproduced in][295]{renaud}} -- Contracts, Torts, Real Property, Criminal Law, Evidence, Equity, and so on -- it becomes obvious that things haven't changed much, for any law school.
+
+* ``it has been argued\footnote{By \ljcite[\nopp 785]{friedman}, as cited by \lcljauthor{smythsc}.} that, stylistically,
+dissents are often looser than majority judgments.''\sindex[general]{dissents}\footnote{\ljcite[\nopp 59]{smythsc}.}\bigskip 
+
+\optsett{\cmdb{ljcite\braces{key}}}{}
+
+* the ``amorphous ... swirl of text,
+unwritten principles, and internal architecture'' of the open-ended definitions within the constitutional stories, ``the narratives that [we tell ourselves] about the
+constitution and its meanings as a whole''
+ --- \ljcite[at p316, and p313 n7]{adams}.\bigskip
+
+%xxx
+%\lcpostnote[at p 318]{adams}
+%xxx
+
+$\rightarrow$ The author, \lcljauthor{adams}, uses the word, `amorphous'\sindex[general]{amorphous}, a second time, \lcpostnote[at p 318]{adams}: ``sub-national provinces with
+amorphous constitutional roles''.\footnote{\ljcite[at p 318]{adams}}
+
+It may indeed seem long-winded rigmarole, typing\\
+< \cmd{lcljauthor}\braces{adams} > and < \cmd{lcpostnote}[at p 318]\braces{adams}>,\\ to get\\ <\lcljauthor{adams}> and <\lcpostnote[at p 318]{adams}>,\\ instead of typing plain text, but \ldots
+
+\lcljauthorfn{adams}, in a recent issue of the \lcljjournaltitle{adams}, has stated that \ldots
+
+\lcljauthor{friedman}, in their classic article in the \lcljjournaltitle{friedman}, \ldots
+
+The \lcljauthorfn{friedman} paper in the \lcljjournaltitle{friedman}, for example, \ldots
+\bigskip
+
+``l’exercice par un peuple autochtone de
+ses droits possède une dimension de droit public''\footnote{\ljcite[at p 456]{otis}. \ljcite[See also][]{jukier}.}
+
+
+%------------------------------
+\section{Other Material}
+\subsection{Epigraphs}
+\begin{quotation}
+\noindent ``The methods for citing cases vary from country to country, from court to court, and from publisher to publisher.''
+
+ \hfill --- \lcepigraph[93]{buttb}
+\end{quotation}
+
+\begin{quotation}
+\noindent ``Questions of proprietary right often involve nice distinctions.''
+
+ \hfill --- \lcepigraph[12]{addison}
+\end{quotation}
+
+For \lcepigraph{candl}-type referencing. %\lcepigraph{friedman}
+\bigskip
+
+\cmd{lcepigraph} looks in the bibentry for shortitle (or title), and, optionally, author(s), edition, and date.
+
+
+\subsection{Book citations}
+Just the standard built-in commands: Text\autocite[110]{eco} Text\autocite[42]{buttb} Text\autocite[para \brackets{2.4}]{anncrimnsw} Text\autocite[\nopp c 1]{bishop} %Text\autocite{ljart3}
+
+\subsection{Supra}
+For \lawcitetitle{cole}, see supra\sindex[general]{supra, manual}, n \ref{fcoleb}, and n \ref{fmcleanbclr} for \lawcitetitle{mcleanbclr}.
+%
+\bigskip 
+
+
+\subsection{Parallel Reports}
+
+Text\lawcite{litz}
+\begin{verbatim}
+@case{litz,
+	partya = {Litz},
+	partyb = {Litz},
+	reportvolume = {180},
+	reportseries = {WAC},
+	reportpage = {116},
+	parallel = {[1998] 10 WWR 145 and 129 Man R (2d) 121},
+}
+\end{verbatim}
+
+
+\lcinline{ludmer}
+
+\lcinline{sheen}
+
+\lcinline{betts}
+
+\lcinline{tiesmaki}
+
+\lcinline{walmart}
+
+%------------------------------
+\section{This Odyssey}
+\ 
+
+\textbf{Absence of Authority}
+
+``Perhaps the reason for my being unable to find authority touching the present application is because the matter is too simple and plain.'' -- Clarry, MC.\lawcite{kybich}
+\bigskip
+
+\textbf{Bleak House}
+
+``If ever there was a case that demonstrates the need for the court’s 
+involvement to ensure it moves forward, this is that case.''\lawcite[Master DE Short][at para 55]{jimenez}
+
+``It is 125 years since Charles Dickens in the opening chapter of \textit{Bleak House} chronicled the sorry saga of the litigation before the English Court of Chancery in Jarndyce and Jarndyce. (see \textit{Bleak House}, (1884) full text available on line via http://books.google.ca/books )''\lawcite[at para 60]{jimenez}
+ 
+``The entire Twentieth Century intervenes between Dickens’ fictional case and this real one.''\lawcite[at para 61]{jimenez}
+
+``This Master is not going to permit these files to become any dustier.''\lawcite[at para 63]{jimenez}
+\bigskip
+
+
+``Because the will must be proved in solemn form, it is expected that some considerable pre-trial process will be undertaken: questioning on affidavits, assessment of expert evidence, etc.  Perhaps having in mind the ominous warning about the Court of Chancery in Charles Dickens’ Bleak House, “Suffer any wrong that can be done you, rather than come here”, prudently, the parties have agreed to provide \ldots ''\lawcite[at para 2, Veit J]{seib}
+\bigskip
+
+
+
+%-------------
+%kristel
+%CÔTÉ JA
+%
+%The injunction asked for would bar demolition of a property in Edmonton.
+%1
+
+This matter\footnote{An injunction asking for the barring of demolition of a property in Edmonton.} has a somewhat Dickensian history, and I am beginning to feel some sympathy for the Lord Chancellor in \textit{Bleak House}.\lawcite[at para 3, Côté JA]{kristel}\bigskip
+
+
+
+``This has become an unusually and perhaps unnecessarily complex family file involving jurisdictions in Alberta and Nevada, as well as a virtual smorgasbord of legislation. The parties, whether deliberately or through misadventure, have developed a voracious appetite for filing affidavits and court applications. The resulting legal carnage has created our own `bleak house'.''\lawcite[at para 4, O'Gorman ACJ]{anderson}
+\bigskip
+%the bloated record
+%4
+
+%O’Gorman
+%Assistant Chief Judge
+
+
+%------------
+%Ludmer
+%fl+
+% In this modern version of Dickens’s iiBleak Houseii, the applicant wife seeks an adjournment of her trial.
+% 1
+ 
+``Further, the non-financial toll on the parties, and the need to bring this odyssey to an end, are significant considerations.  There has been seven years of litigation and at least two prior adjournments of this trial.  The issues are clear and have been reasonably well-defined since at least 2008.  People have to get on with their lives.  In addition, my earlier allusion to the famous \textit{Jarndyce v. Jarndyce} case from \textit{Bleak House} was not without purpose.  This is a case where the parties’ dissipation of assets on the mere cost of litigation alone is staggering.''\lawcite[at para 49, Penny~J]{ludmer}
+\bigskip
+
+
+``\textit{Bleak House} by Charles Dickens is a family chronicle in which a disputed estate is exhausted by the payment of legal costs before the dispute is finally resolved.  The parties to these proceedings are either unaware of that classic novel’s lesson or unenlightened by it.''\lawcite[at para 1, Twaddle JA]{sheen}
+\bigskip
+
+%An argument can be made that the estate remain frozen until all issues between these parties have been resolved.  It may already be too late for these parties to avoid the fate of the parties in the fictitious case of iiJarndyce v. Jarndyceii, but, by freezing the estate assets for the time being, the eventually successful party will have some prospect of recovering a small part of his or their entitlement.
+%17
+
+
+%------------
+%CIBC Mortgages Inc
+``Equity stepped in. The courts of equity, despite the reputation they got from works like Dickens’ \textit{Bleak House}, tried to mitigate some of the harshness of the common law. That is where the concept of an equitable right to redeem, or the equity of redemption, came from. The mortgage was then treated as a form of security only and the rights that remained after the mortgage was granted were protected by equity, in the Courts of Chancery .''\lawcite[at para 14, Campbell J]{cibc}
+%  The question is whether simple foreclosure is legally available as a remedy in Nova Scotia.
+%  3
+%  The distinctions between law and equity and the courts that dealt with them may actually make a difference in this case. 
+%  12
+
+
+
+\hfill ----oooOooo---- \hfill\ 
+
+
+
+%\"O\"o\c c
+
+%======================================= Bibliography
+\newpage
+{\center
+\printbibheading[title=Bibliography]
+}
+%------------------------------- Eveything else
+\newrefcontext[sorting=nty]
+\printbibliography[
+	heading=subbibliography,%
+%	nottype=case,
+%	nottype=statute,
+%	nottype=article,
+%	nottype=ljarticle,
+%	keyword=lawbook,
+	nottype=case,
+	nottype=statute,
+	category=yesinbib,
+	title={\center Articles/Books/Reports},
+%	postnote={bibcolophon},
+	]
+	
+%------------------------------- Cases
+\newrefcontext[sorting=casesort]
+\printbibliography[
+	title=\center Cases,
+	heading=subbibliography,%
+	type=case,
+	category=yesinbib,
+	]
+
+%------------------------------- Legislation
+\newrefcontext[sorting=statsort]
+\printbibliography[
+	title=\center Legislation,
+	heading=subbibliography,%
+	type=statute,
+	category=yesinbib,
+  ]
+
+%%%%------------------------------- Legal Articles, Law Reviews
+%%%\newrefcontext[sorting=nty]
+%%%\printbibliography[
+%%%	heading=subbibliography,%
+%%%	title={\center Secondary Materials: Articles},
+%%%	type=ljarticle,
+%%%	category=yesinbib,
+%%%	]
+%%%%	postnote={bibcolophon},
+%%%
+%%%%-------------------------------------
+%%%\bigskip
+%%%\hfill\rulesep\hfill\ %\hrule
+%%%\bigskip
+%%%%
+%%%%------------------------------- General Material
+%%%\printbibliography[
+%%%	heading=subbibliography,%
+%%%	category=yesinbib,
+%%%	nottype=case,
+%%%	nottype=statute,
+%%%	nottype=ljarticle,
+%%%	notkeyword=lawbook,
+%%%	title={\center General Material},
+%%%		]
+
+
+
+%\printbibliography[category=yesinbib]
+\printbibliography[category=notinbib,
+title={Quotation sources}]
+
+
+%\newpage
+%%\printsubindex[general][General Index]
+%\twocolumn[% set the title onecolumn
+%\section*{General Index} % the section with the indices %
+%%\markbothfIndicesgfIndicesg % setting up the running headline %
+%]% 
+%%%\section*{General Index}
+%%%\twocolumn
+%%\renewcommand{\twocolumn}[1][]{\xoldtwocolumn}
+%%\renewcommand{\indexname}{General Index}
+%%\twocolumn[\section*{\indexname}]
+%\printindex[general]
+\begingroup % hold following extension local to this group
+\makeatletter % allow @ at macro names
+\extendtheindex% some changes of theindex environment
+{
+\let\twocolumn\@firstoptofone % deactivate \twocolumn
+%\let\onecolumn\@firstoptofone % deactivate \onecolumn
+%\let\clearpage\relax % deactivate \clearpage
+\xoldtwocolumn
+}% changes before beginning
+{}% no change after beginning
+{}% no change before ending
+{}% no change after ending
+\makeatother % deactivate \makeatletter
+\printindex[general] % print index
+\endgroup % end group with extended theindex environment
+%\onecolumn
+%\hfill--ooOoo--\hfill\ 
+
+\end{document}
+
+
+
+Popping the Question: What the Questionnaire for Federal Judicial Appointments Reveals about the Pursuit of Justice, Diversity, and the Commitment to Transparency, 2020 CanLIIDocs 1656
+Author(s) : 	Agathon Fric
+Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
+Copyright : 	© 2020, Dalhousie Law Journal
+License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
+Citation : 	Agathon Fric, Popping the Question: What the Questionnaire for Federal Judicial Appointments Reveals about the Pursuit of Justice, Diversity, and the Commitment to Transparency, 2020 43-1 Dalhousie Law Journal 1, 2020 CanLIIDocs 1656, <http://www.canlii.org/t/svcn>, retr
+
+
+
+Searching for a Summary Judgment Equivalent in Quebec Procedural Law, 2020 CanLIIDocs 1654
+Author(s) : 	Kathleen Hammond
+Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
+Copyright : 	© 2020, Dalhousie Law Journal
+License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
+Citation : 	Kathleen Hammond, Searching for a Summary Judgment Equivalent in Quebec Procedural Law, 2020 43-1 Dalhousie Law Journal 1, 2020 CanLIIDocs 1654, <http://www.canlii.org/t/svcl>, retrieved on 2020-08-24
+
+
+
+
+Intervenors at the Supreme Court of Canada, 2020 CanLIIDocs 544
+Author(s) : 	Geoffrey D Callaghan
+Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
+Copyright : 	© 2020, Dalhousie Law Journal
+License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
+Citation : 	Geoffrey D Callaghan, Intervenors at the Supreme Court of Canada, 2020 43-1 Dalhousie Law Journal 1, 2020 CanLIIDocs 544, <http://www.canlii.org/t/srcl>, retrieved on 2
+
+
+
+A Less Private Practice: Government Lawyers and Legal Ethics, 2020 CanLIIDocs 1657
+Author(s) : 	Jennifer A Leitch
+Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
+Copyright : 	© 2020, Dalhousie Law Journal
+License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
+Citation : 	Jennifer A Leitch, A Less Private Practice: Government Lawyers and Legal Ethics, 2020 43-1 Dalhousie Law Journal 1, 2020 CanLIIDocs 1657, <http://www.canlii.org/t/svcp>, ret
+
+
+
+From Law to Legal Studies and Beyond: 50 Years of Law and Legal Studies at Carleton University, 2018 CanLIIDocs 10554
+Author(s) : 	Vincent Kazmierski and Darren Pacione
+Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
+Copyright : 	© 2018, Dalhousie Law Journal
+License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
+Citation : 	Vincent Kazmierski and Darren Pacione, From Law to Legal Studies and Beyond: 50 Years of Law and Legal Studies at Carleton University, 2018 41-2 Dalhousie Law Journal 379, 2018 CanLIIDocs 10554, <http://www.canlii.org/t/sjzt>, retrieved on 2020-08-24
+
+
+
+The Impact of the Honour of the Crown on the Ethical Obligations of Government Lawyers: A Duty of Honourable Dealing, 2018 CanLIIDocs 10558
+Author(s) : 	Andrew Flavelle Martin and Candice Telfer
+Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
+Copyright : 	© 2018, Dalhousie Law Journal
+License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
+Citation : 	Andrew Flavelle Martin and Candice Telfer, The Impact of the Honour of the Crown on the Ethical Obligations of Government Lawyers: A Duty of Honourable Dealing, 2018 41-2 Dalhousie Law Journal 443, 2018 CanLIIDocs 10558, <http://www.canlii.org/t/sjzz>, 
+
+
+
+Duets, Not Solos: The McLachlin Court’s Co-Authorship Legacy, 2018 CanLIIDocs 10557
+Author(s) : 	Peter J McCormick
+Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
+Copyright : 	© 2018, Dalhousie Law Journal
+License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
+Citation : 	Peter J McCormick, Duets, Not Solos: The McLachlin Court’s Co-Authorship Legacy, 2018 41-2 Dalhousie Law Journal 479, 2018 CanLIIDocs 10557, <http://www.canlii.org/t/sjzx>, retrieved on 2020-08-24
+
+
+
+Reassessing the Constitutional Foundation of Delegated Legislation in Canada, 2018 CanLIIDocs 10559
+Author(s) : 	Lorne Neudorf
+Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
+Copyright : 	© 2018, Dalhousie Law Journal
+License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
+Citation : 	Lorne Neudorf, Reassessing the Constitutional Foundation of Delegated Legislation in Canada, 2018 41-2 Dalhousie Law Journal 519, 2018 CanLIIDocs 10559, <http://www.canlii.org/t/sk00>, retrieved on 2020-08-24
+
+
+
+Canadian Constitutional Identities, 2015 CanLIIDocs 4880
+Author(s) : 	Eric M Adams
+Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
+Copyright : 	© 2015, Dalhousie Law Journal
+License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
+Citation : 	Eric M Adams, Canadian Constitutional Identities, 2015 38-2 Dalhousie Law Journal 311, 2015 CanLIIDocs 4880, <http://www.canlii.org/t/sk1r>, retrieved on 2020-08-24
+
+
+
+Canada and Québec, 2019 CanLIIDocs 1767
+Author(s) : 	Rosalie Jukier
+Publisher(s) : 	Journal of Commonwealth Law (www.journalofcommonwealthlaw.org)
+Copyright : 	© 2019, Journal of Commonwealth Law
+License : 	This work is licensed under the CanLII user license which includes the right of the User to make copies of the work for legal research purposes, in the practice of law or in the exercise of their legal rights.
+Citation : 	Rosalie Jukier, Good Faith in Contract: A Judicial Dialogue Between Common Law Canada and Québec, 2019 1-1 Journal of Commonwealth Law 1, 2019 CanLIIDocs 1767, <http://www.canlii.org/t/sjb9>, retrieved on 2020-08-2
+
+
+Good Faith and Termination: The English and Australian Experience, 2019 CanLIIDocs 1764
+Author(s) : 	Wayne Courtney
+Publisher(s) : 	Journal of Commonwealth Law (www.journalofcommonwealthlaw.org)
+Copyright : 	© 2019, Journal of Commonwealth Law
+License : 	This work is licensed under the CanLII user license which includes the right of the User to make copies of the work for legal research purposes, in the practice of law or in the exercise of their legal rights.
+Citation : 	Wayne Courtney, Good Faith and Termination: The English and Australian Experience, 2019 1-1 Journal of Commonwealth Law 1, 2019 CanLIIDocs 1764, <http://www.canlii.org/t/sjb6>, retrieved on 2020-08-2
+
+
+Les droits ancestraux des peuples autochtones au carrefour du droit public et du droit privé : le cas de l’industrie extractive, 2019 CanLIIDocs 4154
+Auteur(s) : 	Ghislain Otis
+Éditeur(s) : 	Les Cahiers de droit (www.erudit.org/fr/revues/cd1)
+Droit d'auteur : 	© 2019, Les Cahiers de droit
+Licence : 	Cette œuvre est soumise à la Licence d’utilisation de CanLII qui comporte le droit pour l’Utilisateur de faire des copies de l’œuvre aux fins de recherche juridique, dans la pratique du droit ou l’exercice de ses droits.
+Référence : 	Ghislain Otis, Les droits ancestraux des peuples autochtones au carrefour du droit public et du droit privé : le cas de l’industrie extractive, 2019 60-2 Les Cahiers de droit 451, 2019 CanLIIDocs 4154, <http://www.canlii.org/t/xkhr>, consulté le 2020-08-24
+
+
+Report on the Proliferation of Prostitution in Winnipeg, 2019 CanLIIDocs 4185
+Author(s) : 	Hugh Amos Robson
+Publisher(s) : 	Manitoba Law Journal (law.robsonhall.com/manitoba-law-journal/)
+Copyright : 	© 2019, Manitoba Law Journal
+License : 	This work is licensed under the CanLII user license which includes the right of the User to make copies of the work for legal research purposes, in the practice of law or in the exercise of their legal rights.
+Citation : 	Hugh Amos Robson, Report on the Proliferation of Prostitution in Winnipeg, 2019 42-2 Manitoba Law Journal 173, 2019 CanLIIDocs 4185, <http://www.canlii.org/t/svm7>
+
+Chief Justice Robson’s Prescient Interpretation of Corporate Criminal Liability, 2019 CanLIIDocs 4186
+Author(s) : 	Darcy L MacPherson
+Publisher(s) : 	Manitoba Law Journal (law.robsonhall.com/manitoba-law-journal/)
+Copyright : 	© 2019, Manitoba Law Journal
+License : 	This work is licensed under the CanLII user license which includes the right of the User to make copies of the work for legal research purposes, in the practice of law or in the exercise of their legal rights.
+Citation : 	Darcy L MacPherson, Chief Justice Robson’s Prescient Interpretation of Corporate Criminal Liability, 2019 42-2 Manitoba Law Journal 192, 2019 CanLIIDocs 4186, <http://www.canlii.org/t/svm8>, retrieved on 2020-08-24
+
+
+On Company Law, 2019 CanLIIDocs 4187
+Author(s) : 	Hugh Amos Robson
+Publisher(s) : 	Manitoba Law Journal (law.robsonhall.com/manitoba-law-journal/)
+Copyright : 	© 2019, Manitoba Law Journal
+License : 	This work is licensed under the CanLII user license which includes the right of the User to make copies of the work for legal research purposes, in the practice of law or in the exercise of their legal rights.
+Citation : 	Hugh Amos Robson, On Company Law, 2019 42-2 Manitoba Law Journal 204, 2019 CanLIIDocs 4187, <http://www.canlii.org/t/svm9>, retrieved on 2020-08
+
+
+The Life and Works of Chief Justice Hugh Amos Robson, 2019 CanLIIDocs 4178
+Author(s) : 	Bryan P Schwartz
+Publisher(s) : 	Manitoba Law Journal (law.robsonhall.com/manitoba-law-journal/)
+Copyright : 	© 2019, Manitoba Law Journal
+License : 	This work is licensed under the CanLII user license which includes the right of the User to make copies of the work for legal research purposes, in the practice of law or in the exercise of their legal rights.
+Citation : 	Bryan P Schwartz, The Life and Works of Chief Justice Hugh Amos Robson, 2019 42-2 Manitoba Law Journal i, 2019 CanLIIDocs 4178, <http://www.canlii.org/t/svm0>, ret
+
+
+From Reading Courses to Robson Hall: The Development of Legal Education in the Province of Manitoba, 1877–1968, 2019 CanLIIDocs 4192
+Author(s) : 	Matthew Renaud
+Publisher(s) : 	Manitoba Law Journal (law.robsonhall.com/manitoba-law-journal/)
+Copyright : 	© 2019, Manitoba Law Journal
+License : 	This work is licensed under the CanLII user license which includes the right of the User to make copies of the work for legal research purposes, in the practice of law or in the exercise of their legal rights.
+Citation : 	Matthew Renaud, From Reading Courses to Robson Hall: The Development of Legal Education in the Province of Manitoba, 1877–1968, 2019 42-2 Manitoba Law Journal 286, 2019 CanLIIDocs 4192, <http://www.canlii.org/t/svmg>,
+
+
+
+
+To do:
+static parallel references: parallel={},: done
+useljjournaaltitleabbrev, e.g., MLR
+
+
+https://www.kjvsayings.com/phrase/of-making-many-books-there-is-no-end
+
+“Of making many books there is no end”
+Source:
+
+This phrase has its origins in Ecclesiastes 12:12 of the King James Version of the Bible
+

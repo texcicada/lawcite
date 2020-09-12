@@ -43,6 +43,10 @@ parallel,
   partysep,
   partysepx,
   shipname,
+  partyasn,%party short name, eg: DPP
+  partybsn,
+  partyajur,%party jurisdiction
+  partybjur,
   caseyear, %will be a date
   icaseyear, %for the index
   decisionyear, %for the casename, when no report year
@@ -86,7 +90,12 @@ mncnumber,
 \DeclareDatamodelEntryfields[case]{%
 partya,partyb,partysep,partysepx,caseyear,reportyear,reportvolume,%
 volyearneeded,reportseries,reportpage,courtname,casenumber,note,shipname,%
-icaseyear,caseshortname,casenickname,decisionyear,parallel}
+icaseyear,caseshortname,casenickname,decisionyear,parallel,
+  partyasn,%party short name, eg: DPP
+  partybsn,
+  partyajur,%party jurisdiction
+  partybjur,
+}
 
 
 \DeclareDatamodelEntryfields[statute]{%

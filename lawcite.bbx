@@ -231,6 +231,29 @@
    \togglefalse{ljjnltitleitalic}
 }
 
+\newcommand\lcsetstyleaglc{%
+   \toggletrue{partynamesitalic}
+   \toggletrue{partysepitalic}
+   \togglefalse{partysepdotted}
+   \toggletrue{mncbrackets}
+   \setcounter{reftypemode}{3}
+   \toggletrue{printlegtoc}
+   \toggletrue{statjurisdiction}
+   \togglefalse{stattycomma}
+   \toggletrue{stattyitalic}
+   \toggletrue{commainindex}
+   \togglefalse{multicitecomma}
+   \togglefalse{casenamecomma}
+ \renewcommand\postnotedelim{,\ }
+   \toggletrue{ljarttitleitalic}
+   \togglefalse{ljjnltitleitalic}
+}
+
+
+
+
+
+
 \newcommand\lcsetstylemlr{%
    \toggletrue{partysepdotted}
    \togglefalse{partysepitalic}
@@ -271,6 +294,10 @@
    %xxx
    \lcsetstyledefault
 }{%
+\ifstrequal{#1}{aglc}{%
+   %xxx
+   \lcsetstyleaglc
+}{%
 \ifstrequal{#1}{mlr}{%
    %xxx
    \lcsetstylemlr
@@ -280,7 +307,7 @@
    \lcsetstylemcgill
 }{%
 \lcsetstylemlr
-}}}}
+}}}}}
 }
 
 

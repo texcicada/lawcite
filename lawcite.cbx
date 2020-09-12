@@ -55,6 +55,18 @@
 \DeclareFieldFormat{shipname}{\mkbibemph{#1}}
 \DeclareFieldFormat{caseshortname}{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}
 \DeclareFieldFormat{casenickname}{\mkbibquote{#1\addspace\bibstring{case}}}
+
+\DeclareFieldFormat{partyasn}{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}
+\DeclareFieldFormat{partybsn}{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}
+\DeclareFieldFormat{partyajur}{\mkbibparens{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}}
+\DeclareFieldFormat{partybjur}{\mkbibparens{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}}
+
+
+
+
+
+
+
 \DeclareFieldFormat{decisionyear}{\mkbibparens{#1}}
 
 
@@ -131,18 +143,49 @@
  }%
 }
 
+%======= partynamesa
+\newbibmacro{getpartynamesa}{%
+\iffootnote{%
+\iffieldundef{partyasn}{\printfield{partya}}{\printfield{partyasn}}}%
+{\printfield{partya}}%
+\iffieldundef{partyajur}{}{\addspace\printfield{partyajur}}%
+}%
+
+%======= partynamesb
+\newbibmacro{getpartynamesb}{%
+\iffootnote{%
+\iffieldundef{partybsn}{\printfield{partyb}}{\printfield{partybsn}}}%
+{\printfield{partyb}}%
+\iffieldundef{partybjur}{}{\addspace\printfield{partybjur}}%
+}%
+
+
 %======= casename
 \newbibmacro{getcasename}{%
-\iffieldundef{shipname}{\printfield{partya}%
+\iffieldundef{shipname}{\usebibmacro{getpartynamesa}%
 \iffieldundef{partyb}{}%
 {\addspace\usebibmacro{getpartysep}\addspace%
-\printfield{partyb}}%
+\usebibmacro{getpartynamesb}}%
 }%no shipname
 {The \printfield{shipname}}%
 \iffieldundef{decisionyear}{}{\addspace\printfield{decisionyear}}%
-\newunit
-\newblock
+%\newunit
+%\newblock
 }%
+
+
+%%%======= casename
+%%\newbibmacro{getcasename}{%
+%%\iffieldundef{shipname}{\printfield{partya}%
+%%\iffieldundef{partyb}{}%
+%%{\addspace\usebibmacro{getpartysep}\addspace%
+%%\printfield{partyb}}%
+%%}%no shipname
+%%{The \printfield{shipname}}%
+%%\iffieldundef{decisionyear}{}{\addspace\printfield{decisionyear}}%
+%%\newunit
+%%\newblock
+%%}%
 
 
 %======== caseshortname
@@ -248,10 +291,10 @@ xxx}%
  \usebibmacro{getcaseyear}%
  \usebibmacro{getcourtname}%
  \usebibmacro{getcasenumber}%
- \setunit*{\addcomma\addspace}%
+%
 %   \newunit
 %    \newblock
-   \iffieldundef{reportpage}{}{\usebibmacro{getreportref}}%
+   \iffieldundef{reportpage}{}{\iffieldundef{casenumber}{}{\setunit*{\addcomma\addspace}}\usebibmacro{getreportref}}%
    \iffieldundef{parallel}{}{\setunit*{\addcomma\space}}%
 %   \usebibmacro{getnote}%
 %   \newunit
@@ -931,6 +974,59 @@ test {\ifentrytype{statute}}%
 }
 
 
+
+%============= lawcite head foot: only for cases
+\DeclareCiteCommand{lawcitehf}%
+{%
+\usebibmacro{prenote}%
+}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getcasename}%
+\mkbibfootnote{%
+    \usebibmacro{getcaseref}\usebibmacro{getnote}%\usebibmacro{postnote}%
+    }%
+\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\usebibmacro{fullstepindex}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{%
+ \multicitedelim%
+}%
+%@@@@@@@@@@@@@@@@ postnote
+{%
+\usebibmacro{postnote}
+}%
+
+%============= lawcite head foot with name: only for cases
+\DeclareCiteCommand{lawcitehfn}%
+{%
+\usebibmacro{prenote}%
+}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getcasename}%
+\mkbibfootnote{%
+    \usebibmacro{getcasenameref}\usebibmacro{getnote}%\usebibmacro{postnote}%
+    }%
+\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\usebibmacro{fullstepindex}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{%
+ \multicitedelim%
+}%
+%@@@@@@@@@@@@@@@@ postnote
+{%
+\usebibmacro{postnote}
+}%
+
+
+
+
+
+
+
 %============= lawciterr
 \DeclareCiteCommand{lawciterr}%
 %%caseallabove      reftypemode}{1}}{}
@@ -1250,8 +1346,8 @@ test {\ifentrytype{case}}%
 {%true
 %\iffirstcitekey{%
 \iftoggle{lcindexing}{%
-\sindex[cases]{\iffieldundef{shipname}{\thefield{partya}%no space, for one party only; space if partyb (before v)
-\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}} \thefield{partyb}}}{\thefield{shipname}, The}%
+\sindex[cases]{\iffieldundef{shipname}{\thefield{partya}\iffieldundef{partyajur}{}{ (\thefield{partyajur})}%no space, for one party only; space if partyb (before v)
+\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}%
 \iftoggle{refintoc}{% 1st character is a space
 \iftoggle{commainindex}{,}{}\addspace\iffieldundef{casenumber}{}{\iftoggle{mncbrackets}{[}{}\thefield{caseyear}\iftoggle{mncbrackets}{]}{} \thefield{courtname} \thefield{casenumber}}%
 %\iffieldundef{reportpage}{}{\thefield{reportyear} \thefield{reportvolume} \thefield{reportseries} \thefield{reportpage}} %
@@ -1301,8 +1397,8 @@ test {\ifentrytype{case}}%
 \renewcommand\lcindexaccum{}%empty
 \xappto\lcindexaccum{%
 %partynames = casename
-\iffieldundef{shipname}{\thefield{partya}%no space, for one party only; space if partyb (before v)
-\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}} \thefield{partyb}}}{\thefield{shipname}, The}%
+\iffieldundef{shipname}{\thefield{partya}\iffieldundef{partyajur}{}{ (\thefield{partyajur})}%no space, for one party only; space if partyb (before v)
+\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}%
 }%end accum
 }%end true
 {%false 
@@ -1425,7 +1521,7 @@ test {\ifentrytype{case}}%
 
 
 \newbibmacro{getparallelreports}{%
-\iflistundef{parallel}{}{\printlist[][-\value{listtotal}]{parallel}\newunit\newblock}%
+\iflistundef{parallel}{}{\setunit*{\addcomma\space}\printlist[][-\value{listtotal}]{parallel}\newunit\newblock}%
 }
 
 
@@ -1457,7 +1553,7 @@ test {\ifentrytype{case}}%
 
 \newbibmacro{getljarticletitle}{%
 \iftoggle{ljarttitleitalic}{%
-\printtext[emph]{\thefield{title}}\iffieldundef{subtitle}{}{\addcolon\addspace\printtext[emph]{subtitle}}%
+\printtext[emph]{\thefield{title}}\iffieldundef{subtitle}{}{\addcolon\addspace\printtext[emph]{\thefield{subtitle}}}%
 }%end italic
 {%not italic
 \printfield[plain]{title}\iffieldundef{subtitle}{}{\addcolon\addspace\printfield[plain]{subtitle}}%
