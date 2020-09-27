@@ -1,0 +1,137 @@
+
+
+%===================================================
+
+\documentclass[12pt]{article}
+\title{How to do a manual Table of Cases}
+\author{}
+\date{}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+\usepackage[table]{xcolor}
+\pagecolor{blue!3}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+
+%------------------
+
+%=================
+%indexing
+
+\newcommand*\myhyperref[1]{\ref{para.#1}}
+
+\usepackage{splitidx}
+\newcommand\pagerefindexnote{\smallskip\noindent\small\mdseries\hfill $\to$ References are to paragraph numbers.\bigskip}
+\newcommand\pagerefindexnoteb{{\small\mdseries\itshape\hfill Para}}
+
+\makeindex
+\newindex[Table of Cases]{cases}
+%\newindex[Table of Statutes]{legislation}
+%\newindex[Table of Regulations]{regulations}
+
+\setindexpreamble[cases]{\pagerefindexnoteb}
+%\setindexpreamble[legislation]{\pagerefindexnote}
+%\setindexpreamble[regulations]{\pagerefindexnote}
+
+
+%Numbered paragraphs
+\newcounter{parno}%[paragraph]%% numbered paragraph
+\renewcommand{\theparno}{\arabic{parno}}
+\newcommand{\p}{\refstepcounter{parno}\noindent[\theparno]\label{para.\theparno}\ } 
+\setcounter{secnumdepth}{4}
+\setcounter{parno}{0}
+%%%
+%%%
+%%%%numbered paragraphs cross-referencing method
+%%%\newcommand\definname{para}
+%%%\newcommand{\paradef}[1]{\label{#1}}
+%%%\newcommand\pararef[1]{\definname\ [\ref{#1}]}
+%%%
+
+\newfontface\ftmark{Noto Sans Symbols2}
+\newcommand\goodoh{{\large\ftmark ✔}}%🗸
+\newcommand\notsogoodoh{{\large\ftmark 🗶}}
+\newcommand\setmpx{\color{red}}
+\newcommand\xx{{\setmpx\notsogoodoh}}
+\newcommand\setmpy{\color{blue!80!green}}
+\newcommand\yy{{\setmpy\goodoh}}
+\newcommand\zz[1]{\textbf{\textit{\myhyperref{#1}}}}
+
+
+%-------------------------------------------------------
+\AtWriteToIndex{cases}{\let\thepage\theparno}
+%\AtWriteToIndex{legislation}{\let\thepage\theparno}
+%\AtWriteToIndex{regulations}{\let\thepage\theparno}
+%-------------------------------------------------------
+
+
+
+
+\usepackage[
+				bookmarks,
+            colorlinks=true,        
+            allcolors = black,  
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+
+%------------------
+\begin{document}
+\maketitle
+%\printlawciteindexes
+
+\let\oldtwocolumn\twocolumn
+\renewcommand{\twocolumn}[1][]{#1}
+\let\oldclearpage\clearpage
+\renewcommand\clearpage{\relax}
+\extendtheindex{}{\useindexpreamble}{}{}
+\printindex[cases]
+%\printindex[legislation]
+%\printindex[regulations]
+\renewcommand{\twocolumn}[1][]{\oldtwocolumn}
+\renewcommand\clearpage{\oldclearpage}
+
+
+\bigskip
+\hfill\rulesep\hfill\ 
+\bigskip
+
+
+
+\p A case (\textit{ABC** v XYZ}, 123 xxx 456).
+\sindex[cases]{abc@\yy\textit{ABC** v XYZ}, 123 xxx 456|myhyperref} 
+
+\p Another case (\textit{CDE** v UVW}, 789 yyy 3)
+\sindex[cases]{cde@\yy\textit{CDE** v UVW}, 789 yyy 3|myhyperref} 
+
+\p A third case (\textit{X1** v X2}, 123 xxx 159)
+\sindex[cases]{x1@\yy\textit{X1** v X2}, 123 xxx 159|myhyperref}
+
+\textbackslash sindex[cases]\{abc@ABC v XYZ, 123 xxx 456\}, sort-by-text@index-entry-text 
+
+
+The workflow to generate the index (ToC) for a file foo.tex is:
+\begin{itemize}
+\item \verb|xelatex foo|
+\item \verb|splitindex -- -s square.ist -c|
+\item \verb|xelatex foo|
+\end{itemize}
+
+where the index style file (.ist) is:
+
+\begin{verbatim}
+delim_0 "\\space\\dotfill\\space ["
+delim_1 "\\space\\dotfill\\space ["
+delim_2 "\\space\\dotfill\\space ["
+delim_n "], ["
+delim_r "--"
+delim_t "]"
+
+line_max 172
+\end{verbatim}
+
+
+\bigskip
+\bigskip
+\hfill ----oooOooo---- \hfill\ 
+\end{document}/.'
