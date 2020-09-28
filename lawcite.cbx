@@ -2429,10 +2429,10 @@ test {\ifentrytype{jurisdiction}}%
 \iftoggle{partynamesitalic}{%start italic
 \textit{%
 \iffieldundef{shipname}{\thefield{partya}\iffieldundef{partyajur}{}{ (\thefield{partyajur})}%no space, for one party only; space if partyb (before v)
-\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}}\iftoggle{partysepdotted}{.}{} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}}}%end italic
+\iffieldundef{partyb}{}{ \iffieldundef{partysep}{\iftoggle{partysepitalic}{\textit{v}}{\textup{v}}}{\iftoggle{partysepitalic}{\textit{\thefield{partysep}}}{\textup{\thefield{partysep}}}}\iftoggle{partysepdotted}{.}{} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}}}%end italic
 {%
 \iffieldundef{shipname}{\thefield{partya}\iffieldundef{partyajur}{}{ (\thefield{partyajur})}%no space, for one party only; space if partyb (before v)
-\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}}\iftoggle{partysepdotted}{.}{} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}}%
+\iffieldundef{partyb}{}{ \iffieldundef{partysep}{\iftoggle{partysepitalic}{\textit{v}}{\textup{v}}}{\iftoggle{partysepitalic}{\textit{\thefield{partysep}}}{\textup{\thefield{partysep}}}}\iftoggle{partysepdotted}{.}{} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}}%
 %proceedings reference
 \iffieldundef{courtname}{}{, \thefield{courtname}}%
 \iffieldundef{courtdivision}{}{, \thefield{courtdivision}}%
