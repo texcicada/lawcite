@@ -156,8 +156,8 @@
 
 \makeindex
 \newindex[Table of Cases]{cases}
-
-
+\newcommand\pagerefindexnoteb{{\small\mdseries\itshape\hfill Page}}
+\setindexpreamble[cases]{\pagerefindexnoteb}
 
 \usepackage[
 				bookmarks,
@@ -182,6 +182,7 @@
 \renewcommand{\twocolumn}[1][]{#1}
 \let\oldclearpage\clearpage
 \renewcommand\clearpage{\relax}
+\extendtheindex{}{\useindexpreamble}{}{}
 \printindex[cases]
 \printindex[legislation]
 \iftoggle{printregulations}{\printindex[regulations]}{}
@@ -210,7 +211,7 @@ The lc-proceedings citation command, \cmd{lcproc}, looks for the bibentry fields
   courtdivision = {Commercial Division},
   courtlist = {Civil List},
 %  courtjurisdiction,
-  casenumber ={N-20-1/456},
+  courtcasenumber ={Case number: N-20-1/456},
 }
 
 \end{dov}
