@@ -1,6 +1,8 @@
 %hyperref support for splitindex
 %\NewDocumentCommand\boldhyperpage{ m } {\textbf{\hyperpage{#1}}
 %\NewDocumentCommand\boldhyperpage{ m } {\hyperpage{#1}}
+\newcommand*\myhyperref[1]{\hyperpage{#1}}
+
 
 \DeclareDatamodelFields[type=field, datatype=verbatim]{thumbnail}
 \DeclareDatamodelEntryfields{thumbnail}
@@ -26,6 +28,8 @@
 %legislation%
 }
 
+\newtoggle{hyperindexpages}
+\toggletrue{hyperindexpages}
 
 
 
@@ -45,7 +49,7 @@ parallel,
   shipname,
   partyasn,%party short name, eg: DPP
   partybsn,
-  partyajur,%party jurisdiction
+  partyajur,%party jurisdiction (for shortname), e.g. (NSW), as in DPP (NSW)
   partybjur,
   caseyear, %will be a date
   icaseyear, %for the index
@@ -55,8 +59,15 @@ parallel,
   volyearneeded, %will be a boolean
   reportseries,
   reportpage,
-  courtname,
-  casenumber,
+  courtname,%for MNC, and in-progress
+  casenumber,%for MNC
+% for in-progress
+  casename,
+  courtdivision,
+  courtlist,
+  courtjurisdiction,
+  courtcasenumber,%in-progress, the docket
+%general
   note,
   caseshortname,
   casenickname,
@@ -95,6 +106,11 @@ icaseyear,caseshortname,casenickname,decisionyear,parallel,
   partybsn,
   partyajur,%party jurisdiction
   partybjur,
+  casename,% in-progress fields
+  courtdivision,
+  courtlist,
+  courtjurisdiction,
+  courtcasenumber,
 }
 
 

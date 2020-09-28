@@ -1,0 +1,263 @@
+\begin{filecontents*}[overwrite]{\jobname.bib}
+
+@case{abcproc,
+  partya = {PartyAName},
+  partyb = {PartyB Inc},
+  courtname = {Supreme Court of Somewhere},
+  courtdivision = {Commercial Division},
+  courtlist = {Civil List},
+%  courtjurisdiction,
+  courtcasenumber ={Case number: N-20-1/456},
+}
+@case{xyzproc,
+  partya = {Mr Smith},
+  partyb = {Mrs Smith},
+  courtname = {XYZ SC},
+%  courtdivision = {Commercial Division},
+%  courtlist = {Civil List},
+%  courtjurisdiction,
+  courtcasenumber ={Case : N-20-1/456},
+}
+@case{thomas,
+  partya = {Thomas},
+  partyb = {Newton},
+  icaseyear = {1827},
+	}
+@case{thomascar,
+  reportyear = {1827},
+  reportvolume = {2},
+  reportseries = {Car \& P},
+  reportpage = {606},
+  crossref = {thomas},
+}
+@case{snail,
+  partya = {Donoghue}, 
+  partyb = {Stevenson},
+  icaseyear = {1932},
+  reportyear={1932},
+%  volyearneeded = {true},
+  reportseries = {AC},
+  reportpage = {562},
+  casenickname = {snail in the bottle},
+  note = {HL},
+	}
+
+\end{filecontents*}
+
+\documentclass[12pt]{article}
+\title{QuickStart Guide to using lawcite\\[24pt]\normalsize \hfill ---------\hfill\ }
+\author{}
+\date{}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+\usepackage{pdfpages}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Sans Mono}[Colour=blue]
+\newfontface\ftmark{Noto Sans Symbols2}
+\newcommand\goodoh{{\large\ftmark 🗸}}
+\newcommand\notsogoodoh{{\large\ftmark 🗶}}
+\usepackage{fancyhdr} % Needed for customized footer
+
+%\colorbox{white}{\textcolor{white}{\makebox(40,20){XXXXX}}
+%\kern-23pt{\raisebox{0.9ex}{\thepage}}
+
+\newcommand\bpn{\textcolor{white}{\raisebox{-3pt}{\rule{40pt}{15pt}}}}
+
+\renewcommand{\headrulewidth}{0.0pt} % Eliminate rule in header
+\newcommand{\myfooter}{              % Place the page number 1cm below default position
+    \fancyfoot{}
+    \fancyfoot[C]{\bpn \rlap{\kern-24pt\thepage}}
+}
+%\vspace{1cm}
+
+%\fancyfoot[C]{\colorbox{cyan}{\textcolor{white}{\makebox(40,20){XXXXX}}}\\\raisebox{20pt}{\thepage}}
+
+
+%\parbox[<alignment>][<height>][<inner arrangement>]{<width>}{<text>}
+%
+%The <height> must be a length which tells LaTeX to build the box as if its vertical dimension were the stated length. The <inner arrangement> must be c, t, b or s (by default the stated or implicit <alignment> is used), that tells how to vertically arrange the text in the available space; s means "spread": all flexible glue available will be used for getting the first line at the top and the last line at the bottom of the available space.
+
+
+
+\includepdfset{                      % Setup keys for calls of \includepdf
+    pages=-,
+%    templatesize={215.9mm}{279.4mm}, % Because the page gets trimmed reset the page size
+%    nup=1x1,
+    scale=1,
+%    clip, 
+%    trim=5mm 36.5mm 5mm 20mm,            
+%	trim=0mm 0mm 0mm 0mm,        % 
+% Trim off the existing page numbers
+%    fitpaper=true,
+    pagecommand={\myfooter}          % Apply the customized page numbering
+}
+
+\pagestyle{fancy}
+\fancyhead[L,C,R]{}
+%\includepdf[pages=-,addtotoc={
+%     1,section,1,First Section Entry,p1,   
+%     1,subsection,1,Subsection Entry,p2,
+%     2,section,1,Second Section Entry,p3}]
+%     {publishing-logo+layout.pdf}    
+%
+%Parameters for each TOC entry are:
+%
+%    Page number relative to the first page of the included document. Caveat: with pages={3-10}, the smallest possible number would be 3.
+%    Level for the TOC entry
+%    Depth of section (1 for section, 2 for subsection, etc.)
+%    TOC entry
+%    Label for the entry
+%
+%Apr 17 '11 at 10:10
+%Christian Lindig
+%
+%
+%     https://tex.stackexchange.com/questions/15989/toc-entries-and-labels-for-included-pdf-pages
+
+
+\usepackage{splitidx}
+%=============================================
+
+\newcommand\bef[1]{(\textit{#1})}
+\newcommand\cmd[1]{\textsf{\textbackslash\textbf{#1}}}
+\usepackage[style=lawcite,
+	party-separator-dotted=true,
+	lawrefstyle=caseallabove,
+	print-toc-tos=true,
+%	hyperlink-index-pages=true,
+%	use-toc-parnumrefs=false,
+	]{biblatex}
+\addbibresource{\jobname.bib}
+
+
+\usepackage{fancyvrb}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage{float}
+%\floatstyle{boxed}
+\newfloat{program}{h}{lop}
+\floatname{program}{Code listing}
+
+\newenvironment{dov}[2]%
+  {\VerbatimEnvironment
+      \program
+    \begin{mdframed}[backgroundcolor=green!40!blue!12]
+    \caption{#2}%
+    \label{#1}%    
+    \begin{Verbatim}}
+  {\end{Verbatim}%
+    \end{mdframed}
+    \endprogram
+}
+
+
+
+\makeindex
+\newindex[Table of Cases]{cases}
+
+
+
+\usepackage[
+				bookmarks,
+            colorlinks=true,        
+            allcolors = black,  
+            citecolor=blue,        
+%            hyperindex=false, 
+]{hyperref}
+
+
+
+
+%=============================================
+\begin{document}
+\maketitle
+\tableofcontents
+
+%\setprintlegtocon
+\let\xoldtwocolumn\twocolumn
+\iftoggle{printlegtoc}{%
+\let\oldtwocolumn\twocolumn
+\renewcommand{\twocolumn}[1][]{#1}
+\let\oldclearpage\clearpage
+\renewcommand\clearpage{\relax}
+\printindex[cases]
+\printindex[legislation]
+\iftoggle{printregulations}{\printindex[regulations]}{}
+%%%\printindex[general]
+%%%
+\renewcommand{\twocolumn}[1][]{\oldtwocolumn}
+\renewcommand\clearpage{\oldclearpage}
+}{}
+\bigskip
+\hfill\rulesep\hfill\ %\hrule%{0.8\linewidth}
+\bigskip
+
+
+
+
+%\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
+\section{Intro}
+The lc-proceedings citation command, \cmd{lcproc}, looks for the bibentry fields shown in code listing \ref{ex}.
+
+\begin{dov}{ex}{Example}
+
+@case{abcproc,
+  partya = {PartyAName},
+  partyb = {PartyB Inc},
+  courtname = {Supreme Court of Somewhere},
+  courtdivision = {Commercial Division},
+  courtlist = {Civil List},
+%  courtjurisdiction,
+  casenumber ={N-20-1/456},
+}
+
+\end{dov}
+
+\cmd{lcproc}\{abcproc\} produces: 
+
+\lcproc{abcproc}
+\bigskip
+
+The index style file, plain.ist, has to contain the formatting code as shown in listing \ref{ist} for the page numbers in the Table of Cases to hyperlink correctly.
+
+
+\begin{dov}{ist}{Code for plain.ist file for SplitIndex}
+
+delim_0 "\\space\\dotfill\\space "\hss
+delim_1 "\\space\\dotfill\\space "\hss
+delim_2 "\\space\\dotfill\\space "\hss
+delim_n ", "
+delim_r "--"
+delim_t ""
+encap_prefix "\\"
+encap_infix "{"
+encap_suffix "}"
+line_max 1000
+
+\end{dov}
+
+
+\newpage
+\lcproc{xyzproc}
+
+\newpage
+The \cmd{lawcite} command's indexing ccapability has been enhanced to also include page hyperlinking in the Table of Cases, like \cmd{lcproc} does.
+
+Example:
+
+\lawcite{snail}
+
+
+\bigskip
+\bigskip
+\hfill --oooOooo--\hfill\ 
+
+
+\end{document}
+
+
+
+
+

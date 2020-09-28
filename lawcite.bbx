@@ -95,7 +95,8 @@
 \ifstrequal{#1}{true}
 {\toggletrue{lcparnumrefs}}
 {\togglefalse{lcparnumrefs}}%
-\iftoggle{lcparnumrefs}{\renewcommand\lcparnumrefsencap{|myhyperref}}{\renewcommand\lcparnumrefsencap{}}%
+\iftoggle{lcparnumrefs}{\renewcommand\myhyperref[1]{\ref{para.#1}}\renewcommand\lcparnumrefsencap{|myhyperref}}{\renewcommand\myhyperref[1]{\hyperpage{#1}}
+\renewcommand\lcparnumrefsencap{|myhyperref}}%
 }
 %
 
@@ -182,6 +183,12 @@
 \DeclareBibliographyOption[boolean]{print-toc-tos}[true]{%
 \ifstrequal{#1}{true}{\toggletrue{printlegtoc}}{\togglefalse{printlegtoc}}
 }
+
+\DeclareBibliographyOption[boolean]{hyperlink-index-pages}[true]{%
+\ifstrequal{#1}{true}{\toggletrue{hyperindexpages}}{\togglefalse{hyperindexpages}}
+}
+
+
 
 %
 \DeclareBibliographyOption[string]{lawrefstyle}[caseallbelow]{%

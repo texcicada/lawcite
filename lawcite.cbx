@@ -691,7 +691,7 @@ xxx}%
 % BC Reg%
 %\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }BC Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}% 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }BC Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{manreg}{%
@@ -700,7 +700,7 @@ xxx}%
 % Man Reg%
 %\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Man Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}% 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Man Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nbreg}{%
@@ -718,7 +718,7 @@ xxx}%
 % Nfld Reg%
 %\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Nfld \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}% 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Nfld \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nlrreg}{%
@@ -727,7 +727,7 @@ xxx}%
 % NLR%
 %\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NLR \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}% 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NLR \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nwtreg}{%
@@ -736,7 +736,7 @@ xxx}%
 % NWT Reg%
 %\addspace\printfield{regnum}-\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NWT Reg \thefield{regnum}-\thefield{year}\lcparnumrefsencap}}{}% 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NWT Reg \thefield{regnum}-\thefield{year}\lcparnumrefsencap}}{}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nsreg}{%
@@ -745,7 +745,7 @@ xxx}%
 % NS Reg%
 %\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NS Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}% 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }NS Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{nureg}{%
@@ -754,7 +754,7 @@ xxx}%
 % Nu Reg%
 %\addspace\printfield{regnum}-\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Nu Reg \thefield{regnum}-\thefield{year}\lcparnumrefsencap}}{}% 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Nu Reg \thefield{regnum}-\thefield{year}\lcparnumrefsencap}}{}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{oreg}{%
@@ -784,7 +784,7 @@ xxx}%
 \iftoggle{lcindexing}{%
  \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }OC Reg \thefield{regnum}-\thefield{year}%
  , \thefield{fulldate}, GOQ \thefield{gazette}%
-\lcparnumrefsencap}}{}% 
+\lcparnumrefsencap}}{}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{saskreg}{%
@@ -793,7 +793,7 @@ xxx}%
 % Sask Reg%
 %\addspace\printfield{regnum}/\printfield{year}%
 \iftoggle{lcindexing}{%
- \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Sask Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}% 
+ \sindex[\iftoggle{printregulations}{regulations}{legislation}]{\iffieldundef{title}{}{\thefield{title}, }Sask Reg \thefield{regnum}/\thefield{year}\lcparnumrefsencap}}{}%
  }{}%endif
 %----
 \iffieldequalstr{citeref}{yoicreg}{%
@@ -908,7 +908,7 @@ test {\ifentrytype{statute}}%
  \or% prenote is already in the footnote
  \or\usebibmacro{prenote}%
   \fi%
-}%end statute false  
+}%end statute false
 }%
 %@@@@@@@@@@@@@@@@ item
 {%
@@ -944,7 +944,7 @@ test {\ifentrytype{statute}}%
  \fi%
 \iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
 %
-\usebibmacro{fullstepindex}%
+%\usebibmacro{fullstepindex}% ???
 }% end statute false
 }%end item
 %@@@@@@@@@@@@@@@@ delim
@@ -1344,30 +1344,31 @@ test {\ifentrytype{statute}}%
 test {\ifentrytype{case}}%
 }%
 {%true
+\usebibmacro{indexcaseparm}%
 %\iffirstcitekey{%
-\iftoggle{lcindexing}{%
-\sindex[cases]{\iffieldundef{shipname}{\thefield{partya}\iffieldundef{partyajur}{}{ (\thefield{partyajur})}%no space, for one party only; space if partyb (before v)
-\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}%
-\iftoggle{refintoc}{% 1st character is a space
-\iftoggle{commainindex}{,}{}\addspace\iffieldundef{casenumber}{}{\iftoggle{mncbrackets}{[}{}\thefield{caseyear}\iftoggle{mncbrackets}{]}{} \thefield{courtname} \thefield{casenumber}}%
-%\iffieldundef{reportpage}{}{\thefield{reportyear} \thefield{reportvolume} \thefield{reportseries} \thefield{reportpage}} %
-\iffieldundef{reportpage}{}{%
-\iffieldundef{casenumber}{}{;}%
-\iffieldundef{reportyear}{}{%
-\iffieldundef{reportvolume}{ [}{%
-\iffieldundef{volyearneeded}{ (}{ [}}%
-\thefield{reportyear}%
-\iffieldundef{reportvolume}{]}{%
-\iffieldundef{volyearneeded}{)}{]}} }%
-\thefield{reportvolume} %
-\thefield{reportseries} %  use \mkbibordinal{}?
-\thefield{reportpage}%
-}%end if reportpage
-}%end refintoc true
-{%start reefintoc false
-\iffieldundef{icaseyear}{\iffieldundef{caseyear}{\iffieldundef{reportyear}{}{ (\thefield{reportyear})}}{ (\thefield{caseyear})}}{ (\thefield{icaseyear})}%
-}%end refintoc false
-\lcparnumrefsencap}}{}%end sindex
+%%%%%\iftoggle{lcindexing}{%
+%%%%%\sindex[cases]{\iffieldundef{shipname}{\thefield{partya}\iffieldundef{partyajur}{}{ (\thefield{partyajur})}%no space, for one party only; space if partyb (before v)
+%%%%%\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}%
+%%%%%\iftoggle{refintoc}{% 1st character is a space
+%%%%%\iftoggle{commainindex}{,}{}\addspace\iffieldundef{casenumber}{}{\iftoggle{mncbrackets}{[}{}\thefield{caseyear}\iftoggle{mncbrackets}{]}{} \thefield{courtname} \thefield{casenumber}}%
+%%%%%%\iffieldundef{reportpage}{}{\thefield{reportyear} \thefield{reportvolume} \thefield{reportseries} \thefield{reportpage}} %
+%%%%%\iffieldundef{reportpage}{}{%
+%%%%%\iffieldundef{casenumber}{}{;}%
+%%%%%\iffieldundef{reportyear}{}{%
+%%%%%\iffieldundef{reportvolume}{ [}{%
+%%%%%\iffieldundef{volyearneeded}{ (}{ [}}%
+%%%%%\thefield{reportyear}%
+%%%%%\iffieldundef{reportvolume}{]}{%
+%%%%%\iffieldundef{volyearneeded}{)}{]}} }%
+%%%%%\thefield{reportvolume} %
+%%%%%\thefield{reportseries} %  use \mkbibordinal{}?
+%%%%%\thefield{reportpage}%
+%%%%%}%end if reportpage
+%%%%%}%end refintoc true
+%%%%%{%start reefintoc false
+%%%%%\iffieldundef{icaseyear}{\iffieldundef{caseyear}{\iffieldundef{reportyear}{}{ (\thefield{reportyear})}}{ (\thefield{caseyear})}}{ (\thefield{icaseyear})}%
+%%%%%}%end refintoc false
+%%%%%\lcparnumrefsencap}}{}%end sindex
 %}%end \iffirstcitekey
 }%end true
 {%false
@@ -1381,7 +1382,7 @@ test {\ifentrytype{statute}}%
 \togglefalse{printxregulations}%
 }%
 {}%
-}%end false 
+}%end false
 }
 
 
@@ -1401,7 +1402,7 @@ test {\ifentrytype{case}}%
 \iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}%
 }%end accum
 }%end true
-{%false 
+{%false
 }%end case false
 }
 
@@ -1469,7 +1470,7 @@ test {\ifentrytype{case}}%
     {\addcomma}%
     {\addspace\bibstring{and}}%
   \addspace%
-  }% 
+  }%
   \namepartfamily%
 }}
 
@@ -1667,7 +1668,7 @@ test {\ifentrytype{case}}%
 %%%}%
 %%%{\sindex[legislation]{\thefield{statutetitle} \thefield{statutetitleyear}}}%
 %%%{}%
-%%%}%end false 
+%%%}%end false
 %%%}
 %%%
 %%%
@@ -1698,7 +1699,7 @@ test {\ifentrytype{case}}%
 %%%}%
 %%%{\sindex[legislation]{\thefield{statutetitle} \thefield{statutetitleyear}}}%
 %%%{}%
-%%%}%end false 
+%%%}%end false
 %%%}
 
 
@@ -2068,7 +2069,7 @@ test {\ifentrytype{case}}%
 \newbibmacro{getlastnames}{%
  \printnames[authorplainlast][-\value{listtotal}]{author}%
  }
- 
+
 
 \newbibmacro{gettitle}{%
 \iffieldundef{shorttitle}{%
@@ -2165,7 +2166,7 @@ test {\ifentrytype{case}}%
   \iffieldundef{thumbnail}
     {}
     {\marginpar{\usefield{\insertbibimage}{thumbnail}}}}
-     
+
 %===================
 \newcommand\lcsetindexingoff{\togglefalse{lcindexing}}
 \newcommand\lcsetindexingon{\toggletrue{lcindexing}}
@@ -2324,7 +2325,7 @@ test {\ifentrytype{case}}%
 \DeclareRefcontext{legalcase}{sorting=casesort}
 \DeclareRefcontext{legalstat}{sorting=statsort}
 \DeclareRefcontext{legalcasestat}{sorting=casestat}
-    
+
 \defbibheading{lm}{%
 \section*{Legal Material}}
 
@@ -2395,6 +2396,99 @@ test {\ifentrytype{jurisdiction}}%
    \usebibmacro{lclgetlegalfull}%
  \usebibmacro{finentry}
 }
+
+
+
+
+%-------------------------
+%\DeclareFieldFormat{courtname}{#1}%already defined
+\DeclareFieldFormat{courtdivision}{#1}
+\DeclareFieldFormat{courtlist}{#1}
+\DeclareFieldFormat{courtjurisdiction}{#1}
+\DeclareFieldFormat{courtcasenumber}{#1}
+
+
+\newbibmacro{getcaseproc}{%
+\iffieldundef{courtname}{}{\addcomma\addspace\printfield{courtname}}%
+\iffieldundef{courtdivision}{}{\addcomma\addspace\printfield{courtdivision}}%
+\iffieldundef{courtlist}{}{\addcomma\addspace\printfield{courtlist}}%
+\iffieldundef{courtjurisdiction}{}{\addcomma\addspace\printfield{courtjurisdiction}}%
+\iffieldundef{courtcasenumber}{}{\addcomma\addspace\printfield{courtcasenumber}}%
+}
+
+
+
+\newbibmacro{getproc}{%
+ \usebibmacro{getcasename}
+  \usebibmacro{getcaseproc}
+}
+
+\newbibmacro{indexcaseparm}{%
+\sindex[cases]{%
+%partynames = casename
+\iftoggle{partynamesitalic}{%start italic
+\textit{%
+\iffieldundef{shipname}{\thefield{partya}\iffieldundef{partyajur}{}{ (\thefield{partyajur})}%no space, for one party only; space if partyb (before v)
+\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}}\iftoggle{partysepdotted}{.}{} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}}}%end italic
+{%
+\iffieldundef{shipname}{\thefield{partya}\iffieldundef{partyajur}{}{ (\thefield{partyajur})}%no space, for one party only; space if partyb (before v)
+\iffieldundef{partyb}{}{ \iffieldundef{partysep}{v}{\thefield{partysep}}\iftoggle{partysepdotted}{.}{} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}}%
+%proceedings reference
+\iffieldundef{courtname}{}{, \thefield{courtname}}%
+\iffieldundef{courtdivision}{}{, \thefield{courtdivision}}%
+\iffieldundef{courtlist}{}{, \thefield{courtlist}}%
+\iffieldundef{courtjurisdiction}{}{, \thefield{courtjurisdiction}}%
+\iffieldundef{courtcasenumber}{}{, \thefield{courtcasenumber}}%
+%caseref
+\iftoggle{refintoc}{% 1st character is a space
+\iftoggle{commainindex}{,}{}\addspace\iffieldundef{casenumber}{}{\iftoggle{mncbrackets}{[}{}\thefield{caseyear}\iftoggle{mncbrackets}{]}{} \thefield{courtname} \thefield{casenumber}}%
+%\iffieldundef{reportpage}{}{\thefield{reportyear} \thefield{reportvolume} \thefield{reportseries} \thefield{reportpage}} %
+\iffieldundef{reportpage}{}{%
+\iffieldundef{casenumber}{}{;}%
+\iffieldundef{reportyear}{}{%
+\iffieldundef{reportvolume}{ [}{%
+\iffieldundef{volyearneeded}{ (}{ [}}%
+\thefield{reportyear}%
+\iffieldundef{reportvolume}{]}{%
+\iffieldundef{volyearneeded}{)}{]}} }%
+\thefield{reportvolume} %
+\thefield{reportseries} %  use \mkbibordinal{}?
+\thefield{reportpage}%
+}%end if reportpage
+}%end refintoc true
+{%start refintoc false
+\iffieldundef{icaseyear}{\iffieldundef{caseyear}{\iffieldundef{reportyear}{}{ (\thefield{reportyear})}}{ (\thefield{caseyear})}}{ (\thefield{icaseyear})}%
+}%end refintoc false
+\lcparnumrefsencap}%end sindex
+}
+
+\newbibmacro{getprocindex}{%
+\usebibmacro{indexcaseparm}%
+}%
+
+
+
+%------------------------- (in-progress) proceedings
+\DeclareCiteCommand{lcproc}%
+{%
+\usebibmacro{prenote}%
+}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getproc}%
+\usebibmacro{getprocindex}
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{%
+\multicitedelim%
+}%
+%@@@@@@@@@@@@@@@@ postnote
+{%
+\usebibmacro{postnote}%
+}
+
+
+
 
 
 
