@@ -2112,6 +2112,17 @@ test {\ifentrytype{case}}%
 }
 
 
+\newbibmacro{getlcepigraphp}{%
+\ifbibliography{}{%otherwise
+\ifnameundef{author}{}{%otherwise
+\usebibmacro{getlastnames}%
+\mkbibemph{\bibstring{possessive}}
+\addspace%
+}%end name defined
+\usebibmacro{gettitle}%
+}%end inbib=false
+}
+
 
 
 
@@ -2128,6 +2139,19 @@ test {\ifentrytype{case}}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}%
 
+
+%============= lcepigraphp: possessive x's y
+\DeclareCiteCommand{lcepigraphp}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getlcepigraphp}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
 
 
 
@@ -2174,33 +2198,35 @@ test {\ifentrytype{case}}%
 
 %=================== utility macros: display the bibentry using all cite commands
 %----------------------
-\newcommand\sdfs[1]{\ttfamily\small\color{blue} #1\space\dotfill\space}
+\newcommand\sdfs[1]{\ttfamily\small\color{blue} \textbackslash #1\space\dotfill\space}
 
 %\lcsetdemooff
 \newcommand\lcdemolabelw{6cm}
 \newcommand\lccitedemowidth{6cm}
 %===============================================
-\newcommand\lccitedemo[1]{%
+\newcommand\lccitedemo[2]{%
 \renewcommand\lcdemolabelw{\lccitedemowidth}
 
 \noindent\fbox{#1}\vspace{2pt}
 
-\lcsetstyledefault\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (default)}}Text\lawcite{#1}
+\lcsetstyledefault\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (default)}}Text\lawcite[#2]{#1}
 
-\lcsetstylemlr\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (MLR)}}\lawcite{#1}
+\lcsetstylemlr\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (MLR)}}\lawcite[#2]{#1}
 
-\lcsetstylemcgill\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (McGill)}}Text\lawcite{#1}
+\lcsetstylemcgill\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (McGill)}}Text\lawcite[#2]{#1}
 
-\lcsetstyledefault\setallabove\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (all above)}}\lawcite{#1}
+\lcsetstyleaglc\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (AGLC)}}Text\lawcite[#2]{#1}
 
-\settitleonly\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (name only)}}\lawcite{#1}
+\lcsetstyledefault\setallabove\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (all above)}}\lawcite[#2]{#1}
+
+\settitleonly\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (name only)}}\lawcite[#2]{#1}
 \lcsetstyledefault%\medskip
 
-\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcinline}}\lcinline{#1}
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcinline}}\lcinline[#2]{#1}
 
-\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcinlinenn}}\lcinlinenn{#1}
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcinlinenn}}\lcinlinenn[#2]{#1}
 
-\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcfoot}}Text\lcfoot{#1}
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcfoot}}Text\lcfoot[#2]{#1}
 
 \noindent\makebox[\lcdemolabelw][l]{\sdfs{lcnickname}}\lcnickname{#1}
 
@@ -2211,6 +2237,8 @@ test {\ifentrytype{case}}%
 \noindent\makebox[\lcdemolabelw][l]{\sdfs{lcrefnn}}\lcrefnn{#1}
 
 \noindent\makebox[\lcdemolabelw][l]{\sdfs{lcnote}}\lcnote{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcpostnote}}\lcpostnote[#2]{#1}
 
 \noindent\makebox[\lcdemolabelw][l]{\sdfs{lcshorttitle}}\lcshorttitle{#1}
 
@@ -2294,6 +2322,8 @@ test {\ifentrytype{case}}%
 \noindent\makebox[\lcdemolabelw][l]{\sdfs{ljcite}}\ljcite{#1}
 
 \noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljauthor}}\lcljauthor{#1}
+
+\noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljauthorfn}}\lcljauthorfn{#1}
 
 \noindent\makebox[\lcdemolabelw][l]{\sdfs{lcljtitle}}\lcljtitle{#1}
 
@@ -2419,8 +2449,9 @@ test {\ifentrytype{jurisdiction}}%
 
 
 \newbibmacro{getproc}{%
- \usebibmacro{getcasename}
-  \usebibmacro{getcaseproc}
+\ifciteseen{\usebibmacro{getcasename}}{%
+ \usebibmacro{getcasename}%
+  \usebibmacro{getcaseproc}}%
 }
 
 \newbibmacro{indexcaseparm}{%
@@ -2538,7 +2569,9 @@ test {\ifentrytype{jurisdiction}}%
 \newcommand\lcatpara[1]{\bibstring{atparagraph}\addspace\mkbibbrackets{#1}}
 \newcommand\lcatparas[2]{\bibstring{atparagraph}\addspace\mkbibbrackets{#1}--\mkbibbrackets{#2}}
 
+%===================
+%misc general commands
 
-
+%===============================================
 %===================
 \endinput

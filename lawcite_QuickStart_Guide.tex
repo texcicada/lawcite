@@ -42,6 +42,32 @@
   note = {HL},
 	}
 
+@book{tnl,
+	author = {Nikolas James and Rachael Field and Jackson Walkden-Brown},
+	title = {The New Lawyer},
+	edition = {2},
+	publisher = {Wiley},
+	isbn = {9780730363446},
+	shorttitle = {The New Lawyer},
+}
+
+@ljarticle{smythsc,
+author = {Russell Smyth},
+title = {What do Intermediate Appellate Courts Cite? A Quantitative Study of the Citation Practice of Australian State Supreme Courts},
+mncyear = {1999},
+mncname = {AdelLawRw},
+mncnumber = {3},
+date = {1999},
+volume = {21},
+journaltitle = {Adelaide Law Review},
+pages = {51},
+%keywords = {lj},
+}
+
+@ljarticle{renaud,author = {Matthew Renaud},subtitle = {The Development of Legal Education in the Province of Manitoba, 1877–1968},title = {From Reading Courses to Robson Hall},mncyear = {2019},mncname = {CanLIIDocs},mncnumber = {4192},date = {2019},volume = {42},journaltitle = {Manitoba Law Journal},pages = {286},}
+
+
+
 \end{filecontents*}
 
 \documentclass[12pt]{article}
@@ -49,11 +75,11 @@
 \author{}
 \date{}
 \newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
-\usepackage{pdfpages}
-\usepackage{xcolor}
+%\usepackage{pdfpages}
+\usepackage[table]{xcolor}
 \usepackage{fontspec}
 \setmainfont{Noto Serif}
-\setsansfont{Noto Sans}
+\setsansfont{Noto Sans}[Scale=0.9]
 \setmonofont{Noto Sans Mono}[Colour=blue]
 \newfontface\ftmark{Noto Sans Symbols2}
 \newcommand\goodoh{{\large\ftmark 🗸}}
@@ -65,11 +91,11 @@
 
 \newcommand\bpn{\textcolor{white}{\raisebox{-3pt}{\rule{40pt}{15pt}}}}
 
-\renewcommand{\headrulewidth}{0.0pt} % Eliminate rule in header
-\newcommand{\myfooter}{              % Place the page number 1cm below default position
-    \fancyfoot{}
-    \fancyfoot[C]{\bpn \rlap{\kern-24pt\thepage}}
-}
+%%%%%\renewcommand{\headrulewidth}{0.0pt} % Eliminate rule in header
+%%%%%\newcommand{\myfooter}{              % Place the page number 1cm below default position
+%%%%%    \fancyfoot{}
+%%%%%    \fancyfoot[C]{\bpn \rlap{\kern-24pt\thepage}}
+%%%%%}
 %\vspace{1cm}
 
 %\fancyfoot[C]{\colorbox{cyan}{\textcolor{white}{\makebox(40,20){XXXXX}}}\\\raisebox{20pt}{\thepage}}
@@ -81,62 +107,69 @@
 
 
 
-\includepdfset{                      % Setup keys for calls of \includepdf
-    pages=-,
-%    templatesize={215.9mm}{279.4mm}, % Because the page gets trimmed reset the page size
-%    nup=1x1,
-    scale=1,
-%    clip, 
-%    trim=5mm 36.5mm 5mm 20mm,            
-%	trim=0mm 0mm 0mm 0mm,        % 
-% Trim off the existing page numbers
-%    fitpaper=true,
-    pagecommand={\myfooter}          % Apply the customized page numbering
-}
-
-\pagestyle{fancy}
-\fancyhead[L,C,R]{}
-%\includepdf[pages=-,addtotoc={
-%     1,section,1,First Section Entry,p1,   
-%     1,subsection,1,Subsection Entry,p2,
-%     2,section,1,Second Section Entry,p3}]
-%     {publishing-logo+layout.pdf}    
-%
-%Parameters for each TOC entry are:
-%
-%    Page number relative to the first page of the included document. Caveat: with pages={3-10}, the smallest possible number would be 3.
-%    Level for the TOC entry
-%    Depth of section (1 for section, 2 for subsection, etc.)
-%    TOC entry
-%    Label for the entry
-%
-%Apr 17 '11 at 10:10
-%Christian Lindig
-%
-%
-%     https://tex.stackexchange.com/questions/15989/toc-entries-and-labels-for-included-pdf-pages
+%%%%%\includepdfset{                      % Setup keys for calls of \includepdf
+%%%%%    pages=-,
+%%%%%%    templatesize={215.9mm}{279.4mm}, % Because the page gets trimmed reset the page size
+%%%%%%    nup=1x1,
+%%%%%    scale=1,
+%%%%%%    clip, 
+%%%%%%    trim=5mm 36.5mm 5mm 20mm,            
+%%%%%%	trim=0mm 0mm 0mm 0mm,        % 
+%%%%%% Trim off the existing page numbers
+%%%%%%    fitpaper=true,
+%%%%%    pagecommand={\myfooter}          % Apply the customized page numbering
+%%%%%}
+%%%%%
+%%%%%\pagestyle{fancy}
+%%%%%\fancyhead[L,C,R]{}
+%%%%%%\includepdf[pages=-,addtotoc={
+%%%%%%     1,section,1,First Section Entry,p1,   
+%%%%%%     1,subsection,1,Subsection Entry,p2,
+%%%%%%     2,section,1,Second Section Entry,p3}]
+%%%%%%     {publishing-logo+layout.pdf}    
+%%%%%%
+%%%%%%Parameters for each TOC entry are:
+%%%%%%
+%%%%%%    Page number relative to the first page of the included document. Caveat: with pages={3-10}, the smallest possible number would be 3.
+%%%%%%    Level for the TOC entry
+%%%%%%    Depth of section (1 for section, 2 for subsection, etc.)
+%%%%%%    TOC entry
+%%%%%%    Label for the entry
+%%%%%%
+%%%%%%Apr 17 '11 at 10:10
+%%%%%%Christian Lindig
+%%%%%%
+%%%%%%
+%%%%%%     https://tex.stackexchange.com/questions/15989/toc-entries-and-labels-for-included-pdf-pages
 
 
 \usepackage{splitidx}
 %=============================================
 
 \newcommand\bef[1]{(\textit{#1})}
+\newcommand\cef[1]{\textit{#1}}
 \newcommand\cmd[1]{\textsf{\textbackslash\textbf{#1}}}
+\newcommand\cmdb[2]{\textsf{\textbackslash\textbf{#1}\{#2\}}}
+
 \usepackage[style=lawcite,
 	party-separator-dotted=true,
 	lawrefstyle=caseallabove,
 	print-toc-tos=true,
 %	hyperlink-index-pages=true,
 %	use-toc-parnumrefs=false,
+	citetracker=true,
+	ibidtracker=false,%for demo purposes
 	]{biblatex}
 \addbibresource{\jobname.bib}
 
 
 \usepackage{fancyvrb}
 \usepackage{mdframed}
-\usepackage{xcolor}
+%\usepackage{xcolor}
+\rowcolors{1}{blue!5}{blue!9}
 \usepackage{float}
 %\floatstyle{boxed}
+%------------------------------- program float
 \newfloat{program}{h}{lop}
 \floatname{program}{Code listing}
 
@@ -151,6 +184,24 @@
     \end{mdframed}
     \endprogram
 }
+
+%------------------------------- reference float
+\newfloat{reference}{h}{lop}
+\floatname{reference}{Reference}
+
+\newenvironment{dor}[2]%
+  {%
+      \reference
+    \begin{mdframed}[backgroundcolor=red!40!green!12]
+    \caption{#2}%
+    \label{#1}%    
+    }
+  {%
+    \end{mdframed}
+    \endreference
+}
+
+
 
 
 
@@ -200,9 +251,68 @@
 
 %\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
 \section{Intro}
+ext-authortitle-ibid
+
+\section{Files}
+Currently, installation of files is manual.
+
+Put the files listed in Reference \ref{ref:files} in a location where \TeX\ can find the, such as the current folder.
+
+\begin{dor}{ref:files}{Files needed for lawcite}
+\begin{description}
+\item[lawcite.dbx]  datamodel definitions, e.g., whether an item is a \cef{field}, a \cef{date}, a \cef{name list}, and so on.
+\item[lawcite.bbx]  bibliography commands.
+\item[lawcite.cbx]  citation commands.
+\item[english-lawcite.lbx]  language-specific string constants, such as the abbreviations for `rule' and `regulation', in singular and plural form.
+\item[plain.ist] index style file for producing a plain-style Table of Cases with dot leaders, plus preparatory code for producing hyperlinked page numbers. The file name is arbitrary. The file is used as input by the SplitIndex program (see Section \ref{workflow} for the workflow). 
+\item[square.ist] index style file for producing a plain-style Table of Cases with dot leaders and numbers enclosed in square brackets ([]) -- intended for use with paragraph numbers (hyperlinking of paragraph numbers is done outside of the .ist file). The file name is arbitrary. The file is used as input by the SplitIndex program (see Section \ref{workflow} for the workflow).
+\end{description}
+\end{dor}
+
+\section{Workflow}\label{workflow}
+For a file, \cef{foo.tex}, the workflow is shown in Reference \ref{ref:workflow}.
+
+\begin{dor}{ref:workflow}{Workflow}
+\begin{itemize}
+\item \verb|xelatex foo|
+	\begin{itemize}
+	\item Inital run, placeholder markers are set down
+	\end{itemize}
+\item \verb|biber foo|
+	\begin{itemize}
+	\item \cef{bib} file is read and bibliogaphic and citation references are resolved
+	\end{itemize}
+\item \verb|xelatex foo|
+	\begin{itemize}
+	\item bibliographic and citation material is incorporated
+	\end{itemize}
+\item \verb|splitindex foo -- -s plain.ist -c|
+	\begin{itemize}
+	\item index information is split out into \cef{.ind} files for the Table of Cases, etc
+	\end{itemize}
+\item \verb|xelatex foo|
+	\begin{itemize}
+	\item Table of Cases is incorporated
+	\end{itemize}
+\item \verb|splitindex foo -- -s plain.ist -c|
+	\begin{itemize}
+	\item any refreshed page numbers for the Table of Cases are collected
+	\end{itemize}
+\item \verb|xelatex foo|
+	\begin{itemize}
+	\item page numbers settle
+	\end{itemize}
+\end{itemize}
+\end{dor}
+
+\section{Commands}
+
+\subsection{\cmd{lcproc} -- in-progress proceedings}
 The lc-proceedings citation command, \cmd{lcproc}, looks for the bibentry fields shown in code listing \ref{ex}.
 
-\begin{dov}{ex}{Example}
+Use this citation command when there is no published decision.
+
+\begin{dov}{ex}{In-progress proceedings bibentry example}
 
 @case{abcproc,
   partya = {PartyAName},
@@ -216,15 +326,15 @@ The lc-proceedings citation command, \cmd{lcproc}, looks for the bibentry fields
 
 \end{dov}
 
-\cmd{lcproc}\{abcproc\} produces: 
+\cmdb{lcproc}{abcproc} produces: 
 
 \lcproc{abcproc}
 \bigskip
 
-The index style file, plain.ist, has to contain the formatting code as shown in listing \ref{ist} for the page numbers in the Table of Cases to hyperlink correctly.
+The index style file, \cef{plain.ist}, has to contain the formatting code as shown in listing \ref{list:ist} for the page numbers in the Table of Cases to hyperlink correctly.
 
 
-\begin{dov}{ist}{Code for plain.ist file for SplitIndex}
+\begin{dov}{list:ist}{Code for plain.ist file for SplitIndex}
 
 delim_0 "\\space\\dotfill\\space "\hss
 delim_1 "\\space\\dotfill\\space "\hss
@@ -238,13 +348,17 @@ encap_suffix "}"
 line_max 1000
 
 \end{dov}
-
-
 \newpage
-\lcproc{xyzproc}
+The first citation\marginpar{2nd cite} of a case is in full: \lcproc{xyzproc}.
 
-\newpage
-The \cmd{lawcite} command's indexing ccapability has been enhanced to also include page hyperlinking in the Table of Cases, like \cmd{lcproc} does.
+If the biblatex cite tracking option has been switched on 
+\begin{quotation}
+\hspace{2em}\verb|citetracker=true|
+\end{quotation}
+ then, in subsequent citations of the same case, only the case name is presented: \lcproc{xyzproc}.
+
+%\newpage
+The \cmd{lawcite} command's indexing capability has been enhanced to also include page hyperlinking in the Table of Cases, like \cmd{lcproc} does.
 
 Example:
 
@@ -258,10 +372,66 @@ Example:
 
 and the indexer picks it up too.
 
+\subsection{\cmd{lawcite} -- published decisions}
+\begin{quotation}
+`There are many different citation styles.' 
+\medskip
+
+\lcepigraphp[ \nopp 232]{tnl}
+\end{quotation}
+
+The \cmd{lawcite} command is the general purpose citation command.
+
+It is governed by a set of switches set either as biblatex options, or as mid-document commands.
+\bigskip
+
+%\newpage
+Booleans
+
+\begin{tabular}{lll}
+\bfseries Option & \bfseries Toggle & \bfseries Command \\ 
+casename-comma & casenamecomma &  \\ 
+caseref-in-toc & refintoc & setrefintocon \\ 
+comma-in-index & commainindex &  \\ 
+demo-mode & indemomode & lcsetdemoon \\ 
+hyperlink-index-pages & hyperindexpages &  \\ 
+mnc-brackets & mncbrackets & setmncbracketson \\ 
+multi-comma-sep & multicitecomma & setmulticitecommaon \\ 
+party-names-italic & partynamesitalic & setpartynamesitalicon \\ 
+party-separator-dotted & partysepdotted & setpartysepdottedon \\ 
+party-separator-italic & partysepitalic & setpartysepitalicon \\ 
+print-toc-tos & printlegtoc & setprintlegtocon \\ 
+regulations-as-tor & printregulations &  \\ 
+set-lawcite-indexing & lcindexing &  \\ 
+set-ljarticletitle-italic & ljarttitleitalic & setljarttitleitalicon \\ 
+set-ljjournaltitle-italic & ljjnltitleitalic & setljjnltitleitalicon \\ 
+show-statute-jurisdiction & statjurisdiction & setstatjurison \\ 
+statute-title-year-comma & stattycomma &  \\ 
+statute-title-year-italic & stattyitalic &  \\ 
+use-toc-parnumrefs & lcparnumrefs &  \\ 
+\end{tabular}
+
+\newpage
+\lccitedemo{snail}{565}
+\bigskip
+
+There is some interaction with the lawcite refstyle and other settings already set prior in the document and partway through the list. And the biblatex ibid-tracker option has been switched off to allow the demonstration to show the case name rather than a trail of ibids.
+
+And, of course, all these variations find their way into the Table of Cases (an index).
+
+\newpage
+Law Journals and Law Reviews
+\bigskip
+
+\lccitedemolj{smythsc}
+\bigskip 
+
+
 \bigskip
 \bigskip
 \hfill --oooOooo--\hfill\ 
 
+\printbibliography[type=book]
 
 \end{document}
 
