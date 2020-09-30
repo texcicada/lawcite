@@ -1,0 +1,386 @@
+\begin{filecontents*}[overwrite]{\jobname.bib}
+
+
+@case{thomas,
+  partya = {Thomas},
+  partyb = {Newton},
+  icaseyear = {1827},
+	}
+@case{thomascar,
+  reportyear = {1827},
+  reportvolume = {2},
+  reportseries = {Car \& P},
+  reportpage = {606},
+  crossref = {thomas},
+}
+@case{snail,
+  partya = {Donoghue}, 
+  partyb = {Stevenson},
+  icaseyear = {1932},
+  reportyear={1932},
+%  volyearneeded = {true},
+  reportseries = {AC},
+  reportpage = {562},
+  casenickname = {snail in the bottle},
+  note = {HL},
+	}
+
+
+
+@case{caseausrec,
+  partya = {Applicant S270/2019}, 
+  partyb = {Minister for Immigration and Border Protection},
+  caseyear = {2020},
+  courtname = {HCA},
+  casenumber = {32},
+	}
+
+@case{casecanrec,
+  partya = {Michel}, 
+  partyb = {Graydon},
+  caseyear = {2020},
+  courtname = {SCC},
+  casenumber = {24},
+	}
+
+
+@case{caseukrec,
+  partya = {Revenue and Customs}, 
+  partyb = {Parry},
+  caseyear = {2020},
+  courtname = {UKSC},
+  casenumber = {35},
+	}
+
+@case{caseusrec,
+  partya = {Little}, 
+  partyb = {Reclaim Idaho},
+%  caseyear = {2020},
+%  courtname = {UKSC},
+%  casenumber = {35},
+  courtname = {USSC},
+%  courtdivision = {},
+%  courtlist = {},
+%  courtjurisdiction = {},
+  courtcasenumber ={No. 20A18},
+	}
+
+@case{caseus,
+  partya = {Pittsburgh Melting Co},
+  partyb = {Totten},
+%  reportyear = {1918},
+  reportvolume = {248},
+  reportseries = {US},
+  reportpage = {1},
+  note = {1918},
+}
+
+@case{caseuslumber,
+  partya = {United States},
+  partyb = {Detroit Timber \& Lumber Company},
+%  reportyear = {},
+  reportvolume = {200},
+  reportseries = {US},
+  reportpage = {321},
+  note = {1906},
+}
+
+%=======
+@case{caseaus,
+  partya = {Royal Botanic Gardens and Domain Trust}, 
+  partyb = {South Sydney City Council},
+  caseyear = {2002},
+  courtname = {HCA},
+  casenumber = {5},
+  reportyear = {2002},
+%  volyearneeded = {true},
+  reportvolume = {186},
+  reportseries = {ALR},
+  reportpage = {289},
+	}
+
+@case{casecan,
+  partya = {Babcock}, 
+  partyb = {Canada (Attorney General)},
+  caseyear = {2002},
+  courtname = {SCC},
+  casenumber = {57},
+  reportyear = {2002},
+  volyearneeded = {true},
+  reportvolume = {3},
+  reportseries = {SCR},
+  reportpage = {3},
+	}
+
+
+@case{caseukunrep1,
+  partya = {Stanford International Bank Ltd}, 
+  partyb = {Director of The Serious Fraud Office},
+  caseyear = {2012},
+  courtname = {UKSC},
+  casenumber = {3},
+%  reportyear = {xxxx},
+%  volyearneeded = {true},
+%  reportvolume = {xxx},
+%  reportseries = {xxx},
+%  reportpage = {xxx},
+	}
+
+@case{caseukunrep2,
+  partya = {Kasilevicius}, 
+  partyb = {Deputy Prosecutor General Lithuania},
+  caseyear = {2014},
+  courtname = {EWHC},
+  casenumber = {2281 (Admin)},
+%  reportyear = {xxxx},
+%  volyearneeded = {true},
+%  reportvolume = {xxx},
+%  reportseries = {xxx},
+%  reportpage = {xxx},
+	note = {QBD},
+	}
+
+
+
+@case{caseuk,
+  partya = {Cox}, 
+  partyb = {Ergo Versicherung AG },
+  caseyear = {2014},
+  courtname = {UKSC},
+  casenumber = {22},
+  reportyear = {2014},
+%  volyearneeded = {true},
+%  reportvolume = {},
+  reportseries = {AC},
+  reportpage = {1379},
+	}
+
+
+
+@case{caseusnd,
+  partya = {State}, 
+  partyb = {Birchfield},
+  caseyear = {2016},
+  courtname = {ND},
+  casenumber = {182},
+%  reportyear = {},
+%  volyearneeded = {true},
+  reportvolume = {885},
+  reportseries = {NW 2d},
+  reportpage = {62},
+  note = {NDSC},
+	}
+
+
+
+\end{filecontents*}
+
+\documentclass[12pt]{article}
+\title{QuickStart Guide \\Exercise 1\\[24pt]\normalsize \hfill ---------\hfill\ }
+\author{}
+\date{}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+%\usepackage{pdfpages}
+\usepackage[table]{xcolor}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}[Scale=0.9]
+\setmonofont{Noto Sans Mono}[Colour=blue]
+\newfontface\ftmark{Noto Sans Symbols2}
+\newcommand\goodoh{{\large\ftmark 🗸}}
+\newcommand\notsogoodoh{{\large\ftmark 🗶}}
+
+\usepackage{splitidx}
+%=============================================
+
+\newcommand\bef[1]{(\textit{#1})}
+\newcommand\cef[1]{\textit{#1}}
+\newcommand\cmd[1]{\textsf{\textbackslash\textbf{#1}}}
+\newcommand\cmdb[2]{\textsf{\textbackslash\textbf{#1}\{#2\}}}
+
+\usepackage[style=lawcite,
+%	party-separator-dotted=true,
+%	lawrefstyle=caseallabove,
+	print-toc-tos=true,
+%%	hyperlink-index-pages=true,
+	use-toc-parnumrefs=false,
+%	citetracker=true,
+	ibidtracker=false,%for demo purposes
+	]{biblatex}
+\addbibresource{\jobname.bib}
+
+\renewcommand\myhyperref[1]{\hyperpage{#1}}
+\renewcommand\lcparnumrefsencap{|myhyperref}
+
+\usepackage{fancyvrb}
+\usepackage{mdframed}
+\rowcolors{1}{blue!5}{blue!9}
+\usepackage{float}
+%\floatstyle{boxed}
+%------------------------------- program float
+\newfloat{program}{h}{lop}
+\floatname{program}{Code listing}
+
+\newenvironment{dov}[2]%
+  {\VerbatimEnvironment
+      \program
+    \begin{mdframed}[backgroundcolor=green!40!blue!12]
+    \caption{#2}%
+    \label{#1}%    
+    \begin{Verbatim}}
+  {\end{Verbatim}%
+    \end{mdframed}
+    \endprogram
+}
+
+%------------------------------- reference float
+\newfloat{reference}{h}{lop}
+\floatname{reference}{Reference}
+
+\newenvironment{dor}[2]%
+  {%
+      \reference
+    \begin{mdframed}[backgroundcolor=red!40!green!12]
+    \caption{#2}%
+    \label{#1}%    
+    }
+  {%
+    \end{mdframed}
+    \endreference
+}
+
+
+
+
+
+\makeindex
+\newindex[Table of Cases]{cases}
+\newcommand\pagerefindexnoteb{{\small\mdseries\itshape\hfill Page}}
+\setindexpreamble[cases]{\pagerefindexnoteb}
+
+\usepackage[
+				bookmarks,
+            colorlinks=true,        
+            allcolors = black,  
+            citecolor=blue,        
+            pageanchor=true,
+            plainpages=false,
+            hyperindex=false, 
+]{hyperref}
+
+
+\newcommand\illus[2]{\bigskip\noindent\fbox{#1}\\#2}
+
+%\usepackage{tablefootnote}
+
+%=============================================
+\begin{document}
+\maketitle
+%\tableofcontents
+
+
+%\setprintlegtocon
+\let\xoldtwocolumn\twocolumn
+\iftoggle{printlegtoc}{%
+\let\oldtwocolumn\twocolumn
+\renewcommand{\twocolumn}[1][]{#1}
+\let\oldclearpage\clearpage
+\renewcommand\clearpage{\relax}
+\extendtheindex{}{\useindexpreamble}{}{}
+\printindex[cases]
+\printindex[legislation]
+\iftoggle{printregulations}{\printindex[regulations]}{}
+%%%\printindex[general]
+%%%
+\renewcommand{\twocolumn}[1][]{\oldtwocolumn}
+\renewcommand\clearpage{\oldclearpage}
+}{}
+\bigskip
+\hfill\rulesep\hfill\ %\hrule%{0.8\linewidth}
+\bigskip
+
+
+
+
+\section{Exercise 1}
+Compile this document with (xe/lua)latex, biber, (xe/lua)latex.
+
+The further compilation, splitindex and (xe/lua)latex, to produce the Table of Cases, will be described in Exercise 2, where the parameters used by splitindex will be explained.
+
+\section{Result}
+\sdft{lawcite} with the built-in styles:
+\bigskip
+
+\renewcommand\lcdemolabelw{5cm}
+\noindent\colorbox{blue!5}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (MLR)}}}\lcsetstylemlr\lawcite{snail}
+
+\noindent\colorbox{blue!9}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (McGill)}}}Text\lcsetstylemcgill\lawcite{snail}
+
+\noindent\colorbox{blue!5}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (Indigo)}}}\lcsetstyleindigo\lawcite{caseuslumber}
+
+\noindent\colorbox{blue!9}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (AGLC)}}}Text\lcsetstyleaglc\lawcite{snail}
+
+\noindent\colorbox{blue!5}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (Default)}}}Text\lcsetstyledefault\lawcite{snail}
+
+\bigskip
+
+The built-in styles with \sdft{setallabove}:
+\bigskip
+
+\noindent\colorbox{blue!5}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (MLR)}}}\lcsetstylemlr\setallabove\lawcite{snail}
+
+\noindent\colorbox{blue!9}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (McGill)}}}\lcsetstylemcgill\setallabove\lawcite{snail}
+
+\noindent\colorbox{blue!5}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (Indigo)}}}\lcsetstyleindigo\setallabove\lawcite{caseuslumber}
+
+\noindent\colorbox{blue!9}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (AGLC)}}}\lcsetstyleaglc\setallabove\lawcite{snail}
+
+\noindent\colorbox{blue!5}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (Default)}}}\lcsetstyledefault\setallabove\lawcite{snail}
+\bigskip
+
+Recent cases:
+
+\lcsetstyleaglc\setallabove
+\illus{Aus}{\lawcite{caseausrec}}
+
+\lcsetstylemcgill\setallabove
+\illus{Can}{\lawcite{casecanrec}}
+
+\lcsetstyledefault\setallabove
+\illus{UK}{\lawcite{caseukrec}}
+
+\lcsetstyleindigo
+\illus{US}{\lcproc{caseusrec}}
+\bigskip
+
+Reported cases:
+
+\lcsetstyleaglc\setallabove
+\illus{Aus}{\lawcite{caseaus}}
+
+\lcsetstylemcgill\setallabove
+\illus{Can}{\lawcite{casecan}}
+
+\lcsetstyledefault\setallabove
+\illus{UK}{\lawcite{caseuk}}
+
+\lcsetstyleindigo
+\illus{US}{\lawcite{caseus}}
+
+\illus{US-ND}{\lawcite{caseusnd}}
+
+\bigskip
+
+
+\bigskip
+\bigskip
+\hfill --oooOooo--\hfill\ 
+\myhyperref{2}
+%\printbibliography[type=book]
+
+\end{document}
+
+
+
+
+

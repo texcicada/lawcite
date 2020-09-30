@@ -225,7 +225,7 @@
 \iffieldundef{reportyear}%
 {\iffieldundef{caseyear}%if no report year
 {}%if no case year
-{\printfield{caseyear}}%
+{\iftoggle{caseyearasreportyear}{\printfield{caseyear}}{}}%
 }%end if no reportyear
 {\iffieldundef{volyearneeded}{%
 \iffieldundef{reportvolume}{%
@@ -2198,7 +2198,9 @@ test {\ifentrytype{case}}%
 
 %=================== utility macros: display the bibentry using all cite commands
 %----------------------
-\newcommand\sdfs[1]{\ttfamily\small\color{blue} \textbackslash #1\space\dotfill\space}
+\newcommand\sdfs[1]{{\ttfamily\small\color{blue} \textbackslash #1\space\dotfill\space}}
+\newcommand\sdft[1]{{\ttfamily\small\color{blue}\textbackslash #1}}
+
 
 %\lcsetdemooff
 \newcommand\lcdemolabelw{6cm}

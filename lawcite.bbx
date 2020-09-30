@@ -16,6 +16,9 @@
 \newtoggle{mncbrackets}
 \toggletrue{mncbrackets}
 %
+\newtoggle{caseyearasreportyear}
+\togglefalse{caseyearasreportyear}
+%
 \newtoggle{multicitecomma}
 \togglefalse{multicitecomma}
 %
@@ -35,6 +38,15 @@
 %
 \newtoggle{lcindexing}
 \toggletrue{lcindexing}
+
+%
+\DeclareBibliographyOption[boolean]{use-case-year-as-report-year}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{caseyearasreportyear}}
+{\togglefalse{caseyearasreportyear}}%
+}
+
+
 
 % statute
 \DeclareBibliographyOption[boolean]{set-lawcite-indexing}[true]{%
@@ -221,39 +233,39 @@
 
 
 \newcommand\lcsetstyledefault{%
-   \toggletrue{partynamesitalic}
-   \toggletrue{partysepitalic}
-   \togglefalse{partysepdotted}
-   \toggletrue{mncbrackets}
-   \setcounter{reftypemode}{3}
-   \toggletrue{printlegtoc}
-   \toggletrue{statjurisdiction}
-   \togglefalse{stattycomma}
-   \toggletrue{stattyitalic}
-   \toggletrue{commainindex}
-   \togglefalse{multicitecomma}
-   \togglefalse{casenamecomma}
- \renewcommand\postnotedelim{,\ }
-   \toggletrue{ljarttitleitalic}
-   \togglefalse{ljjnltitleitalic}
+   \toggletrue{partynamesitalic}%
+   \toggletrue{partysepitalic}%
+   \togglefalse{partysepdotted}%
+   \toggletrue{mncbrackets}%
+   \setcounter{reftypemode}{3}%
+   \toggletrue{printlegtoc}%
+   \toggletrue{statjurisdiction}%
+   \togglefalse{stattycomma}%
+   \toggletrue{stattyitalic}%
+   \toggletrue{commainindex}%
+   \togglefalse{multicitecomma}%
+   \togglefalse{casenamecomma}%
+ \renewcommand\postnotedelim{,\ }%
+   \toggletrue{ljarttitleitalic}%
+   \togglefalse{ljjnltitleitalic}%
 }
 
 \newcommand\lcsetstyleaglc{%
-   \toggletrue{partynamesitalic}
-   \toggletrue{partysepitalic}
-   \togglefalse{partysepdotted}
-   \toggletrue{mncbrackets}
-   \setcounter{reftypemode}{3}
-   \toggletrue{printlegtoc}
-   \toggletrue{statjurisdiction}
-   \togglefalse{stattycomma}
-   \toggletrue{stattyitalic}
-   \toggletrue{commainindex}
-   \togglefalse{multicitecomma}
-   \togglefalse{casenamecomma}
- \renewcommand\postnotedelim{,\ }
-   \toggletrue{ljarttitleitalic}
-   \togglefalse{ljjnltitleitalic}
+   \toggletrue{partynamesitalic}%
+   \toggletrue{partysepitalic}%
+   \togglefalse{partysepdotted}%
+   \toggletrue{mncbrackets}%
+   \setcounter{reftypemode}{3}%
+   \toggletrue{printlegtoc}%
+   \toggletrue{statjurisdiction}%
+   \togglefalse{stattycomma}%
+   \toggletrue{stattyitalic}%
+   \toggletrue{commainindex}%
+   \togglefalse{multicitecomma}%
+   \togglefalse{casenamecomma}%
+ \renewcommand\postnotedelim{,\ }%
+   \toggletrue{ljarttitleitalic}%
+   \togglefalse{ljjnltitleitalic}%
 }
 
 
@@ -262,36 +274,55 @@
 
 
 \newcommand\lcsetstylemlr{%
-   \toggletrue{partysepdotted}
-   \togglefalse{partysepitalic}
-   \toggletrue{partynamesitalic}
-   \toggletrue{mncbrackets}
-   \setcounter{reftypemode}{2}
-   \togglefalse{printlegtoc}
-   \togglefalse{multicitecomma}
-   \togglefalse{casenamecomma}
- \renewcommand\postnotedelim{,\ }
-   \togglefalse{ljarttitleitalic}
-   \toggletrue{ljjnltitleitalic}
+   \toggletrue{partysepdotted}%
+   \togglefalse{partysepitalic}%
+   \toggletrue{partynamesitalic}%
+   \toggletrue{mncbrackets}%
+   \setcounter{reftypemode}{2}%
+   \togglefalse{printlegtoc}%
+   \togglefalse{multicitecomma}%
+   \togglefalse{casenamecomma}%
+ \renewcommand\postnotedelim{,\ }%
+   \togglefalse{ljarttitleitalic}%
+   \toggletrue{ljjnltitleitalic}%
 }
 
 \newcommand\lcsetstylemcgill{%
-   \togglefalse{partysepdotted}
-   \toggletrue{partysepitalic}
-   \toggletrue{partynamesitalic}
-   \setcounter{reftypemode}{3}
-   \togglefalse{mncbrackets}
+   \togglefalse{partysepdotted}%
+   \toggletrue{partysepitalic}%
+   \toggletrue{partynamesitalic}%
+   \setcounter{reftypemode}{3}%
+   \togglefalse{mncbrackets}%
    \toggletrue{stattycomma}%after the title
-   \togglefalse{stattyitalic}
-   \togglefalse{statjurisdiction}
+   \togglefalse{stattyitalic}%
+   \togglefalse{statjurisdiction}%
 %   \toggletrue{statutecomma}%after the title
- \toggletrue{commainindex}
- \toggletrue{multicitecomma}
- \toggletrue{casenamecomma}
- \renewcommand\postnotedelim{\ }
-   \togglefalse{ljarttitleitalic}
-   \toggletrue{ljjnltitleitalic}
+ \toggletrue{commainindex}%
+ \toggletrue{multicitecomma}%
+ \toggletrue{casenamecomma}%
+ \renewcommand\postnotedelim{\ }%
+   \togglefalse{ljarttitleitalic}%
+   \toggletrue{ljjnltitleitalic}%
 }
+
+\newcommand\lcsetstyleindigo{%
+   \toggletrue{partynamesitalic}%
+   \toggletrue{partysepitalic}%
+   \toggletrue{partysepdotted}%
+   \togglefalse{mncbrackets}%
+   \setcounter{reftypemode}{1}%
+   \toggletrue{printlegtoc}%
+   \toggletrue{statjurisdiction}%
+   \togglefalse{stattycomma}%
+   \toggletrue{stattyitalic}%
+   \toggletrue{commainindex}%
+   \togglefalse{multicitecomma}%
+   \toggletrue{casenamecomma}%
+ \renewcommand\postnotedelim{,\ }%
+   \toggletrue{ljarttitleitalic}%
+   \togglefalse{ljjnltitleitalic}%
+}
+
 
 
 %
