@@ -209,8 +209,10 @@
 	]{biblatex}
 \addbibresource{\jobname.bib}
 
-\renewcommand\myhyperref[1]{\hyperpage{#1}}
-\renewcommand\lcparnumrefsencap{|myhyperref}
+
+
+%\renewcommand\myhyperref[1]{\hyperpage{#1}}
+%\renewcommand\lcparnumrefsencap{|myhyperref}
 
 \usepackage{fancyvrb}
 \usepackage{mdframed}
@@ -280,6 +282,7 @@
 
 
 %\setprintlegtocon
+\setindexhyperlinks
 \let\xoldtwocolumn\twocolumn
 \iftoggle{printlegtoc}{%
 \let\oldtwocolumn\twocolumn
@@ -375,7 +378,6 @@ Reported cases:
 \bigskip
 \bigskip
 \hfill --oooOooo--\hfill\ 
-\myhyperref{2}
 %\printbibliography[type=book]
 
 \end{document}

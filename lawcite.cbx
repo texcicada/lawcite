@@ -5,6 +5,12 @@
 \newcommand\statutetitleyeardelim{\addspace}
 \newcommand\statutejurisdictiondelim{\addspace}
 
+%for Table of Cases
+\newcommand\mncreportdelimiter{}
+\newcommand\setmncreportdelimiter[1]{%
+\renewcommand\mncreportdelimiter{\addcomma\addspace}}
+
+
 
 
 %====================================================
@@ -2458,6 +2464,7 @@ test {\ifentrytype{jurisdiction}}%
 
 \newbibmacro{indexcaseparm}{%
 \sindex[cases]{%
+\thefield{partya}\thefield{partyb}@%for sorting
 %partynames = casename
 \iftoggle{partynamesitalic}{%start italic
 \textit{%
@@ -2466,18 +2473,19 @@ test {\ifentrytype{jurisdiction}}%
 {%
 \iffieldundef{shipname}{\thefield{partya}\iffieldundef{partyajur}{}{ (\thefield{partyajur})}%no space, for one party only; space if partyb (before v)
 \iffieldundef{partyb}{}{ \iffieldundef{partysep}{\iftoggle{partysepitalic}{\textit{v}}{\textup{v}}}{\iftoggle{partysepitalic}{\textit{\thefield{partysep}}}{\textup{\thefield{partysep}}}}\iftoggle{partysepdotted}{.}{} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}}%
-%proceedings reference
+%proceedings reference, if any
+\iffieldundef{courtcasenumber}{}{%
 \iffieldundef{courtname}{}{, \thefield{courtname}}%
 \iffieldundef{courtdivision}{}{, \thefield{courtdivision}}%
 \iffieldundef{courtlist}{}{, \thefield{courtlist}}%
 \iffieldundef{courtjurisdiction}{}{, \thefield{courtjurisdiction}}%
-\iffieldundef{courtcasenumber}{}{, \thefield{courtcasenumber}}%
+, \thefield{courtcasenumber}}%
 %caseref
 \iftoggle{refintoc}{% 1st character is a space
 \iftoggle{commainindex}{,}{}\addspace\iffieldundef{casenumber}{}{\iftoggle{mncbrackets}{[}{}\thefield{caseyear}\iftoggle{mncbrackets}{]}{} \thefield{courtname} \thefield{casenumber}}%
 %\iffieldundef{reportpage}{}{\thefield{reportyear} \thefield{reportvolume} \thefield{reportseries} \thefield{reportpage}} %
 \iffieldundef{reportpage}{}{%
-\iffieldundef{casenumber}{}{;}%
+\iffieldundef{casenumber}{}{, }% s/b delimiter ***
 \iffieldundef{reportyear}{}{%
 \iffieldundef{reportvolume}{ [}{%
 \iffieldundef{volyearneeded}{ (}{ [}}%
@@ -2573,6 +2581,17 @@ test {\ifentrytype{jurisdiction}}%
 
 %===================
 %misc general commands
+\newcommand\setindexhyperlinks{%
+\iftoggle{lcparnumrefs}{%
+\renewcommand\myhyperref[1]{\ref{para.##1}}%
+\renewcommand\lcparnumrefsencap{|myhyperref}%
+}%end true
+{%false
+\renewcommand\myhyperref[1]{\hyperpage{##1}}%
+\renewcommand\lcparnumrefsencap{|myhyperref}%
+}%end false
+}
+
 
 %===============================================
 %===================
