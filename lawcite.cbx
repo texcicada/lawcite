@@ -193,6 +193,12 @@
 %%\newblock
 %%}%
 
+%======== casesn
+\newbibmacro{getcasesn}{%
+\iffieldundef{shipname}{\iffieldundef{partya}{}{\printfield{partya}}}%
+{\printfield{shipname}}%
+}
+
 
 %======== caseshortname
 \newbibmacro{getcaseshortname}{%
@@ -1297,6 +1303,22 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}
 
+
+
+%============= lccasesn
+\DeclareCiteCommand{lccasesn}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\usebibmacro{sendtocaseindex}%
+\usebibmacro{fullstepindex}%
+\usebibmacro{getcasesn}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
 
 
 

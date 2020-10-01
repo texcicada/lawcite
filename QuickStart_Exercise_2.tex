@@ -177,10 +177,60 @@ date={2017},
 }
 
 
+@statute{crimcan,
+statutetitle = {Criminal Code},
+%statutelongtitle = {},
+%statuteshorttitle = {},
+%statutenickname = {},
+%statutevolume = {},
+%statutejurisdiction = {NSW},
+%statuteregnalyear = {},
+%statutechapter = {},
+%statuteyear = {},%for the volume
+statutetitleyear = {RSC 1985, c~C-46},%for the title
+}
+
+
+@statute{canreg,
+statutetitle = {Maple Products Regulations},
+%statutelongtitle = {},
+statuteshorttitle = {CRC},
+%statutenickname = {},
+%statutevolume = {},
+%statutejurisdiction = {NSW},
+%statuteregnalyear = {},
+statutechapter = {289},
+%statuteyear = {},%for the volume
+%statutetitleyear = {RSC 1985},%for the title
+}
+
+@statute{canregnwt,
+citeref = {nwtreg},
+%title = {xxx},
+%chapter = {xxx},
+year = {2008},
+regnum = {26},
+}
+
+
+@statute{crimnsw,
+statutetitle = {Crimes Act},
+%statutelongtitle = {},
+%statuteshorttitle = {},
+%statutenickname = {},
+%statutevolume = {},
+statutejurisdiction = {NSW},
+%statuteregnalyear = {},
+%statutechapter = {},
+%statuteyear = {},%for the volume
+statutetitleyear = {1900},%for the title
+}
+
+
 \end{filecontents*}
 
 \documentclass[12pt]{article}
-\title{Lawcite\\QuickStart Guide \\Exercise 1\\Citation\\[24pt]\normalsize \hfill ---------\hfill\ }
+\title{Lawcite\\QuickStart Guide \\Exercise 2\\Table of Cases\\[24pt]\normalsize \hfill ---------\hfill\ }
 \author{}
 \date{}
 \newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
@@ -208,6 +258,7 @@ date={2017},
 	print-toc-tos=true,
 %%	hyperlink-index-pages=true,
 	use-toc-parnumrefs=false,
+	show-statute-jurisdiction=true,
 %	citetracker=true,
 	ibidtracker=false,%for demo purposes
 	]{biblatex}
@@ -255,14 +306,19 @@ date={2017},
     \endreference
 }
 
-
+%------------------------------- code emphasis
+\newcommand\markthis[1]{\textcolor{red}{\textbf{#1}}}
 
 
 
 \makeindex
 \newindex[Table of Cases]{cases}
+\newindex[Table of Statutes]{legislation}
+\newindex[Table of Regulations]{regulations}
 \newcommand\pagerefindexnoteb{{\small\mdseries\itshape\hfill Page}}
 \setindexpreamble[cases]{\pagerefindexnoteb}
+\setindexpreamble[legislation]{\pagerefindexnoteb}
+\setindexpreamble[regulations]{\pagerefindexnoteb}
 
 \usepackage[
 				bookmarks,
@@ -315,124 +371,124 @@ Exercise 2 demonstrates how to produce the Table of Cases and a general index.
 
 Exercise 3 demonstrates the use of numbered paragraphs.
 
-\section{Exercise 1}
+\section{Exercise 2}
 Compile this document with (xe/lua)latex, biber, (xe/lua)latex.
 
-\section{Result}
+\section{Indexing}
+The Table of Cases, the Table of Statutes, and the Table of Regulations (compendiously referred to here as `ToC') are one-column indexes.
 
-Given a bibentry as shown in listing \ref{snailbib},\footnote{And using a US case to illustrate Indigo.} the results are shown in subsections \ref{standard} and \ref{modified}.
+To produce them, put the code shown in listing \ref{indexpreamble} into the preamble of the document.
 
-
-\begin{dov}{snailbib}{The \lccasesn{snail} case bibentry.}
-@case{snail,
-  partya = {Donoghue}, 
-  partyb = {Stevenson},
-  reportyear={1932},
-%  volyearneeded = {true},
-  reportseries = {AC},
-  reportpage = {562},
-  casenickname = {snail in the bottle},
-  note = {HL},
-	}
+\begin{dov}{indexpreamble}{Defining the Indexes}
+\usepackage{splitidx}
+\makeindex
+\newindex[Table of Cases]{cases}
+\newindex[Table of Statutes]{legislation}
+\newindex[Table of Regulations]{regulations}
+\newcommand\pagerefindexnoteb{%
+{\small\mdseries\itshape\hfill Page}}
+\setindexpreamble[cases]{\pagerefindexnoteb}
 \end{dov}
 
-\subsection{Standard styles}
-\label{standard}
-\sdft{lawcite} with the built-in styles:
-\bigskip
 
-\renewcommand\lcdemolabelw{5cm}
-\noindent\colorbox{blue!5}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (MLR)}}}\lcsetstylemlr\lawcite{snail}
+Put the code shown in listing \ref{indexbody} into the body of the document where the Table of Cases should appear (usually near the start, just after \texttt{\textbackslash begin\{document\}}).
 
-\noindent\colorbox{blue!9}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (McGill)}}}Text\lcsetstylemcgill\lawcite{snail}
+\begin{dov}{indexbody}{Printing the Indexes}
+\setindexhyperlinks
+\let\xoldtwocolumn\twocolumn
+\iftoggle{printlegtoc}{%
+\let\oldtwocolumn\twocolumn
+\renewcommand{\twocolumn}[1][]{#1}
+\let\oldclearpage\clearpage
+\renewcommand\clearpage{\relax}
+\extendtheindex{}{\useindexpreamble}{}{}
+\printindex[cases]
+\printindex[legislation]
+\iftoggle{printregulations}{%
+\printindex[regulations]}{}
+\renewcommand{\twocolumn}[1][]{\oldtwocolumn}
+\renewcommand\clearpage{\oldclearpage}
+}{}
+\end{dov}
 
-\noindent\colorbox{blue!5}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (Indigo)}}}\lcsetstyleindigo\lawcite{caseuslumber}
+There are two lawcite biblatex options controlling the ToC.
 
-\noindent\colorbox{blue!9}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (AGLC)}}}Text\lcsetstyleaglc\lawcite{snail}
-
-\noindent\colorbox{blue!5}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (Default)}}}Text\lcsetstyledefault\lawcite{snail}
-
-\subsection{Modified styles}
-\label{modified}
-
-The built-in styles with \sdft{setallabove}:
-\bigskip
-
-\noindent\colorbox{blue!5}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (MLR)}}}\lcsetstylemlr\setallabove\lawcite{snail}
-
-\noindent\colorbox{blue!9}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (McGill)}}}\lcsetstylemcgill\setallabove\lawcite{snail}
-
-\noindent\colorbox{blue!5}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (Indigo)}}}\lcsetstyleindigo\setallabove\lawcite{caseuslumber}
-
-\noindent\colorbox{blue!9}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (AGLC)}}}\lcsetstyleaglc\setallabove\lawcite{snail}
-
-\noindent\colorbox{blue!5}{\makebox[\lcdemolabelw][l]{\sdfs{lawcite (Default)}}}\lcsetstyledefault\setallabove\lawcite{snail}
-\bigskip
-
-
-For switching styles mid-document, the style switches are: 
 \begin{itemize}
-\item[] \cmd{lcsetstylemlr}
-\item[] \cmd{lcsetstylemcgill}
-\item[] \cmd{lcsetstyleindigo}
-\item[] \cmd{lcsetstyledefault}
-\item[] \cmd{lcsetstyleaglc}
+\item[] print-toc-tos=true 
+	\begin{itemize}
+	\item[] the ToC/ToS/ToR will be printed
+	\end{itemize}
+\item[] regulations-as-tor=true
+	\begin{itemize}
+	\item[] the Table of Regulations will be printed separately from the Table of Statutes
+	\end{itemize}
 \end{itemize}
 
-For a single-style document, the style can be set initially at document startup with the \texttt{lawcitestyle=} biblatex option:
-\begin{itemize}
-\item[] lawcitestyle=aglc,
-\item[] lawcitestyle=default,
-\item[] lawcitestyle=mcgill,
-\item[] lawcitestyle=mlr,
-\item[] lawcitestyle=indigo,
-\end{itemize}
+\section{The \texttt{\textbackslash index} Command}
+The MakeIndex program produces one index file (.ind) as output from information put into an input file (.idx) by the \texttt{\textbackslash index} command. Formatting is applied via code stored in an index style file (usually .ist).
 
-The style, or any of its components, can be changed at anytime after.
+The \texttt{\textbackslash index} command has the following structure:
 
-\section{Examples}
-\subsection{Recent cases}
-For very recent cases,\footnote{The cases listed are as at September 2020.} usually only the medium-neutral (MNC) or the court's case number  will be available.
+\colorbox{yellow!50!green!20}{\texttt{\textbackslash index}\{sort-text\markthis{@}index-entry\markthis{!}subentry\markthis{!}subsubentry\markthis{|}code\}}
 
+\section{The \texttt{\textbackslash sindex} Command}
+The \texttt{splitidx} package, using the SplitIndex program, is able to produce, and apply MakeIndex to, multiple index files.
+
+Its \texttt{\textbackslash sindex} command has the same structure as the \texttt{\textbackslash index} command, with the addition of a parameter identifying the specific index:
+
+\colorbox{yellow!50!green!20}{\texttt{\textbackslash index}[index-shortname]\{ \ldots\ \}}
+
+A split index is printed with \texttt{\textbackslash printindex} using the index shortname, e.g., \colorbox{yellow!50!green!20}{\texttt{\textbackslash printindex}[cases]}.
+
+Additional (manual) indexes may be defined and used as desired, e.g., \colorbox{yellow!50!green!20}{\texttt{\textbackslash newindex}[General Index]\{general\}}.
+
+The lawcite citation commands run the \texttt{\textbackslash sindex} command in the background, using the following method:
+
+\colorbox{yellow!50!green!20}{\texttt{\textbackslash sindex}[shortname]\{sort-text\markthis{@}index-entry\markthis{|}code\}}
+
+\noindent where \textit{code} is the command for setting hyperlinked page numbers or hyperlinked paragraph numbers.\footnote{Paragraph numbering is described in Exercise 3.}
+
+\section{Generating the Table of Cases}
 \lcsetstyleaglc\setallabove
-\illus{Aus}{\lawcite{caseausrec}}
-
+Firstly, some cites are needed: some cases -- \lawcite{snail}, \lcsetstyleindigo\lawcite{caseuslumber}; some statutes -- 
 \lcsetstylemcgill\setallabove
-\illus{Can}{\lawcite{casecanrec}}
-
-\lcsetstyledefault\setallabove
-\illus{UK}{\lawcite{caseukrec}}
-
-\lcsetstyleindigo
-\illus{US}{\lcproc{caseusrec}}
-\bigskip
-
-\subsection{Reported cases}
-Published decisions will be in one more law report series by volume and page, although for more recent cases, it will become more and more likely that ``[t]he citation refers to the decision's volume and page number in a book that will never be printed''\footcite[29]{martin} as publication goes online and becomes virtual.
-
+\lawcite{crimcan},
 \lcsetstyleaglc\setallabove
-\illus{Aus}{\lawcite{caseaus}}
-
+\lawcite{crimnsw}; 
+and some regulations\footnote{Where they are different in appearance and format to statutes, like the Canadian ones are.} -- 
 \lcsetstylemcgill\setallabove
-\illus{Can}{\lawcite{casecan}}
+\lawcite{canreg}, and lastly \lawcite{canregnwt}.
 
-\lcsetstyledefault\setallabove
-\illus{UK}{\lawcite{caseuk}}
 
-\lcsetstyleindigo
-\illus{US}{\lawcite{caseus}}
+Secondly, the index style file (see listing \ref{refist}) needs to be in place.
 
-\illus{US-ND}{\lawcite{caseusnd}}
+\begin{dov}{refist}{The index style file.}
+delim_0 "\\space\\dotfill\\space "
+delim_1 "\\space\\dotfill\\space "
+delim_2 "\\space\\dotfill\\space "
+delim_n ", "
+delim_r "--"
+delim_t ""
+encap_prefix "\\"
+encap_infix "{"
+encap_suffix "}"
+line_max 1000
+\end{dov}
 
-Note that, for this last citation, althought `\textit{State}' is the party name published in the law report, it will be more useful for readers who do not have the advantage of knowing the context from being within the jurisdiction to put the actual state name into the bibentry, in this case `\textit{North Dakota}'.
+
+Thirdly, the SplitIndex program needs to be run. It requires certain parameters.
+
+\colorbox{yellow!50!green!20}{\texttt{splitindex filename -s plain.ist}}
+
+Then xelatex again, to read in the .ind files.
 \bigskip
 
 
 \bigskip
 \bigskip
 \hfill --oooOooo--\hfill\ 
-\vfill
-\printbibliography[type=book]
+%\vfill
+%\printbibliography[type=book]
 
 \end{document}
 
