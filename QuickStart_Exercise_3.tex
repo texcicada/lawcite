@@ -485,9 +485,9 @@ keywords = {lj},
 \p The lawcite QuickStart Guide Exercise Pack consists of three exercises. 
 Exercise 1 illustrates the different styles available to the citation commands. Exercise 2 demonstrates how to produce the Table of Cases and a general index. Exercise 3 (this one) demonstrates the use of numbered paragraphs.
 
-\p Compile this document as per the orevious exercises, with with (xe/lua)latex, biber, (xe/lua)latex, splitinex, (xe/lua)latex.
+\p Compile this document as per the previous exercises, with with (xe/lua)latex, biber, (xe/lua)latex, splitindex, (xe/lua)latex.
 
-\p Add the code in listing \ref{refparnum} to the document preamble.
+\p Lawcite already defines a paragraph numbering command \cmd{p} (see Exercise 3a). To use paragraph numbering outside of lawcite, add the code in listing \ref{refparnum} to the document preamble.
 
 \begin{dov}{refparnum}{Defining the paragraphing numbering command, \cmd{p}}
 %Numbered paragraphs
@@ -500,7 +500,7 @@ Exercise 1 illustrates the different styles available to the citation commands. 
 \end{dov}
 
 
-\p To enable cross-referencing, put the code in listing \ref{refcrossref} also in the preamble.
+\p To enable cross-referencing, put the code in listing \ref{refcrossref} also into the preamble.
 
 \begin{dov}{refcrossref}{Cross-referencing commands}
 %numbered paragraphs cross-referencing method
@@ -509,7 +509,7 @@ Exercise 1 illustrates the different styles available to the citation commands. 
 \newcommand\pararef[1]{\definname\ [\ref{#1}]}
 \end{dov}
 
-\p To get the paragraph numbers at citation into the Table of Cases, put the code shown in listing \ref{reftoc} also into the document peramble.
+\p To get the paragraph numbers at citation into the Table of Cases, put the code shown in listing \ref{reftoc} also into the document preamble.
 
 \begin{dov}{reftoc}{Writing para numbers to the indexes.}
 %-------------------------------------------------------
