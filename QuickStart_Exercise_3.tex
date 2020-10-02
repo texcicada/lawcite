@@ -74,7 +74,7 @@
   note = {1918},
 }
 
-@case{caseuslumber,
+@case{dtlc,
   partya = {United States},
   partyb = {Detroit Timber \& Lumber Company},
 %  reportyear = {},
@@ -415,7 +415,7 @@ keywords = {lj},
 \setindexpreamble[cases]{\pagerefindexnoteb}
 \setindexpreamble[legislation]{\pagerefindexnoteb}
 \setindexpreamble[regulations]{\pagerefindexnoteb}
-
+\setindexpreamble[general]{\pagerefindexnoteb}
 
 %%Numbered paragraphs
 %\newcounter{parno}%[paragraph]%% numbered paragraph
@@ -435,7 +435,7 @@ keywords = {lj},
 \AtWriteToIndex{cases}{\let\thepage\theparno}
 \AtWriteToIndex{legislation}{\let\thepage\theparno}
 \AtWriteToIndex{regulations}{\let\thepage\theparno}
-%-------------------------------------------------------
+\AtWriteToIndex{general}{\let\thepage\theparno}%-------------------------------------------------------
 
 
 
@@ -557,6 +557,9 @@ Examples
 \lccitedemo{becker}{15}
 \bigskip 
 
+\lccitedemo{dtlc}{322}
+\bigskip 
+
 \p Text text text 
 \lccitedemorr{armstronglewin, armstronger}
 \bigskip 
@@ -629,7 +632,7 @@ Law Journals
 
 Index Style File
 
-\p To prevent spurious spaces appearing in the ToC after \markthis{[} for long citations because the default line length in the index file is 72 characters followed by a newline beginning with two tabs (to make the index file human-readable), set \verb|line_max| in the index style file (.ist) to a larger number.
+\p To prevent spurious spaces appearing in the ToC after \markthis{[} for long citations because the default line length in the index file is 72 characters\sindex[general]{72 chars|myhyperref} followed by a newline beginning with two tabs (to make the index file human-readable), set \verb|line_max| in the index style file (.ist) to a larger number.
 
 
 

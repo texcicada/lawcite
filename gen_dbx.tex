@@ -1,0 +1,162 @@
+\begin{filecontents*}[overwrite]{lawcite.dbx}
+%hyperref support for splitindex
+%\NewDocumentCommand\boldhyperpage{ m } {\textbf{\hyperpage{#1}}
+%\NewDocumentCommand\boldhyperpage{ m } {\hyperpage{#1}}
+\newcommand*\myhyperref[1]{\hyperpage{#1}}
+
+
+\DeclareDatamodelFields[type=field, datatype=verbatim]{thumbnail}
+\DeclareDatamodelEntryfields{thumbnail}
+
+\newcommand*{\insertbibimage}[1]{\includegraphics[width=1cm, keepaspectratio]{#1}}
+
+
+
+
+%
+\newtoggle{printregulations}
+\toggletrue{printregulations}
+
+%
+\newtoggle{printxregulations}
+\toggletrue{printxregulations}
+
+
+%
+\newcommand\lctos{legislation}
+%
+
+\newcommand\lctor{%
+%\ifkeyword{regulations}{\iftoggle{printregulations}{regulations}{legislation}}{legislation}%
+\iftoggle{printxregulations}{regulations}{legislation}%
+%legislation%
+}
+
+\newtoggle{hyperindexpages}
+\toggletrue{hyperindexpages}
+
+
+
+\DeclareDatamodelEntrytypes{case,statute,ljarticle}
+
+\DeclareDatamodelFields[type=list, datatype=literal]{%
+parallel,
+}
+
+
+\DeclareDatamodelFields[type=field, datatype=literal]{
+% case fields
+  partya,
+  partyb,
+  partysep,
+  partysepx,
+  shipname,
+  partyasn,%party short name, eg: DPP
+  partybsn,
+  partyajur,%party jurisdiction (for shortname), e.g. (NSW), as in DPP (NSW)
+  partybjur,
+  caseyear, %will be a date
+  icaseyear, %for the index
+  decisionyear, %for the casename, when no report year
+  reportyear, %will be a date
+  reportvolume,
+  volyearneeded, %will be a boolean
+  reportseries,
+  reportpage,
+  courtname,%for MNC, and in-progress
+  casenumber,%for MNC
+% for in-progress  
+  casename,
+  courtdivision,
+  courtlist,
+  courtjurisdiction,
+  courtcasenumber,%in-progress, the docket
+%general  
+  note,
+  caseshortname,
+  casenickname,
+% statute
+statutetitle,
+statutelongtitle,
+statuteshorttitle,
+statutenickname,
+statutevolume,
+statutejurisdiction,
+statuteregnalyear,
+statutechapter,
+statuteyear,%for the volume
+statutetitleyear,%for the title
+%reg2
+title,
+chapter,
+year,
+citeref,
+regnum,
+fulldate,
+gazette,
+%leg
+svjy,
+%ljarticle
+mncyear,
+mncname,
+mncnumber,
+}
+
+\DeclareDatamodelEntryfields[case]{%
+partya,partyb,partysep,partysepx,caseyear,reportyear,reportvolume,%
+volyearneeded,reportseries,reportpage,courtname,casenumber,note,shipname,%
+icaseyear,caseshortname,casenickname,decisionyear,parallel,
+  partyasn,%party short name, eg: DPP
+  partybsn,
+  partyajur,%party jurisdiction
+  partybjur,
+  casename,% in-progress fields
+  courtdivision,
+  courtlist,
+  courtjurisdiction,
+  courtcasenumber,  
+}
+
+
+\DeclareDatamodelEntryfields[statute]{%
+statutetitle,%
+statutelongtitle,%
+statuteshorttitle,%
+statutenickname,%
+statutevolume,%
+statutejurisdiction,%
+statuteregnalyear,%
+statutechapter,%
+statuteyear,%for the volume
+statutetitleyear,%for the title
+%reg2
+title,%
+chapter,%
+year,%
+citeref,%
+regnum,%
+fulldate,%
+gazette,%
+%
+svjy,%
+}
+
+\DeclareDatamodelEntryfields[ljarticle]{%
+author,
+title,
+mncyear,
+mncname,
+mncnumber,
+date,
+volume,
+journaltitle,
+pages,
+keywords,
+note,
+}
+
+\DeclareLanguageMapping{english}{english-lawcite}
+
+
+\endinput
+\end{filecontents*}

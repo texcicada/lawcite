@@ -529,6 +529,7 @@ xxx}%
 \ifkeyword{regulations}{\toggletrue{printxregulations}}{\togglefalse{printxregulations}}%
 \iftoggle{lcindexing}{\sindex[\lctor]{\lcindexaccum\lcparnumrefsencap}}{}%
 \togglefalse{printxregulations}%
+\renewcommand\lcindexaccum{}%empty
  }{}%endif
 }
 
@@ -1644,11 +1645,17 @@ test {\ifentrytype{case}}%
 
 
 
-\newbibmacro{fullstepindex}{%name-ref for all keys
+\newbibmacro{fullstepindex}{%name-ref for all keys: cases only
+\ifboolexpr{%
+test {\ifentrytype{case}}%
+}%
+{%true: is a case
 \iftoggle{lcindexing}{%
 \usebibmacro{getindexcasename}%
 \usebibmacro{getindexcaseref}%
 \usebibmacro{sendtoindexrr}%
+}%end true
+{}%false=is not case
 }{}%
 }
 
@@ -1804,20 +1811,20 @@ test {\ifentrytype{case}}%
 
 
 
-%============= lcinline
+%============= lcinline: only for cases
 \DeclareCiteCommand{lcinline}%
 %@@@@@@@@@@@@@@@@ prenote
 {\usebibmacro{prenote}}%
 %@@@@@@@@@@@@@@@@ item
 {%
-%\sindex[cases]{\thefield{partya} v \thefield{partyb}}
-%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\ifboolexpr{%
+test {\ifentrytype{case}}%
+}%
+{%true: is a case
 \textcolor{\lcinlinecolour}{\usebibmacro{getcasenameref}}%
-%\usebibmacro{sendtocaseindex}
-%%%\usebibmacro{getindexcasename}
-%%%\usebibmacro{getindexcaseref}
-%%%\usebibmacro{sendtoindexrr}
 \usebibmacro{fullstepindex}%
+}%end true: is a case
+{}%false = is not a case
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%
@@ -2244,6 +2251,8 @@ test {\ifentrytype{case}}%
 \lcsetstylemlr\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (MLR)}}\lawcite[#2]{#1}
 
 \lcsetstylemcgill\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (McGill)}}Text\lawcite[#2]{#1}
+
+\lcsetstyleindigo\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (Indigo)}}\lawcite[#2]{#1}
 
 \lcsetstyleaglc\noindent\makebox[\lcdemolabelw][l]{\sdfs{lawcite (AGLC)}}Text\lawcite[#2]{#1}
 
