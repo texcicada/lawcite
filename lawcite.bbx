@@ -1,6 +1,35 @@
 \ProvidesFile{lawcite.bbx}[2020/04/11 v1.0 biblatex bibliography style]
 \RequireBibliographyStyle{ext-authortitle-ibid}
 %%%%%%%%% case
+%
+\newtoggle{parabrackets}
+\toggletrue{parabrackets}
+%
+\newtoggle{ibidpostdelimcomma}
+\togglefalse{ibidpostdelimcomma}
+%
+\newtoggle{scndrefbrackets}
+\togglefalse{scndrefbrackets}
+%
+\newtoggle{ibidsupracomma}
+\togglefalse{ibidsupracomma}
+%
+\newtoggle{ibidsuprabrackets}
+\togglefalse{ibidsuprabrackets}
+%
+\newtoggle{ibidsupraon}
+\togglefalse{ibidsupraon}
+%
+\newtoggle{ibidsupraitalic}
+\togglefalse{ibidsupraitalic}
+%
+\newtoggle{ibidsupranotelong}
+\togglefalse{ibidsupranotelong}
+%
+
+\newtoggle{pinpointaftermnc}
+\toggletrue{pinpointaftermnc}
+%
 \newtoggle{partysepitalic}
 \toggletrue{partysepitalic}
 %
@@ -39,6 +68,134 @@
 \newtoggle{lcindexing}
 \toggletrue{lcindexing}
 
+
+%ibid settings
+%
+\newtoggle{ibiditalic}
+\togglefalse{ibiditalic}
+%
+\newtoggle{ibiduppercase}
+\togglefalse{ibiduppercase}
+%
+%\newtoggle{ibiddelimcomma}
+%\togglefalse{ibiddelimcomma}
+\newcounter{ibiddelimmode}
+\setcounter{ibiddelimmode}{1}%default: 1 none
+
+%book
+\newtoggle{bookauthorgiven}
+\togglefalse{bookauthorgiven}
+%
+
+%=======================================
+
+
+\DeclareBibliographyOption[boolean]{ibid-comma-postnote}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ibidpostdelimcomma}}
+{\togglefalse{ibidpostdelimcomma}}%
+}
+
+
+
+\DeclareBibliographyOption[boolean]{paragraph-number-brackets}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{parabrackets}}
+{\togglefalse{parabrackets}}%
+}
+
+
+\DeclareBibliographyOption[boolean]{second-case-ref-brackets}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{scndrefbrackets}}
+{\togglefalse{scndrefbrackets}}%
+}
+
+
+
+\DeclareBibliographyOption[boolean]{cite-book-author-given}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{bookauthorgiven}}
+{\togglefalse{bookauthorgiven}}%
+}
+
+
+\DeclareBibliographyOption[boolean]{supra-comma}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ibidsupracomma}}
+{\togglefalse{ibidsupracomma}}%
+}
+
+%
+\DeclareBibliographyOption[boolean]{supra-brackets}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ibidsuprabrackets}}
+{\togglefalse{ibidsuprabrackets}}%
+}
+
+%
+\DeclareBibliographyOption[boolean]{supra-on}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ibidsupraon}}
+{\togglefalse{ibidsupraon}}%
+}
+%
+\DeclareBibliographyOption[boolean]{supra-italic}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ibidsupraitalic}}
+{\togglefalse{ibidsupraitalic}}%
+}
+
+%
+\DeclareBibliographyOption[boolean]{supra-note-long}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ibidsupranotelong}}
+{\togglefalse{ibidsupranotelong}}%
+}
+%
+
+
+
+
+%
+\DeclareBibliographyOption[boolean]{ibid-italic}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ibiditalic}}
+{\togglefalse{ibiditalic}}%
+}
+
+%
+\DeclareBibliographyOption[boolean]{ibid-uppercase}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ibiduppercase}}
+{\togglefalse{ibiduppercase}}%
+}
+
+%
+\DeclareBibliographyOption[boolean]{pinpoint-after-mnc}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{pinpointaftermnc}}
+{\togglefalse{pinpointaftermnc}}%
+}
+
+
+%%
+%\DeclareBibliographyOption[boolean]{ibid-delim-comma}[false]{%
+%\ifstrequal{#1}{true}
+%{\toggletrue{ibiddelimcomma}}
+%{\togglefalse{ibiddelimcomma}}%
+%}
+
+%
+\DeclareBibliographyOption[string]{ibid-delim}[none]{%
+\ifstrempty{#1}{\setcounter{ibiddelimmode}{1}}{}
+\ifstrequal{#1}{none}{\setcounter{ibiddelimmode}{1}}{}
+\ifstrequal{#1}{comma}{\setcounter{ibiddelimmode}{2}}{}
+\ifstrequal{#1}{colon}{\setcounter{ibiddelimmode}{3}}{}
+\ifstrequal{#1}{dot}{\setcounter{ibiddelimmode}{4}}{}
+}
+
+
 %
 \DeclareBibliographyOption[boolean]{use-case-year-as-report-year}[true]{%
 \ifstrequal{#1}{true}
@@ -55,6 +212,14 @@
 {\togglefalse{lcindexing}}%
 }
 %
+\newtoggle{ljarttitlequotes}
+\toggletrue{ljarttitlequotes}
+%
+\newtoggle{ljarttitledoublequotes}
+\toggletrue{ljarttitledoublequotes}
+%
+%\newtoggle{ljarttitledoublequoteslig}
+%\toggletrue{ljarttitledoublequoteslig}
 %
 \newtoggle{ljarttitleitalic}
 \toggletrue{ljarttitleitalic}
@@ -66,14 +231,34 @@
 \togglefalse{ljarttitleitalic}
 }
 
-% lj article title
+% lj article title: italic
 \DeclareBibliographyOption[boolean]{set-ljarticletitle-italic}[true]{%
 \ifstrequal{#1}{true}
 {\toggletrue{ljarttitleitalic}}
 {\togglefalse{ljarttitleitalic}}%
 }
 
+% lj article title: quotes
+\DeclareBibliographyOption[boolean]{set-ljarticletitle-quotes}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ljarttitlequotes}}
+{\togglefalse{ljarttitlequotes}}%
+}
 
+% lj article title: double quotes
+\DeclareBibliographyOption[boolean]{set-ljarticletitle-double-quotes}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ljarttitledoublequotes}}
+{\togglefalse{ljarttitledoublequotes}}%
+}
+
+
+% lj article title: double quotes ligature
+%\DeclareBibliographyOption[boolean]{set-ljarticletitle-double-quotes-lig}[false]{%
+%\ifstrequal{#1}{true}
+%{\toggletrue{ljarttitledoublequoteslig}}
+%{\togglefalse{ljarttitledoublequoteslig}}%
+%}
 %
 \newtoggle{ljjnltitleitalic}
 \toggletrue{ljjnltitleitalic}
@@ -232,6 +417,41 @@
 }
 
 
+
+
+
+
+%--------------------------------
+
+%%%styletrack
+\newcommand\lcstyletagdefault{1}
+\newcommand\lcstyletagmlr{2}
+\newcommand\lcstyletagmcgill{3}
+\newcommand\lcstyletagaglc{4}
+\newcommand\lcstyletagindigo{5}
+\newcommand\lcstyletagunknown{99}
+\newcommand\lccurrentstyle{}
+\newcounter{lccurrentstyletag}
+\newcommand\setlccurrentstyletag[1]{%
+\setcounter{lccurrentstyletag}{#1}%
+\ifcase\value{lccurrentstyletag}%
+\or\renewcommand\lccurrentstyle{default}
+\or\renewcommand\lccurrentstyle{MLR}
+\or\renewcommand\lccurrentstyle{McGill}
+\or\renewcommand\lccurrentstyle{AGLC}
+\or\renewcommand\lccurrentstyle{Indigo}
+\else\renewcommand\lccurrentstyle{unknown}
+\fi%
+}
+
+\newcommand\lcshowcurrentstyle{%
+lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
+}
+
+
+
+
+%--------------------- Default lawcite style
 \newcommand\lcsetstyledefault{%
    \toggletrue{partynamesitalic}%
    \toggletrue{partysepitalic}%
@@ -248,8 +468,28 @@
  \renewcommand\postnotedelim{,\ }%
    \toggletrue{ljarttitleitalic}%
    \togglefalse{ljjnltitleitalic}%
+   \togglefalse{ljarttitlequotes}%
+   \togglefalse{ljarttitledoublequotes}%
+		\togglefalse{ibiditalic}%
+		\togglefalse{ibiduppercase}%
+		\setcounter{ibiddelimmode}{1}%none   
+		\togglefalse{pinpointaftermnc}
+		\togglefalse{ibidsupracomma}
+		\togglefalse{ibidsuprabrackets}
+		\togglefalse{ibidsupraon}
+		\togglefalse{ibidsupraitalic}
+		\togglefalse{ibidsupranotelong}
+		\togglefalse{bookauthorgiven}   		
+		\togglefalse{ibidpostdelimcomma}
+%		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+		\toggletrue{parabrackets}
+\setlccurrentstyletag{\lcstyletagdefault}%
 }
 
+
+
+
+%--------------------- AGLC
 \newcommand\lcsetstyleaglc{%
    \toggletrue{partynamesitalic}%
    \toggletrue{partysepitalic}%
@@ -266,6 +506,22 @@
  \renewcommand\postnotedelim{,\ }%
    \toggletrue{ljarttitleitalic}%
    \togglefalse{ljjnltitleitalic}%
+   \togglefalse{ljarttitlequotes}%
+   \togglefalse{ljarttitledoublequotes}%
+		\togglefalse{ibiditalic}%
+		\togglefalse{ibiduppercase}%
+		\setcounter{ibiddelimmode}{1}%none   
+		\togglefalse{pinpointaftermnc}
+		\togglefalse{ibidsupracomma}
+		\toggletrue{ibidsuprabrackets}
+		\togglefalse{ibidsupraon}
+		\togglefalse{ibidsupraitalic}
+		\togglefalse{ibidsupranotelong}
+		\togglefalse{bookauthorgiven}     		
+		\togglefalse{ibidpostdelimcomma}
+%		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+		\toggletrue{parabrackets}
+\setlccurrentstyletag{\lcstyletagaglc}%
 }
 
 
@@ -273,6 +529,7 @@
 
 
 
+%--------------------- MLR
 \newcommand\lcsetstylemlr{%
    \toggletrue{partysepdotted}%
    \togglefalse{partysepitalic}%
@@ -285,8 +542,29 @@
  \renewcommand\postnotedelim{,\ }%
    \togglefalse{ljarttitleitalic}%
    \toggletrue{ljjnltitleitalic}%
+   \togglefalse{ljarttitlequotes}%
+   \togglefalse{ljarttitledoublequotes}%
+		\togglefalse{ibiditalic}%
+		\togglefalse{ibiduppercase}%
+		\setcounter{ibiddelimmode}{1}%none   
+		\togglefalse{pinpointaftermnc}
+		\togglefalse{ibidsupracomma}
+		\togglefalse{ibidsuprabrackets}
+		\togglefalse{ibidsupraon}
+		\togglefalse{ibidsupraitalic}
+		\togglefalse{ibidsupranotelong}
+		\togglefalse{bookauthorgiven}     				   
+		\toggletrue{ibidpostdelimcomma}
+%		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+		\toggletrue{parabrackets}
+\setlccurrentstyletag{\lcstyletagmlr}%
 }
 
+
+
+
+
+%--------------------- McGill
 \newcommand\lcsetstylemcgill{%
    \togglefalse{partysepdotted}%
    \toggletrue{partysepitalic}%
@@ -302,9 +580,27 @@
  \toggletrue{casenamecomma}%
  \renewcommand\postnotedelim{\ }%
    \togglefalse{ljarttitleitalic}%
-   \toggletrue{ljjnltitleitalic}%
+   \togglefalse{ljjnltitleitalic}%
+   \togglefalse{ljarttitlequotes}%
+   \toggletrue{ljarttitledoublequotes}%
+		\toggletrue{ibiditalic}%
+		\toggletrue{ibiduppercase}%
+		\setcounter{ibiddelimmode}{1}%no delimiter   
+		\toggletrue{pinpointaftermnc}
+		%supra
+		\toggletrue{ibidsupracomma}
+		\togglefalse{ibidsuprabrackets}
+		\toggletrue{ibidsupraon}
+		\toggletrue{ibidsupraitalic}
+		\toggletrue{ibidsupranotelong}
+		\toggletrue{bookauthorgiven}
+		\togglefalse{ibidpostdelimcomma}
+%		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+		\togglefalse{parabrackets}
+   \setlccurrentstyletag{\lcstyletagmcgill}%
 }
 
+%--------------------- Indigo
 \newcommand\lcsetstyleindigo{%
    \toggletrue{partynamesitalic}%
    \toggletrue{partysepitalic}%
@@ -321,6 +617,22 @@
  \renewcommand\postnotedelim{,\ }%
    \toggletrue{ljarttitleitalic}%
    \togglefalse{ljjnltitleitalic}%
+   \togglefalse{ljarttitlequotes}%
+   \togglefalse{ljarttitledoublequotes}%
+		\togglefalse{ibiditalic}%
+		\togglefalse{ibiduppercase}%
+		\setcounter{ibiddelimmode}{1}%none   
+		\togglefalse{pinpointaftermnc}
+		\togglefalse{ibidsupracomma}
+		\togglefalse{ibidsuprabrackets}
+		\togglefalse{ibidsupraon}
+		\togglefalse{ibidsupraitalic}
+		\togglefalse{ibidsupranotelong}
+		\togglefalse{bookauthorgiven}     		
+		\toggletrue{ibidpostdelimcomma}
+%		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+		\toggletrue{parabrackets}
+\setlccurrentstyletag{\lcstyletagindigo}%
 }
 
 

@@ -4,6 +4,11 @@
 \newcommand*\myhyperref[1]{\hyperpage{#1}}
 
 
+
+
+\DeclareDatamodelFields[type=field, format=xsv, datatype=literal]{yoptions}
+\DeclareDatamodelEntryfields{yoptions}
+
 \DeclareDatamodelFields[type=field, datatype=verbatim]{thumbnail}
 \DeclareDatamodelEntryfields{thumbnail}
 
@@ -21,7 +26,10 @@
 \toggletrue{printxregulations}
 
 
-%\newbibmacro{lctor}{%
+%
+\newcommand\lctos{legislation}
+%
+
 \newcommand\lctor{%
 %\ifkeyword{regulations}{\iftoggle{printregulations}{regulations}{legislation}}{legislation}%
 \iftoggle{printxregulations}{regulations}{legislation}%
@@ -33,7 +41,7 @@
 
 
 
-\DeclareDatamodelEntrytypes{case,statute,ljarticle}
+\DeclareDatamodelEntrytypes{case,statute,ljarticle,quote}
 
 \DeclareDatamodelFields[type=list, datatype=literal]{%
 parallel,
@@ -67,6 +75,13 @@ parallel,
   courtlist,
   courtjurisdiction,
   courtcasenumber,%in-progress, the docket
+  casestatus, %unreported, etc
+  attribution, % J for the Court, for quote (qqcite)
+  courtfullname, % for when unreported etc
+%link
+	linkname,
+	url,
+	mncurl,
 %general
   note,
   caseshortname,
@@ -96,12 +111,31 @@ svjy,
 mncyear,
 mncname,
 mncnumber,
+shortname,
+%quote
+quotetext,
 }
 
 \DeclareDatamodelEntryfields[case]{%
-partya,partyb,partysep,partysepx,caseyear,reportyear,reportvolume,%
-volyearneeded,reportseries,reportpage,courtname,casenumber,note,shipname,%
-icaseyear,caseshortname,casenickname,decisionyear,parallel,
+partya,
+partyb,
+partysep,
+partysepx,
+caseyear,
+reportyear,
+reportvolume,%
+volyearneeded,
+reportseries,
+reportpage,
+courtname,
+casenumber,
+note,
+shipname,%
+icaseyear,
+caseshortname,
+casenickname,
+decisionyear,
+parallel,
   partyasn,%party short name, eg: DPP
   partybsn,
   partyajur,%party jurisdiction
@@ -111,6 +145,12 @@ icaseyear,caseshortname,casenickname,decisionyear,parallel,
   courtlist,
   courtjurisdiction,
   courtcasenumber,
+  casestatus, %unreported, etc
+  attribution, % J for the Court, for quote (qqcite)
+  courtfullname, % for when unreported etc
+	linkname,
+	url,
+	mncurl,
 }
 
 
@@ -135,6 +175,9 @@ fulldate,%
 gazette,%
 %
 svjy,%
+	linkname,
+	url,
+	mncurl,% court link
 }
 
 \DeclareDatamodelEntryfields[ljarticle]{%
@@ -149,7 +192,13 @@ journaltitle,
 pages,
 keywords,
 note,
+shortname,
 }
+
+\DeclareDatamodelEntryfields[quote]{%
+quotetext,
+}
+
 
 \DeclareLanguageMapping{english}{english-lawcite}
 
