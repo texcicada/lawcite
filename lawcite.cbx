@@ -178,7 +178,7 @@
 \newbibmacro{getcasename}{%
 %\ifciteseen{\ifciteibid{SEENIBID}{SEEN}}{}%
 \iffootnote{%
-\ifciteseen{\ifciteibid{\textcolor{red}{BB}}{\usebibmacro{getcaseshortname}}}{%
+\ifciteseen{\ifciteibid{\textcolor{red}{CC}}{\usebibmacro{getcaseshortname}\textcolor{red}{DD}}}{%
 \iffieldundef{shipname}{\usebibmacro{getpartynamesa}%
 \iffieldundef{partyb}{}%
 {\addspace\usebibmacro{getpartysep}\addspace%
@@ -199,6 +199,18 @@
 {The \printfield{shipname}}%
 \iffieldundef{decisionyear}{}{\addspace\printfield{decisionyear}}%
 }%not in footnote
+}%
+
+
+%======= casenamefull
+\newbibmacro{getcasenamefull}{%
+\iffieldundef{shipname}{\usebibmacro{getpartynamesa}%
+\iffieldundef{partyb}{}%
+{\addspace\usebibmacro{getpartysep}\addspace%
+\usebibmacro{getpartynamesb}}%
+}%no shipname
+{The \printfield{shipname}}%
+\iffieldundef{decisionyear}{}{\addspace\printfield{decisionyear}}%
 }%
 
 
@@ -413,6 +425,11 @@ xxx}%
 %\addspace
 }
 
+
+\newtoggle{lcibidtracking}
+\toggletrue{lcibidtracking}
+
+
 \newtoggle{supranoteused}
 \togglefalse{supranoteused}
 
@@ -534,8 +551,27 @@ xxx}%
 
 %vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
+%===== casenamereffull
+\newbibmacro{getcasenamereffull}{%
+ \usebibmacro{getcasenamefull}%
+ \ifboolexpr{%
+  not test {\iffieldundef{casenumber}}
+  or
+  not test {\iffieldundef{reportpage}}
+  }%
+% {\iftoggle{casenamecomma}{\lcnamerefcommadelim}{\lcnamerefdelim}}%
+% {\lcparentchilddelim}%
+ {\iftoggle{casenamecomma}{\setunit*{\addcomma\addspace}}{\setunit*{\addspace}}}%true
+ {\setunit*{\addspace}}%false
+ \usebibmacro{getcaseref}%
+ \usebibmacro{getparallelreports}%
+% \usebibmacro{getnote}%
+%    \finentry
+ }
+	 
 
-%===== casenamerefnofn: no footnote
+
+%===== casenamerefnofn: no footnote  (i.e., no ibiding)
 \newbibmacro{getcasenamerefnofn}{%
  \usebibmacro{getcasename}%
  \ifboolexpr{%
@@ -573,16 +609,22 @@ xxx}%
  \togglefalse{supranoteused}%
  \ifboolexpr{%
  not test {\iffootnote}
+% or
+% test {\iftoggle{lcibidtracking}}
  }%
- {\usebibmacro{getcasenamerefnofn}}{%
+ {\usebibmacro{getcasenamerefnofn}}{%if it is a footnote
  \ifboolexpr{%
   test {\ifcitation}
   and
   test {\ifciteibid}
+%  and
+%  test {\iftoggle{lcibidtracking}}
   }%
   {%
+%  \iftoggle{lcibidtracking}{%we're in a command that wants ibid:
   \toggletrue{usedibid}%
   \usebibmacro{getibid}%
+%  }{}%
 %  \textcolor{red}{AA}%
 %%if current postnote = previous postnote, then nothing; else:
 %%%\ifdefstrequal{\ibidprevpintemp}{\thefield{postnote}}%
@@ -2855,14 +2897,24 @@ test {\ifentrytype{case}}%
 %============= lcinline: only for cases
 \DeclareCiteCommand{lcinline}%
 %@@@@@@@@@@@@@@@@ prenote
-{\usebibmacro{prenote}}%
+{%
+%\let\blx@ibidtracker\relax
+%\textcolor{red}{AA}%
+%\togglefalse{lcibidtracking}%
+%\blx@opt@ibidtracker@false
+%\ExecuteBibliographyOptions{ibidtracker=false}%
+%\boolfalse{citetracker}%
+%\boolfalse{pagetracker}%
+%\boolfalse{citerequest}%
+\usebibmacro{prenote}}%
 %@@@@@@@@@@@@@@@@ item
 {%
 \ifboolexpr{%
 test {\ifentrytype{case}}%
 }%
 {%true: is a case
-\textcolor{\lcinlinecolour}{\usebibmacro{getcasenameref}}%
+%\togglefalse{lcibidtracking}%
+\textcolor{\lcinlinecolour}{\usebibmacro{getcasenamerefnofn}}%no ibiding
 \usebibmacro{fullstepindex}%
 }%end true: is a case
 {}%false = is not a case
@@ -2873,7 +2925,46 @@ test {\ifentrytype{case}}%
 %{\usebibmacro{postnote}\iflastcitekey{\addspace\usebibmacro{getnote}}{}}
 {\usebibmacro{notmnc:postnote}\usebibmacro{getnote}}%{\iflastcitekey{\usebibmacro{postnote}\addspace\usebibmacro{getnote}}{\usebibmacro{postnote}}}
 
-%============= lcinline: only for cases
+
+
+%============= lcinlinefull: only for cases
+\DeclareCiteCommand{lcinlinefull}%
+%@@@@@@@@@@@@@@@@ prenote
+{%
+%\let\blx@ibidtracker\relax
+%\textcolor{red}{AA}%
+%\togglefalse{lcibidtracking}%
+%\blx@opt@ibidtracker@false
+%\ExecuteBibliographyOptions{ibidtracker=false}%
+%\boolfalse{citetracker}%
+%\boolfalse{pagetracker}%
+%\boolfalse{citerequest}%
+\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\ifboolexpr{%
+test {\ifentrytype{case}}%
+}%
+{%true: is a case
+%\togglefalse{lcibidtracking}%
+\textcolor{\lcinlinecolour}{\usebibmacro{getcasenamereffull}}%no ibiding
+\usebibmacro{fullstepindex}%
+}%end true: is a case
+{}%false = is not a case
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%
+%@@@@@@@@@@@@@@@@ postnote
+%{\usebibmacro{postnote}\iflastcitekey{\addspace\usebibmacro{getnote}}{}}
+{\usebibmacro{notmnc:postnote}\usebibmacro{getnote}}%{\iflastcitekey{\usebibmacro{postnote}\addspace\usebibmacro{getnote}}{\usebibmacro{postnote}}}
+
+
+
+
+
+
+
+%============= lcinlineparens: only for cases
 \DeclareCiteCommand{lcinlineparens}[\mkbibparens]%
 %@@@@@@@@@@@@@@@@ prenote
 {\usebibmacro{prenote}}%
@@ -2996,6 +3087,24 @@ test {\ifentrytype{case}}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{notmnc:postnote}}
 
+
+
+
+
+%============= lcfootfull
+\DeclareCiteCommand{lcfootfull}[\mkbibfootnote]%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
+\usebibmacro{fullstepindex}%
+\usebibmacro{getcasenamereffull}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{notmnc:postnote}}
 
 %============= lcfootrr
 \DeclareCiteCommand{lcfootrr}[\mkbibfootnote]%
@@ -4135,6 +4244,7 @@ test {\ifentrytype{jurisdiction}}%
 \newcommand\pararef[1]{\definname\ \iftoggle{parabrackets}{[\ref{#1}]}{\ref{#1}}}
 
 %user bib commands
+\newcommand\lcat[1]{\bibstring{onlyat}~#1}
 \newcommand\lcsec[1]{\bibstring{section}~#1}
 \newcommand\lcsecyr[2]{\bibstring{section}~#1\addspace\mkbibparens{#2}}
 \newcommand\lcssec[1]{\bibstring{sections}~#1}

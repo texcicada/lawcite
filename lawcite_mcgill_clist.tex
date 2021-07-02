@@ -2,6 +2,11 @@
 
 \begin{filecontents*}[overwrite]{clist\jobname.bib}
 
+@case{bata,	partya =  {British American Tobacco Australia Ltd},	partyb =  {Western Australia},	caseshortname =  {BATA},	caseyear =  {2003},	courtname =  {HCA},	casenumber =  {47},	pagination =  {onlyat},	reportyear =  {2003},	reportvolume =  {217},		reportseries =  {CLR},	reportpage =  {30},			mncurl =  {http://www.austlii.edu.au/cgi-bin/viewdoc/au/cases/cth/HCA/2003/47.html},											}
+
+@case{bivens,	partya =  {Bivens},	partyb =  {Six Unknown Named Agents of Federal Bureau of Narcotics},	caseshortname =  {Bivens},	caseyear =  {1971},	courtname =  {USSC},	casenumber =  {133},		reportyear =  {1971},	reportvolume =  {403},		reportseries =  {US},	reportpage =  {388},			mncurl =  {http://www.worldlii.org/us/cases/federal/USSC/1971/133.html},											}
+
+@case{ajl20,	partya =  {Commonwealth of Australia},	partyb =  {AJL20},	caseshortname =  {AJL20},	caseyear =  {2021},	courtname =  {HCA},	casenumber =  {21},	pagination =  {atparagraph},						url =  {http://www.austlii.edu.au/cgi-bin/viewdoc/au/cases/cth/HCA//2021/21.html},	linkname =  {AustLII},												}
 
 @statute{maanulth,	title =  {Maanulth First Nations Final Agreement Act},	citeref =  {canleg},	svjy =  {SC 2009},	chapter =  {18},			url =  {https://canlii.ca/t/l292},	linkname =  {CanLII},							}
 
@@ -295,7 +300,7 @@ volume = {volume},
 
 @case{spratt,	partya =  {Spratt},	partyb =  {Hermes},	caseshortname =  {Spratt},	reportyear =  {1965},	reportvolume =  {114},		reportseries =  {CLR},	reportpage =  {226},		}
 @case{capital,	partya =  {Capital TV \& Appliances Pty Ltd},	partyb =  {Falconer},	caseshortname =  {Capital TV},	reportyear =  {1971},	reportvolume =  {125},		reportseries =  {CLR},	reportpage =  {591},		}
-@case{kruger,	partya =  {Kruger},	partyb =  {Commonwealth},	caseshortname =  {Kruger},	reportyear =  {1997},	reportvolume =  {190},		reportseries =  {CLR},	reportpage =  {1},		}
+@case{kruger,	partya =  {Kruger},	partyb =  {The Commonwealth},	caseshortname =  {Kruger},	caseyear =  {1977},	courtname =  {HCA},	casenumber =  {27},	pagination =  {onlyat},	reportyear =  {1997},	reportvolume =  {190},		reportseries =  {CLR},	reportpage =  {1},			mncurl =  {http://www.austlii.edu.au/cgi-bin/viewdoc/au/cases/cth/HCA/1997/27.html},											}
 @case{bernasconi,	partya =  {R},	partyb =  {Bernasconi},	caseshortname =  {Bernasconi},	reportyear =  {1915},	reportvolume =  {19},		reportseries =  {CLR},	reportpage =  {629},		}
 
 
@@ -1487,6 +1492,42 @@ options={skipbib=true,},
 \newcounter{examplecounter}
 \newcommand\numeg{\refstepcounter{examplecounter}\marginpar{Ex \theexamplecounter\label{ex\theexamplecounter}}}
 
+
+
+
+
+
+%https://tex.stackexchange.com/questions/223434/ibidem-only-in-the-footnotes-and-not-in-the-running-text
+\makeatletter
+\def\blx@opt@ibidtracker@foot{%
+  \let\blx@imc@ifciteibid\blx@ifciteibid@foot
+  \let\blx@ibidtracker\blx@ibidtracker@foot
+  \let\blx@ibidreset\blx@ibidreset@foot
+  \booltrue{citetracker}}
+
+\def\blx@ifciteibid@foot{%
+  \ifbool{citetracker}
+    {\iftoggle{blx@footnote}
+       {\blx@imc@iffieldequals{entrykey}\blx@lastkey@text}
+       {\@secondoftwo}}
+    {\@secondoftwo}}
+
+\def\blx@ibidtracker@foot{%
+  \ifbool{citetracker}
+    {\iftoggle{blx@footnote}
+       {\global\let\blx@lastkey@text\abx@field@entrykey}
+       {\global\let\blx@lastkey@foot\abx@field@entrykey}}
+    {}}
+
+\def\blx@ibidreset@foot{%
+  \iftoggle{blx@footnote}
+    {\global\undef\blx@lastkey@text}}
+    {}
+\makeatother
+
+
+
+
 \newcommand\abibname{lawcite}
 \newcommand\abibstyle{style=\abibname}
 \usepackage[
@@ -1496,7 +1537,7 @@ options={skipbib=true,},
 	indexing=cite,
 	citetracker=true,
 	citecounter=context,
-	ibidtracker=true,%option setting for footnotes: assumes single refs
+	ibidtracker=foot,%option setting for footnotes: assumes single refs
 %%	ibidstyle=uc,%uppercase Ibid OSCOLA option
 	pagetracker=true,
 	idemtracker=true,
@@ -1592,6 +1633,9 @@ options={skipbib=true,},
 \newfontface\fcc{Noto Sans Mono}
 \newcommand\attribution[1]{\hspace{2pt}\fcc\tiny\rotatebox{90}{#1}}
 
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+
 
 \usepackage[
 				final=true,
@@ -1635,6 +1679,7 @@ options={skipbib=true,},
 
 %-------------------------------
 \newcommand\bemph[1]{\colorbox{blue!12}{#1}}
+\newcommand\cemph[1]{\colorbox{red!12!yellow!72}{#1}}
 
 %-------------------------------
 \newcommand\itemdesc[1]{{\usefont{T1}{lmr}{m}{n}#1:}}
@@ -1664,14 +1709,14 @@ options={skipbib=true,},
 
 
 %-------------------------------
-\newcommand\exampledemo[4]{%
+\newcommand\exampledemo[5][fson]{%
 
 \bigskip
 \fbox{\begin{minipage}{0.8\textwidth}
-\applymycounter{#4} -- \itemdesc{#3}\hfill{\tiny fieldset \ref{mydump:#4}}\par
-\bemph{#1} $\mapsto$\ \par
+\applymycounter{#5} -- \itemdesc{#4}\ifstrequal{#1}{fson}{\hfill{\tiny fieldset \ref{mydump:#5}}}{}\par
+\bemph{#2} $\mapsto$\ \par
 \smallskip
-#2
+#3
 \end{minipage}}
 
 \bigskip
@@ -1841,5 +1886,43 @@ For example, \lcinline{scc} [``\lcshorttitle{scc}''] can be referred to as \lcsh
 
 \newpage
 \examplefieldscite{{\scriptsize\cmd{lawcite}\hspace{0.1em}\brackets{\cmd{lcsec}\hspace{0.1em}\braces{16(1)}}\hspace{0.1em}\braces{maanulth}}}{``Judicial notice shall be taken of Maanulth Laws.'' \par\smallskip -- \lawcite[\lcsec{16(1)}]{maanulth}}{maanulth}
+
+%``The Commonwealth's submission \ldots is glib and unhelpful[151].''\lawcite[99]{ajl20}
+
+%``the Bivens action for damages[153] is not recognised in Australia[154].''\lawcite[99]{ajl20} 
+
+\newpage
+{
+\lcsetstyleaglc
+\exampledemo[fsoff]{\lccurrentstyle}{``the \lccasesn{bivens} action for damages\lcfootfull[\cemph{After}\tikzmark{aftera}][]{bivens} is not recognised in Australia\footnote{\lcinline[\lcat 53 \mkbibbrackets{40}]{bata}, \lcinline[\cemph{citing}][\lcat 46--47, 93, 125‑-126, 146--148]{kruger}.}.''\lawcite[From][\lcat \mkbibbrackets{99}]{ajl20}}{Australian style}{aus}
+}
+
+\bigskip
+produced by:
+
+\bigskip
+{\ttfamily
+``the \cmd{lccasesn}\braces{\bemph{bivens}} action for damages\cmd{lcfootfull} \brackets{\cemph{After}\tikzmark {afterb}} \brackets{} \braces{\bemph{bivens}} is not recognised in Australia\cmd{footnote \braces{\cmd{lcinline} \brackets{\cmd{lcat} 53 \cmd{mkbibbrackets} \braces{40}} \braces{bata}, \cmd{lcinline} \brackets{\cemph{citing}} \brackets{\cmd{lcat} 46--47, 93, 125‑-126, 146--148}\braces{kruger}.}.''\cmd{lawcite} \brackets{From} \brackets{\cmd{lcat} \cmd{mkbibbrackets}\braces{99}} \braces{ajl20}}
+}
+
+\bigskip
+With the first reference here to \lccasesn{bivens} (using \cmd{lccasesn}), a second reference, in the footnote, would \textit{ibid} out, so a full reference (by way of \cmd{lcfootfull}) is used instead.
+
+\begin{tikzpicture}[remember picture, overlay]
+\draw [->] (pic cs:aftera) edge (pic cs:afterb);
+\end{tikzpicture}
+%153:
+% After Bivens v Six Unknown Named Agents of Federal Bureau of Narcotics [1971] USSC 133; (1971) 403 US 388.
+
+%154
+%British American Tobacco Australia Ltd v Western Australia [2003] HCA 47; (2003) 217 CLR 30 at 52 [40], citing Kruger v The Commonwealth [1997] HCA 27; (1997) 190 CLR 1 at 46-47, 93, 125‑126, 146-148. 
+
+
+%Chief Justice Lamer’s observations in Residential Tenancies (1996) where he invoked Lord Sankey’s famous admonition in the 1929 “Persons” case (Edwards v. Attorney-General for Canada, 1929 CanLII 438 (UK JCPC), [1930] A.C. 124 (P.C.)) that the Constitution is a “living tree” to be interpreted flexibly
+%
+%303
+
+
+
 
 \end{document}
