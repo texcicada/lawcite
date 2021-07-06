@@ -64,6 +64,7 @@ parallel,
   caseyear, %will be a date
   icaseyear, %for the index
   decisionyear, %for the casename, when no report year
+  indexyear, %decision year in plain format
   reportyear, %will be a date
   reportvolume,
   volyearneeded, %will be a boolean
@@ -137,6 +138,7 @@ icaseyear,
 caseshortname,
 casenickname,
 decisionyear,
+indexyear,
 parallel,
   partyasn,%party short name, eg: DPP
   partybsn,
@@ -3354,6 +3356,28 @@ test {\ifentrytype{statute}}%
 {\usebibmacro{postnote}}
 
 
+\newbibmacro{getcasedecisionyearplain}{%
+\iffieldundef{indexyear}{}{\printfield[plain]{indexyear}}%
+}
+
+
+%============= lcdecisionyear: plain
+\DeclareCiteCommand{lcdecisionyear}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+%%\usebibmacro{sendtocaseindex}%
+\usebibmacro{fullstepindex}%
+\usebibmacro{getcasedecisionyearplain}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}
+
+
+
 
 %============= lccasesn
 \DeclareCiteCommand{lccasesn}%
@@ -5537,7 +5561,7 @@ onlyat = {{at}}{{at}},
 
 @case{rta1979,	partya =  {Re Residential Tenancies Act, 1979},			caseyear =  {1981},	courtname =  {CanLII},	casenumber =  {24},	pagination =  {atparagraph},	reportyear =  {1981},	reportvolume =  {1},	volyearneeded =  {true},	reportseries =  {SCR},	reportpage =  {714},			mncurl =  {https://www.canlii.org/en/ca/scc/doc/1981/1981canlii24/1981canlii24.html},											}
 @case{ccpref,	partya =  {Reference re Code of Civil Procedure (Que.), art. 35},			caseyear =  {2021},	courtname =  {SCC},	casenumber =  {27},	pagination =  {atparagraph},						url =  {https://canlii.ca/t/jgnxz},	linkname =  {CanLII},												}
-@case{edwardsa,	partya =  {Edwards},	partyb =  {Attorney‑General for Canada},	caseshortname =  {Edwards},	caseyear =  {1929},	courtname =  {CanLII},	casenumber =  {438 (UK JCPC)},		reportyear =  {1930},			reportseries =  {AC},	reportpage =  {134},			mncurl =  {https://www.canlii.org/en/ca/ukjcpc/doc/1929/1929canlii438/1929canlii438.html},						note =  {PC},		casenickname =  {Persons},			}
+@case{edwardsa,	partya =  {Edwards},	partyb =  {Attorney‑General for Canada},	caseshortname =  {Edwards},	caseyear =  {1929},	courtname =  {CanLII},	casenumber =  {438 (UK JCPC)},		reportyear =  {1930},	indexyear={1929},		reportseries =  {AC},	reportpage =  {134},			mncurl =  {https://www.canlii.org/en/ca/ukjcpc/doc/1929/1929canlii438/1929canlii438.html},						note =  {PC},		casenickname =  {Persons},			}
 @case{rta1996,	partya =  {Reference re Amendments to the Residential Tenancies Act (N.S.)},		caseshortname =  {Residential Tenancies Act (1996)},	caseyear =  {1996},	courtname =  {CanLII},	casenumber =  {259},	pagination =  {atparagraph},	reportyear =  {1996},	reportvolume =  {1},	volyearneeded =  {true},	reportseries =  {SCR},	reportpage =  {186},			mncurl =  {https://www.canlii.org/en/ca/scc/doc/1996/1996canlii259/1996canlii259.html},											}
 
 @case{bata,	partya =  {British American Tobacco Australia Ltd},	partyb =  {Western Australia},	caseshortname =  {BATA},	caseyear =  {2003},	courtname =  {HCA},	casenumber =  {47},	pagination =  {onlyat},	reportyear =  {2003},	reportvolume =  {217},		reportseries =  {CLR},	reportpage =  {30},			mncurl =  {http://www.austlii.edu.au/cgi-bin/viewdoc/au/cases/cth/HCA/2003/47.html},											}
@@ -7270,11 +7294,11 @@ options={skipbib=true,},
 \bfseries\sffamily\color{yellow!80}Citation\phantom{\Large L} & 
 \bfseries\sffamily\color{yellow!80}Bibentry fields \\
 \hline & \\
-\fbox{\begin{minipage}{0.4\textwidth}
+\fcolorbox{violet}{brown!18}{\fcolorbox{violet}{brown!12}{\begin{minipage}{0.4\textwidth}
 \bemph{#2} $\mapsto$\ \par
 \smallskip
 #3
-\end{minipage}} 
+\end{minipage}}} 
 &
 \fbox{\begin{minipage}{0.5\textwidth}
 #1{#4} 
@@ -7285,6 +7309,8 @@ options={skipbib=true,},
 
 
 
+%\usepackage{atbegshi}
+%\usepackage[pages=some]{background}
 
 
 
@@ -7294,23 +7320,46 @@ options={skipbib=true,},
 \ifstrequal{#1}{\newpage}{\applymydcounter{#3}Fields for example \ref{mycite:#2}: \textbf{#2} --}{} \par
 
 \bigskip
-\lcdcase{#2}
-%\printrectangle
+%\printrectanglea
+\fcolorbox{violet}{brown!20}{\parbox{0.8\textwidth}{\lcdcase{#2}}}
+%\printrectangleb
+%\printrectanglec
 }
 
 
-\newcounter{rectmark}
-\newcommand{\printrectangle}{\stepcounter{rectmark}
-  \gdef\mynode{pic cs:\therectmark}\tikzmark{\therectmark}%
-%  }%
-%\AddToHook{shipout/background}{%
-  \begin{tikzpicture}[remember picture,overlay]
-    \fill[blue!10!white] (current page.north west) rectangle 
-    ( $ (\mynode) +(\paperwidth,0) $ );
-  \end{tikzpicture}
-\gdef\mynode{0,0}%
-}%
 
+%https://tex.stackexchange.com/questions/603635/trying-to-get-different-backgrounds-on-even-and-odd-pages:
+%    \AddEverypageHook{⟨code⟩} ≡ \AddToHook{shipout/background}{\put(1in,-1in){⟨code⟩}}
+
+
+%%%\newcounter{rectmark}
+%%%
+%%%\newcommand{\printrectanglea}{\stepcounter{rectmark}
+%%%  \gdef\mynode{pic cs:\therectmark}\tikzmark{\therectmark}\textcolor{red}{TL}}%
+%%%\newcommand{\printrectangleb}{%\stepcounter{rectmark}
+%%%  \gdef\mynodebr{pic cs:br\therectmark}\tikzmark{br\therectmark}\textcolor{red}{BR}}%
+%%%  
+%%%\newcommand{\printrectanglec}{%\stepcounter{rectmark}
+%%%%  \gdef\mynode{pic cs:\therectmark}\tikzmark{\therectmark}%
+%%%%  }%
+%%%%%\AddToHook{shipout/background}{%
+%%%%\AddEverypageHook{%
+%%%%\AtBeginShipoutAddToBox{%
+%%%%\AtBeginShipout{%
+%%%\BgThispage
+%%%\backgroundsetup{
+%%%  contents={%
+%%%  \begin{tikzpicture}[remember picture,overlay]
+%%%%    \fill[blue!10!white] (current page.north west) rectangle 
+%%%%    ( $ (\mynode) + (\paperwidth,0) $ );
+%%%    \fill[blue!10!white] (\mynode)[xshift=-2em] rectangle 
+%%%    									(\mynodebr)[xshift=\textwidth];
+%%%  \end{tikzpicture}
+%%%  }}
+%%%\gdef\mynode{0,0}%
+%%%\gdef\mynodebr{0,0}%
+%%%}%
+%%%
 
 
 
@@ -7327,7 +7376,7 @@ Citation commands for >>\lccurrentstyle<< lawcitestyle.
 \examplefieldscite{\cmd{lawcite}\brackets{23}\braces{collins}}{``and if the manner in which the search was carried out is reasonable''\lawcite[23]{collins}}{collins}
 
 \newpage
-\examplefieldscite{\cmd{ljcite}\brackets{276}\braces{kleefeld}}{``typography matters'' \par\smallskip -- \ljcite[276]{kleefeld}}{kleefeld}
+\examplefieldscite{\cmd{ljfootcite}\brackets{276}\braces{kleefeld}}{``typography matters''\ljfootcite[276]{kleefeld}}{kleefeld}
 
 \newpage
 \examplefieldscite{{\scriptsize\cmd{lawcite}\hspace{0.1em}\brackets{\cmd{lcsec}\hspace{0.1em}\braces{16(1)}}\hspace{0.1em}\braces{maanulth}}}{``Judicial notice shall be taken of Maanulth Laws.'' \par\smallskip -- \lawcite[\lcsec{16(1)}]{maanulth}}{maanulth}
@@ -7340,7 +7389,7 @@ Citation commands for >>\lccurrentstyle<< lawcitestyle.
 \newpage
 {
 \lcsetstylemcgill
-\exampledemo[fsoff]{\lccurrentstyle}{\mkbibquote{\ldots Chief Justice Lamer’s observations in \lcshorttitle{rta1996} where he invoked Lord Sankey’s famous admonition in the 1929 \lcnickname{edwardsa} case \lcinlineparens{edwardsa} that the Constitution is a \mkbibquote{living tree} to be interpreted flexibly\ldots}\lawcite[From][303]{ccpref}}{Canadian style}{can}
+\exampledemo[fsoff]{\lccurrentstyle}{\mkbibquote{\ldots Chief Justice Lamer’s observations in \lcshorttitle{rta1996} where he invoked Lord Sankey’s famous admonition in the \lcdecisionyear{edwardsa} \lcnickname{edwardsa} case \lcinlineparens{edwardsa} that the Constitution is a \mkbibquote{living tree} to be interpreted flexibly\ldots}\lawcite[From][303]{ccpref}}{Canadian style}{can}
 }
 
 \bigskip
@@ -7348,7 +7397,7 @@ produced by:
 
 \bigskip
 {\ttfamily
-\cmd{mkbibquote}\braces{\cmd{ldots} Chief Justice Lamer’s observations in \cmd{lcshorttitle}\braces{rta1996} where he invoked Lord Sankey’s famous admonition in the 1929 \cmd{lcnickname}\braces{edwardsa} case \cmd{lcinlineparens}\braces{edwardsa} that the Constitution is a \cmd{mkbibquote}\braces{living tree} to be interpreted flexibly\cmd{ldots}}\hspace{0.1pt}\cmd{lawcite}\hspace{0.1pt}\brackets{From}\hspace{0.1pt}\brackets{303}\hspace{0.1pt}\braces{ccpref}
+\cmd{mkbibquote}\braces{\cmd{ldots} Chief Justice Lamer’s observations in \cmd{lcshorttitle}\braces{rta1996} where he invoked Lord Sankey’s famous admonition in the \cmd{lcdecisionyear}\braces{edwardsa} \cmd{lcnickname}\braces{edwardsa} case \cmd{lcinlineparens}\braces{edwardsa} that the Constitution is a \cmd{mkbibquote}\braces{living tree} to be interpreted flexibly\cmd{ldots}}\hspace{0.1pt}\cmd{lawcite}\hspace{0.1pt}\brackets{From}\hspace{0.1pt}\brackets{303}\hspace{0.1pt}\braces{ccpref}
 }
 
 \bigskip
