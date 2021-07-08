@@ -7101,7 +7101,7 @@ options={skipbib=true,},
 \usepackage[
 	\abibstyle , 
 	lawcitestyle=mcgill,
-   use-toc-parnumrefs=false,
+  use-toc-parnumrefs=true,
 	indexing=cite,
 	citetracker=true,
 	citecounter=context,
@@ -7126,7 +7126,7 @@ options={skipbib=true,},
 %indexing
 
 \usepackage{splitidx}
-\newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to page numbers.\bigskip}
+\newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to \iftoggle{lcparnumrefs}{paragraph}{page} numbers.\bigskip}
 \newcommand\dupentries{\ \\\small\mdseries $\to$ `Duplicated' entries are intentional.}
 \setindexpreamble[cases]{\pagerefindexnote}%\dupentries}
 \setindexpreamble[legislation]{\pagerefindexnote}
@@ -7174,6 +7174,11 @@ options={skipbib=true,},
 
 %-------------------------------------------------------
 %%\AtWriteToIndex{idx}{\let\thepage\thesection}
+\AtWriteToIndex{cases}{\let\thepage\theparno}
+\AtWriteToIndex{legislation}{\let\thepage\theparno}
+\AtWriteToIndex{regulations}{\let\thepage\theparno}
+\AtWriteToIndex{general}{\let\thepage\theparno}
+\AtWriteToIndex{idx}{\let\thepage\theparno}
 %-------------------------------------------------------
 
 
@@ -7377,23 +7382,35 @@ options={skipbib=true,},
 
 %------------------
 \begin{document}
-Citation commands for >>\lccurrentstyle<< lawcitestyle.
+\p This document uses paragraph numbers.\footnote{The SplitIndex command \texttt{AtWriteToIndex} has been set to the paragraph number for all indices: \cmd{AtWriteToIndex}\braces{idx}\braces{\cmd{let}\cmd{thepage}\cmd{theparno}} etc; the square.ist index style file is being used instead of plain.ist; and the \texttt{use-toc-parnumrefs} biblatex option has been set to true.}
+
+\p Citation commands for >>\lccurrentstyle<< lawcitestyle.
+
+\p Citing a case.
 
 \bigskip
 \examplefieldscite{\cmd{lawcite}\brackets{23}\braces{collins}}{``and if the manner in which the search was carried out is reasonable''\lawcite[23]{collins}}{collins}
 
 \newpage
+\p Citing a law journal or law review.
+
 \examplefieldscite{\cmd{ljfootcite}\brackets{276}\braces{kleefeld}}{``typography matters''\ljfootcite[276]{kleefeld}}{kleefeld}
 
 \newpage
+\p Citing a statute.
+
 \examplefieldscite{{\scriptsize\cmd{lawcite}\hspace{0.1em}\brackets{\cmd{lcsec}\hspace{0.1em}\braces{16(1)}}\hspace{0.1em}\braces{maanulth}}}{``Judicial notice shall be taken of Maanulth Laws.'' \par\smallskip -- \lawcite[\lcsec{16(1)}]{maanulth}}{maanulth}
 
 
 \newpage
+\p Citing a legal monograph.
+
 \examplefieldscite[\lcdallfields]{{\scriptsize\cmd{lcbook}\brackets{12}\hspace{0.1em}\braces{addison}}}{``Questions of proprietary right often involve nice distinctions.''\lcbook[12]{addison}}{addison}
 
 
 \newpage
+\p A quotation from a case.
+
 {
 \lcsetstylemcgill
 \exampledemo[fsoff]{\lccurrentstyle}{\mkbibquote{\ldots Chief Justice Lamer’s observations in \lcshorttitle{rta1996} where he invoked Lord Sankey’s famous admonition in the \lcdecisionyear{edwardsa} \lcnickname{edwardsa} case \lcinlineparens{edwardsa} that the Constitution is a \mkbibquote{living tree} to be interpreted flexibly\ldots}\lawcite[From][303]{ccpref}}{Canadian style}{can}
@@ -7411,7 +7428,7 @@ produced by:
 \demofielddump[]{edwardsa}{can}
 
 \bigskip
-Note:
+\p Note:
 \begin{itemize}
 \item the two nested mkbibquotes:
 		\begin{itemize}
@@ -7429,11 +7446,12 @@ Note:
 		\item and that \cmd{lcinlineparens} ignores nesting of brackets for any note, to get (\ldots (\textit{note})) instead of a nested (\ldots [\textit{note}]).
 \end{itemize}
 
-A non-legal cite\autocite{westfahl:space}. 
+\p A non-legal cite\autocite{westfahl:space}. 
 
-To test the ibid mechanism, change the ibidtracker option for biblatex to true:
+\p To test the ibid mechanism, change the ibidtracker option for biblatex to true:
 \begin{verbatim}ibidtracker=true,\end{verbatim} and then re-run.
-An ibid test: text case\lawcite{lchousen2002} text ibid\lawcite[3]{lchousen2002} text next\lawcite[100]{lccrestonmoly2014}
+
+\p An ibid test: text case\lawcite{lchousen2002} text ibid\lawcite[3]{lchousen2002} text next\lawcite[100]{lccrestonmoly2014}
 x\lawcite[45]{lchousen2002}
 y\lawcite[45]{lchousen2002}
 z\lawcite[46]{lchousen2002}
@@ -7445,22 +7463,34 @@ zz\lawcite{lchousen2002}
 %\section{Cases}
 
 \bigskip
+\p A case.
+
 \exampledemo{\cmd{lawcite}\braces{cole}}{Text\lawcite{cole}}{lawcite style}{cole}
+
+\p Ibid test.
 
 \exampledemo{\cmd{lawcite}\braces{cole}}{Text\lawcite{cole}}{ibid}{coleb}
 
 
 \bigskip
+\p Legislation.
+
 \exampledemo{\cmd{lawcite}\braces{tcca}}{\lawcite{tcca}}{lawcite style, citeref canleg}{tcca}
 
 
+\p Regulation.
+
 \exampledemo{\cmd{lawcite}\braces{fisc}}{\lawcite{fisc}}{lawcite style, citeref canreg}{fisc}
+
+\p Provincial regulations.
 
 \exampledemo{\cmd{lawcite}\braces{dfns}}{\lawcite{dfns}}{lawcite style, citeref nsreg}{dfns}
 
 \exampledemo{\cmd{lawcite}\braces{bears}}{\lawcite{bears}}{lawcite style, citeref sorreg}{bears}
 
 %Fields for example \ref{mycite:cole}: cole -- \lcdcase{cole}
+\p Bibentry fields.
+
 \parindent = 0pt
 \demofielddump{cole}{cole}
 \demofielddump{cole}{coleb}
@@ -7480,6 +7510,8 @@ zz\lawcite{lchousen2002}
 
 %======================================= Bibliography
 \newpage
+\p The McGill bibliography.\paradef{mcgbib}
+
 {\center
 \printbibheading[title=Bibliography]
 }
@@ -7535,6 +7567,8 @@ zz\lawcite{lchousen2002}
 
 
 \newpage
+\p Non-McGill material: a Table of Cases (run with SplitIndex, using the square.ist index style file). Note that ToC is for other legal citation styles, and that items appearing in a McGill bibliography (see \pararef{mcgbib}) count as citations for the index tracker.
+
 \printlawciteindexes
 
 \printindex[general]
