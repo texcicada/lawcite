@@ -18,6 +18,10 @@
 
 
 
+%
+\newtoggle{lcindexactualequal}
+\toggletrue{lcindexactualequal}
+
 
 %
 \newtoggle{printregulations}
@@ -301,6 +305,12 @@ quotetext,
 %
 
 %=======================================
+
+\DeclareBibliographyOption[boolean]{index-actual-equal}[false]{%
+\ifstrequal{#1}{true}
+{\toggletrue{lcindexactualequal}}
+{\togglefalse{lcindexactualequal}}%
+}
 
 
 \DeclareBibliographyOption[boolean]{ibid-comma-postnote}[true]{%
@@ -5297,7 +5307,7 @@ test {\ifentrytype{jurisdiction}}%
 
 \newbibmacro{indexcaseparm}{%
 \sindex[cases]{%
-\thefield{partya}\thefield{partyb}@%for sorting
+\thefield{partya}\thefield{partyb}\iftoggle{lcindexactualequal}{=}{@}%for sorting
 %partynames = casename
 \iftoggle{partynamesitalic}{%start italic
 \textit{%
@@ -6199,8 +6209,8 @@ keywords = {ca},
 	}
 
 @case{lccrestonmoly2014,
-  partya = {Creston Moly Corp.\protect\@}, 
-  partyb = {Sattva Capital Corp.\protect\@},
+  partya = {Creston Moly Corp}, 
+  partyb = {Sattva Capital Corp},
   caseshortname = {Creston Moly},
 %MNC
   caseyear = {2014},
@@ -7102,7 +7112,8 @@ options={skipbib=true,},
 	\abibstyle , 
 	lawcitestyle=mcgill,
   use-toc-parnumrefs=true,
-	indexing=cite,
+  index-actual-equal=true,%index style file uses: actual '=' instead of @ for sortkey/actual value
+	indexing=false,%cite,
 	citetracker=true,
 	citecounter=context,
 	ibidtracker=foot,%option setting for footnotes: assumes single refs
@@ -7180,7 +7191,7 @@ options={skipbib=true,},
 \AtWriteToIndex{general}{\let\thepage\theparno}
 \AtWriteToIndex{idx}{\let\thepage\theparno}
 %-------------------------------------------------------
-
+%Note that this will work only if the shortcut of the index is given explicitly in each marked-up index entry...
 
 
 
@@ -7382,6 +7393,7 @@ options={skipbib=true,},
 
 %------------------
 \begin{document}
+\renewcommand\lcparnumrefsencap{}
 \p This document uses paragraph numbers.\footnote{The SplitIndex command \texttt{AtWriteToIndex} has been set to the paragraph number for all indices: \cmd{AtWriteToIndex}\braces{idx}\braces{\cmd{let}\cmd{thepage}\cmd{theparno}} etc; the square.ist index style file is being used instead of plain.ist; and the \texttt{use-toc-parnumrefs} biblatex option has been set to true.}
 
 \p Citation commands for >>\lccurrentstyle<< lawcitestyle.
@@ -7446,9 +7458,9 @@ produced by:
 		\item and that \cmd{lcinlineparens} ignores nesting of brackets for any note, to get (\ldots (\textit{note})) instead of a nested (\ldots [\textit{note}]).
 \end{itemize}
 
-\p A non-legal cite\autocite{westfahl:space}. 
+\p A non-legal cite\autocite{westfahl:space}\sindex[idx]{Westfahl}. 
 
-\p To test the ibid mechanism, change the ibidtracker option for biblatex to true:
+\p To test the ibid mechanism, change the ibidtracker option for biblatex to true:\sindex[general]{ibid test}
 \begin{verbatim}ibidtracker=true,\end{verbatim} and then re-run.
 
 \p An ibid test: text case\lawcite{lchousen2002} text ibid\lawcite[3]{lchousen2002} text next\lawcite[100]{lccrestonmoly2014}
@@ -7567,13 +7579,15 @@ zz\lawcite{lchousen2002}
 
 
 \newpage
-\p Non-McGill material: a Table of Cases (run with SplitIndex, using the square.ist index style file). Note that ToC is for other legal citation styles, and that items appearing in a McGill bibliography (see \pararef{mcgbib}) count as citations for the index tracker.
+\p Non-McGill material: a Table of Cases (run with SplitIndex, using the squareh.ist index style file). Note that ToC is for other legal citation styles, and that items appearing in a McGill bibliography (see \pararef{mcgbib}) count as citations for the index tracker.
+
+
+%\clearpage
+\printindex[general]
 
 \printlawciteindexes
 
-\printindex[general]
-
-\printindex[idx]
+%\printindex[idx]
 
 %\myhyperref{5}; \hyperpage{5}
 %

@@ -1,0 +1,13 @@
+actual '='
+delim_0 "\\space\\dotfill\\space [\\myhyperref{"
+delim_1 "\\space\\dotfill\\space [\\myhyperref{"
+delim_2 "\\space\\dotfill\\space [\\myhyperref{"
+delim_n "}], [\\myhyperref{"
+delim_r "}--\\myhyperref{"
+delim_t "}]"
+%encap_infix "{\\ChapterPage{"
+%%encap_prefix "["
+%encap_suffix "]"
+
+line_max 1000
+
