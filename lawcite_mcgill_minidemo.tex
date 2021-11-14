@@ -739,16 +739,16 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\togglefalse{ibiditalic}%
 		\togglefalse{ibiduppercase}%
 		\setcounter{ibiddelimmode}{1}%none   
-		\togglefalse{pinpointaftermnc}
-		\togglefalse{ibidsupracomma}
-		\toggletrue{ibidsuprabrackets}
-		\togglefalse{ibidsupraon}
-		\togglefalse{ibidsupraitalic}
-		\togglefalse{ibidsupranotelong}
-		\togglefalse{bookauthorgiven}     		
-		\togglefalse{ibidpostdelimcomma}
+		\togglefalse{pinpointaftermnc}%
+		\togglefalse{ibidsupracomma}%
+		\toggletrue{ibidsuprabrackets}%
+		\togglefalse{ibidsupraon}%
+		\togglefalse{ibidsupraitalic}%
+		\togglefalse{ibidsupranotelong}%
+		\togglefalse{bookauthorgiven}%     		
+		\togglefalse{ibidpostdelimcomma}%
 %		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
-		\toggletrue{parabrackets}
+		\toggletrue{parabrackets}%
 \setlccurrentstyletag{\lcstyletagaglc}%
 }
 
@@ -775,16 +775,16 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\togglefalse{ibiditalic}%
 		\togglefalse{ibiduppercase}%
 		\setcounter{ibiddelimmode}{1}%none   
-		\togglefalse{pinpointaftermnc}
-		\togglefalse{ibidsupracomma}
-		\togglefalse{ibidsuprabrackets}
-		\togglefalse{ibidsupraon}
-		\togglefalse{ibidsupraitalic}
-		\togglefalse{ibidsupranotelong}
-		\togglefalse{bookauthorgiven}     				   
-		\toggletrue{ibidpostdelimcomma}
+		\togglefalse{pinpointaftermnc}%
+		\togglefalse{ibidsupracomma}%
+		\togglefalse{ibidsuprabrackets}%
+		\togglefalse{ibidsupraon}%
+		\togglefalse{ibidsupraitalic}%
+		\togglefalse{ibidsupranotelong}%
+		\togglefalse{bookauthorgiven}%     				   
+		\toggletrue{ibidpostdelimcomma}%
 %		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
-		\toggletrue{parabrackets}
+		\toggletrue{parabrackets}%
 \setlccurrentstyletag{\lcstyletagmlr}%
 }
 
@@ -814,17 +814,17 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\toggletrue{ibiditalic}%
 		\toggletrue{ibiduppercase}%
 		\setcounter{ibiddelimmode}{1}%no delimiter   
-		\toggletrue{pinpointaftermnc}
+		\toggletrue{pinpointaftermnc}%
 		%supra
-		\toggletrue{ibidsupracomma}
-		\togglefalse{ibidsuprabrackets}
-		\toggletrue{ibidsupraon}
-		\toggletrue{ibidsupraitalic}
-		\toggletrue{ibidsupranotelong}
-		\toggletrue{bookauthorgiven}
-		\togglefalse{ibidpostdelimcomma}
+		\toggletrue{ibidsupracomma}%
+		\togglefalse{ibidsuprabrackets}%
+		\toggletrue{ibidsupraon}%
+		\toggletrue{ibidsupraitalic}%
+		\toggletrue{ibidsupranotelong}%
+		\toggletrue{bookauthorgiven}%
+		\togglefalse{ibidpostdelimcomma}%
 %		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
-		\togglefalse{parabrackets}
+		\togglefalse{parabrackets}%
    \setlccurrentstyletag{\lcstyletagmcgill}%
 }
 
@@ -850,16 +850,16 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\togglefalse{ibiditalic}%
 		\togglefalse{ibiduppercase}%
 		\setcounter{ibiddelimmode}{1}%none   
-		\togglefalse{pinpointaftermnc}
-		\togglefalse{ibidsupracomma}
-		\togglefalse{ibidsuprabrackets}
-		\togglefalse{ibidsupraon}
-		\togglefalse{ibidsupraitalic}
-		\togglefalse{ibidsupranotelong}
-		\togglefalse{bookauthorgiven}     		
-		\toggletrue{ibidpostdelimcomma}
+		\togglefalse{pinpointaftermnc}%
+		\togglefalse{ibidsupracomma}%
+		\togglefalse{ibidsuprabrackets}%
+		\togglefalse{ibidsupraon}%
+		\togglefalse{ibidsupraitalic}%
+		\togglefalse{ibidsupranotelong}%
+		\togglefalse{bookauthorgiven}%     		
+		\toggletrue{ibidpostdelimcomma}%
 %		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
-		\toggletrue{parabrackets}
+		\toggletrue{parabrackets}%
 \setlccurrentstyletag{\lcstyletagindigo}%
 }
 
@@ -870,25 +870,25 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \ifstrempty{#1}{}{%
 \ifstrequal{#1}{default}{%
    %xxx
-   \lcsetstyledefault
+   \lcsetstyledefault%
 }{%
 \ifstrequal{#1}{aglc}{%
    %xxx
-   \lcsetstyleaglc
+   \lcsetstyleaglc%
 }{%
 \ifstrequal{#1}{mlr}{%
    %xxx
-   \lcsetstylemlr
+   \lcsetstylemlr%
 }{%
 \ifstrequal{#1}{mcgill}{%
    %xxx
-   \lcsetstylemcgill
+   \lcsetstylemcgill%
 }{%
 \ifstrequal{#1}{indigo}{%
    %xxx
-   \lcsetstyleindigo
+   \lcsetstyleindigo%
 }{%
-\lcsetstylemlr
+\lcsetstylemlr%
 }}}}}}
 }
 
@@ -1547,7 +1547,7 @@ xxx}%
 %  YYY
 %\usebibmacro{postnote}
    \iffieldundef{reportpage}{}{\iffieldundef{casenumber}{}{\setunit*{\addcomma\addspace}}\usebibmacro{getreportref}}%
-   \iffieldundef{parallel}{}{\setunit*{\addcomma\space}}%
+   \iflistundef{parallel}{}{\setunit*{\addcomma\space}}%
 %   \usebibmacro{getnote}%
 %   \newunit
 %   \newblock%
@@ -4668,7 +4668,7 @@ test {\ifentrytype{case}}%
 
 \newcommand\multicitecommadelim{\addcomma\addspace}
 
-%\DeclareMultiCiteCommand{lawcites}[xxx]{lawcite}{\multicitedelim}
+%\DeclareMultiCiteCommand{lawcites}{lawcite}{\multicitedelim}
 \DeclareMultiCiteCommand{\lawcitesinline}{lcinline}{\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%different cases
 \DeclareMultiCiteCommand{\lawcitesinlinerr}{lcinlinerr}{\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%same case, different reports
 \DeclareMultiCiteCommand{\lawcitesfoot}[\mkbibfootnote]{lcfoot}{\multicitedelim}
@@ -4738,7 +4738,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{number}{}{number =  \{\thefield{number}\},\par}%
 \noindent\iffieldundef{pages}{}{pages =  \{\thefield{pages}\},\par}%
 \noindent\iffieldundef{pagination}{}{pagination =  \{\thefield{pagination}\},\par}%
-\noindent\iffieldundef{parallel}{}{parallel =  \{\thefield{parallel}\},\par}%
+\noindent\iflistundef{parallel}{}{parallel =  \{\thelist{parallel}\},\par}%
 \noindent\iffieldundef{partya}{}{partya =  \{\thefield{partya}\},\par}%
 \noindent\iffieldundef{partyajur}{}{partyajur =  \{\thefield{partyajur}\},\par}%
 \noindent\iffieldundef{partyasn}{}{partyasn =  \{\thefield{partyasn}\},\par}%
@@ -4776,6 +4776,108 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \}\par%
 }}
 
+\ExplSyntaxOn
+\NewDocumentCommand { \mystrcomp } { m } {
+	\str_case:on { #1 }
+	{
+	{ parallel } { xxx }
+	{ x } { yyy }
+	}
+}
+\cs_new_eq:NN \strcompare \str_if_eq:onT
+\ExplSyntaxOff
+
+\DeclareListFormat[case]{wand}{%
+#1%
+\ifthenelse{\value{listcount}<\value{liststop}}
+{\space and\space}
+{}}
+
+
+\newbibmacro{getlcdacasefield}[1]{%
+{%
+\edef\myparm{#1}
+\color{blue}\small\ttfamily\ \par
+\begin{quotation}
+\noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
+\noindent ...\par%
+%\noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
+%\noindent\iffieldundef{author}{}{author =  \{\thefield{author}\},\par}%
+%\noindent\iffieldundef{casename}{}{casename =  \{\thefield{casename}\},\par}%
+%\noindent\iffieldundef{casenickname}{}{casenickname =  \{\thefield{casenickname}\},\par}%
+%\noindent\iffieldundef{casenumber}{}{casenumber =  \{\thefield{casenumber}\},\par}%
+%\noindent\iffieldundef{caseshortname}{}{caseshortname =  \{\thefield{caseshortname}\},\par}%
+%\noindent\iffieldundef{casestatus}{}{casestatus =  \{\thefield{casestatus}\},\par}%
+%\noindent\iffieldundef{caseyear}{}{caseyear =  \{\thefield{caseyear}\},\par}%
+%\noindent\iffieldundef{chapter}{}{chapter =  \{\thefield{chapter}\},\par}%
+%\noindent\iffieldundef{citeref}{}{citeref =  \{\thefield{citeref}\},\par}%
+%\noindent\iffieldundef{courtcasenumber}{}{courtcasenumber =  \{\thefield{courtcasenumber}\},\par}%
+%\noindent\iffieldundef{courtdivision}{}{courtdivision =  \{\thefield{courtdivision}\},\par}%
+%\noindent\iffieldundef{courtfullname}{}{courtfullname =  \{\thefield{courtfullname}\},\par}%
+%\noindent\iffieldundef{courtjurisdiction}{}{courtjurisdiction =  \{\thefield{courtjurisdiction}\},\par}%
+%\noindent\iffieldundef{courtlist}{}{courtlist =  \{\thefield{courtlist}\},\par}%
+%\noindent\iffieldundef{courtname}{}{courtname =  \{\thefield{courtname}\},\par}%
+%\noindent\iffieldundef{date}{}{date =  \{\thefield{date}\},\par}%
+%\noindent\iffieldundef{decisionyear}{}{decisionyear =  \{\thefield{decisionyear}\},\par}%
+%\noindent\iffieldundef{fulldate}{}{fulldate =  \{\thefield{fulldate}\},\par}%
+%\noindent\iffieldundef{gazette}{}{gazette =  \{\thefield{gazette}\},\par}%
+%\noindent\iffieldundef{icaseyear}{}{icaseyear =  \{\thefield{icaseyear}\},\par}%
+%\noindent\iffieldundef{journaltitle}{}{journaltitle =  \{\thefield{journaltitle}\},\par}%
+%\noindent\iffieldundef{keywords}{}{keywords =  \{\thefield{keywords}\},\par}%
+%\noindent\iffieldundef{linkname}{}{linkname =  \{\thefield{linkname}\},\par}%
+%\noindent\iffieldundef{mncname}{}{mncname =  \{\thefield{mncname}\},\par}%
+%\noindent\iffieldundef{mncnumber}{}{mncnumber =  \{\thefield{mncnumber}\},\par}%
+%\noindent\iffieldundef{mncurl}{}{mncurl =  \{\thefield{mncurl}\},\par}%
+%\noindent\iffieldundef{mncyear}{}{mncyear =  \{\thefield{mncyear}\},\par}%
+%\noindent\iffieldundef{note}{}{note =  \{\thefield{note}\},\par}%
+%\noindent\iffieldundef{number}{}{number =  \{\thefield{number}\},\par}%
+%\noindent\iffieldundef{pages}{}{pages =  \{\thefield{pages}\},\par}%
+%\noindent\iffieldundef{pagination}{}{pagination =  \{\thefield{pagination}\},\par}%
+\strcompare{\myparm}{parallel}{%
+\noindent\iflistundef{parallel}{}{parallel =  \{\printlist[wand][-\value{listtotal}]{parallel}\},\par}%
+}%
+\strcompare{\myparm}{partya}{%
+\noindent\iffieldundef{partya}{}{partya =  \{\thefield{partya}\},\par}%
+}%
+%\noindent\iffieldundef{partyajur}{}{partyajur =  \{\thefield{partyajur}\},\par}%
+%\noindent\iffieldundef{partyasn}{}{partyasn =  \{\thefield{partyasn}\},\par}%
+%\noindent\iffieldundef{partyb}{}{partyb =  \{\thefield{partyb}\},\par}%
+%\noindent\iffieldundef{partybjur}{}{partybjur =  \{\thefield{partybjur}\},\par}%
+%\noindent\iffieldundef{partybsn}{}{partybsn =  \{\thefield{partybsn}\},\par}%
+\strcompare{\myparm}{partysep}{%
+\noindent\iffieldundef{partysep}{}{partysep =  \{\thefield{partysep}\},\par}%
+}%
+%\noindent\iffieldundef{partysepx}{}{partysepx =  \{\thefield{partysepx}\},\par}%
+%\noindent\iffieldundef{regnum}{}{regnum =  \{\thefield{regnum}\},\par}%
+%\noindent\iffieldundef{reportpage}{}{reportpage =  \{\thefield{reportpage}\},\par}%
+%\noindent\iffieldundef{reportseries}{}{reportseries =  \{\thefield{reportseries}\},\par}%
+%\noindent\iffieldundef{reportvolume}{}{reportvolume =  \{\thefield{reportvolume}\},\par}%
+%\noindent\iffieldundef{reportyear}{}{reportyear =  \{\thefield{reportyear}\},\par}%
+%\noindent\iffieldundef{shipname}{}{shipname =  \{\thefield{shipname}\},\par}%
+%\noindent\iffieldundef{shortname}{}{shortname =  \{\thefield{shortname}\},\par}%
+%\noindent\iffieldundef{statutechapter}{}{statutechapter =  \{\thefield{statutechapter}\},\par}%
+%\noindent\iffieldundef{statutejurisdiction}{}{statutejurisdiction =  \{\thefield{statutejurisdiction}\},\par}%
+%\noindent\iffieldundef{statutelongtitle}{}{statutelongtitle =  \{\thefield{statutelongtitle}\},\par}%
+%\noindent\iffieldundef{statutenickname}{}{statutenickname =  \{\thefield{statutenickname}\},\par}%
+%\noindent\iffieldundef{statuteregnalyear}{}{statuteregnalyear =  \{\thefield{statuteregnalyear}\},\par}%
+%\noindent\iffieldundef{statuteshorttitle}{}{statuteshorttitle =  \{\thefield{statuteshorttitle}\},\par}%
+%\noindent\iffieldundef{statutetitle}{}{statutetitle =  \{\thefield{statutetitle}\},\par}%
+%\noindent\iffieldundef{statutetitleyear}{}{statutetitleyear =  \{\thefield{statutetitleyear}\},\par}%
+%\noindent\iffieldundef{statutevolume}{}{statutevolume =  \{\thefield{statutevolume}\},\par}%
+%\noindent\iffieldundef{statuteyear}{}{statuteyear =  \{\thefield{statuteyear}\},\par}%
+%\noindent\iffieldundef{svjy}{}{svjy =  \{\thefield{svjy}\},\par}%
+%\noindent\iffieldundef{title}{}{title =  \{\thefield{title}\},\par}%
+%\noindent\iffieldundef{url}{}{url =  \{\thefield{url}\},\par}%
+%\noindent\iffieldundef{volume}{}{volume =  \{\thefield{volume}\},\par}%
+%\noindent\iffieldundef{volyearneeded}{}{volyearneeded =  \{\thefield{volyearneeded}\},\par}%
+%\noindent\iffieldundef{year}{}{year =  \{\thefield{year}\},\par}%
+%\noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
+%\noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
+%\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
+\noindent ...\par%
+\}\par%
+\end{quotation}
+}}
 
 
 
@@ -5022,6 +5124,18 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}%
 
+%============= lcdcase
+\DeclareCiteCommand{lcdacasefield}%
+%@@@@@@@@@@@@@@@@ prenote
+{}%{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getlcdacasefield}{\thefield{prenote}}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{}%{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{}%{\usebibmacro{postnote}}%
 
 %============= lcdallfields
 \DeclareCiteCommand{lcdallfields}%
@@ -6746,8 +6860,13 @@ partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
 @case{acmeca,partya = {Acme Video Inc },partyb = {Hedges and Retail Technologies (Video) Inc},caseyear = {1993},courtname = {CanLII},casenumber = {8553 (ON CA)},reportvolume = {12},reportseries = {OR (3rd)},reportpage = {16},note = {Ont CA},mncurl = {https://www.canlii.org/en/on/onca/doc/1993/1993canlii8553/1993canlii8553.html},}
 @case{moore,partya = {Moore},partyb = {Mercator Enterprises Ltd},caseyear = {1978},courtname = {CanLII},casenumber = {2139 (NS SC)},reportvolume = {90},reportseries = {DLR (3rd)},reportpage = {590},note = {NSTD},decisionyear = {1978},parallel = {31 NSR (2d) 327 and 7 CPC 150},mncurl = {https://www.canlii.org/en/ns/nssc/doc/1978/1978canlii2139/1978canlii2139.html},}
 @case{aero,partya = {Re Aero Trades Western Ltd and Ben Hochum \& Son Ltd},reportvolume = {51},reportseries = {DLR (3rd)},reportpage = {617},decisionyear = {1974},parallel = {[1975] 4 WWR 412},}
-@case{tdi,partya = {TDI Hospitality Management Consultants Inc},partyb = {Browne},caseyear = {1994},courtname = {CanLII},casenumber = {10958 (MB CA)},reportvolume = {117},reportseries = {DLR (4th)},reportpage = {289},note = {Man CA},parallel = {[1994] 9 WWR 153 and 70 WAC 302 and 95 Man R (2d) 302 and 28 CPC (3d) 232 and [1994] MJ No 448 (QL) and 50 ACWS (3d) 206},mncurl = {https://www.canlii.org/en/mb/mbca/doc/1994/1994canlii10958/1994canlii10958.html},pagination = {atparagraph},}
+@case{tdi,partya = {TDI Hospitality Management Consultants Inc},partyb = {Browne},caseyear = {1994},courtname = {CanLII},casenumber = {10958 (MB CA)},reportvolume = {117},reportseries = {DLR (4th)},reportpage = {289},note = {Man CA},parallel= {[1994] 9 WWR 153 and 70 WAC 302 and 95 Man R (2d) 302 and 28 CPC (3d) 232 and [1994] MJ No 448 (QL) and 50 ACWS (3d) 206},mncurl = {https://www.canlii.org/en/mb/mbca/doc/1994/1994canlii10958/1994canlii10958.html},pagination = {atparagraph},}
 @case{morguard,partya = {Morguard Investments Ltd},partyb = {Be Savoye},caseyear = {1990},courtname = {CanLII},casenumber = {29 (SCC)},reportyear = {1990},reportvolume = {3},volyearneeded = {true},reportseries = {SCR},reportpage = {1077},decisionyear = {1990},parallel = {76 DLR (4th) 256 and 46 CPC (2d) 1},mncurl = {https://www.canlii.org/en/ca/scc/doc/1990/1990canlii29/1990canlii29.html},}
+@case{whatcott,partya = {Saskatchewan (Human Rights Commission)},partyb = {Whatcott},caseyear = {2013},courtname = {SCC},casenumber = {11},reportyear = {2013},reportvolume = {1},volyearneeded = {true},reportseries = {SCR},reportpage = {467},mncurl = {https://www.canlii.org/en/ca/scc/doc/2013/2013scc11/2013scc11.html},}
+@case{bombadier,partya = {Quebec (Commission des droits de la personne et des droits de la jeunesse)},partyb = {Bombardier Inc. (Bombardier Aerospace Training Center)},caseyear = {2015},courtname = {SCC},casenumber = {39},reportyear = {2015},reportvolume = {2},volyearneeded = {true},reportseries = {SCR},reportpage = {789},mncurl = {https://www.canlii.org/en/ca/scc/doc/2015/2015scc39/2015scc39.html},}
+@case{calego,partya = {Calego International inc},partyb = {Commission des droits de la personne et des droits de la jeunesse},partysep = {c},caseyear = {2013},courtname = {QCCA},casenumber = {924},reportyear = {2013},volyearneeded = {true},reportseries = {RJDT},reportpage = {517},pagination = {atparagraph},mncurl = {https://www.canlii.org/fr/qc/qcca/doc/2013/2013qcca924/2013qcca924.html},}
+@case{fraser,partya = {Fraser},partyb = {Canada (Commission des relations de travail dans la fonction publique)},partysep = {c},caseyear = {1985},courtname = {CanLII},casenumber = {14 (CSC)},reportyear = {1985},reportvolume = {2},volyearneeded = {true},reportseries = {RCS},reportpage = {455},mncurl = {https://www.canlii.org/fr/ca/csc/doc/1985/1985canlii14/1985canlii14.html},pagination = {atparagraph},}
+@case{mcauliffe,partya = {McAuliffe},partyb = {Mayor and Board of Aldermen of New Bedford},reportvolume = {29},reportseries = {NE},reportpage = {517},note = {1892},}
 
 
 
@@ -7091,7 +7210,7 @@ options={skipbib=true,},
 \rowcolors{1}{blue!5}{blue!9}
 \usepackage{fontspec}
 \setmainfont{Noto Serif}
-\setsansfont{TeX Gyre Schola}[Scale=1.2]%Gentium Plus}
+\setsansfont{TeX Gyre Adventor}[Scale=1.2]%Gentium Plus}
 \setmonofont{Noto Sans Mono}%[Colour=blue]
 \newfontface\fcircnum{DejaVu Sans}[Colour=blue]
 \newcommand\circnum[1]{{\fcircnum#1}}
@@ -7107,6 +7226,8 @@ options={skipbib=true,},
 \usepackage{minitoc}
 \dosecttoc
 %\usepackage{booktabs}
+\usepackage{etoolbox}
+
 
 \newcommand\theadcolour{\rowcolor{blue!80!green!20!yellow}}
 
@@ -7258,6 +7379,22 @@ options={skipbib=true,},
 \newcommand\dispb[1]{\hfill #1 \hfill\ \par\medskip}
 \newcommand\dispeg[1]{\noindent #1\par}
 
+\newcommand\mnotepre{}
+\newcommand\mnotepredelim{}
+\newcommand\mnotepostdelim{}
+\newcommand\mnotepost{}
+\newcommand\mnote[1]{%
+{\mnotepre\mnotepredelim#1\mnotepostdelim\mnotepost}%
+}
+\newcommand\lcdisclaimer{%
+{%
+\renewcommand\mnotepre{\bigskip\noindent\sffamily\bfseries\scshape\large}
+\renewcommand\mnotepredelim{}
+\renewcommand\mnotepostdelim{}
+\renewcommand\mnotepost{\hspace{1.2em}}
+\mnote{Disclaimer}%
+}%
+}
 
 \newcommand\canreg[2]{\lawcite[#2]{#1}}
 
@@ -7436,11 +7573,11 @@ options={skipbib=true,},
 
 \newcommand\vv[1]{\texttt{#1}}
 
+\newsavebox{\mnbox}
 
 
 
-
-\title{Legal citation \\ using \\ >>\textcolor{blue}{\lccurrentstyle}<< \\ lawcitestyle}
+\title{Legal citation \\ using \\a >>\textcolor{blue}{\lccurrentstyle}-like<< \\ lawcitestyle}
 \author{}
 \date{13-Nov-2021}
 
@@ -7448,6 +7585,14 @@ options={skipbib=true,},
 %------------------
 \begin{document}
 \maketitle
+
+\sbox{\mnbox}{\begin{minipage}{0.9\linewidth}
+\lcdisclaimer \colorbox{blue!12!green!15}{\vv{lawcite}} does not purport to be the official or authorised implementation of any legal citation style (including ``\lccurrentstyle'') and no warranty is expressed or implied. Use (and modify) at own risk.
+\end{minipage}}
+
+\begin{center}
+\fcolorbox{black}{blue!7!red!5}{\fcolorbox{black}{yellow!5!green!2}{\usebox{\mnbox}}}
+\end{center}
 
 \section{Quick Overview}
 \bigskip
@@ -7553,6 +7698,8 @@ Note:
 
 \p This section describes the citation commands available for use with the \vv{@case} and \vv{@statute} bibentry types.
 
+\subsection{General}
+
 \p The general, all-purpose, citation command is \cmd{lawcite}.
 
 \p Initial citation: \democomm[Text]{lawcite}{hmb}
@@ -7562,6 +7709,11 @@ Note:
 \p If \texttt{partya}'s name ends with a dot (\verb|.|), use \verb|\@| to tell biblatex that it is an abbreviation dot, otherwise the following party separator will be taken as the first letter of a new sentence and set to upper case.
 
 With \verb|\@|, \democomm[Text]{lawcite}{hmb2}{:}
+
+
+\citetrackerfalse
+\lcdacasefield[partya][]{hmb2}
+\citetrackertrue
 
 \p Post-note: \democommpost[``the governing case \ldots calls for a liberal approach to the recognition and enforcement of foreign judgments'']{lawcite}{hmb2}{:}{18}
 
@@ -7573,7 +7725,7 @@ With \verb|\@|, \democomm[Text]{lawcite}{hmb2}{:}
 \p Pre-note and post-note: \democommprepost[Text]{lawcite}{wilson}{:}
 {However, cf. ``In my view, the purchase of articles in Idaho from a seller located there and their removal to Alberta for resale does not constitute carrying on business in Idaho.'' -- }{13}
 
-\p Subsequent history: build the history by hand:
+\p Subsequent history of a case: build the history by hand:
 \begin{verbatim}
 Text\footnote{\lcinline{acme}, rev'd \lawciteref{acmeca}.}
 \end{verbatim}
@@ -7587,9 +7739,40 @@ Text\footnote{\lcinline{acme}, rev'd \lawciteref{acmeca}.}
 ``The result of the clause is that the effect of the original judgment depends upon the rules on recognition of foreign judgments in force in this Province. I refer to  \lcinline{aero}.''\lawcite[][600]{moore}
 \end{quotation}
 
+
+\citetrackerfalse
+\lcdacasefield[parallel][]{tdi}
+\citetrackertrue
+
 \begin{quotation}
 ``In \lcinline{morguard}, the Supreme Court of Canada broadened the criteria for the recognition and enforcement of foreign judgments. La Forest J., writing for the court, reviewed the nineteenth-century English rules governing the recognition of foreign judgments. He discussed the concept of Canada as a single nation, the need to encourage the flow of trade and commerce between the provinces, and the reasons why the existing rules, as they were adopted in Canadian jurisprudence, require broadening for this country. He concluded that the "real and substantial connection" test for the recognition of foreign judgments should govern in Canada. That is, if the events, the parties or the circumstances giving rise to the conflict have a real and substantial connection to the jurisdiction from which a judgment emanates, that judgment should be recognized for enforcement purposes.''\lawcite[][3]{tdi}
 \end{quotation}
+
+\p Using a different party separator (\textit{c} for ``contre''):
+
+\citetrackerfalse
+\lcdacasefield[partysep][]{calego}
+\citetrackertrue
+
+\begin{quotation}
+``À cela s’ajoute le fait que, si le contrat de travail impose à un salarié certaines restrictions à sa liberté d’expression[25], il n’y a pas de raison pour que des restrictions du même ordre ne visent pas également l’employeur.'' -- \lawcite[][115]{calego}
+\end{quotation}
+%Il y a plus d’un siècle, dans McAuliffe v. Mayor and Board of Aldermen of New Bedford, 29 N.E. 517 (1892), le juge Holmes écrivait, p. 517-8 : « There are few employments for hire in which the servant does not agree to suspend his constitutional right of free speech, as well as of idleness, by the implied terms of his contract. »
+
+\p Citing from a different jurisdiction (US)
+\begin{quotation}
+Il y a plus d’un siècle, dans \lcsetstyleindigo\lcinline{mcauliffe}\lcsetstylemcgill, le juge Holmes écrivait, \lcpostnote[][p. 517-8]{mcauliffe} : « There are few employments for hire in which the servant does not agree to suspend his constitutional right of free speech, as well as of idleness, by the implied terms of his contract. »\lawcite[][note 25]{calego}
+\end{quotation}
+
+
+%``No real comparison exists between the interprovincial relationships of today and those obtaining between foreign countries in the 19th century.  The courts made a serious error in transposing the rules developed for the enforcement of foreign judgments to the enforcement of judgments from sister‑provinces.  The considerations underlying the rules of comity apply with much greater force between the units of a federal state.'' -- 
+%Morguard headnote
+%
+%``there is really no comparison between the interprovincial relationships of today and those obtaining between foreign countries in the 19th century.  Indeed, in my view, there never was and the courts made a serious error in transposing the rules developed for the enforcement of foreign judgments to the enforcement of judgments from sister-provinces.  The considerations underlying the rules of comity apply with much greater force between the units of a federal state, and I do not think it much matters whether one calls these rules of comity or simply relies directly on the reasons of justice, necessity and convenience to which I have already adverted.  Whatever nomenclature is used, our courts have not hesitated to cooperate with courts of other provinces where necessary to meet the ends of justice; see Re Wismer and Javelin International Ltd. (1982), 1982 CanLII 3132 (ON SC), 136 D.L.R. (3d) 647 (Ont. H.C.), at pp. 654-55; Re Mulroney and Coates (1986), 1986 CanLII 2613 (ON SC), 27 D.L.R. (4th) 118 (Ont. H.C.), at pp. 128-29; Touche Ross Ltd. v. Sorrel Resources Ltd. (1987), 1987 CanLII 2693 (BC SC), 11 B.C.L.R. (2d) 184 (S.C.), at p. 189; Roglass Consultants Inc. v. Kennedy, Lock (1984), 1984 CanLII 421 (BC CA), 65 B.C.L.R. 393 (C.A.), at p. 394.'' -- Morguard
+
+%\p Multiple citations: \democomm[Text]{lawcite}{clarke,tulk,cbc,vdn}{:}
+
+%\lcdacasefield[parallel][]{tdi}
 
 %\newpage
 %\lcdallfields{westfahl:space}
