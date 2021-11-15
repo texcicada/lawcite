@@ -4719,7 +4719,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \newbibmacro{getlcdcase}{%
 {%
 \ttfamily\ \par
-@\thefield{entrytype}\{\thefield{entrykey},\par%
+\noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
 \noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
 \noindent\iffieldundef{author}{}{author =  \{\thefield{author}\},\par}%
 \noindent\iffieldundef{casename}{}{casename =  \{\thefield{casename}\},\par}%
@@ -4749,7 +4749,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{mncurl}{}{mncurl =  \{\thefield{mncurl}\},\par}%
 \noindent\iffieldundef{mncyear}{}{mncyear =  \{\thefield{mncyear}\},\par}%
 \noindent\iffieldundef{note}{}{note =  \{\thefield{note}\},\par}%
-\noindent\iffieldundef{number}{}{number =  \{\thefield{number}\},\par}%
+\noindent\iffieldundef{options}{}{options =  \{\thefield{options}\},\par}%\noindent\iffieldundef{number}{}{number =  \{\thefield{number}\},\par}%
 \noindent\iffieldundef{pages}{}{pages =  \{\thefield{pages}\},\par}%
 \noindent\iffieldundef{pagination}{}{pagination =  \{\thefield{pagination}\},\par}%
 \noindent\iflistundef{parallel}{}{parallel =  \{\thelist{parallel}\},\par}%
@@ -6887,6 +6887,16 @@ partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
 @case{mulroney,partya = {Re Mulroney and Coates},caseyear = {1986},courtname = {CanLII},casenumber = {2613 (ON SC)},reportvolume = {27},reportseries = {DLR (4th)},reportpage = {118},note = {Ont HC},decisionyear = {1986},mncurl = {https://www.canlii.org/en/on/onsc/doc/1986/1986canlii2613/1986canlii2613.html},}
 @case{toucheross,partya = {Touche Ross Ltd},partyb = {Sorrel Resources Ltd},caseyear = {1987},courtname = {CanLII},casenumber = {2693 (BC SC)},reportvolume = {11},reportseries = {BCLR (2nd)},reportpage = {184},note = {SC},decisionyear = {1987},mncurl = {https://www.canlii.org/en/bc/bcsc/doc/1987/1987canlii2693/1987canlii2693.html},}
 @case{roglass,partya = {Roglass Consultants Inc},partyb = {Kennedy, Lock},caseyear = {1984},courtname = {CanLII},casenumber = {421 (BC CA)},reportvolume = {65},reportseries = {BCLR},reportpage = {393},note = {CA},decisionyear = {1984},mncurl = {https://www.canlii.org/en/bc/bcca/doc/1984/1984canlii421/1984canlii421.html},}
+@case{equitycary,reportseries = {Cary},reportpage = {11},crossref = {equity},options = {skipbib=true},}
+@case{equityer,reportvolume = {21},reportseries = {ER},reportpage = {6},note = {B},crossref = {equity},}
+@case{equity,partya = {Anonymous},decisionyear = {1492},thumbnail = {equity.png},options = {skipbib=true},}
+@case{ashnr,partya = {Ann Ash},partyb = {Lady Ash},reportseries = {Comb},reportpage = {357},decisionyear = {1724},options = {skipbib=true},}
+@case{asher,partya = {Ann Ash},partyb = {Lady Ash},reportvolume = {90},reportseries = {ER},reportpage = {526},note = {B},decisionyear = {1724},}
+@case{salter,partya = {Salter and Bellamy},decisionyear = {1724},options = {skipbib=true},}
+@case{salternr,reportseries = {Comb},reportpage = {5},crossref = {salter},options = {skipbib=true},}
+@case{salterer,reportvolume = {90},reportseries = {ER},reportpage = {309},note = {B},crossref = {salter},}
+
+
 
 
 
@@ -7774,7 +7784,7 @@ Text\footnote{\lcinline{acme}, rev'd \lawciteref{acmeca}.}
 \citetrackertrue
 
 \begin{quotation}
-``À cela s’ajoute le fait que, si le contrat de travail impose à un salarié certaines restrictions à sa liberté d’expression[25], il n’y a pas de raison pour que des restrictions du même ordre ne visent pas également l’employeur.'' -- \lawcite[][115]{calego}
+``À cela s’ajoute le fait que, si le contrat de travail impose à un salarié certaines restrictions à sa liberté d’expression[25], il n’y a pas de raison pour que des restrictions du même ordre ne visent pas également l’employeur.''\lawcite[][115]{calego}
 \end{quotation}
 %Il y a plus d’un siècle, dans McAuliffe v. Mayor and Board of Aldermen of New Bedford, 29 N.E. 517 (1892), le juge Holmes écrivait, p. 517-8 : « There are few employments for hire in which the servant does not agree to suspend his constitutional right of free speech, as well as of idleness, by the implied terms of his contract. »
 
@@ -7868,7 +7878,7 @@ Il y a plus d’un siècle, dans \lcsetstyleindigo\lcinline{mcauliffe}\marginpar
 \citetrackerfalse
 \lcsetstylemcgill
 
-\p The bibentry \cmdc{caseshortname} field is intended as the user-assigned adhoc shorthand for a case, e.g., \lawcitetitle{tdi} could be shortened to \lcshorttitle{tdi}; while the \cmdc{casenickname} field is the shorthand as known generally among the profession, e.g., \lawcitetitle{edwardsa} is known as the \lcnickname{edwardsa} case.
+\p The bibentry \cmdc{caseshortname} field is intended as the adhoc, user-assigned, shorthand for a case, e.g., \lawcitetitle{tdi} could be shortened to \lcshorttitle{tdi}; while the \cmdc{casenickname} field is the shorthand as known generally among the profession, e.g., \lawcitetitle{edwardsa} is known as the \lcnickname{edwardsa} case.
 
 \p One citation (inline) with multiple cases can be done with \\ \democomm[Text\ ]{lcinline}{clarke,tulk,cbc,vdn}{:}
 
@@ -7900,6 +7910,52 @@ Text\lawcitesfoot(Overall prenote:)(overall postnote)[654-55]{wismer}[128-29]{mu
 \toggletrue{pinpointaftermnc}
 \end{quotation}
 
+\begin{figure}
+\begin{center}
+\toggletrue{lcimageshow}
+\setlcimagescale{0.7}
+\lcimage{equity}
+\caption[Equity follows Law]{\lcinlinerr{equity, equitycary, equityer}.}
+\end{center}
+\end{figure}
+
+\p With nominate reports and their reprints in the English Reports, set up three bibentries and the \cmd{lcinlinerr} command.  One bibentry has the casename and will be the `parent' entry (and use the \cmdc{skipbib} option:
+
+\begin{quotation}\noindent
+\demofielddump[]{salter}{salter}
+\end{quotation}
+
+The two child entries will \cmdc{crossref} back to the parent and inherit its fields, and one of the child entries will use the \cmdc{skipbib} option:
+
+\begin{quotation}\noindent
+\demofielddump[]{salternr}{salternr}
+\end{quotation}
+
+and
+
+\begin{quotation}\noindent
+\demofielddump[]{salterer}{salterer}
+\end{quotation}
+give:
+\begin{quotation}\noindent
+`the corporation dieth not' -- \lcinlinerr{salter, salternr, salterer}
+\end{quotation}
+
+
+\p Alternatively, when pinpoints are needed, and using two bibentries and components of their citations, the casename and caseref from one bibentry may be used, followed by the caseref of the other, with one of the entries having the \cmdc{skipbib=true} option,
+
+with
+\begin{quotation}\noindent
+\demofielddump[]{ashnr}{ashnr}
+\end{quotation}
+and
+\begin{quotation}\noindent
+\demofielddump[]{asher}{asher}
+\end{quotation}
+giving:
+\begin{quotation}\noindent
+\lcinline[358]{ashnr}, \lawciteref[526]{asher}.
+\end{quotation}
 
 %``No real comparison exists between the interprovincial relationships of today and those obtaining between foreign countries in the 19th century.  The courts made a serious error in transposing the rules developed for the enforcement of foreign judgments to the enforcement of judgments from sister‑provinces.  The considerations underlying the rules of comity apply with much greater force between the units of a federal state.'' -- 
 %Morguard headnote

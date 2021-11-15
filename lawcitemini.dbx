@@ -1,0 +1,223 @@
+%hyperref support for splitindex
+%\NewDocumentCommand\boldhyperpage{ m } {\textbf{\hyperpage{#1}}
+%\NewDocumentCommand\boldhyperpage{ m } {\hyperpage{#1}}
+\newcommand*\myhyperref[1]{\hyperpage{#1}}
+
+
+
+
+\DeclareDatamodelFields[type=field, format=xsv, datatype=literal]{yoptions}
+\DeclareDatamodelEntryfields{yoptions}
+
+\DeclareDatamodelFields[type=field, datatype=verbatim]{thumbnail}
+\DeclareDatamodelEntryfields{thumbnail}
+
+%
+\newtoggle{lcimageshow}
+\togglefalse{lcimageshow}
+
+\newtoggle{lcimageusescale}
+\toggletrue{lcimageusescale}
+
+\newcommand\lcimagewidth{1cm}
+\newcommand\setlcimagewidth[1]{\renewcommand\lcimagewidth{#1}}
+
+\newcommand\lcimagescale{0.2}
+\newcommand\setlcimagescale[1]{\renewcommand\lcimagescale{#1}}
+
+\newcommand*{\insertbibimage}[1]{\iftoggle{lcimageshow}%
+{\fbox{\iftoggle{lcimageusescale}{\includegraphics[scale=\lcimagescale]{#1}}%true
+{\includegraphics[width=\lcimagewidth,keepaspectratio]{#1}}%false
+}}%true
+{}%false
+}
+
+
+
+%
+\newtoggle{printregulations}
+\toggletrue{printregulations}
+
+%
+\newtoggle{printxregulations}
+\toggletrue{printxregulations}
+
+
+%
+\newcommand\lctos{legislation}
+%
+
+\newcommand\lctor{%
+%\ifkeyword{regulations}{\iftoggle{printregulations}{regulations}{legislation}}{legislation}%
+\iftoggle{printxregulations}{regulations}{legislation}%
+%legislation%
+}
+
+\newtoggle{hyperindexpages}
+\toggletrue{hyperindexpages}
+
+
+
+\DeclareDatamodelEntrytypes{case,statute,ljarticle,quote}
+
+\DeclareDatamodelFields[type=list, datatype=literal]{%
+parallel,
+}
+
+
+\DeclareDatamodelFields[type=field, datatype=literal]{
+% case fields
+  partya,
+  partyb,
+  partysep,
+  partysepx,
+  shipname,
+  partyasn,%party short name, eg: DPP
+  partybsn,
+  partyajur,%party jurisdiction (for shortname), e.g. (NSW), as in DPP (NSW)
+  partybjur,
+  caseyear, %will be a date
+  icaseyear, %for the index
+  decisionyear, %for the casename, when no report year
+  reportyear, %will be a date
+  reportvolume,
+  volyearneeded, %will be a boolean
+  reportseries,
+  reportpage,
+  courtname,%for MNC, and in-progress
+  casenumber,%for MNC
+% for in-progress
+  casename,
+  courtdivision,
+  courtlist,
+  courtjurisdiction,
+  courtcasenumber,%in-progress, the docket
+  casestatus, %unreported, etc
+  attribution, % J for the Court, for quote (qqcite)
+  courtfullname, % for when unreported etc
+%link
+ linkname,
+ url,
+ mncurl,
+%general
+  note,
+  caseshortname,
+  casenickname,
+% statute
+statutetitle,
+statutelongtitle,
+statuteshorttitle,
+statutenickname,
+statutevolume,
+statutejurisdiction,
+statuteregnalyear,
+statutechapter,
+statuteyear,%for the volume
+statutetitleyear,%for the title
+%reg2
+title,
+chapter,
+year,
+citeref,
+regnum,
+fulldate,
+gazette,
+%leg
+svjy,
+%ljarticle
+mncyear,
+mncname,
+mncnumber,
+shortname,
+%quote
+quotetext,
+}
+
+\DeclareDatamodelEntryfields[case]{%
+partya,
+partyb,
+partysep,
+partysepx,
+caseyear,
+reportyear,
+reportvolume,%
+volyearneeded,
+reportseries,
+reportpage,
+courtname,
+casenumber,
+note,
+shipname,%
+icaseyear,
+caseshortname,
+casenickname,
+decisionyear,
+parallel,
+  partyasn,%party short name, eg: DPP
+  partybsn,
+  partyajur,%party jurisdiction
+  partybjur,
+  casename,% in-progress fields
+  courtdivision,
+  courtlist,
+  courtjurisdiction,
+  courtcasenumber,
+  casestatus, %unreported, etc
+  attribution, % J for the Court, for quote (qqcite)
+  courtfullname, % for when unreported etc
+ linkname,
+ url,
+ mncurl,
+}
+
+
+\DeclareDatamodelEntryfields[statute]{%
+statutetitle,%
+statutelongtitle,%
+statuteshorttitle,%
+statutenickname,%
+statutevolume,%
+statutejurisdiction,%
+statuteregnalyear,%
+statutechapter,%
+statuteyear,%for the volume
+statutetitleyear,%for the title
+%reg2
+title,%
+chapter,%
+year,%
+citeref,%
+regnum,%
+fulldate,%
+gazette,%
+%
+svjy,%
+ linkname,
+ url,
+ mncurl,% court link
+}
+
+\DeclareDatamodelEntryfields[ljarticle]{%
+author,
+title,
+mncyear,
+mncname,
+mncnumber,
+date,
+volume,
+journaltitle,
+pages,
+keywords,
+note,
+shortname,
+}
+
+\DeclareDatamodelEntryfields[quote]{%
+quotetext,
+}
+
+
+\DeclareLanguageMapping{english}{english-lawcitemini}
+
+
+\endinput
