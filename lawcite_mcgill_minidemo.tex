@@ -1522,9 +1522,11 @@ xxx}%
 %======== getcaseref
 \newbibmacro{getcaseref}{%
 	\iffieldundef{mncurl}{%
+	\iffieldundef{casenumber}{}{%
  \usebibmacro{getcaseyear}%
  \usebibmacro{getcourtname}%
  \usebibmacro{getcasenumber}%
+ }%
  }{%
   \ifhyperref
     {%
@@ -4335,12 +4337,24 @@ test {\ifentrytype{case}}%
 {\usebibmacro{prenote}}%
 %@@@@@@@@@@@@@@@@ item
 {%
+\ifboolexpr{%
+test {\ifentrytype{statute}}%
+}%
+{%start statute true
 \usebibmacro{getciteref}
+}%end statute true
+{}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}\iffieldundef{note}{}{\addspace\printfield[parens]{note}}%
+{\ifboolexpr{%
+test {\ifentrytype{statute}}%
+}%
+{%start statute true
+\usebibmacro{postnote}\iffieldundef{note}{}{\addspace\printfield[parens]{note}}%
+}%end statute true
+{}%
 }
 
 
@@ -6758,6 +6772,7 @@ keywords = {lawbook},
   reportpage = {562},
   casenickname = {snail in the bottle},
   note = {HL},
+  caseyear = {1932},
 	}
 
 %Commonwealth v Tasmania ("Tasmanian Dam case") [1983] HCA 21; (1983) 158 CLR 1
@@ -6860,14 +6875,18 @@ partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
 @case{acmeca,partya = {Acme Video Inc },partyb = {Hedges and Retail Technologies (Video) Inc},caseyear = {1993},courtname = {CanLII},casenumber = {8553 (ON CA)},reportvolume = {12},reportseries = {OR (3rd)},reportpage = {16},note = {Ont CA},mncurl = {https://www.canlii.org/en/on/onca/doc/1993/1993canlii8553/1993canlii8553.html},}
 @case{moore,partya = {Moore},partyb = {Mercator Enterprises Ltd},caseyear = {1978},courtname = {CanLII},casenumber = {2139 (NS SC)},reportvolume = {90},reportseries = {DLR (3rd)},reportpage = {590},note = {NSTD},decisionyear = {1978},parallel = {31 NSR (2d) 327 and 7 CPC 150},mncurl = {https://www.canlii.org/en/ns/nssc/doc/1978/1978canlii2139/1978canlii2139.html},}
 @case{aero,partya = {Re Aero Trades Western Ltd and Ben Hochum \& Son Ltd},reportvolume = {51},reportseries = {DLR (3rd)},reportpage = {617},decisionyear = {1974},parallel = {[1975] 4 WWR 412},}
-@case{tdi,partya = {TDI Hospitality Management Consultants Inc},partyb = {Browne},caseyear = {1994},courtname = {CanLII},casenumber = {10958 (MB CA)},reportvolume = {117},reportseries = {DLR (4th)},reportpage = {289},note = {Man CA},parallel= {[1994] 9 WWR 153 and 70 WAC 302 and 95 Man R (2d) 302 and 28 CPC (3d) 232 and [1994] MJ No 448 (QL) and 50 ACWS (3d) 206},mncurl = {https://www.canlii.org/en/mb/mbca/doc/1994/1994canlii10958/1994canlii10958.html},pagination = {atparagraph},}
+@case{tdi,partya = {TDI Hospitality Management Consultants Inc},partyb = {Browne},caseyear = {1994},courtname = {CanLII},casenumber = {10958 (MB CA)},reportvolume = {117},reportseries = {DLR (4th)},reportpage = {289},note = {Man CA},caseshortname = {TDI},parallel = {[1994] 9 WWR 153 and 70 WAC 302 and 95 Man R (2d) 302 and 28 CPC (3d) 232 and [1994] MJ No 448 (QL) and 50 ACWS (3d) 206},mncurl = {https://www.canlii.org/en/mb/mbca/doc/1994/1994canlii10958/1994canlii10958.html},pagination = {atparagraph},}
 @case{morguard,partya = {Morguard Investments Ltd},partyb = {Be Savoye},caseyear = {1990},courtname = {CanLII},casenumber = {29 (SCC)},reportyear = {1990},reportvolume = {3},volyearneeded = {true},reportseries = {SCR},reportpage = {1077},decisionyear = {1990},parallel = {76 DLR (4th) 256 and 46 CPC (2d) 1},mncurl = {https://www.canlii.org/en/ca/scc/doc/1990/1990canlii29/1990canlii29.html},}
 @case{whatcott,partya = {Saskatchewan (Human Rights Commission)},partyb = {Whatcott},caseyear = {2013},courtname = {SCC},casenumber = {11},reportyear = {2013},reportvolume = {1},volyearneeded = {true},reportseries = {SCR},reportpage = {467},mncurl = {https://www.canlii.org/en/ca/scc/doc/2013/2013scc11/2013scc11.html},}
 @case{bombadier,partya = {Quebec (Commission des droits de la personne et des droits de la jeunesse)},partyb = {Bombardier Inc. (Bombardier Aerospace Training Center)},caseyear = {2015},courtname = {SCC},casenumber = {39},reportyear = {2015},reportvolume = {2},volyearneeded = {true},reportseries = {SCR},reportpage = {789},mncurl = {https://www.canlii.org/en/ca/scc/doc/2015/2015scc39/2015scc39.html},}
 @case{calego,partya = {Calego International inc},partyb = {Commission des droits de la personne et des droits de la jeunesse},partysep = {c},caseyear = {2013},courtname = {QCCA},casenumber = {924},reportyear = {2013},volyearneeded = {true},reportseries = {RJDT},reportpage = {517},pagination = {atparagraph},mncurl = {https://www.canlii.org/fr/qc/qcca/doc/2013/2013qcca924/2013qcca924.html},}
 @case{fraser,partya = {Fraser},partyb = {Canada (Commission des relations de travail dans la fonction publique)},partysep = {c},caseyear = {1985},courtname = {CanLII},casenumber = {14 (CSC)},reportyear = {1985},reportvolume = {2},volyearneeded = {true},reportseries = {RCS},reportpage = {455},mncurl = {https://www.canlii.org/fr/ca/csc/doc/1985/1985canlii14/1985canlii14.html},pagination = {atparagraph},}
 @case{mcauliffe,partya = {McAuliffe},partyb = {Mayor and Board of Aldermen of New Bedford},reportvolume = {29},reportseries = {NE},reportpage = {517},note = {1892},}
-
+@case{pszon,partya = {Re Pszon},caseyear = {1946},courtname = {CanLII},casenumber = {107 (ON CA)},reportyear = {1946},volyearneeded = {true},reportseries = {OR},reportpage = {229},parallel = {[1946] 2 DLR 507 and 27 CBR 130},mncurl = {https://www.canlii.org/en/on/onca/doc/1946/1946canlii107/1946canlii107.html},}
+@case{wismer,partya = {Re Wismer and Javelin International Ltd},caseyear = {1982},courtname = {CanLII},casenumber = {3132 (ON SC)},reportvolume = {136},reportseries = {DLR (3rd)},reportpage = {647},note = {Ont HC},decisionyear = {1982},mncurl = {https://www.canlii.org/en/on/onsc/doc/1982/1982canlii3132/1982canlii3132.html},}
+@case{mulroney,partya = {Re Mulroney and Coates},caseyear = {1986},courtname = {CanLII},casenumber = {2613 (ON SC)},reportvolume = {27},reportseries = {DLR (4th)},reportpage = {118},note = {Ont HC},decisionyear = {1986},mncurl = {https://www.canlii.org/en/on/onsc/doc/1986/1986canlii2613/1986canlii2613.html},}
+@case{toucheross,partya = {Touche Ross Ltd},partyb = {Sorrel Resources Ltd},caseyear = {1987},courtname = {CanLII},casenumber = {2693 (BC SC)},reportvolume = {11},reportseries = {BCLR (2nd)},reportpage = {184},note = {SC},decisionyear = {1987},mncurl = {https://www.canlii.org/en/bc/bcsc/doc/1987/1987canlii2693/1987canlii2693.html},}
+@case{roglass,partya = {Roglass Consultants Inc},partyb = {Kennedy, Lock},caseyear = {1984},courtname = {CanLII},casenumber = {421 (BC CA)},reportvolume = {65},reportseries = {BCLR},reportpage = {393},note = {CA},decisionyear = {1984},mncurl = {https://www.canlii.org/en/bc/bcca/doc/1984/1984canlii421/1984canlii421.html},}
 
 
 
@@ -7759,9 +7778,126 @@ Text\footnote{\lcinline{acme}, rev'd \lawciteref{acmeca}.}
 \end{quotation}
 %Il y a plus d’un siècle, dans McAuliffe v. Mayor and Board of Aldermen of New Bedford, 29 N.E. 517 (1892), le juge Holmes écrivait, p. 517-8 : « There are few employments for hire in which the servant does not agree to suspend his constitutional right of free speech, as well as of idleness, by the implied terms of his contract. »
 
-\p Citing from a different jurisdiction (US)
+\p Citing from a different jurisdiction (US), by changing the citation style mid-document:
 \begin{quotation}
-Il y a plus d’un siècle, dans \lcsetstyleindigo\lcinline{mcauliffe}\lcsetstylemcgill, le juge Holmes écrivait, \lcpostnote[][p. 517-8]{mcauliffe} : « There are few employments for hire in which the servant does not agree to suspend his constitutional right of free speech, as well as of idleness, by the implied terms of his contract. »\lawcite[][note 25]{calego}
+Il y a plus d’un siècle, dans \lcsetstyleindigo\lcinline{mcauliffe}\marginpar{$\leftarrow$ \sffamily\small\lccurrentstyle}\lcsetstylemcgill, le juge Holmes écrivait, \lcpostnote[][p. 517-8]{mcauliffe} : « There are few employments for hire in which the servant does not agree to suspend his constitutional right of free speech, as well as of idleness, by the implied terms of his contract. »\lawcite[][note 25]{calego}
+\end{quotation}
+
+%\begin{itemize}
+%\item
+%\end{itemize}
+\p To change the citation style mid-document, use one of the following switches:
+\citetrackerfalse
+\begin{itemize}
+\item \cmd{lcsetstyleaglc} for AGLC style (a footnote style)
+			\begin{itemize}
+			\item \lcsetstyleaglc Text\lawcite{snail}
+			\end{itemize}
+\item \cmd{lcsetstylemlr} for MLR style (casename inline, caseref in footnote)
+			\begin{itemize}
+			\item \lcsetstylemlr  Text \lawcite{snail}
+			\end{itemize}
+\item \cmd{lcsetstylemcgill} for McGill style (a footnote style)
+			\begin{itemize}
+			\item \lcsetstylemcgill  Text\lawcite{snail}
+			\end{itemize}
+\item \cmd{lcsetstyleindigo} for Indigo style (an inline style)
+			\begin{itemize}
+			\item \lcsetstyleindigo  Text \lawcite{mcauliffe}
+			\end{itemize}
+\end{itemize}
+\citetrackerfalse
+\lcsetstylemcgill
+
+\p To explicitly override the currently active citation style:
+\citetrackerfalse
+\begin{itemize}
+\item use \cmd{lcinline} for an inline citation
+			\begin{itemize}
+			\item Text \lcinline{snail}
+			\end{itemize}
+\item use \cmd{lcinlineparens} for a parenthetic inline citation
+			\begin{itemize}
+			\item Text \lcinlineparens{snail}
+					\begin{itemize}
+					\item Alternatively, do \cmdc{(\textbackslash lcinline\{..\})}
+					\end{itemize}
+			\end{itemize}
+\item use \cmd{lcfoot} for a footnote citation
+			\begin{itemize}
+			\item Text\lcfoot{snail}
+					\begin{itemize}
+					\item Alternatively, do \cmdc{\textbackslash footnote\{\textbackslash lcinline\{..\}..\}}
+					\end{itemize}
+			\end{itemize}
+\item use \cmd{lawcitehf} for an MLR-style citation
+			\begin{itemize}
+			\item Text \lawcitehf{snail}
+			\end{itemize}
+\end{itemize}
+\citetrackerfalse
+
+\newcommand\lccci[2]{\item \cmd{#1} for the #2
+			\begin{itemize}
+			\item \csname #1\endcsname{snail}
+			\end{itemize}
+}
+\newcommand\lcccib[2]{\item \cmd{#1} for the #2
+			\begin{itemize}
+			\item \csname #1\endcsname[563]{snail}
+			\end{itemize}
+}
+\citetrackerfalse
+\lcsetstyleaglc
+\p Components of a citation can be retrieved individually for use as standalone items. For a given citation ``\lcinline[563]{snail}'':
+\begin{itemize}
+\item \cmd{lawcitetitle} for the casename
+			\begin{itemize}
+			\item \lawcitetitle{snail}
+			\end{itemize}
+\lccci{lawciteref}{caseref}
+\lccci{lcrefnn}{caseref without the note}
+\lccci{lcnote}{note}
+\lccci{lcshorttitle}{short title (shipname, caseshortname, partya)}
+\lccci{lccasesn}{case shortname  (shipname, partya)}
+\lccci{lcyear}{decision year}
+\lccci{lcnickname}{case nickname}
+\lcccib{lcpostnote}{postnote}
+\lccci{lcciteref}{citeref (for statutes)}
+\end{itemize}
+\citetrackerfalse
+\lcsetstylemcgill
+
+\p The bibentry \cmdc{caseshortname} field is intended as the user-assigned adhoc shorthand for a case, e.g., \lawcitetitle{tdi} could be shortened to \lcshorttitle{tdi}; while the \cmdc{casenickname} field is the shorthand as known generally among the profession, e.g., \lawcitetitle{edwardsa} is known as the \lcnickname{edwardsa} case.
+
+\p One citation (inline) with multiple cases can be done with \\ \democomm[Text\ ]{lcinline}{clarke,tulk,cbc,vdn}{:}
+
+The parenthetical and footnote versions can be done the usual way (with \cmdc{(...)}, and \cmdc{\textbackslash footnote\{...\}}).
+
+\p One citation with multiple cases, each case with its own prenote and postnote, and a overall prenote and postnote for the whole citation group, can be done with \cmd{lawcitesinline}.
+
+This code:
+\begin{quotation}
+\noindent\cmd{togglefalse} \braces{pinpointaftermnc}\\
+\cmd{lawcitesinline} (Overall prenote:) (overall postnote) \brackets{654-55} \braces{wismer} \brackets{128-29} \braces{mulroney} \brackets{189} \braces{toucheross} \brackets{394} \braces{roglass}.\\
+\cmd{toggletrue} \braces{pinpointaftermnc}
+\end{quotation}
+
+produces:
+\begin{quotation}\noindent
+\togglefalse{pinpointaftermnc}
+\lawcitesinline(Overall prenote:)(overall postnote)[654-55]{wismer}[128-29]{mulroney}[189]{toucheross}[394]{roglass}.
+\toggletrue{pinpointaftermnc}
+\end{quotation}
+
+In this case, none of the citations have real MNCs, so \cmdc{pinpointaftermnc} is toggled to false, so that the pinpoints appear after the law report reference and not after the CanLII ``MNC''.
+
+\p The corresponding footnote version uses \cmd{lawcitesfoot}:
+
+\begin{quotation}
+\togglefalse{pinpointaftermnc}
+Text\lawcitesfoot(Overall prenote:)(overall postnote)[654-55]{wismer}[128-29]{mulroney}[189]{toucheross}[394]{roglass}
+\toggletrue{pinpointaftermnc}
 \end{quotation}
 
 
