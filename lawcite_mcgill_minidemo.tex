@@ -3153,7 +3153,7 @@ test {\ifentrytype{statute}}%
 \usebibmacro{fullstepindex}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\multicitedelim}%
+{\usebibmacro{delim:choice}}%
 %@@@@@@@@@@@@@@@@ postnote
 {%
  \ifcase\thereftypemode \or%
@@ -3282,6 +3282,8 @@ test {\ifentrytype{statute}}%
 {\usebibmacro{postnote}}
 
 
+\newtoggle{infirstcite}
+
 %============= lawciterefrr
 \DeclareCiteCommand{lawciterefrr}%
 %@@@@@@@@@@@@@@@@ prenote
@@ -3291,7 +3293,15 @@ test {\ifentrytype{statute}}%
 %%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
 %\usebibmacro{fullstepindex}%
 \usebibmacro{rrindex}%
+ \ifboolexpr{%
+  not test {\iffirstcitekey}%if 2nd+ cite
+  }%
+	{%
+%\renewcommand{\multicitedelim}{\addsemicolon\addspace}
+%\renewcommand{\multicitedelim}{y}
 \usebibmacro{getcaseref}%
+}{%false
+}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
@@ -4174,7 +4184,9 @@ test {\ifentrytype{case}}%
 %{\usebibmacro{postnote}\iflastcitekey{\addspace\usebibmacro{getnote}}{}}
 {\usebibmacro{notmnc:postnote}\usebibmacro{getnote:noparens}}%{\iflastcitekey{\usebibmacro{postnote}\addspace\usebibmacro{getnote}}{\usebibmacro{postnote}}}
 
-
+\newbibmacro{delim:choice}{%
+\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}%
+}
 %============= lcinlinerr
 \DeclareCiteCommand{lcinlinerr}%
 %@@@@@@@@@@@@@@@@ prenote
@@ -4204,7 +4216,7 @@ test {\ifentrytype{case}}%
 \usebibmacro{rrindex}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%
+{\usebibmacro{delim:choice}}%
 %@@@@@@@@@@@@@@@@ postnote
 {\iflastcitekey{\usebibmacro{postnote}\iffieldundef{note}{}{\addspace\usebibmacro{getnote}}}{\usebibmacro{postnote}}}
 
@@ -4222,7 +4234,7 @@ test {\ifentrytype{case}}%
 \usebibmacro{getcasenameref}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\multicitedelim}%
+{\usebibmacro{delim:choice}}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}
 
@@ -4241,7 +4253,7 @@ test {\ifentrytype{case}}%
 \iffirstcitekey{\usebibmacro{getcasenameref}}{\usebibmacro{getcaseref}}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\multicitedelim}%
+{\usebibmacro{delim:choice}}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}
 
@@ -4321,7 +4333,7 @@ test {\ifentrytype{case}}%
 \usebibmacro{rrindex}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\multicitedelim}%
+{\usebibmacro{delim:choice}}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}
 
@@ -4444,7 +4456,7 @@ test {\ifentrytype{statute}}%
 {\usebibmacro{prenote}}%
 %@@@@@@@@@@@@@@@@ item
 {%
-\usebibmacro{getljarticletitlequotes}%
+\usebibmacro{getljarticlequotes}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
@@ -4807,6 +4819,21 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 {\space and\space}
 {}}
 
+\newcommand\docompfield[1]{%
+\strcompare{\myparm}{#1}{%
+\noindent\iffieldundef{#1}{}{#1 =  \{\thefield{#1}\},\par}%
+}%
+}
+\newcommand\docomplist[2]{%1=list,2=list format
+\strcompare{\myparm}{#1}{%
+\noindent\iflistundef{#1}{}{#1 =  \{\printlist[#2][-\value{listtotal}]{#1}\},\par}%
+}%
+}
+\newcommand\lcgetabibfield[2]{%1=key,2=fieldname
+\citetrackerfalse
+\lcdacasefield[#2][]{#1}
+\citetrackertrue
+}
 
 \newbibmacro{getlcdacasefield}[1]{%
 {%
@@ -4837,6 +4864,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 %\noindent\iffieldundef{gazette}{}{gazette =  \{\thefield{gazette}\},\par}%
 %\noindent\iffieldundef{icaseyear}{}{icaseyear =  \{\thefield{icaseyear}\},\par}%
 %\noindent\iffieldundef{journaltitle}{}{journaltitle =  \{\thefield{journaltitle}\},\par}%
+\docompfield{keywords}
 %\noindent\iffieldundef{keywords}{}{keywords =  \{\thefield{keywords}\},\par}%
 %\noindent\iffieldundef{linkname}{}{linkname =  \{\thefield{linkname}\},\par}%
 %\noindent\iffieldundef{mncname}{}{mncname =  \{\thefield{mncname}\},\par}%
@@ -4845,30 +4873,25 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 %\noindent\iffieldundef{mncyear}{}{mncyear =  \{\thefield{mncyear}\},\par}%
 %\noindent\iffieldundef{note}{}{note =  \{\thefield{note}\},\par}%
 %\noindent\iffieldundef{number}{}{number =  \{\thefield{number}\},\par}%
+\docompfield{options}
 %\noindent\iffieldundef{pages}{}{pages =  \{\thefield{pages}\},\par}%
 %\noindent\iffieldundef{pagination}{}{pagination =  \{\thefield{pagination}\},\par}%
-\strcompare{\myparm}{parallel}{%
-\noindent\iflistundef{parallel}{}{parallel =  \{\printlist[wand][-\value{listtotal}]{parallel}\},\par}%
-}%
-\strcompare{\myparm}{partya}{%
-\noindent\iffieldundef{partya}{}{partya =  \{\thefield{partya}\},\par}%
-}%
-%\noindent\iffieldundef{partyajur}{}{partyajur =  \{\thefield{partyajur}\},\par}%
-%\noindent\iffieldundef{partyasn}{}{partyasn =  \{\thefield{partyasn}\},\par}%
-%\noindent\iffieldundef{partyb}{}{partyb =  \{\thefield{partyb}\},\par}%
-%\noindent\iffieldundef{partybjur}{}{partybjur =  \{\thefield{partybjur}\},\par}%
-%\noindent\iffieldundef{partybsn}{}{partybsn =  \{\thefield{partybsn}\},\par}%
-\strcompare{\myparm}{partysep}{%
-\noindent\iffieldundef{partysep}{}{partysep =  \{\thefield{partysep}\},\par}%
-}%
-%\noindent\iffieldundef{partysepx}{}{partysepx =  \{\thefield{partysepx}\},\par}%
-%\noindent\iffieldundef{regnum}{}{regnum =  \{\thefield{regnum}\},\par}%
-%\noindent\iffieldundef{reportpage}{}{reportpage =  \{\thefield{reportpage}\},\par}%
-%\noindent\iffieldundef{reportseries}{}{reportseries =  \{\thefield{reportseries}\},\par}%
-%\noindent\iffieldundef{reportvolume}{}{reportvolume =  \{\thefield{reportvolume}\},\par}%
-%\noindent\iffieldundef{reportyear}{}{reportyear =  \{\thefield{reportyear}\},\par}%
-%\noindent\iffieldundef{shipname}{}{shipname =  \{\thefield{shipname}\},\par}%
-%\noindent\iffieldundef{shortname}{}{shortname =  \{\thefield{shortname}\},\par}%
+\docomplist{parallel}{wand}
+\docompfield{partya}
+\docompfield{partyajur}
+\docompfield{partyasn}
+\docompfield{partyb}
+\docompfield{partybjur}
+\docompfield{partybsn}
+\docompfield{partysep}
+\docompfield{partysepx}
+\docompfield{regnum}
+\docompfield{reportpage}
+\docompfield{reportseries}
+\docompfield{reportvolume}
+\docompfield{reportyear}
+\docompfield{shipname}
+\docompfield{shortname}
 %\noindent\iffieldundef{statutechapter}{}{statutechapter =  \{\thefield{statutechapter}\},\par}%
 %\noindent\iffieldundef{statutejurisdiction}{}{statutejurisdiction =  \{\thefield{statutejurisdiction}\},\par}%
 %\noindent\iffieldundef{statutelongtitle}{}{statutelongtitle =  \{\thefield{statutelongtitle}\},\par}%
@@ -6892,7 +6915,7 @@ partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
 @case{equity,partya = {Anonymous},decisionyear = {1492},thumbnail = {equity.png},options = {skipbib=true},}
 @case{ashnr,partya = {Ann Ash},partyb = {Lady Ash},reportseries = {Comb},reportpage = {357},decisionyear = {1724},options = {skipbib=true},}
 @case{asher,partya = {Ann Ash},partyb = {Lady Ash},reportvolume = {90},reportseries = {ER},reportpage = {526},note = {B},decisionyear = {1724},}
-@case{salter,partya = {Salter and Bellamy},decisionyear = {1724},options = {skipbib=true},}
+@case{salter,partya = {Salter and Bellamy},note = {note},casenickname = {sawcy},decisionyear = {1724},options = {skipbib=true},}
 @case{salternr,reportseries = {Comb},reportpage = {5},crossref = {salter},options = {skipbib=true},}
 @case{salterer,reportvolume = {90},reportseries = {ER},reportpage = {309},note = {B},crossref = {salter},}
 
@@ -7548,12 +7571,12 @@ options={skipbib=true,},
 
 
 
-\newcommand\demofielddump[3][\newpage]{%
-#1
-\ifstrequal{#1}{\newpage}{\applymydcounter{#3}Fields for example \ref{mycite:#2}: \textbf{#2} --}{} \par
+\newcommand\demofielddump[3][\newpage]{%1=layout,2=key, 3=counter
+#1%
+\ifstrequal{#1}{\newpage}{\applymydcounter{#3}Fields for example \ref{mycite:#2}: \textbf{#2} -- \par
 
-\bigskip
-\lcdcase{#2}
+\bigskip}{}%
+\lcdcase{#2}%
 %\printrectangle
 }
 
@@ -7779,9 +7802,10 @@ Text\footnote{\lcinline{acme}, rev'd \lawciteref{acmeca}.}
 
 \p Using a different party separator (\textit{c} for ``contre''):
 
-\citetrackerfalse
-\lcdacasefield[partysep][]{calego}
-\citetrackertrue
+%\citetrackerfalse
+%\lcdacasefield[partysep][]{calego}
+%\citetrackertrue
+\lcgetabibfield{calego}{partysep}
 
 \begin{quotation}
 ``À cela s’ajoute le fait que, si le contrat de travail impose à un salarié certaines restrictions à sa liberté d’expression[25], il n’y a pas de raison pour que des restrictions du même ordre ne visent pas également l’employeur.''\lawcite[][115]{calego}
@@ -7919,13 +7943,18 @@ Text\lawcitesfoot(Overall prenote:)(overall postnote)[654-55]{wismer}[128-29]{mu
 \end{center}
 \end{figure}
 
-\p With nominate reports and their reprints in the English Reports, set up three bibentries and the \cmd{lcinlinerr} command.  One bibentry has the casename and will be the `parent' entry (and use the \cmdc{skipbib} option:
+\p With nominate reports and their reprints in the English Reports, set up three bibentries.  One bibentry has the casename and will be the `parent' entry (and use the \cmdc{skipbib} option:
+
+%%\citetrackerfalse
+%%\lcdacasefield[options][]{salter}
+%%\citetrackertrue
+%\lcgetabibfield{salter}{options}
 
 \begin{quotation}\noindent
 \demofielddump[]{salter}{salter}
 \end{quotation}
 
-The two child entries will \cmdc{crossref} back to the parent and inherit its fields, and one of the child entries will use the \cmdc{skipbib} option:
+The two child entries will \cmdc{crossref} back to the parent and inherit its fields (the party names), and one of the child entries will use the \cmdc{skipbib} option:
 
 \begin{quotation}\noindent
 \demofielddump[]{salternr}{salternr}
@@ -7941,10 +7970,23 @@ give:
 `the corporation dieth not' -- \lcinlinerr{salter, salternr, salterer}
 \end{quotation}
 
+\p To \marginpar{buggy} follow the current cite style, use
+\democomm[Text]{lawciterr}{salter, salternr, salterer}{:}
 
-\p Alternatively, when pinpoints are needed, and using two bibentries and components of their citations, the casename and caseref from one bibentry may be used, followed by the caseref of the other, with one of the entries having the \cmdc{skipbib=true} option,
+Workaround for footnote styles: use \cmd{footnote}\braces{\cmd{lcinelinerr}\braces{...}}: Text\footnote{\lcinlinerr{salter, salternr, salterer}.}
 
-with
+\p To have an inline citation, use
+\democomm[Text\ ]{lcinlinerr}{salter, salternr, salterer}{:}
+
+
+\p To have a footnote, use
+\democomm[Text]{lcfootrr}{salter, salternr, salterer}{:}
+
+
+
+\p Alternatively to the parent-child method, especially when pinpoints are needed, two full bibentries with the components of their citations may be used:, the casename and caseref from one bibentry, followed by the caseref of the other, with one of the entries having the \cmdc{skipbib=true} option,
+
+so that, with
 \begin{quotation}\noindent
 \demofielddump[]{ashnr}{ashnr}
 \end{quotation}
@@ -7952,10 +7994,80 @@ and
 \begin{quotation}\noindent
 \demofielddump[]{asher}{asher}
 \end{quotation}
-giving:
+the combination gives:
 \begin{quotation}\noindent
 \lcinline[358]{ashnr}, \lawciteref[526]{asher}.
 \end{quotation}
+
+
+%%Not really needed, given that components are already available.
+%%\lawcitetitlerr{salter, salternr, salterer}
+%%
+%%\lcshorttitlerr{salter, salternr, salterer}
+%%
+%%\lcnicknamerr{salter, salternr, salterer}
+%%
+%%\lawciterefrr{salter, salternr, salterer}
+%%
+%%\lcrefnnrr{salter, salternr, salterer}
+%%
+%%\lcnoterr{salter, salternr, salterer}
+
+
+
+\p A full inline citation can be done with \\ \democomm[Text\ ]{lcinlinefull}{snail}{:}
+
+\p A full inline citation with no note can be done with \\ \democomm[Text\ ]{lcinlinenn}{snail}{:}
+
+\p A full footnote citation can be done with \\ \democomm[Text]{lcfootfull}{snail}{:}
+
+\section{Statutes}
+
+\section{Law Journals}
+
+\p The @ljarticle bibentry type is for law journals and law reviews.
+\lcdcase{kleefeld}
+\p The information can be accessed with the following commands.
+\begin{itemize}
+\item\cmd{ljcite}: \ljcite[276]{kleefeld}
+
+\item\cmd{ljfootcite}: Text\ljfootcite[276]{kleefeld}
+
+\item\cmd{lcljauthor}: \lcljauthor{kleefeld}
+
+\item\cmd{lcljauthorfn}: \lcljauthorfn{kleefeld}
+
+\item\cmd{lcljtitle}: \lcljtitle{kleefeld}
+
+\item\cmd{lcljyear}: \lcljyear{kleefeld}
+
+\item\cmd{lcljjournaltitle}: \lcljjournaltitle{kleefeld}
+
+\item\cmd{lcljvolume}: \lcljvolume{kleefeld}
+
+\item\cmd{lcljpage}: \lcljpage{kleefeld}
+
+\end{itemize}
+
+\p `Ordinary' articles can be stored in the @article bibentry type: \begin{quotation}\noindent\fullcite{a104}\end{quotation}
+
+\section{Legal Monographs}
+
+\p Legal textbooks are stored in the @book bibentry type, with the keywood \cmdc{lawbook} to direct them into the relevant section of a bibliography.
+\lcgetabibfield{lrcns}{keywords}
+
+\p They may be cited with the normal citation commands (such as \cmd{cite}): \cite{lrcns}.
+
+\p The \cmd{lcbook} command does a specialised footnote.\lcbook{lrcns}
+
+\p Non-legal books do not have the keyword: \cite{litlaw}
+
+\p For the customary treatise shorthand references of the \lcepigraph{candl} kind, see section \ref{sec:epigrapha}.
+
+
+\section{Quotations and Epigrapha}
+\label{sec:epigrapha}
+\qqcite{q5}
 
 %``No real comparison exists between the interprovincial relationships of today and those obtaining between foreign countries in the 19th century.  The courts made a serious error in transposing the rules developed for the enforcement of foreign judgments to the enforcement of judgments from sister‑provinces.  The considerations underlying the rules of comity apply with much greater force between the units of a federal state.'' -- 
 %Morguard headnote
