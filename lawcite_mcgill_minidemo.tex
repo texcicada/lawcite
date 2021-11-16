@@ -2707,7 +2707,7 @@ x#1;;
 \iffieldundef{partya}{\hfill}{}\textemdash\addspace\printnames{author}%
 }\iffieldundef{author}{}{\par}%
 %\printnames{editor}%
-\printfield{title}%if there is one
+\addspace\printfield{title}%if there is one
 \iffieldundef{partya}{}{{\small\usebibmacro{getcasenameref}}}%if it's a case
 \iffieldundef{casestatus}{}{\printtext{\addcomma\addspace\printfield{casestatus}}}%
 \iffieldundef{courtfullname}{}{\printtext{\addcomma\addspace\printfield{courtfullname}}}%
@@ -4773,6 +4773,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{partybsn}{}{partybsn =  \{\thefield{partybsn}\},\par}%
 \noindent\iffieldundef{partysep}{}{partysep =  \{\thefield{partysep}\},\par}%
 \noindent\iffieldundef{partysepx}{}{partysepx =  \{\thefield{partysepx}\},\par}%
+\noindent\iffieldundef{quotetext}{}{quotetext =  \{\thefield{quotetext}\},\par}%
 \noindent\iffieldundef{regnum}{}{regnum =  \{\thefield{regnum}\},\par}%
 \noindent\iffieldundef{reportpage}{}{reportpage =  \{\thefield{reportpage}\},\par}%
 \noindent\iffieldundef{reportseries}{}{reportseries =  \{\thefield{reportseries}\},\par}%
@@ -4885,6 +4886,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \docompfield{partybsn}
 \docompfield{partysep}
 \docompfield{partysepx}
+\docompfield{quotetext}
 \docompfield{regnum}
 \docompfield{reportpage}
 \docompfield{reportseries}
@@ -7113,7 +7115,7 @@ keywords = {lj},
 
 @book{buttb,author = {Peter Butt},title = {Legal Usage},subtitle = {A Modern Style Guide},date = {2018},publisher = {LexisNexis Butterworths},location = {Australia},isbn = {9780409341461},jurisdiction = {Australia},}
 
-@book{addison,author = {C G Addison},title = {The Law of Torts},edition = {2},date = {1872},publisher = {Little, Brown, and Company},location = {Boston},shorttitle = {Torts},note = {Abridgement},keywords = {lawbook},}
+@book{addison,author = {C G Addison},title = {The Law of Torts},edition = {2},date = {1872},publisher = {Little, Brown, and Company},location = {Boston},shorttitle = {Torts},note = {Abridgement},keywords = {lawbook},shorttitle={Torts},}
 
 
 @statute{crimnsw,
@@ -8025,6 +8027,8 @@ the combination gives:
 
 \section{Law Journals}
 
+\p Some law review articles: \ljcite{ryder}; \ljcite{renaud}.
+
 \p The @ljarticle bibentry type is for law journals and law reviews.
 \lcdcase{kleefeld}
 \p The information can be accessed with the following commands.
@@ -8062,13 +8066,40 @@ the combination gives:
 
 \p Non-legal books do not have the keyword: \cite{litlaw}
 
-\p For the customary treatise shorthand references of the \lcepigraph{candl} kind, see section \ref{sec:epigrapha}.
+\p For the customary treatise shorthand references of the \lcepigraph{candl} kind, see \pararef{aonb}.% section \ref{sec:epigrapha}.
 
 
 \section{Quotations and Epigrapha}
 \label{sec:epigrapha}
 \qqcite{q5}
 
+\bigskip
+\p Quoted material can be stored as a bibentry (of type @quote):
+\lcdcase{q5}
+
+This allows use of cross-referencing and other biblatex features.
+
+\p Available citation commands are:
+
+\cmd{qcite} (quoted text, with attribution): \begin{quotation}\qcite{q5}\end{quotation}
+\cmd{qcitetext} (quoted text): \begin{quotation}\qcitetext{q5}\end{quotation}
+\cmd{qcitetextnoqq} (plain text, no quotes): \begin{quotation}\qcitetextnoqq{q5}\end{quotation}
+\cmd{qqcite} (formatted epigraph quote): \begin{quotation}\qqcite{q5}\end{quotation}
+\cmd{qqcitefn} (formatted epigraph quote with footnote mark, to be used in association with \cmd{footnotetext}): \begin{quotation}\qqcitefn{q5}\end{quotation}\footnotetext{Some text.}
+
+\p An example of a case-related epigraph: \begin{quotation}\qqcite{q9}\end{quotation}
+
+\p \paradef{aonb} Authorial attribution can be formatted as the customary \textit{A on B} with \cmd{lcepigraphp}, for the possessive case: \lcepigraphp{anncrimnsw}.
+
+\p And \cmd{lcepigraph}, with no possessive: \lcepigraph{addison}.
+
+\p The bibentry fields used (if they exist) are:
+\begin{itemize}
+\item author family name(s) + on/'s
+\item shorttitle, or else: title
+\item edition
+\item year
+\end{itemize}
 %``No real comparison exists between the interprovincial relationships of today and those obtaining between foreign countries in the 19th century.  The courts made a serious error in transposing the rules developed for the enforcement of foreign judgments to the enforcement of judgments from sister‑provinces.  The considerations underlying the rules of comity apply with much greater force between the units of a federal state.'' -- 
 %Morguard headnote
 %
