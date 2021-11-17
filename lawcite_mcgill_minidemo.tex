@@ -7217,7 +7217,7 @@ regnum = {580},
 @statute{canregnb,citeref = {nbreg},year = {2006},regnum = {23},sorttitle = {nbreg200623},}
 @statute{canregnfld,citeref = {nfldreg},year = {97},regnum = {19},sorttitle = {nfldreg9719},}
 @statute{canregnlr,citeref = {nlrreg},year = {9},regnum = {4},sorttitle = {nlrreg94},}
-@statute{canregnwt,citeref = {nwtreg},year = {2008},regnum = {26},sorttitle = {nwtreg200826},}
+@statute{canregnwt,citeref = {nwtreg},year = {2008},regnum = {26},sorttitle = {nwtreg200826},title={Archives Regulations},}
 @statute{canregns,citeref = {nsreg},year = {2007},regnum = {235},sorttitle = {nsreg2007235},}
 @statute{canregnu,citeref = {nureg},year = {40},regnum = {99},sorttitle = {nureg4099},}
 @statute{canrego,citeref = {oreg},year = {8},regnum = {361},sorttitle = {oreg8361},}
@@ -8023,7 +8023,184 @@ the combination gives:
 
 \p A full footnote citation can be done with \\ \democomm[Text]{lcfootfull}{snail}{:}
 
-\section{Statutes}
+\section{Statutes and Regulations}
+\subsection{Statutes}
+
+\p Statutes may be cited with \democomm[Text]{lawcite}{fla}{:}
+
+ \lcdcase{fla}
+
+More examples:
+
+\bigskip
+\lawcite[\addcomma\addspace\lcsec{3}]{tla}\par\bigskip
+\lawcite{fair}\par\bigskip
+\lawcite{water}\par\bigskip
+
+This last uses the semantic structure of the @statute bibentry:\medskip
+
+\fbox{\strut\textit{title}}, \fbox{\strut year} \fbox{\strut (jurisdiction)} \fbox{\strut (note)}\medskip
+
+to store\medskip
+
+\fbox{\strut\textit{Safe Drinking Water Act}}, \fbox{\strut 42 USC §300f} \fbox{\strut \ } \fbox{\strut (1974)}\medskip
+
+The year value 1974 could just as easily have been stored in the jurisdiction field, with no note field, to produce an identical result.\bigskip
+
+\p To display the jurisdiction for non-Canadian statutes, do:\\
+	{\footnotesize\textcolor{blue}{\cmd{toggletrue}\braces{statjurisdiction}}}
+	or
+	{\footnotesize\textcolor{blue}{\cmd{setstatjurison}}}
+   \toggletrue{statjurisdiction}
+
+   \lawcite{prop}\\
+	{\footnotesize\textcolor{blue}{\cmd{togglefalse}\braces{statjurisdiction}}}
+	or
+	{\footnotesize\textcolor{blue}{\cmd{setstatjurisoff}}}
+	\togglefalse{statjurisdiction}\par\bigskip
+
+
+
+%------------------------------
+\subsection{Regulations}
+
+\p Citation of regulations from some jurisdictions could use \democomm[]{lawcite}{canregnb}{:}
+
+from
+
+\lcdcase{canregnb}
+
+More examples:
+
+\bigskip
+\democomm[]{lawcite}{bears}{:} from \lcdcase{bears}
+%\lawcite{bears}\par\bigskip
+\democommpost{lawcite}{birds}{:}{s 9} from \lcdcase{birds}
+%\lawcite[\addcomma\addspace\lcsec{9}]{birds}\par\bigskip
+\democommpost{lawcite}{forests}{:}{s 2} from \lcdcase{forests}
+%\lawcite[\addcomma\addspace\lcsec{2}]{forests}\par\bigskip
+
+
+\p There is a multiplicity of regulation format types across the jurisdictions, and it is more flexible, from a data structure point of view, to use use the \cmdc{citeref} field in the @statute bibentry since it can process both (Canadian) statutes and regulations in one sweep.
+
+\p The `traditional' @statute fields can still be used, but they are formatted only at the level of statutes, and regulations that look like statutes.
+
+\bigskip
+(using \cmdc{citeref} field)\\
+ \lawcite[\addcomma\addspace\bibstring{section} 515]{crimcodecan} provides that ...\\
+(using statute bibentry fields) \\
+\lawcite[\addcomma\addspace\bibstring{section} 515]{crimcan} provides that ...
+\par\bigskip
+
+The corresponding bibentries are:
+
+\lcdcase{crimcodecan}
+%\begin{verbatim}
+%@statute{crimcodecan,
+%	citeref = {canleg},
+%	title = {Criminal Code},
+%	svjy = {RSC 1985},
+%	chapter = {C-46},
+%}
+%
+%\end{verbatim}
+
+versus
+
+\lcdcase{crimcan}
+%\begin{verbatim}
+%@statute{crimcan,
+%	statutetitle = {Criminal Code},
+%	statutetitleyear = {RSC 1985, c C-46},%for the title
+%}
+%\end{verbatim}
+
+
+\p The available \cmdc{citeref} values for regulations are:
+
+\bigskip
+
+\begin{tabular}{ll}
+...reg & Example of format (from AGLC3)\\
+crc & \lawcite{canregcrc} \\
+sor & \lawcite{canregsor} \\
+alta & \lawcite{canregalta} \\
+bc & \lawcite{canregbc} \\
+man & \lawcite{canregman} \\
+nb & \lawcite{canregnb} \\%York-Sunbury-Charlotte Forest Products Marketing Board Regulation, NB Reg 2005-148
+%Wildlife Refuges and Wildlife Management Areas Regulation, NB Reg 94-43
+nfld & \lawcite{canregnfld} \\ %Offshore Petroleum Drilling Newfoundland Regulations (Amendment)
+nlr & \lawcite{canregnlr} \\ %Colliers Municipal Planning Area, NLR 4/98
+nwt & \lawcite{canregnwt} \\%Archives Regulations
+ns & \lawcite{canregns} \\%Involuntary Psychiatric Treatment Regulations
+nu & \lawcite{canregnu} \\
+o & \lawcite{canrego} \\
+pei & \lawcite{canregpei} \\ %Companion Animal Protection Act Regulations, PEI Reg EC249/02
+qc & \lawcite{canregoc} \\
+sask & \lawcite{canregsask} \\ %Alkali Mining Regulations
+yoic & \lawcite{canregyoic} \\%lChild Care Centre Program Regulation
+\end{tabular}
+\bigskip
+
+\p The bibentry data fields required by the various Canadian regulation types are:
+\bigskip
+
+\begin{tabular}{lllllll}
+Reg Type &  & &&&& \\
+crc & title & chapter &&&& \\
+sor & title && year & regnum && \\
+alta & && year & regnum && \\
+bc &  && year & regnum && \\
+man & && year & regnum && \\
+nb &  && year & regnum && \\
+nfld &  && year & regnum && \\
+nlr &  && year & regnum && \\
+nwt &  && year & regnum && \\
+ns &  && year & regnum && \\
+nu &  && year & regnum && \\
+o &  && year & regnum && \\
+pei &  && year & regnum && \\
+qc &  && year & regnum & fulldate & gazette\\
+sask &  && year & regnum && \\
+yoic &  && year & regnum && \\
+\\
+verb &  &&  & regnum && \\
+\end{tabular}
+\bigskip
+
+\p For the non-federal regulations, if a title field is available, it will be printed.
+\bigskip
+
+\p For regulations with no available pre-set format, use the \cmdc{verbreg} citeref, and type the full reference (and any code) into the \cmdc{regnum} field, and it will be printed as-is:
+
+%`"parking area" means a length of road or area designed for parking vehicles'
+%Road Rules 2008, Schedule 99 Dictionary
+%(NSW) Road Rules 2008 -- Reg 15 What is a vehicle
+\lawcite{anyregverb}
+
+\lcdcase{anyregverb}
+%\begin{verbatim}
+%@statute{anyregverb,
+%citeref = {verbreg},
+%regnum = {Road Rules 2008 -- \textcolor{red}{\textbf{Reg 15}} 
+%What is a vehicle (New South Wales)},
+%sorttitle = {Road Rules 2008},
+%}
+%
+%\end{verbatim}
+
+%\lccitedemostat{canregbc}
+%\bigskip 
+
+\subsection{Currently not covered}
+\p The following instruments are not currently covered by \cmdc{lawcite}.
+
+\begin{itemize}
+\item Bills
+\item Constitutions and Charters
+\item Treaties, Agreements, and Accords
+\end{itemize}
+
 
 \section{Law Journals}
 
