@@ -8142,7 +8142,7 @@ yoic & \lawcite{canregyoic} \\%lChild Care Centre Program Regulation
 \end{tabular}
 \bigskip
 
-\p The bibentry data fields required by the various Canadian regulation types are:
+\p When using the \cmd{citeref} field, the bibentry data fields required by the various Canadian regulation types are:
 \bigskip
 
 \begin{tabular}{lllllll}
@@ -8272,7 +8272,7 @@ This allows use of cross-referencing and other biblatex features.
 
 \p The bibentry fields used (if they exist) are:
 \begin{itemize}
-\item author family name(s) + on/'s
+\item author (using family name(s) + on/'s)
 \item shorttitle, or else: title
 \item edition
 \item year
@@ -8293,6 +8293,99 @@ This allows use of cross-referencing and other biblatex features.
 %\lcdcase{waters}
 %\lcdallfields{waters}
 
+\section{Ancillary Commands}
+\p For style authors, various ancillary commands are available.
+\subsection{Meta Commands}
+\p Basic meta commands are: 
+\begin{itemize}
+\item \cmd{cmd} to add a backslash
+		\begin{itemize}
+		\item \cmd{cmd}\braces{xyz} $\mapsto$ \cmd{xyz}
+		\end{itemize}
+\item \cmd{braces} to wrap something in braces
+		\begin{itemize}
+		\item \cmd{braces}\braces{xyz} $\mapsto$ \braces{xyz}
+		\end{itemize}
+\item \cmd{brackets} to wrap something in brackets
+		\begin{itemize}
+		\item \cmd{brackets}\braces{xyz} $\mapsto$ \brackets{xyz}
+		\end{itemize}
+\item overall use:
+		\begin{itemize}
+		\item \cmd{cmd}\braces{command}\cmd{brackets}\braces{option}\cmd{braces}\braces{code} $\mapsto$ \cmd{command}\brackets{option}\braces{code}
+		\end{itemize}
+\end{itemize}
+
+\newcommand\smitem[1]{		\begin{itemize}%
+		\item \cmd{#1}\braces{xyz} $\mapsto$ \csname #1\endcsname{xyz}%
+		\end{itemize}}
+		
+		
+\p Additional meta-commands:
+\begin{itemize}
+\item \cmd{bcmd}: same as \cmd{braces}
+		\begin{itemize}
+		\item \cmd{bcmd}\braces{xyz} $\mapsto$ \bcmd{xyz}
+		\end{itemize}
+\item \cmd{cmdb}: backslash, current colour
+\smitem{cmdb}
+\item \cmd{cmdc}: blue, no backslash
+\smitem{cmdc}
+\item \cmd{mcmd}: \cmd{cmd} with braces, current colour 
+\smitem{mcmd}
+\item \cmd{bracketsb}: highlighted brackets
+\smitem{bracketsb}
+\item \cmd{parens}: in parentheses
+\smitem{parens}
+\item \cmd{disp}: display, with frame
+\smitem{disp}
+\item \cmd{dispb}: display as a block
+\smitem{dispb}
+\item \cmd{dispeg}: display, with \cmd{par}
+\smitem{dispeg}
+\end{itemize}
+
+\subsection{Demo Mode}
+\p Switch demo mode on and off with \cmd{lcsetdemoon} and \cmd{lcsetdemooff}, for highlighting citatin components.
+
+\lcsetdemoon
+\begin{itemize}
+\item \lcinline{snail}
+\item \lcinlinerr{columbus, columbussr, columbusne}
+\end{itemize}
+\lcsetdemooff
+
+\p Illustrations of cases, statutes and law journals may be made.
+
+\begin{itemize}
+\item Use \cmd{lccitedemo}\braces{key}\braces{pinpoint} to illustrate the various citestyles for a case citation.
+\end{itemize}
+
+\lccitedemo{snail}{563}
+
+\begin{itemize}
+\item Use \cmd{lccitedemorr}\braces{key} to illustrate the various citestyles for an \textit{-rr} case citation.
+\end{itemize}
+
+\lccitedemorr{columbus, columbussr, columbusne}
+
+
+\begin{itemize}
+\item Use \cmd{lccitedemostat}\braces{key} to illustrate the various citestyles for a statute citation.
+\end{itemize}
+
+\lccitedemostat{crimcan}
+
+\lccitedemostat{crimcodecan}
+
+
+\begin{itemize}
+\item Use \cmd{lccitedemolj}\braces{key} to illustrate the various citestyles for a law journal citation.
+\end{itemize}
+
+\lccitedemolj{renaud}
+
+\lccitedemolj{smythsc}
 
 %======================================= Bibliography
 \newpage
