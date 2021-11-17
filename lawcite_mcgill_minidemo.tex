@@ -1302,7 +1302,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \newbibmacro{getcasename}{%
 %\ifciteseen{\ifciteibid{SEENIBID}{SEEN}}{}%
 \iffootnote{%
-\ifciteseen{\ifciteibid{\textcolor{red}{CC}}{\usebibmacro{getcaseshortname}\textcolor{red}{DD}}}{%
+\ifciteseen{\ifciteibid{\textcolor{red}{CC}}{\usebibmacro{getcaseshortname}}}{%
 \iffieldundef{shipname}{\usebibmacro{getpartynamesa}%
 \iffieldundef{partyb}{}%
 {\addspace\usebibmacro{getpartysep}\addspace%
@@ -1489,6 +1489,15 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
  }%
 }}}
 
+%======== getnote:plain
+\newbibmacro{getnote:plain}{%
+\iffieldundef{note}%
+{}%
+{%false
+ \printtext[plain]{%
+ \printfield{note}%
+ }%
+}}
 
 
 %======== getnote:noparens, i.e. always (...(x)), not (...[x]).
@@ -3284,6 +3293,9 @@ test {\ifentrytype{statute}}%
 
 \newtoggle{infirstcite}
 
+\newcommand\multicitedelimrr{\addcomma\addspace}
+
+
 %============= lawciterefrr
 \DeclareCiteCommand{lawciterefrr}%
 %@@@@@@@@@@@@@@@@ prenote
@@ -3299,12 +3311,13 @@ test {\ifentrytype{statute}}%
 	{%
 %\renewcommand{\multicitedelim}{\addsemicolon\addspace}
 %\renewcommand{\multicitedelim}{y}
+%\ifthenelse{\value{citecount}=2}{x}{y}
 \usebibmacro{getcaseref}%
 }{%false
 }%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\multicitedelim}%
+{\multicitedelimrr}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}
 
@@ -3324,7 +3337,7 @@ test {\ifentrytype{statute}}%
 \usebibmacro{getcaseref}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\multicitedelim}%
+{\multicitedelimrr}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}
 
@@ -3338,7 +3351,7 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ item
 {%
 \usebibmacro{fullstepindex}%
-\usebibmacro{getnote}%
+\usebibmacro{getnote:plain}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
@@ -3354,7 +3367,7 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ item
 {%
 \usebibmacro{rrindex}%
-\iffirstcitekey{\usebibmacro{getnote}}%
+\iffirstcitekey{\usebibmacro{getnote:plain}}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {}%
@@ -3723,6 +3736,9 @@ test {\ifentrytype{case}}%
 %}
 \newbibmacro{getljarticleyear}{%
 \printtext[parens]{\thefield{year}}%
+}
+\newbibmacro{getljarticleyear:plain}{%
+\printtext[plain]{\thefield{year}}%
 }
 \newbibmacro{getljarticlevolume}{%
 \printfield[plain]{volume}%
@@ -4216,7 +4232,7 @@ test {\ifentrytype{case}}%
 \usebibmacro{rrindex}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\usebibmacro{delim:choice}}%
+{\multicitedelimrr}%
 %@@@@@@@@@@@@@@@@ postnote
 {\iflastcitekey{\usebibmacro{postnote}\iffieldundef{note}{}{\addspace\usebibmacro{getnote}}}{\usebibmacro{postnote}}}
 
@@ -4253,7 +4269,7 @@ test {\ifentrytype{case}}%
 \iffirstcitekey{\usebibmacro{getcasenameref}}{\usebibmacro{getcaseref}}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\usebibmacro{delim:choice}}%
+{\multicitedelimrr}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}
 
@@ -4333,9 +4349,9 @@ test {\ifentrytype{case}}%
 \usebibmacro{rrindex}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\usebibmacro{delim:choice}}%
+{\addcomma\addspace}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{getnote}\usebibmacro{postnote}}
 
 
 \newbibmacro{getciteref}{%
@@ -4470,7 +4486,7 @@ test {\ifentrytype{statute}}%
 {\usebibmacro{prenote}}%
 %@@@@@@@@@@@@@@@@ item
 {%
-\usebibmacro{getljarticleyear}%
+\usebibmacro{getljarticleyear:plain}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
@@ -7885,7 +7901,7 @@ Il y a plus d’un siècle, dans \lcsetstyleindigo\lcinline{mcauliffe}\marginpar
 }
 \citetrackerfalse
 \lcsetstyleaglc
-\p Components of a citation can be retrieved individually for use as standalone items. For a given citation ``\lcinline[563]{snail}'':
+\p Components of a citation can be retrieved individually for use as standalone items. \marginpar{See also \pararef{illus}.}For a given citation ``\lcinline[563]{snail}'':
 \begin{itemize}
 \item \cmd{lawcitetitle} for the casename
 			\begin{itemize}
@@ -8026,7 +8042,7 @@ the combination gives:
 \section{Statutes and Regulations}
 \subsection{Statutes}
 
-\p Statutes may be cited with \democomm[Text]{lawcite}{fla}{:}
+\p Statutes may be cited with \democomm[]{lawcite}{fla}{:}
 
  \lcdcase{fla}
 
@@ -8064,7 +8080,7 @@ The year value 1974 could just as easily have been stored in the jurisdiction fi
 %------------------------------
 \subsection{Regulations}
 
-\p Citation of regulations from some jurisdictions could use \democomm[]{lawcite}{canregnb}{:}
+\p In combination with a corresponding formatter \cmdc{citeref} (if applicable), citation of regulations can use \democomm[]{lawcite}{canregnb}{:}
 
 from
 
@@ -8258,11 +8274,11 @@ This allows use of cross-referencing and other biblatex features.
 
 \p Available citation commands are:
 
-\cmd{qcite} (quoted text, with attribution): \begin{quotation}\qcite{q5}\end{quotation}
-\cmd{qcitetext} (quoted text): \begin{quotation}\qcitetext{q5}\end{quotation}
-\cmd{qcitetextnoqq} (plain text, no quotes): \begin{quotation}\qcitetextnoqq{q5}\end{quotation}
-\cmd{qqcite} (formatted epigraph quote): \begin{quotation}\qqcite{q5}\end{quotation}
-\cmd{qqcitefn} (formatted epigraph quote with footnote mark, to be used in association with \cmd{footnotetext}): \begin{quotation}\qqcitefn{q5}\end{quotation}\footnotetext{Some text.}
+\begin{itemize}\item \cmd{qcite} (quoted text, with attribution):\end{itemize} \begin{quotation}\qcite{q5}\end{quotation}
+\begin{itemize}\item\cmd{qcitetext} (quoted text):\end{itemize} \begin{quotation}\qcitetext{q5}\end{quotation}
+\begin{itemize}\item\cmd{qcitetextnoqq} (plain text, no quotes): \end{itemize}\begin{quotation}\qcitetextnoqq{q5}\end{quotation}
+\begin{itemize}\item\cmd{qqcite} (formatted epigraph quote): \end{itemize}\begin{quotation}\qqcite{q5}\end{quotation}
+\begin{itemize}\item\cmd{qqcitefn} (formatted epigraph quote with footnote mark, to be used in association with \cmd{footnotetext}):\end{itemize} \begin{quotation}\qqcitefn{q5}\end{quotation}\footnotetext{Some text.}
 
 \p An example of a case-related epigraph: \begin{quotation}\qqcite{q9}\end{quotation}
 
@@ -8273,7 +8289,7 @@ This allows use of cross-referencing and other biblatex features.
 \p The bibentry fields used (if they exist) are:
 \begin{itemize}
 \item author (using family name(s) + on/'s)
-\item shorttitle, or else: title
+\item shorttitle or title
 \item edition
 \item year
 \end{itemize}
@@ -8346,7 +8362,7 @@ This allows use of cross-referencing and other biblatex features.
 \end{itemize}
 
 \subsection{Demo Mode}
-\p Switch demo mode on and off with \cmd{lcsetdemoon} and \cmd{lcsetdemooff}, for highlighting citatin components.
+\p Switch demo mode on and off with \cmd{lcsetdemoon} and \cmd{lcsetdemooff}, for highlighting citation components.
 
 \lcsetdemoon
 \begin{itemize}
@@ -8355,7 +8371,7 @@ This allows use of cross-referencing and other biblatex features.
 \end{itemize}
 \lcsetdemooff
 
-\p Illustrations of cases, statutes and law journals may be made.
+\p \paradef{illus}Illustrations of cases, statutes and law journals may be made.
 
 \begin{itemize}
 \item Use \cmd{lccitedemo}\braces{key}\braces{pinpoint} to illustrate the various citestyles for a case citation.
