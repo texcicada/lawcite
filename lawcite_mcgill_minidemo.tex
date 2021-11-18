@@ -1979,7 +1979,7 @@ xxx}%
 
 \expandafter\newbibmacro{\csname lc/aglc/can/delleg/revfedreg/1\endcsname}{%
 \printfield{statutetitle}\addcomma\addspace\printfield{statuteshorttitle}%
-\addcomma\addspace\bibstring{canchapter}\addspace\printfield{statutechapter}
+\printtext{\addspace}\addcomma\addspace\bibstring{canchapter}~\printfield{statutechapter}
 %sindex{} not coded here
 }%
 
@@ -1997,7 +1997,7 @@ xxx}%
 %----
 \iffieldequalstr{citeref}{canleg}{%
  \printfield{title}\addcomma\addspace\printfield{svjy}%
-\addcomma\addspace\bibstring{canchapter}\addspace\thefield{chapter}%
+\addcomma\addspace\bibstring{canchapter}~\thefield{chapter}%
 \renewcommand\lcindexaccum{}%empty
 \xappto\lcindexaccum{%
 \thefield{title}, \thefield{svjy}%
@@ -3014,7 +3014,7 @@ test {\ifentrytype{statute}}%
 \usebibmacro{getcanleg}%
 \usebibmacro{getcanreg2}%
 }%end citeref
-\iffieldundef{postnote}{}{\addcomma\usebibmacro{notmnc:postnote}}%
+\iffieldundef{postnote}{}{\usebibmacro{notmnc:postnote}}%
 \iffieldundef{url}{}{\addspace\printtext[angles]{\usebibmacro{getcaseurl}}}% 
 }%end statute true
 {%
@@ -3334,7 +3334,10 @@ test {\ifentrytype{statute}}%
 {%
 %%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
 \usebibmacro{rrindex}%
+%\printtext{\addspace}
 \usebibmacro{getcaseref}%
+%\iffirstcitekey{\printtext{y\addspace}}{x}
+%\iffirstcitekey{\renewcommand{\multicitedelimrr}{\printtext{x\addspace}}}{\renewcommand{\multicitedelimrr}{\printtext{y\addcomma\addspace}}}
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelimrr}%
@@ -6937,6 +6940,13 @@ partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
 @case{salternr,reportseries = {Comb},reportpage = {5},crossref = {salter},options = {skipbib=true},}
 @case{salterer,reportvolume = {90},reportseries = {ER},reportpage = {309},note = {B},crossref = {salter},}
 
+@statute{samplestat,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statutechapter = {statutechapter},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {2021},citeref = {canleg},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
+@statute{samplestat2,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statutechapter = {statutechapter},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {2021},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
+@statute{cancorp,title = {Canada Business Corporations Act},chapter = {33},citeref = {canleg},svjy = {1974-75-76 (Can.\@)},}
+@statute{cancorp2,statutetitle = {Canada Business Corporations Act},statuteshorttitle = {1974-75-76 (Can)},statutechapter = {33},}
+@statute{cca1970,statutetitle = {Canada Corporations Act},statuteshorttitle = {RSC 1970},statutechapter = {C-32},}
+@statute{cca1970b,title = {Canada Corporations Act},chapter = {C-32},citeref = {canleg},svjy = {RSC 1970},}
+@statute{crimcode1970,title = {Criminal Code},chapter = {C-34},citeref = {canleg},svjy = {RSC 1970},}
 
 
 
@@ -7448,6 +7458,7 @@ options={skipbib=true,},
 \newcommand\disp[1]{\hfill\fbox{#1}\hfill\ \par}
 \newcommand\dispb[1]{\hfill #1 \hfill\ \par\medskip}
 \newcommand\dispeg[1]{\noindent #1\par}
+\newcommand\angles[1]{<#1>}
 
 \newcommand\mnotepre{}
 \newcommand\mnotepredelim{}
@@ -8075,7 +8086,7 @@ The year value 1974 could just as easily have been stored in the jurisdiction fi
 	{\footnotesize\textcolor{blue}{\cmd{setstatjurisoff}}}
 	\togglefalse{statjurisdiction}\par\bigskip
 
-
+\lcdcase{prop}
 
 %------------------------------
 \subsection{Regulations}
@@ -8403,6 +8414,51 @@ This allows use of cross-referencing and other biblatex features.
 
 \lccitedemolj{smythsc}
 
+
+
+
+\section{Bibentry Fields}
+\subsection{@case}
+x
+\subsection{@statute}
+\p An @statute bib entry with the \cmdc{citeref} field set to \cmdc{canleg} produces this structure:
+
+\begin{quotation}
+\lawcite{samplestat}
+\end{quotation}
+so that an entry
+
+\lcdcase{cancorp}
+produces\footnote{Note that the dot \angles{.} in \angles{(Can.)} is marked as an abbreviation dot with \angles{\textbackslash @}, thus \angles{(Can.\textbackslash @)}, so that biblatex's puncuation tracker will add \angles{, c} to the output rather than start a new sentence with \angles{\ C}.}
+\begin{quotation}
+\lawcite{cancorp}
+\end{quotation}
+%\lcdcase{samplestat}
+and a bib entry without the \cmdc{citeref} field produces this structure:
+
+\begin{quotation}
+\lawcite{samplestat2}
+\end{quotation}
+and so an entry
+
+\lcdcase{cancorp2}
+produces\footnote{This entry has \angles{(Can)} rather than \angles{(Can.)}.}
+\begin{quotation}
+\lawcite{cancorp2}
+\end{quotation}
+
+\p Again, this time from the Revised Statutes:
+\begin{quotation}
+\lawcite{cca1970}
+
+\lawcite{cca1970b}
+\end{quotation}
+
+\p \angles{\lawcite[s 457(1)]{crimcode1970}} versus \angles{\lcpostnote[s 457(1)]{crimcode1970} of the \lawcite{crimcode1970}}.
+
+
+\subsection{@ljarticle}
+x
 %======================================= Bibliography
 \newpage
 {\center
