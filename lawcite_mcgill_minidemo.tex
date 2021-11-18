@@ -3816,7 +3816,12 @@ test {\ifentrytype{case}}%
   \ifhyperref
     {%
     		\iffieldundef{mncnumber}{%
+    		\iffieldundef{linkname}{%
 				    \url{\thefield{url}}
+    				}%
+    				{\href{\thefield{url}}{%
+    												\thefield{linkname}%
+    																					}}%
     				}%
     				{\href{\thefield{url}}{%
     												\thefield{mncyear}\addspace%
@@ -3926,11 +3931,11 @@ test {\ifentrytype{case}}%
 \iffieldundef{related}{}{\addspace\usebibmacro{related}}%
 \iffieldundef{url}{}{%
 %put postnote before url:
-\iffieldundef{postnote}{}{%
+\iffieldundef{postnote}{\addspace\printtext[angles]{\usebibmacro{getljarticleurl}}}{%
 \DeclareDelimFormat{postnotedelim}{\addcomma\space}%restore
 \usebibmacro{postnote}%
 \addspace\printtext[angles]{\usebibmacro{getljarticleurl}}}}%
-\newunit\newblock%
+%\newunit\newblock%
 }
 
 
@@ -6947,6 +6952,12 @@ partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
 @statute{cca1970,statutetitle = {Canada Corporations Act},statuteshorttitle = {RSC 1970},statutechapter = {C-32},}
 @statute{cca1970b,title = {Canada Corporations Act},chapter = {C-32},citeref = {canleg},svjy = {RSC 1970},}
 @statute{crimcode1970,title = {Criminal Code},chapter = {C-34},citeref = {canleg},svjy = {RSC 1970},}
+@ljarticle{tetley,author = {William Tetley},title = {Evasion/Fraude à la loi and Avoidance of the Law},date = {1994},volume = {39},journaltitle = {McGill LJ},pages = {303},linkname = {1994 CanLIIDocs 67},url = {https://canlii.ca/t/2bk9},}
+@ljarticle{cheung,author = {Perry Cheung},title = {A Call for Action},subtitle = {The Need for Canadian Spam Legislation},date = {2007},volume = {7},journaltitle = {Asper Review of International Business and Trade Law},pages = {227},linkname = {2007 CanLIIDocs 514},url = {https://canlii.ca/t/t1mq },}
+@ljarticle{kirbyalr,author = {Michael Kirby},title = {Forty Years of the Alberta Law Reform Institute — Past, Present, Future},date = {2009},volume = {46},journaltitle = {Alberta Law Review},pages = {831},linkname = {2009 CanLIIDocs 235},url = {https://canlii.ca/t/2d12},}
+@ljarticle{parkinson,author = {Patrick Parkinson},title = {The Payoffs and Pitfalls of Laws that Encourage Shared Parenting},subtitle = {Lessons from the Australian Experience},date = {2014},volume = {37},journaltitle = {Dalhousie Law Journal},pages = {301},linkname = {2014 CanLIIDocs 33572},url = {https://canlii.ca/t/t0xv},}
+@ljarticle{silver,author = {Natalie Silver and Renate Buijze},title = {Tax Incentives for Cross-border Giving in an Era of Philanthropic Globalization},subtitle = {A Comparative Perspective},date = {2020},volume = {6},journaltitle = {Canadian Journal of Comparative and Contemporary Law},pages = {109},linkname = {2020 CanLIIDocs 3314},url = {https://canlii.ca/t/t07q},}
+@ljarticle{beck,author = {Luke Beck},title = {The Role of Religion in the Law of Royal Succession in Canada and Australia},date = {2017},volume = {43},journaltitle = {Queen's Law Journal},pages = {53},linkname = {2017 CanLIIDocs 3968},url = {https://canlii.ca/t/sx2r},}
 
 
 
@@ -8454,11 +8465,29 @@ produces\footnote{This entry has \angles{(Can)} rather than \angles{(Can.)}.}
 \lawcite{cca1970b}
 \end{quotation}
 
-\p \angles{\lawcite[s 457(1)]{crimcode1970}} versus \angles{\lcpostnote[s 457(1)]{crimcode1970} of the \lawcite{crimcode1970}}.
+\p The postnote may be retrieved separately with \cmd{lcpostnote}, allowing for a variation in the flow of text, if required: \angles{\lawcite[s 457(1)]{crimcode1970}} versus \angles{\lcpostnote[s 457(1)]{crimcode1970} of the \lawcite{crimcode1970}}.
 
 
 \subsection{@ljarticle}
-x
+\p For law journals, the CanLII link may be stored as if it were an MNC, or not.
+
+\begin{quotation}
+\noindent\ljcite{otis}
+\end{quotation}
+from
+
+\lcdcase{otis}
+
+versus
+\begin{quotation}
+\noindent\ljcite{tetley}
+\end{quotation}
+from
+
+\lcdcase{tetley}
+
+
+
 %======================================= Bibliography
 \newpage
 {\center
