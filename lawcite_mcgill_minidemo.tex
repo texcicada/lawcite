@@ -4752,7 +4752,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{#1}{}{{\lcffieldformat#1} =  \{\thefield{#1}\},\par}%
 }
 
-\newbibmacro{getlcdcase}{%
+\newbibmacro{getlcdcase}[1][x]{%
 {%
 \ttfamily\ \par
 \noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
@@ -4835,7 +4835,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 	{ x } { yyy }
 	}
 }
-\cs_new_eq:NN \strcompare \str_if_eq:onT
+\cs_new_eq:NN \strcompare \str_if_eq:onTF
 \ExplSyntaxOff
 
 \DeclareListFormat[case]{wand}{%
@@ -4847,18 +4847,113 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \newcommand\docompfield[1]{%
 \strcompare{\myparm}{#1}{%
 \noindent\iffieldundef{#1}{}{#1 =  \{\thefield{#1}\},\par}%
-}%
+}{}%
 }
 \newcommand\docomplist[2]{%1=list,2=list format
 \strcompare{\myparm}{#1}{%
 \noindent\iflistundef{#1}{}{#1 =  \{\printlist[#2][-\value{listtotal}]{#1}\},\par}%
-}%
+}{}%
 }
 \newcommand\lcgetabibfield[2]{%1=key,2=fieldname
 \citetrackerfalse
 \lcdacasefield[#2][]{#1}
 \citetrackertrue
 }
+
+
+\newcommand\docompfieldhl[1]{%
+\iffieldundef{#1}{}{%
+\strcompare{\myparmhl}{#1}{%
+\noindent\colorbox{green!50}{\parbox{0.85\textwidth}{#1 =  \{\thefield{#1}\},}}\par%
+}{%
+\noindent#1 =  \{\thefield{#1}\},\par%
+}%
+}%
+}
+
+\newbibmacro{getlcdcasehl}[1]{%
+{%
+\edef\myparmhl{#1}
+\color{blue}\small\ttfamily\ \par
+\begin{quotation}
+\noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
+%\noindent ...\par%
+%\noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
+%\noindent\iffieldundef{author}{}{author =  \{\thefield{author}\},\par}%
+%\noindent\iffieldundef{casename}{}{casename =  \{\thefield{casename}\},\par}%
+%\noindent\iffieldundef{casenickname}{}{casenickname =  \{\thefield{casenickname}\},\par}%
+%\noindent\iffieldundef{casenumber}{}{casenumber =  \{\thefield{casenumber}\},\par}%
+%\noindent\iffieldundef{caseshortname}{}{caseshortname =  \{\thefield{caseshortname}\},\par}%
+%\noindent\iffieldundef{casestatus}{}{casestatus =  \{\thefield{casestatus}\},\par}%
+%\noindent\iffieldundef{caseyear}{}{caseyear =  \{\thefield{caseyear}\},\par}%
+%\noindent\iffieldundef{chapter}{}{chapter =  \{\thefield{chapter}\},\par}%
+%\noindent\iffieldundef{citeref}{}{citeref =  \{\thefield{citeref}\},\par}%
+%\noindent\iffieldundef{courtcasenumber}{}{courtcasenumber =  \{\thefield{courtcasenumber}\},\par}%
+%\noindent\iffieldundef{courtdivision}{}{courtdivision =  \{\thefield{courtdivision}\},\par}%
+%\noindent\iffieldundef{courtfullname}{}{courtfullname =  \{\thefield{courtfullname}\},\par}%
+%\noindent\iffieldundef{courtjurisdiction}{}{courtjurisdiction =  \{\thefield{courtjurisdiction}\},\par}%
+%\noindent\iffieldundef{courtlist}{}{courtlist =  \{\thefield{courtlist}\},\par}%
+%\noindent\iffieldundef{courtname}{}{courtname =  \{\thefield{courtname}\},\par}%
+%\noindent\iffieldundef{date}{}{date =  \{\thefield{date}\},\par}%
+%\noindent\iffieldundef{decisionyear}{}{decisionyear =  \{\thefield{decisionyear}\},\par}%
+%\noindent\iffieldundef{fulldate}{}{fulldate =  \{\thefield{fulldate}\},\par}%
+%\noindent\iffieldundef{gazette}{}{gazette =  \{\thefield{gazette}\},\par}%
+%\noindent\iffieldundef{icaseyear}{}{icaseyear =  \{\thefield{icaseyear}\},\par}%
+\docompfieldhl{journaltitle}
+%\noindent\iffieldundef{journaltitle}{}{journaltitle =  \{\thefield{journaltitle}\},\par}%
+\docompfieldhl{keywords}
+%\noindent\iffieldundef{keywords}{}{keywords =  \{\thefield{keywords}\},\par}%
+\docompfieldhl{linkname}
+\docompfieldhl{mncname}
+\docompfieldhl{mncnumber}
+\docompfieldhl{mncurl}
+\docompfieldhl{mncyear}
+%\noindent\iffieldundef{note}{}{note =  \{\thefield{note}\},\par}%
+%\noindent\iffieldundef{number}{}{number =  \{\thefield{number}\},\par}%
+\docompfieldhl{options}
+\docompfieldhl{pages}
+\docompfieldhl{pagination}
+%%\docomplist{parallel}{wand}
+\docompfieldhl{partya}
+\docompfieldhl{partyajur}
+\docompfieldhl{partyasn}
+\docompfieldhl{partyb}
+\docompfieldhl{partybjur}
+\docompfieldhl{partybsn}
+\docompfieldhl{partysep}
+\docompfieldhl{partysepx}
+\docompfieldhl{quotetext}
+\docompfieldhl{regnum}
+\docompfieldhl{reportpage}
+\docompfieldhl{reportseries}
+\docompfieldhl{reportvolume}
+\docompfieldhl{reportyear}
+\docompfieldhl{shipname}
+\docompfieldhl{shortname}
+%\noindent\iffieldundef{statutechapter}{}{statutechapter =  \{\thefield{statutechapter}\},\par}%
+%\noindent\iffieldundef{statutejurisdiction}{}{statutejurisdiction =  \{\thefield{statutejurisdiction}\},\par}%
+%\noindent\iffieldundef{statutelongtitle}{}{statutelongtitle =  \{\thefield{statutelongtitle}\},\par}%
+%\noindent\iffieldundef{statutenickname}{}{statutenickname =  \{\thefield{statutenickname}\},\par}%
+%\noindent\iffieldundef{statuteregnalyear}{}{statuteregnalyear =  \{\thefield{statuteregnalyear}\},\par}%
+%\noindent\iffieldundef{statuteshorttitle}{}{statuteshorttitle =  \{\thefield{statuteshorttitle}\},\par}%
+%\noindent\iffieldundef{statutetitle}{}{statutetitle =  \{\thefield{statutetitle}\},\par}%
+%\noindent\iffieldundef{statutetitleyear}{}{statutetitleyear =  \{\thefield{statutetitleyear}\},\par}%
+%\noindent\iffieldundef{statutevolume}{}{statutevolume =  \{\thefield{statutevolume}\},\par}%
+%\noindent\iffieldundef{statuteyear}{}{statuteyear =  \{\thefield{statuteyear}\},\par}%
+%\noindent\iffieldundef{svjy}{}{svjy =  \{\thefield{svjy}\},\par}%
+\docompfieldhl{title}
+\docompfieldhl{url}
+\docompfieldhl{volume}
+%\noindent\iffieldundef{volyearneeded}{}{volyearneeded =  \{\thefield{volyearneeded}\},\par}%
+\docompfieldhl{year}
+%\noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
+%\noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
+%\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
+%\noindent ...\par%
+\}\par%
+\end{quotation}
+}}
+
 
 \newbibmacro{getlcdacasefield}[1]{%
 {%
@@ -5187,7 +5282,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}%
 
-%============= lcdcase
+%============= lcdacasefield
 \DeclareCiteCommand{lcdacasefield}%
 %@@@@@@@@@@@@@@@@ prenote
 {}%{\usebibmacro{prenote}}%
@@ -5199,6 +5294,20 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 {}%{\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
 {}%{\usebibmacro{postnote}}%
+
+%============= lcdcasehl
+\DeclareCiteCommand{lcdcasehl}%
+%@@@@@@@@@@@@@@@@ prenote
+{}%{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getlcdcasehl}{\thefield{prenote}}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{}%{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{}%{\usebibmacro{postnote}}%
+
 
 %============= lcdallfields
 \DeclareCiteCommand{lcdallfields}%
@@ -8469,14 +8578,16 @@ produces\footnote{This entry has \angles{(Can)} rather than \angles{(Can.)}.}
 
 
 \subsection{@ljarticle}
-\p For law journals, the CanLII link may be stored as if it were an MNC, or not.
+\p For law journals, the CanLII link may be stored as if it were an MNC, or not. In either case, the \cmdc{url} will be used as link.
 
 \begin{quotation}
 \noindent\ljcite{otis}
 \end{quotation}
 from
 
-\lcdcase{otis}
+%\lcdcase{otis}
+
+\lcdcasehl[mncname][]{otis}
 
 versus
 \begin{quotation}
@@ -8484,8 +8595,8 @@ versus
 \end{quotation}
 from
 
-\lcdcase{tetley}
-
+%\lcdcase{tetley}
+\lcdcasehl[linkname][]{tetley}
 
 
 %======================================= Bibliography
