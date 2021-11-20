@@ -4846,12 +4846,12 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 
 \newcommand\docompfield[1]{%
 \strcompare{\myparm}{#1}{%
-\noindent\iffieldundef{#1}{}{#1 =  \{\thefield{#1}\},\par}%
+\iffieldundef{#1}{}{\noindent#1 =  \{\thefield{#1}\},\par}%
 }{}%
 }
 \newcommand\docomplist[2]{%1=list,2=list format
 \strcompare{\myparm}{#1}{%
-\noindent\iflistundef{#1}{}{#1 =  \{\printlist[#2][-\value{listtotal}]{#1}\},\par}%
+\iflistundef{#1}{}{\noindent#1 =  \{\printlist[#2][-\value{listtotal}]{#1}\},\par}%
 }{}%
 }
 \newcommand\lcgetabibfield[2]{%1=key,2=fieldname
@@ -7067,6 +7067,9 @@ partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
 @ljarticle{parkinson,author = {Patrick Parkinson},title = {The Payoffs and Pitfalls of Laws that Encourage Shared Parenting},subtitle = {Lessons from the Australian Experience},date = {2014},volume = {37},journaltitle = {Dalhousie Law Journal},pages = {301},linkname = {2014 CanLIIDocs 33572},url = {https://canlii.ca/t/t0xv},}
 @ljarticle{silver,author = {Natalie Silver and Renate Buijze},title = {Tax Incentives for Cross-border Giving in an Era of Philanthropic Globalization},subtitle = {A Comparative Perspective},date = {2020},volume = {6},journaltitle = {Canadian Journal of Comparative and Contemporary Law},pages = {109},linkname = {2020 CanLIIDocs 3314},url = {https://canlii.ca/t/t07q},}
 @ljarticle{beck,author = {Luke Beck},title = {The Role of Religion in the Law of Royal Succession in Canada and Australia},date = {2017},volume = {43},journaltitle = {Queen's Law Journal},pages = {53},linkname = {2017 CanLIIDocs 3968},url = {https://canlii.ca/t/sx2r},}
+@statute{samstata,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statutechapter = {statutechapter},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
+@statute{samstatb,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
+@statute{samstatc,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statutechapter = {statutechapter},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},citeref = {peireg},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
 
 
 
@@ -8201,6 +8204,7 @@ The year value 1974 could just as easily have been stored in the jurisdiction fi
    \toggletrue{statjurisdiction}
 
    \lawcite{prop}\\
+   \lawcite{crimnsw}\\
 	{\footnotesize\textcolor{blue}{\cmd{togglefalse}\braces{statjurisdiction}}}
 	or
 	{\footnotesize\textcolor{blue}{\cmd{setstatjurisoff}}}
@@ -8289,7 +8293,7 @@ yoic & \lawcite{canregyoic} \\%lChild Care Centre Program Regulation
 \end{tabular}
 \bigskip
 
-\p When using the \cmd{citeref} field, the bibentry data fields required by the various Canadian regulation types are:
+\p \paradef{cffields}When using the \cmd{citeref} field, the bibentry data fields required by the various Canadian regulation types are:
 \bigskip
 
 \begin{tabular}{lllllll}
@@ -8569,15 +8573,83 @@ produces\footnote{This entry has \angles{(Can)} rather than \angles{(Can.)}.}
 
 \p Again, this time from the Revised Statutes:
 \begin{quotation}
-\lawcite{cca1970}
+\noindent\lawcite{cca1970} {\footnotesize (non-citeref)}
 
-\lawcite{cca1970b}
+\noindent\lawcite{cca1970b} {\footnotesize (citeref)}
 \end{quotation}
 
 \p The postnote may be retrieved separately with \cmd{lcpostnote}, allowing for a variation in the flow of text, if required: \angles{\lawcite[s 457(1)]{crimcode1970}} versus \angles{\lcpostnote[s 457(1)]{crimcode1970} of the \lawcite{crimcode1970}}.
 
+\p The @statute bibentry handles three types of data structure: with a \cmdc{statutechapter}; without a \cmdc{statutechapter}; with a \cmdc{citeref}.\footnote{The actual details of he typeset output will vary slightly, according to the style options and overrides in play.}
+
+\p When \cmdc{statutechapter} is present and \cmdc{citeref} is not, the following structure is used:
+
+\begin{quotation}
+\lawcite{samstata}
+\end{quotation}
+
+\p When both \cmdc{statutechapter} and \cmdc{citeref} are not present, the following structure is used:
+
+\begin{quotation}
+\lawcite{samstatb}
+\end{quotation}
+
+
+\p When \cmdc{citeref} is present, the following structure is used (depending on the citeref value - see \pararef{cffields}):
+
+\begin{quotation}
+\lawcite{samstatc}
+\end{quotation}
+
+\p The available fields are listed in the following:
+
+\begin{description}
+\item[chapter]for the \cmdc{citeref} method, chapter of the statute or regulation
+\item[citeref]for the \cmdc{citeref} method, specfies the formatting template of the statute or regulation
+\item[fulldate]for the \cmdc{citeref} method, fulldate of the regulation (Qbc)
+\item[gazette]for the \cmdc{citeref} method, gazette reference of the regulation (Qbc)
+\item[regnum]for the \cmdc{citeref} method, regulation number of the statute or regulation
+\item[statutechapter]chapter of the statute
+\item[statutejurisdiction]jurisdiction of the statute
+\item[statutelongtitle]
+\item[statutenickname]
+\item[statuteregnalyear]
+\item[statuteshorttitle]used for the SVJY for Canadian statutes (i.e., when \cmdc{statutechapter} is defined)
+\item[statutetitle]title of the statute
+\item[statutetitleyear]year of the statute as part of the statute’s title
+\item[statutevolume]
+\item[statuteyear]year of the statute
+\item[svjy]for the \cmdc{citeref} method, the SVJY  of the statute
+\item[title]for the \cmdc{citeref} method, title of the statute or regulation
+\item[year]for the \cmdc{citeref} method, year of the statute or regulation
+\end{description}
+
+
 
 \subsection{@ljarticle}
+\p Available fields for the ljarticle bibentry type are listed in the following:
+
+\begin{description}
+\item[author]author(s) of the article
+\item[crossref]cross-reference, the name of the entry to inherit fields from
+\item[date]year of the journal
+\item[journaltitle]title of the jourrnal
+\item[linkname]text to display for the url
+\item[mncname]medium-neutral citation of the journal name
+\item[mncnumber]medium-neutral citation number of the article
+\item[mncurl]the MNC’s url
+\item[mncyear]medium-neutral citation year of the article
+\item[options]list of processing options for the bibentry, e.g., skipbib=true
+\item[pages]page number of the journal the article starts on
+\item[pagination]what string or bibstring to display as prefix for a numeric postnote; default is p.
+\item[shortname] 
+\item[subtitle]subtitle of the article
+\item[thumbnail]image filename
+\item[title]title of the article
+\item[url]url of the article
+\item[volume]volume number of the journal
+\end{description}
+
 \p For law journals, the CanLII link may be stored as if it were an MNC, or not. In either case, the \cmdc{url} will be used as link.
 
 \begin{quotation}
@@ -8587,7 +8659,7 @@ from
 
 %\lcdcase{otis}
 
-\lcdcasehl[mncname][]{otis}
+\colorbox{blue!12}{\begin{minipage}{\textwidth}\lcdcasehl[mncname][]{otis}\end{minipage}}
 
 versus
 \begin{quotation}
@@ -8596,7 +8668,7 @@ versus
 from
 
 %\lcdcase{tetley}
-\lcdcasehl[linkname][]{tetley}
+\colorbox{blue!12}{\begin{minipage}{\textwidth}\lcdcasehl[linkname][]{tetley}\end{minipage}}
 
 
 %======================================= Bibliography
