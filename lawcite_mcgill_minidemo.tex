@@ -2669,8 +2669,8 @@ x#1;;
 
 \newcommand\qqcitecasewidth{0.48}
 
-\newbibmacro{qqcitebox}{%
-\hfill\parbox{\iffieldundef{partya}{0.4}{\qqcitecasewidth}\textwidth}{\raggedright%
+\newbibmacro{quotebox}[1][]{%
+\parbox{\iffieldundef{partya}{0.4}{\qqcitecasewidth}\textwidth}{\raggedright%
 \printfield{quotetext}\par%
 \smallskip\hrule\par%
 \medskip{%
@@ -2686,7 +2686,11 @@ x#1;;
 \iffieldundef{partya}{%
 \addcomma\addspace\usebibmacro{postnote}}{}%
 \adddot}%
+#1%
 }%end parbox
+}
+\newbibmacro{qqcitebox}{%
+\hfill\colorbox{blue!12!green!8}{\usebibmacro{quotebox}}
 }
 
 
@@ -2708,24 +2712,7 @@ x#1;;
 \DeclareCiteCommand{qqcitefn}%
 {\usebibmacro{prenote}}%
 {%
-\hfill\parbox{\iffieldundef{partya}{0.4}{\qqcitecasewidth}\textwidth}{\raggedright%
-\printfield{quotetext}\par%
-\smallskip\hrule\par%
-\medskip{%
-\DeclareNameAlias[quote]{author}{given-family}%
-\iffieldundef{partya}{\hfill}{}\textemdash\addspace\printnames{author}%
-}\iffieldundef{author}{}{\par}%
-%\printnames{editor}%
-\addspace\printfield{title}%if there is one
-\iffieldundef{partya}{}{{\small\usebibmacro{getcasenameref}}}%if it's a case
-\iffieldundef{casestatus}{}{\printtext{\addcomma\addspace\printfield{casestatus}}}%
-\iffieldundef{courtfullname}{}{\printtext{\addcomma\addspace\printfield{courtfullname}}}%
-\iffieldundef{postnote}{}{%
-\iffieldundef{partya}{%
-\addcomma\addspace\usebibmacro{postnote}}{}%
-\adddot}%
-\footnotemark
-}%end parbox
+\hfill\colorbox{blue!12!green!8}{\usebibmacro{quotebox}[\footnotemark]}
 }%
 {%
 %\multicitedelim%
@@ -3132,7 +3119,7 @@ test {\ifentrytype{statute}}%
 
 
 %============= lawciterr
-\DeclareCiteCommand{lawciterr}%
+\DeclareCiteCommand{lawciterr}%[\mkbibfootnote]%
 %%caseallabove      reftypemode}{1}}{}
 %%caseabovebelow  reftypemode}{2}}{}
 %%caseallbelow      reftypemode}{3}}{}
@@ -4639,6 +4626,24 @@ test {\ifentrytype{statute}}%
 }
 }
 
+
+\newbibmacro{getshorttitle}{%
+\iffieldundef{shorttitle}{%
+}%
+{\printfield[emph]{shorttitle}%
+}
+}
+
+\newbibmacro{getedition}{%
+\iffieldundef{edition}{}{%
+\printfield{edition}%
+}%end true
+{}%false
+}
+
+
+
+
 \newbibmacro{geteditionyear}{%
  \ifboolexpr{%
   not test {\iffieldundef{edition}}%if there is an edition
@@ -4655,6 +4660,34 @@ test {\ifentrytype{statute}}%
 }%end psrens
 }%end true
 {}%false
+}
+
+
+%--------------------- for bib ``Clerk and Lindsall on Torts 4th ed''-type items
+\newbibmacro{getaonbtitle}{%
+%\ifbibliography{}{%otherwise
+\ifnameundef{author}{}{%otherwise
+\usebibmacro{getlastnames}%
+\addspace%
+\mkbibemph{\bibstring{legalon}}
+\addspace%
+}%end name defined
+\usebibmacro{getshorttitle}%
+%\usebibmacro{geteditionyear}%
+%}%end inbib=false
+}
+
+\newbibmacro{getaonbedition}{%
+\ifbibliography{}{%otherwise
+%\ifnameundef{author}{}{%otherwise
+%\usebibmacro{getlastnames}%
+%\addspace%
+%\mkbibemph{\bibstring{legalon}}
+%\addspace%
+%}%end name defined
+%\usebibmacro{getshorttitle}%
+\usebibmacro{getedition}%
+}%end inbib=false
 }
 
 
@@ -4683,6 +4716,34 @@ test {\ifentrytype{statute}}%
 \usebibmacro{gettitle}%
 }%end inbib=false
 }
+
+
+
+%============= lcaonbtitle
+\DeclareCiteCommand{lcaonbtitle}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getaonbtitle}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
+
+%============= lcaonbedition
+\DeclareCiteCommand{lcaonbedition}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getaonbedition}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
 
 
 
@@ -7070,6 +7131,10 @@ partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
 @statute{samstata,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statutechapter = {statutechapter},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
 @statute{samstatb,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
 @statute{samstatc,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statutechapter = {statutechapter},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},citeref = {peireg},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
+@case{riley,partya = {R},partyb = {Riley},reportvolume = {18},reportseries = {CoxCC},reportpage = {285},decisionyear = {1896},}
+@book{phipson9,author = {Sidney Phipson},title = {Phipson’s Manual of the Law of Evidence},date = {1966},publisher = {Sweet \& Maxwell},location = {London},edition = {9},keywords = {lawbook},shorttitle = {Evidence},editor = {D W Elliott},}
+
+
 
 
 
@@ -7779,6 +7844,17 @@ options={skipbib=true,},
 
 \newsavebox{\mnbox}
 
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\newfontface\fmag{Noto Sans Symbols2}[Scale=2,Colour=blue]
+\newenvironment{magpar}
+{
+			\begin{tcolorbox}[breakable, enhanced,colback=yellow!10!white,boxrule=0pt,frame hidden,borderline west={1mm}{-2mm}{black}]
+			{ \fmag 🔍 }
+}
+{			\end{tcolorbox}
+ }
 
 
 \title{Legal citation \\ using \\a >>\textcolor{blue}{\lccurrentstyle}-like<< \\ lawcitestyle}
@@ -7827,9 +7903,35 @@ options={skipbib=true,},
 produced by:
 
 \bigskip
-{\ttfamily
-\cmd{mkbibquote}\braces{\cmd{ldots} Chief Justice Lamer’s observations in \cmd{lcshorttitle}\braces{rta1996} where he invoked Lord Sankey’s famous admonition in the \cmd{lcyear}\braces{edwardsa} \cmd{lcnickname}\braces{edwardsa} case \cmd{lcinlineparens}\braces{edwardsa} that the Constitution is a \cmd{mkbibquote}\braces{living tree} to be interpreted flexibly\cmd{ldots}}\hspace{0.1pt}\cmd{lawcite}\hspace{0.1pt}\brackets{From}\hspace{0.1pt}\brackets{303}\hspace{0.1pt}\braces{ccpref}
-}
+\begin{magpar}
+%\begin{quotation}\noindent
+%{\ttfamily
+%\cmd{mkbibquote}\braces{\cmd{ldots} Chief Justice Lamer’s observations in 
+%\cmd{lcshorttitle}\braces{rta1996} 
+%where he invoked Lord Sankey’s famous admonition in the \cmd{lcyear}\braces{edwardsa} 
+%\cmd{lcnickname}\braces{edwardsa} case 
+%\cmd{lcinlineparens}\braces{edwardsa} 
+%that the Constitution is a 
+%\cmd{mkbibquote}\braces{living tree} 
+%to be interpreted flexibly\cmd{ldots}}
+%\hspace{0.1pt}\cmd{lawcite}\hspace{0.1pt}\brackets{From}\hspace{0.1pt}\brackets{303}\hspace{0.1pt}\braces{ccpref}
+%}
+%\end{quotation}
+\begin{verbatim}
+\mkbibquote{\ldots 
+Chief Justice Lamer’s observations in 
+\lcshorttitle{rta1996} 
+where he invoked Lord Sankey’s 
+famous admonition in the 
+\lcyear{edwardsa} 
+\lcnickname{edwardsa} case 
+\lcinlineparens{edwardsa} 
+that the Constitution is a 
+\mkbibquote{living tree} 
+to be interpreted 
+flexibly\ldots}\lawcite[From][303]{ccpref}
+\end{verbatim}
+\end{magpar}
 
 \bigskip
 \demofielddump[]{edwardsa}{can}
@@ -7930,9 +8032,12 @@ With \verb|\@|, \democomm[Text]{lawcite}{hmb2}{:}
 {However, cf. ``In my view, the purchase of articles in Idaho from a seller located there and their removal to Alberta for resale does not constitute carrying on business in Idaho.'' -- }{13}
 
 \p Subsequent history of a case: build the history by hand:
+\begin{magpar}
 \begin{verbatim}
-Text\footnote{\lcinline{acme}, rev'd \lawciteref{acmeca}.}
+Text\footnote{\lcinline{acme}, 
+rev'd \lawciteref{acmeca}.}
 \end{verbatim}
+\end{magpar}
 \begin{quotation}
 Text\footnote{\lcinline{acme}, rev'd \lawciteref{acmeca}.}
 \end{quotation}
@@ -8063,12 +8168,13 @@ The parenthetical and footnote versions can be done the usual way (with \cmdc{(.
 \p One citation with multiple cases, each case with its own prenote and postnote, and a overall prenote and postnote for the whole citation group, can be done with \cmd{lawcitesinline}.
 
 This code:
+\begin{magpar}
 \begin{quotation}
 \noindent\cmd{togglefalse} \braces{pinpointaftermnc}\\
 \cmd{lawcitesinline} (Overall prenote:) (overall postnote) \brackets{654-55} \braces{wismer} \brackets{128-29} \braces{mulroney} \brackets{189} \braces{toucheross} \brackets{394} \braces{roglass}.\\
 \cmd{toggletrue} \braces{pinpointaftermnc}
 \end{quotation}
-
+\end{magpar}
 produces:
 \begin{quotation}\noindent
 \togglefalse{pinpointaftermnc}
@@ -8197,11 +8303,11 @@ to store\medskip
 
 The year value 1974 could just as easily have been stored in the jurisdiction field, with no note field, to produce an identical result.\bigskip
 
-\p To display the jurisdiction for non-Canadian statutes, do:\\
+\p To display the jurisdiction for (non-Canadian) statutes, do:\\
 	{\footnotesize\textcolor{blue}{\cmd{toggletrue}\braces{statjurisdiction}}}
 	or
 	{\footnotesize\textcolor{blue}{\cmd{setstatjurison}}}
-   \toggletrue{statjurisdiction}
+	   \toggletrue{statjurisdiction}
 
    \lawcite{prop}\\
    \lawcite{crimnsw}\\
@@ -8209,6 +8315,16 @@ The year value 1974 could just as easily have been stored in the jurisdiction fi
 	or
 	{\footnotesize\textcolor{blue}{\cmd{setstatjurisoff}}}
 	\togglefalse{statjurisdiction}\par\bigskip
+
+\begin{magpar}
+\begin{verbatim}
+\toggletrue{statjurisdiction}
+\lawcite{prop}
+  
+\lawcite{crimnsw}
+\togglefalse{statjurisdiction}
+\end{verbatim}
+\end{magpar}
 
 \lcdcase{prop}
 
@@ -8543,8 +8659,79 @@ This allows use of cross-referencing and other biblatex features.
 
 \section{Bibentry Fields}
 \subsection{@case}
-x
+\p Fields available for use in an @case bibentry are listed in the following:
+
+\begin{description}
+\item[attribution]source of quote, for quotetext entry
+\item[casename]for in-progress case
+\item[casenickname]the generally-known shorthand name for the case
+\item[casenumber]medium-neutral citation case number
+\item[caseshortname]user-assigned shorthand name for the case
+\item[casestatus]for in-progress case
+\item[caseyear]medium-neutral citation year
+\item[courtcasenumber]for in-progress case
+\item[courtdivision]for in-progress case
+\item[courtfullname]for in-progress case
+\item[courtjurisdiction]for in-progress case
+\item[courtlist]for in-progress case
+\item[courtname]medium-neutral citation courtname
+\item[crossref]key of entry to inherit fields from
+\item[decisionyear]year for the case name, if none of the reports identify the year
+\item[icaseyear]the case year to appear in the table of cases
+\item[linkname]text for the url
+\item[mncurl]the MNC url
+\item[note]note for the bibentry
+\item[options]Biblatex processing options, e.g, skipbib=true
+\item[pagination]setting for postnote (default is ‘p’, for ‘page’): e.g. bibstring ‘atparagraph’
+\item[parallel]parallel reports, all as one string
+\item[partya]the party bringing the action or cause, or the description of the cause
+\item[partyajur]jurisdiction of partya, if applicable (e.g., NSW)
+\item[partyasn]shortname for partya (e.g., DPP)
+\item[partyb]the responding or defending party, if any
+\item[partybjur]jurisdiction of partya, if applicable (e.g., NSW)
+\item[partybsn]shortname for partyb (e.g., DPP)
+\item[partysep]separator between party names (default: v)
+\item[partysepx]
+\item[reportpage]page that the reported cases starts on
+\item[reportseries]name of the report series
+\item[reportvolume]volume number of the report series
+\item[reportyear]year of the report series
+\item[shipname]name of the ship (admiralty cases)
+\item[thumbnail]image file name
+\item[url]url for a secondary link, the display text will come from linkname
+\item[volyearneeded]true = the reportyear is needed to identify the report series volume
+\end{description}
+
+\p An MNC case would generally use these fields: {\ttfamily
+partya, 
+partyb, 
+partysep (if not v), 
+caseyear, 
+courtname, 
+casenumber}.
+
+\p A paper-report case would use these fields:{\ttfamily
+partya, 
+partyb, 
+partysep (if not v), 
+reportyear, 
+reportvolume, 
+volyearneeded, 
+reportseries, 
+reportpage}. 
+
+\p The `in-progress case' fields are defined in the data model but are not linked into any citation command yet: {\ttfamily
+casename, 
+courtdivision, 
+courtlist, 
+courtjurisdiction, 
+courtcasenumber, 
+courtfullname, 
+casestatus}.
+
 \subsection{@statute}
+\p The @statute bibentry handles various types of data, depending on whether either or both of the \cmdc{citeref} and \cmdc{statutechapter} fields are present or not.
+
 \p An @statute bib entry with the \cmdc{citeref} field set to \cmdc{canleg} produces this structure:
 
 \begin{quotation}
@@ -8669,6 +8856,53 @@ from
 
 %\lcdcase{tetley}
 \colorbox{blue!12}{\begin{minipage}{\textwidth}\lcdcasehl[linkname][]{tetley}\end{minipage}}
+
+\newpage
+\section{Examples}
+
+\begin{quotation}
+A plea of guilty is not an
+admission of any facts giving rise to the charge. It is
+evidence only that that particular accused considers that he
+ought to plead guilty to the charge preferred against him. A
+plea of guilty in no way proves any of the circumstances of the
+crime. Phipson on Evidence, 9th ed., page 19 points out that a
+plea of guilty only admits that the accused committed the
+offence charged and does not admit the truth of any
+depositions. See Regina v. Riley (1896), 18 Cox, C.C. 285 at
+p. 295 per Hawkins J. 
+\end{quotation}
+
+\lcaonbtitle{phipson9}, 
+\lcaonbedition[page 19]{phipson9} 
+points out that
+
+\begin{magpar}
+\begin{verbatim}
+\lcaonbtitle{phipson9}, 
+\lcaonbedition[page 19]{phipson9} 
+points out that
+\end{verbatim}
+\end{magpar}
+
+
+\bigskip
+\toggletrue{casenamecomma}
+\lcinline[See][at p 295 per Hawkins J]{riley}
+\togglefalse{casenamecomma}
+
+%\colorbox{blue}{%
+%\begin{minipage}{0.8\textwidth}%
+\begin{magpar}
+\begin{verbatim}
+\toggletrue{casenamecomma}
+\lcinline[See][at p 295 per Hawkins J]{riley}
+\togglefalse{casenamecomma}
+\end{verbatim}
+\end{magpar}
+%\end{minipage}}
+
+
 
 
 %======================================= Bibliography
