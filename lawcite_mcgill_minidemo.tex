@@ -2493,6 +2493,19 @@ subxxx
 } 
 \l_myscriptname_tl
 
+\regex_replace_all:nnN 
+{ emdash } 
+{ 
+\c{addspace}---\c{addspace}
+} 
+\l_myscriptname_tl
+
+\regex_replace_all:nnN 
+{ endash } 
+{ 
+\c{addspace}--\c{addspace}
+} 
+\l_myscriptname_tl
 
 \regex_replace_all:nnN 
 { dot } 
@@ -2779,6 +2792,17 @@ x#1;;
 }%
 {\usebibmacro{postnote}}
 
+
+
+\DeclareCiteCommand{lcycite}%
+{}%
+{%
+\iffieldundef{prenote}{}{\forcsvfield{\getblcommand}{prenote}}%
+}%
+{%
+%\multicitedelim%
+}%
+{\usebibmacro{postnote}}
 
 
 
@@ -7734,6 +7758,7 @@ autocite=footnote,
 
 \usepackage{tikz}
 \usetikzlibrary{tikzmark, calc}
+\newcommand\hlybox[2][]{\tikz[overlay]\node[fill=yellow!20,draw=black,inner sep=2pt, anchor=text, rectangle, rounded corners=1mm,#1] {#2};\phantom{#2}}
 
 %\usepackage{lthooks}
 
@@ -9075,7 +9100,7 @@ The main concern of the hearsay rule is the veracity of the statements made. The
 
 \newpage
 \begin{quotation}\noindent
-As Woods J.A. said in \highLight{R. v. Perras (1972), 1972 CanLII 868 (SK CA), 8 C.C.C. (2d) 209, at p. 213}, ``The evidence of a physician stating what a patient told him about his symptoms is not evidence as to the existence of the symptoms. To accept it as such would be to infringe the rule against hearsay."\lawcite[45-46]{abbey}
+As Woods J.A. said in \highLight{R. v. Perras (1972), 1972 CanLII 868 (SK CA), 8 C.C.C. (2d) 209, at p. 213}, ``The evidence of a physician stating what a patient told him about his symptoms is \hlybox{not} evidence as to the existence of the symptoms. To accept it as such would be to infringe the rule against hearsay."\lawcite[45-46]{abbey}
 \end{quotation}
 
 \lcinline[213]{perras}
@@ -9097,6 +9122,30 @@ As Woods J.A. said in \highLight{R. v. Perras (1972), 1972 CanLII 868 (SK CA), 8
 from
 
 \lcdcasehl[yoptions][]{perras}
+
+\p The \cmd{ycite} citation command reads the bibentry's \cmdc{yoptions} field of comma-separated meta-fields through a \textit{for}-loop, and so is somewhat static; the \cmd{lcycite} is more dynamic and reads the meta-field list from the \cmdc{prenote} field, and the citation can be differently structured each time.
+
+\bigskip
+\lcycite[:getcasename,comma,space,:getcaseurl,comma,space,:getcaseref][213]{perras}
+\begin{magpar}
+\begin{verbatim}
+\lcycite[:getcasename, comma, space, 
+:getcaseurl, comma, space, 
+:getcaseref][213]{perras}
+\end{verbatim}
+\end{magpar}
+
+\bigskip
+\lcycite[:getcaseurl, endash,
+:getcasename, endash][213]{perras}
+\begin{magpar}
+\begin{verbatim}
+\lcycite[:getcaseurl, endash, 
+:getcasename, endash][213]{perras}
+\end{verbatim}
+\end{magpar}
+
+
 
 %\begin{adjustbox}{minipage=200pt,margin=10pt,bgcolor=blue!25,frame,center,margin=0pt \medskipamount}
 %    \centering\sffamily
