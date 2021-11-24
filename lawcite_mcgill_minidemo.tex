@@ -2447,7 +2447,30 @@ test {\iftoggle{usedibid}}
 } 
 \l_myscriptname_tl
 
+%bibmacros - encapsulated:
+\regex_replace_all:nnN 
+{ :getcasename } 
+{ 
+::getcn
+} 
+\l_myscriptname_tl
 
+\regex_replace_all:nnN 
+{ :getcaseurl } 
+{ 
+::geturl
+} 
+\l_myscriptname_tl
+
+\regex_replace_all:nnN 
+{ :getcaseref } 
+{ 
+::getref
+} 
+\l_myscriptname_tl
+
+
+%formatting
 \regex_replace_all:nnN 
 { itcolon } 
 { 
@@ -2598,6 +2621,31 @@ subxxx
 } 
 \l_myscriptname_tl
 
+%bibmacros - un-encapsulated:
+\regex_replace_all:nnN 
+{ ::getcn } 
+{ 
+\c{usebibmacro} \cB\{ getcasename \cE\}
+} 
+\l_myscriptname_tl
+
+\regex_replace_all:nnN 
+{ ::geturl } 
+{ 
+\c{usebibmacro} \cB\{ getcaseurl \cE\}
+} 
+\l_myscriptname_tl
+
+\regex_replace_all:nnN 
+{ ::getref } 
+{ 
+\c{usebibmacro} \cB\{ getcaseref \cE\}
+} 
+\l_myscriptname_tl
+
+
+
+%output
 
 \tl_use:N \l_myscriptname_tl
 }
@@ -5012,6 +5060,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \docompfieldhl{volume}
 %\noindent\iffieldundef{volyearneeded}{}{volyearneeded =  \{\thefield{volyearneeded}\},\par}%
 \docompfieldhl{year}
+\docompfieldhl{yoptions}
 %\noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
 %\noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
 %\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
@@ -7136,13 +7185,15 @@ partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
 @statute{samstata,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statutechapter = {statutechapter},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
 @statute{samstatb,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
 @statute{samstatc,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statutechapter = {statutechapter},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},citeref = {peireg},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
-@case{riley,partya = {R},partyb = {Riley},reportvolume = {18},reportseries = {CoxCC},reportpage = {285},decisionyear = {1896},}
 @book{phipson9,author = {Sidney Phipson},title = {Phipson’s Manual of the Law of Evidence},date = {1966},publisher = {Sweet \& Maxwell},location = {London},edition = {9},keywords = {lawbook},shorttitle = {Evidence},editor = {D W Elliott},}
-@case{berry,partya = {R},partyb = {Berry},reportyear = {1957},volyearneeded = {true},reportseries = {OR},reportpage = {249},linkname = {1957 CanLII 115 (ON CA)},url = {https://canlii.ca/t/g191v},}
-@case{howard,partya = {R},partyb = {Howard},reportvolume = {15},reportseries = {OAC},reportpage = {255},decisionyear = {1986},parallel = {29 CCC (3d) 544},linkname = {1986 CanLII 4725 (ON CA)},url = {https://canlii.ca/t/gbhf8},}
-@case{rosikappeal,partya = {R},partyb = {Rosik},reportvolume = {2},reportseries = {CCC (2d)},reportpage = {393n},parallel = {[1971] 2 OR 89n and [1971] SCR vi},}
-@case{rosik,partya = {R},partyb = {Rosik},reportvolume = {2},reportseries = {CCC (2d)},reportpage = {351},decisionyear = {1970},parallel = {[1971] 2 OR 47 and 13 CrimLQ 224 (Ont CA)},linkname = {CanLII},url = {https://www.canlii.org/en/on/onca/doc/1970/1970canlii278/1970canlii278.html},}
-@case{abbey,partya = {R},partyb = {Abbey},reportvolume = {68},reportseries = {CCC (2d)},reportpage = {394},decisionyear = {1982},parallel = {138 DLR (3d) 202 and [1982] 2 SCR 24 (SCC)},linkname = {CanLII},url = {https://www.canlii.org/en/ca/scc/doc/1982/1982canlii25/1982canlii25.html},}
+@case{riley,partya = {R},partyb = {Riley},reportvolume = {18},reportseries = {CoxCC},reportpage = {285},caseshortname = {Riley},decisionyear = {1896},}
+@case{berry,partya = {R},partyb = {Berry},reportyear = {1957},volyearneeded = {true},reportseries = {OR},reportpage = {249},caseshortname = {Berry},linkname = {1957 CanLII 115 (ON CA)},url = {https://canlii.ca/t/g191v},}
+@case{howard,partya = {R},partyb = {Howard},reportvolume = {15},reportseries = {OAC},reportpage = {255},caseshortname = {Howard},decisionyear = {1986},parallel = {29 CCC (3d) 544},linkname = {1986 CanLII 4725 (ON CA)},url = {https://canlii.ca/t/gbhf8},}
+@case{rosikappeal,partya = {R},partyb = {Rosik},reportvolume = {2},reportseries = {CCC (2d)},reportpage = {393n},caseshortname = {Rosik},parallel = {[1971] 2 OR 89n and [1971] SCR vi},}
+@case{rosik,partya = {R},partyb = {Rosik},reportvolume = {2},reportseries = {CCC (2d)},reportpage = {351},caseshortname = {Rosik},decisionyear = {1970},parallel = {[1971] 2 OR 47 and 13 CrimLQ 224 (Ont CA)},linkname = {CanLII},url = {https://www.canlii.org/en/on/onca/doc/1970/1970canlii278/1970canlii278.html},}
+@case{abbey,partya = {R},partyb = {Abbey},reportvolume = {68},reportseries = {CCC (2d)},reportpage = {394},caseshortname = {Abbey},decisionyear = {1982},parallel = {138 DLR (3d) 202 and [1982] 2 SCR 24 (SCC)},linkname = {CanLII},url = {https://www.canlii.org/en/ca/scc/doc/1982/1982canlii25/1982canlii25.html},}
+@case{perras,partya = {R},partyb = {Perras},reportvolume = {8},reportseries = {CCC (2d)},reportpage = {209},caseshortname = {Perras},decisionyear = {1972},linkname = {1972 CanLII 868 (SK CA)},url = {https://www.canlii.org/en/sk/skca/doc/1972/1972canlii868/1972canlii868.html},
+yoptions={:getcasename,comma,space,:getcaseurl,comma,space,:getcaseref},}
 
 
 
@@ -7484,7 +7535,7 @@ options={skipbib=true,},
 \date{}
 \long\gdef\myabstracttext{\noindent This is the instruction manual for using the  (\cmdc{lawcite})  \textsc{Biblatex} format to produce McGill-style legal citations.}
 %------------------
-\usepackage[table]{xcolor}
+\usepackage[table,dvipsnames,svgnames]{xcolor}
 \pagecolor{blue!3}
 \rowcolors{1}{blue!5}{blue!9}
 \usepackage{fontspec}
@@ -7866,6 +7917,66 @@ bookmarks,
 }
 {\end{tcolorbox}
  }
+
+\newenvironment{casenote}[1]
+{
+\begin{tcolorbox}[title=#1,
+enhanced,
+attach boxed title to top right,
+boxed title style={colframe=blue!75!yellow!15,colback=violet!75,},
+colback=red!5!white,
+colframe=red!75!black,
+fonttitle=\bfseries,
+%before title={x},
+%after title={\hfill\colorbox{Navy}{approved}},
+]
+}
+{\end{tcolorbox}
+ }
+\newenvironment{casequote}[1]
+{
+\begin{quotation}
+\begin{tcolorbox}[title=#1,
+enhanced,
+attach boxed title to top right,
+boxed title style={colframe=blue!75!yellow!15,colback=violet!8,},
+colback=brown!5!white,
+colframe=brown!75!black,
+fonttitle=\bfseries,
+coltitle=green!25!black,
+%before title={x},
+%after title={\hfill\colorbox{Navy}{approved}},
+]\begin{tabular}{ccc}\cellcolor{yellow!30!brown!18}{\Large ``} & \cellcolor{brown!12!white}
+\begin{minipage}{0.82\textwidth}
+}
+{\end{minipage} & \cellcolor{yellow!30!brown!18}{\Large''}\\\end{tabular}\end{tcolorbox}
+\end{quotation}
+ }
+
+
+%---
+\usepackage{luacolor,lua-ul}
+\colorlet{r1}{GreenYellow!50}
+\colorlet{r2}{RubineRed}
+\colorlet{r3}{RoyalPurple}
+\LuaULSetHighLightColor{r1}
+%--
+\newunderlinetype\beginUnderWavy[\number\dimexpr1ex]{\cleaders\hbox{%
+\setlength\unitlength{.3ex}%
+\begin{picture}(4,0)(0,1)
+\thicklines
+\color{red}%
+\qbezier(0,0)(1,1)(2,0)
+\qbezier(2,0)(3,-1)(4,0)
+\end{picture}%
+}}
+\newcommand\underWavy[1]{{\beginUnderWavy#1}}
+
+%---
+\usepackage{adjustbox}
+
+
+%---
 
 
 \title{Legal citation \\ using \\a >>\textcolor{blue}{\lccurrentstyle}-like<< \\ lawcitestyle}
@@ -8880,12 +8991,12 @@ A plea of guilty is not an
 admission of any facts giving rise to the charge. It is
 evidence only that that particular accused considers that he
 ought to plead guilty to the charge preferred against him. A
-plea of guilty in no way proves any of the circumstances of the
-crime. Phipson on Evidence, 9th ed., page 19 points out that a
+plea of guilty \underWavy{in no way} proves any of the circumstances of the
+crime. \highLight{Phipson on Evidence, 9th ed., page 19 points out that} a
 plea of guilty only admits that the accused committed the
 offence charged and does not admit the truth of any
-depositions. See Regina v. Riley (1896), 18 Cox, C.C. 285 at
-p. 295 per Hawkins J. \lawcite{berry}
+depositions. See \highLight{Regina v. Riley (1896), 18 Cox, C.C. 285 at
+p. 295 per Hawkins J}. \lawcite{berry}
 \end{quotation}
 
 \renewcommand\postnotedelim{,\ }%
@@ -8931,7 +9042,7 @@ points out that
 
 \newpage
 \begin{quotation}
-The ability to cross-examine a witness as to the basis for his opinion and the factors which he has taken into account and those which he has omitted can be relevant, pertinent and indeed vital to testing  that opinion: see, for example, \textit{ R. v. Rosik} (1970), 2 C.C.C. (2d) 351, [1971] 2 O.R. 47, 13 Crim. L.Q. 224 (Ont. C.A.) (appeal to the Supreme Court of Canada dismissed 2 C.C.C. (2d) 393\textit{n}, [1971] 2 O.R. 89\textit{n}, [1971] S.C.R. vi), and \textit{R. v. Abbey} (1982), 68 C.C.C. (2d) 394, 138 D.LR. (3d) 202, [1982] 2 S.C.R. 24 (S.C.C.).\lawcite[559-560]{howard}
+The ability to cross-examine a witness as to the basis for his opinion and the factors which he has taken into account and those which he has omitted can be relevant, pertinent and indeed vital to testing  that opinion: see, for example, \highLight{\textit{ R. v. Rosik} (1970), 2 C.C.C. (2d) 351, [1971] 2 O.R. 47, 13 Crim. L.Q. 224 (Ont. C.A.) (appeal to the Supreme Court of Canada dismissed 2 C.C.C. (2d) 393\textit{n}, [1971] 2 O.R. 89\textit{n}, [1971] S.C.R. vi), and \textit{R. v. Abbey} (1982), 68 C.C.C. (2d) 394, 138 D.LR. (3d) 202, [1982] 2 S.C.R. 24 (S.C.C.).}\lawcite[559-560]{howard}
 \end{quotation}
 
 
@@ -8950,8 +9061,52 @@ and
 \lcinline{abbey}.
 \end{verbatim}
 \end{magpar}
+\begin{casenote}{\lcshorttitle{rosik}}
+In \textit{Rosik}, a psychiatrist testified, relaying the contents of a conversation with the accused. This does not prove that what the accused said was true. The accused did not testify. Cross-examination tests the veracity of what a person says, and their credibility. 
+\end{casenote}
+\begin{casequote}{\lcshorttitle{abbey}}
+A general principle of evidence is that all relevant evidence is admissible. The law of evidence, however, reposes on a few general principles riddled by innumerable exceptions. Two major exceptions to this general principle are hearsay evidence and opinion evidence. There are also exceptions to the exceptions. 
+\end{casequote}
 
 
+\begin{casequote}{\lcshorttitle{abbey}}
+The main concern of the hearsay rule is the veracity of the statements made. The principal justification for the exclusion of hearsay evidence is the abhorrence of the common law to proof which is unsworn and has not been subjected to the trial by fire of cross-examination. Testimony under oath, and cross-examination, have been considered to be the best assurances of the truth of the statements of facts presented. Not all statements by a witness of that which he heard someone else say are, however, necessarily hearsay.
+\end{casequote}
+
+\newpage
+\begin{quotation}\noindent
+As Woods J.A. said in \highLight{R. v. Perras (1972), 1972 CanLII 868 (SK CA), 8 C.C.C. (2d) 209, at p. 213}, ``The evidence of a physician stating what a patient told him about his symptoms is not evidence as to the existence of the symptoms. To accept it as such would be to infringe the rule against hearsay."\lawcite[45-46]{abbey}
+\end{quotation}
+
+\lcinline[213]{perras}
+
+\begin{magpar}
+\begin{verbatim}
+\lcinline{perras}
+\end{verbatim}
+\end{magpar}
+
+\ycite[213]{perras}
+
+\begin{magpar}
+\begin{verbatim}
+\ycite[213]{perras}
+\end{verbatim}
+\end{magpar}
+
+from
+
+\lcdcasehl[yoptions][]{perras}
+
+%\begin{adjustbox}{minipage=200pt,margin=10pt,bgcolor=blue!25,frame,center,margin=0pt \medskipamount}
+%    \centering\sffamily
+%{\LARGE Norvig's Law
+%\par\medskip}
+%\normalsize
+%Any technology that surpasses 50\% penetration\\
+%will \textbf{never} double again\\
+%(in any number of months)
+%\end{adjustbox}
 
 
 
