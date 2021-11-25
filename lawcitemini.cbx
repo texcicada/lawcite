@@ -61,10 +61,10 @@
 \DeclareFieldFormat{partyb}{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}
 \DeclareFieldFormat{shipname}{\mkbibemph{#1}}%
 \DeclareFieldFormat{caseshortname}{%
-  \iftoggle{partynamesitalic}%
-  {\mkbibemph{#1}}%
-  {#1}%
-  }
+\iftoggle{partynamesitalic}%
+{\mkbibemph{#1}}%
+{#1}%
+}
 \DeclareFieldFormat{casenickname}{\mkbibquote{#1}}%\addspace\bibstring{case}}}
 
 \DeclareFieldFormat{partyasn}{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}
@@ -178,7 +178,7 @@
 \newbibmacro{getcasename}{%
 %\ifciteseen{\ifciteibid{SEENIBID}{SEEN}}{}%
 \iffootnote{%
-\ifciteseen{\ifciteibid{\textcolor{red}{CC}}{\usebibmacro{getcaseshortname}\textcolor{red}{DD}}}{%
+\ifciteseen{\ifciteibid{\textcolor{red}{CC}}{\usebibmacro{getcaseshortname}}}{%
 \iffieldundef{shipname}{\usebibmacro{getpartynamesa}%
 \iffieldundef{partyb}{}%
 {\addspace\usebibmacro{getpartysep}\addspace%
@@ -358,13 +358,22 @@
   and
   test {\ifciteibid}
   }%
- {}{%not an ibid
+{}{%not an ibid
  \setunit*{\addspace}%
  \printtext[parens]{%
  \printfield{note}%
  }%
 }}}
 
+%======== getnote:plain
+\newbibmacro{getnote:plain}{%
+\iffieldundef{note}%
+{}%
+{%false
+ \printtext[plain]{%
+ \printfield{note}%
+ }%
+}}
 
 
 %======== getnote:noparens, i.e. always (...(x)), not (...[x]).
@@ -380,7 +389,7 @@
   and
   test {\ifciteibid}
   }%
- {}{%not an ibid
+{}{%not an ibid
  \setunit*{\addspace}%
  \printtext{(%
  \printfield{note}%
@@ -397,8 +406,8 @@ xxx}%
 
 %======== getcaseref
 \newbibmacro{getcaseref}{%
- \iffieldundef{mncurl}{%
- \iffieldundef{casenumber}{}{%
+\iffieldundef{mncurl}{%
+\iffieldundef{casenumber}{}{%
  \usebibmacro{getcaseyear}%
  \usebibmacro{getcourtname}%
  \usebibmacro{getcasenumber}%
@@ -406,15 +415,15 @@ xxx}%
  }{%
   \ifhyperref
     {%
-      \printtext{\addspace}%clear the puncuation buffer = no comma in link
-      \iffieldundef{casenumber}{%
-        \url{\thefield{mncurl}}
-        }%
-        {\href{\thefield{mncurl}}{%
-         \usebibmacro{getcaseyear}%
-         \usebibmacro{getcourtname}%
-         \usebibmacro{getcasenumber}%
-                         }}%
+    \printtext{\addspace}%clear the puncuation buffer = no comma in link
+    \iffieldundef{casenumber}{%
+    \url{\thefield{mncurl}}
+    }%
+    {\href{\thefield{mncurl}}{%
+ \usebibmacro{getcaseyear}%
+ \usebibmacro{getcourtname}%
+ \usebibmacro{getcasenumber}%
+    }}%
     }%
     {\nolinkurl{\thefield{mncurl}}}%
 }%
@@ -446,7 +455,7 @@ xxx}%
 % \textcolor{red}{DD}%
  \or\addcolon%
  \or\adddot%
- \fi
+\fi
 %
 %\addspace
 }
@@ -460,18 +469,18 @@ xxx}%
 \togglefalse{supranoteused}
 
 \newbibmacro{getibidsupra}{%
-    \iftoggle{ibidsupraon}{%
-%    supra
-    \iftoggle{ibidsupraitalic}{%
-   %    italic
-       \mkbibemph{\bibstring{ibidsupra}}}%
-       {\bibstring{ibidsupra}}%
-       \addspace%
-   }
-   {    \iftoggle{ibidsupraitalic}{%
-   %    italic
-       \mkbibemph{\bibstring{ibidsupra}}}%
-       {\bibstring{ibidsupra}}%
+  \iftoggle{ibidsupraon}{%
+%  supra
+  \iftoggle{ibidsupraitalic}{%
+%  italic
+  \mkbibemph{\bibstring{ibidsupra}}}%
+  {\bibstring{ibidsupra}}%
+  \addspace%
+}
+{  \iftoggle{ibidsupraitalic}{%
+%  italic
+  \mkbibemph{\bibstring{ibidsupra}}}%
+  {\bibstring{ibidsupra}}%
 }%
 }
 %=========== getibidsupranote: 5 settings
@@ -486,22 +495,22 @@ xxx}%
 %()
  \iftoggle{ibidsuprabrackets}{%
   \mkbibparens{%
-    \iftoggle{ibidsupraon}{\usebibmacro{getibidsupra}}{}%
-%    note
-    \iftoggle{ibidsupranotelong}{\bibstring{ibidsupranote}}%
-    {\bibstring{ibidsupran}}%
-    \addspace\ref{cfn:\thefield{entrykey}}%
-    \toggletrue{supranoteused}%
-    }%parens
-    }%
-   {%
-   \iftoggle{ibidsupraon}{\usebibmacro{getibidsupra}}{}%
-%    note
-    \iftoggle{ibidsupranotelong}{\bibstring{ibidsupranote}}%
-    {\bibstring{ibidsupran}}%
-    \addspace\ref{cfn:\thefield{entrykey}}%
-    \toggletrue{supranoteused}%
-    }%no parens
+  \iftoggle{ibidsupraon}{\usebibmacro{getibidsupra}}{}%
+%  note
+  \iftoggle{ibidsupranotelong}{\bibstring{ibidsupranote}}%
+  {\bibstring{ibidsupran}}%
+\addspace\ref{cfn:\thefield{entrykey}}%
+\toggletrue{supranoteused}%
+  }%parens
+  }%
+{%
+\iftoggle{ibidsupraon}{\usebibmacro{getibidsupra}}{}%
+%  note
+  \iftoggle{ibidsupranotelong}{\bibstring{ibidsupranote}}%
+  {\bibstring{ibidsupran}}%
+\addspace\ref{cfn:\thefield{entrykey}}%
+\toggletrue{supranoteused}%
+}%no parens
 %%%  no ()
 %%  {\iftoggle{ibidsupraon}{%
 %%  \iftoggle{ibidsupraitalic}{%
@@ -594,7 +603,7 @@ xxx}%
 % \usebibmacro{getnote}%
 %    \finentry
  }
- 
+
 
 
 %===== casenamerefnofn: no footnote  (i.e., no ibiding)
@@ -614,7 +623,7 @@ xxx}%
 % \usebibmacro{getnote}%
 %    \finentry
  }
- 
+
 
 \newtoggle{usedibid}
 \togglefalse{usedibid}
@@ -661,7 +670,7 @@ xxx}%
   \iftoggle{ibidpostdelimcomma}%
   {\DeclareDelimFormat{postnotedelim}{\addcomma\space}}%
   {\DeclareDelimFormat{postnotedelim}{\space}}%
-% \textcolor{red}{BB}%
+%\textcolor{red}{BB}%
   \usebibmacro{postnote}%actual ibid
 %%%  \textcolor{red}{xx\ibidprevpintemp}%
   \DeclareDelimFormat{postnotedelim}{\addcomma\space}%restore
@@ -710,7 +719,7 @@ xxx}%
  {\iftoggle{casenamecomma}{\setunit*{\addcomma\addspace}}{\setunit*{\addspace}}}%true
  {\setunit*{\addspace}}%false
 %%\iffieldundef{mncurl}{\usebibmacro{getcaseref}}{\addspace\printtext[angles]{\usebibmacro{getcaseref}}}%
- \iffieldundef{casenumber}{}{\addcomma}%
+\iffieldundef{casenumber}{}{\addcomma}%
  \usebibmacro{getcaseref}%
  \usebibmacro{getparallelreports}%
 \iffieldundef{url}{}{\addspace\printtext[angles]{\usebibmacro{getcaseurl}}}%
@@ -732,19 +741,20 @@ xxx}%
   and
   not test {\ifcsdef{\thefield{entrykey}label}}
   }%
- {\label{cfn:\thefield{entrykey}}%
- \itemlabelset{\thefield{entrykey}}{label}{\thefootnote}%tracking
-% \textcolor{red}{AA}%
- }{}%
+{\label{cfn:\thefield{entrykey}}%
+\itemlabelset{\thefield{entrykey}}{label}{\thefootnote}%tracking
+%\textcolor{red}{AA}%
+}{}%
+%%\ifbibliography{x}{y}%
 % \ifboolexpr{%
 %  test {\iffootnote}
 %  and
 %  not test {\ifcsdef{\thefield{entrykey}label}}
 %  }%
-% {\label{cfn:\thefield{entrykey}}%
-% \itemlabelset{\thefield{entrykey}}{label}{\thefootnote}%
-% >>\textcolor{red}{AA\csname \thefield{entrykey}label\endcsname}<<%
-% }{}%
+%{\label{cfn:\thefield{entrykey}}%
+%\itemlabelset{\thefield{entrykey}}{label}{\thefootnote}%
+%>>\textcolor{red}{AA\csname \thefield{entrykey}label\endcsname}<<%
+%}{}%
 }}
 
 
@@ -846,7 +856,7 @@ xxx}%
 
 \expandafter\newbibmacro{\csname lc/aglc/can/delleg/revfedreg/1\endcsname}{%
 \printfield{statutetitle}\addcomma\addspace\printfield{statuteshorttitle}%
-\addcomma\addspace\bibstring{canchapter}\addspace\printfield{statutechapter}
+\printtext{\addspace}\addcomma\addspace\bibstring{canchapter}~\printfield{statutechapter}
 %sindex{} not coded here
 }%
 
@@ -858,13 +868,24 @@ xxx}%
 
 
 
-
+%======================= svjy
+\newbibmacro{getsvjy}{%
+\iffieldundef{svjy}{}{\printfield{svjy}}%
+}
+%======================= chapter
+\newbibmacro{getchapter}{%
+\iffieldundef{chapter}{}{\thefield{chapter}}%
+}
+%======================= title
+\newbibmacro{gettitle}{%
+\iffieldundef{title}{}{\printfield{title}}%
+}
 %======================= canleg
 \newbibmacro{getcanleg}{%
 %----
 \iffieldequalstr{citeref}{canleg}{%
  \printfield{title}\addcomma\addspace\printfield{svjy}%
-\addcomma\addspace\bibstring{canchapter}\addspace\thefield{chapter}%
+\addcomma\addspace\bibstring{canchapter}~\thefield{chapter}%
 \renewcommand\lcindexaccum{}%empty
 \xappto\lcindexaccum{%
 \thefield{title}, \thefield{svjy}%
@@ -1265,10 +1286,10 @@ xxx}%
 %  test {\ifciteseen}
 %  and
 %  test {\iffootnote}
-  test {\iftoggle{usedibid}}
+test {\iftoggle{usedibid}}
   }%
-    {}% ibid tracker works perfectly
-    {%
+{}% ibid tracker works perfectly
+{%
  \ifboolexpr{%
   not test {\iffieldundef{casenumber}}%if there is MNC
   and
@@ -1281,11 +1302,11 @@ xxx}%
  {%
 \iftoggle{supranoteused}{}{%
 %\textcolor{red}{CC}%
-% \printfield[emph]{postnote}%
-   \usebibmacro{postnote}%
-%   \textcolor{red}{DD}%
-   }%
-    }%
+%\printfield[emph]{postnote}%
+\usebibmacro{postnote}%
+%\textcolor{red}{DD}%
+}%
+}%
  }%
 }
 
@@ -1301,170 +1322,361 @@ xxx}%
 \tl_new:N \l_myscriptname_tl
 \NewDocumentCommand\getblcommand { m }
 {
- \tl_set:Nx \l_myscriptname_tl { #1 }
+\tl_set:Nx \l_myscriptname_tl { #1 }
 
- \regex_replace_all:nnN
-       { given\-family  }
-       {
-          \c{DeclareNameAlias} [book]
-          \cB\{ author\cE\}
-          \cB\{ given-family \cE\}
-       }
-       \l_myscriptname_tl
- 
+\regex_replace_all:nnN
+{ given\-family }
+{
+\c{DeclareNameAlias} [book]
+\cB\{ author\cE\}
+\cB\{ given-family \cE\}
+}
+\l_myscriptname_tl
 
- \regex_replace_all:nnN
-       { itcolon }
-       {
-          \c{textit} \cB\{ \c{addcolon} \cE\}
-       }
-       \l_myscriptname_tl
+%bibmacros - encapsulated:
+\regex_replace_all:nnN { :getljarticlejournaltitle } { :get001 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticleyear:plain } { :get002 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutejurisdiction } { :get003 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticleauthorsc } { :get004 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatuteregnalyear } { :get005 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatuteshorttitle } { :get006 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutelongtitle } { :get007 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutetitleyear } { :get008 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcasenamereffull } { :get009 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcasenamerefnofn } { :get010 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getparallelreports } { :get011 } \l_myscriptname_tl
+\regex_replace_all:nnN { :lclgetlegalrefstat } { :get012 } \l_myscriptname_tl
+\regex_replace_all:nnN { :lclgetlegalrefcase } { :get013 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticleauthor } { :get014 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticlequotes } { :get015 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticlevolume } { :get016 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutenickname } { :get017 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticle:ibid } { :get018 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticletitle } { :get019 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljartshortname } { :get020 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutechapter } { :get021 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutenameref } { :get022 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcaseshortname } { :get023 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getibidsupranote } { :get024 } \l_myscriptname_tl
+\regex_replace_all:nnN { :lclgetlegaltitle } { :get025 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticlepage } { :get026 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticleyear } { :get027 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlcdacasefield } { :get028 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getnote:noparens } { :get029 } \l_myscriptname_tl
+\regex_replace_all:nnN { :nocomma:postnote } { :get030 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutevolume } { :get031 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcasenamefull } { :get032 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcasenickname } { :get033 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getreportseries } { :get034 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getreportvolume } { :get035 } \l_myscriptname_tl
+\regex_replace_all:nnN { :lclgetlegalfull } { :get036 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticleurl } { :get037 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlcdallfields } { :get038 } \l_myscriptname_tl
+\regex_replace_all:nnN { :notmnc:postnote } { :get039 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutetitle } { :get040 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getaonbedition } { :get041 } \l_myscriptname_tl
+\regex_replace_all:nnN { :geteditionyear } { :get042 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcasenameref } { :get043 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getpartynamesa } { :get044 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getpartynamesb } { :get045 } \l_myscriptname_tl
+\regex_replace_all:nnN { :lclgetlegalref } { :get046 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlcepigraphp } { :get047 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutename } { :get048 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatuteyear } { :get049 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getshorttitle } { :get050 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcasenumber } { :get051 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getreportpage } { :get052 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getreportyear } { :get053 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getnote:plain } { :get054 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlcepigraph } { :get055 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getaonbtitle } { :get056 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlastnames } { :get057 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcourtname } { :get058 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getibidsupra } { :get059 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getreportref } { :get060 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticle } { :get061 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlcdcasehl } { :get062 } \l_myscriptname_tl
+\regex_replace_all:nnN { :mnc:postnote } { :get063 } \l_myscriptname_tl
+\regex_replace_all:nnN { :delim:choice } { :get064 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcasename } { :get065 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcaseyear } { :get066 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getpartysep } { :get067 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcaseproc } { :get068 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getedition } { :get069 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcaseref } { :get070 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcaseurl } { :get071 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlcdcase } { :get072 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcanreg2 } { :get073 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getciteref } { :get074 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getchapter } { :get075 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcasesn } { :get076 } \l_myscriptname_tl
+\regex_replace_all:nnN { :qqcitebox } { :get077 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcanleg } { :get078 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcanreg } { :get079 } \l_myscriptname_tl
+\regex_replace_all:nnN { :gettitle } { :get080 } \l_myscriptname_tl
+\regex_replace_all:nnN { :quotebox } { :get081 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getibid } { :get082 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getproc } { :get083 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getnote } { :get084 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getsvjy } { :get085 } \l_myscriptname_tl
 
- \regex_replace_all:nnN
-       { isubtitle }
-       {
-          isubxxx
-       }
-       \l_myscriptname_tl
 
- 
- \regex_replace_all:nnN
-       { subtitle }
-       {
-          subxxx
-       }
-       \l_myscriptname_tl
+%formatting
+\regex_replace_all:nnN
+{ itcolon }
+{
+\c{textit} \cB\{ \c{addcolon} \cE\}
+}
+\l_myscriptname_tl
 
- 
- \regex_replace_all:nnN
-       { dot }
-       {
-          \c{adddot}
-       }
-       \l_myscriptname_tl
-       
- \regex_replace_all:nnN
-       { comma }
-       {
-          \c{addcomma}
-       }
-       \l_myscriptname_tl
-       
- \regex_replace_all:nnN
-       { colon }
-       {
-          \c{addcolon}
-       }
-       \l_myscriptname_tl
+\regex_replace_all:nnN
+{ isubtitle }
+{
+isubxxx
+}
+\l_myscriptname_tl
 
- \regex_replace_all:nnN
-       { space }
-       {
-          \c{addspace}
-       }
-       \l_myscriptname_tl
 
- \regex_replace_all:nnN
-       { lparen }
-       {
-          (
-       }
-       \l_myscriptname_tl
+\regex_replace_all:nnN
+{ subtitle }
+{
+subxxx
+}
+\l_myscriptname_tl
 
- \regex_replace_all:nnN
-       { rparen }
-       {
-          )
-       }
-       \l_myscriptname_tl
+\regex_replace_all:nnN
+{ emdash }
+{
+\c{addspace}---\c{addspace}
+}
+\l_myscriptname_tl
 
- \regex_replace_all:nnN
-       { lbrace }
-       {
-          \{
-       }
-       \l_myscriptname_tl
+\regex_replace_all:nnN
+{ endash }
+{
+\c{addspace}--\c{addspace}
+}
+\l_myscriptname_tl
 
- \regex_replace_all:nnN
-       { rbrace }
-       {
-          \}
-       }
-       \l_myscriptname_tl
-       
- \regex_replace_all:nnN
-       { name }
-       {
-          \c{printnames} \cB\{ author \cE\}
-       }
-       \l_myscriptname_tl
-       
- \regex_replace_all:nnN
-       { title }
-       {
-          \c{printfield} \cB\{ title \cE\}
-       }
-       \l_myscriptname_tl
-       
- \regex_replace_all:nnN
-       { edition }
-       {
-          \c{printfield} \cB\{ edition \cE\}
-       }
-       \l_myscriptname_tl
+\regex_replace_all:nnN
+{ dot }
+{
+\c{adddot}
+}
+\l_myscriptname_tl
 
- \regex_replace_all:nnN
-       { location }
-       {
-          \c{printlist} \cB\{ location \cE\}
-       }
-       \l_myscriptname_tl
+\regex_replace_all:nnN
+{ comma }
+{
+\c{addcomma}
+}
+\l_myscriptname_tl
 
- \regex_replace_all:nnN
-       { publisher }
-       {
-          \c{printlist} \cB\{ publisher \cE\}
-       }
-       \l_myscriptname_tl
-       
- \regex_replace_all:nnN
-       { year }
-       {
-          \c{thefield} \cB\{ year \cE\}
-       }
-       \l_myscriptname_tl
-       
- \regex_replace_all:nnN
-       { volume }
-       {
-          \c{printfield} \cB\{ volume \cE\}
-       }
-       \l_myscriptname_tl
-       
- \regex_replace_all:nnN
-       { note }
-       {
-          \c{thefield} \cB\{ note \cE\}
-       }
-       \l_myscriptname_tl
-       
+\regex_replace_all:nnN
+{ colon }
+{
+\c{addcolon}
+}
+\l_myscriptname_tl
 
- \regex_replace_all:nnN
-       { isubxxx }
-       {
-          \c{printfield} [emph] \cB\{ subtitle \cE\}
-       }
-       \l_myscriptname_tl
-       
- \regex_replace_all:nnN
-       { subxxx }
-       {
-          \c{printfield} \cB\{ subtitle \cE\}
-       }
-       \l_myscriptname_tl
-       
-       
-  \tl_use:N \l_myscriptname_tl
+\regex_replace_all:nnN
+{ space }
+{
+\c{addspace}
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ lparen }
+{
+(
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ rparen }
+{
+)
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ lbrace }
+{
+\{
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ rbrace }
+{
+\}
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ name }
+{
+\c{printnames} \cB\{ author \cE\}
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ title }
+{
+\c{printfield} \cB\{ title \cE\}
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ edition }
+{
+\c{printfield} \cB\{ edition \cE\}
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ location }
+{
+\c{printlist} \cB\{ location \cE\}
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ publisher }
+{
+\c{printlist} \cB\{ publisher \cE\}
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ year }
+{
+\c{thefield} \cB\{ year \cE\}
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ volume }
+{
+\c{printfield} \cB\{ volume \cE\}
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ note }
+{
+\c{thefield} \cB\{ note \cE\}
+}
+\l_myscriptname_tl
+
+
+\regex_replace_all:nnN
+{ isubxxx }
+{
+\c{printfield} [emph] \cB\{ subtitle \cE\}
+}
+\l_myscriptname_tl
+
+\regex_replace_all:nnN
+{ subxxx }
+{
+\c{printfield} \cB\{ subtitle \cE\}
+}
+\l_myscriptname_tl
+
+%bibmacros - un-encapsulated:
+\regex_replace_all:nnN { :get001 } { \c{usebibmacro} \cB\{ getljarticlejournaltitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get002 } { \c{usebibmacro} \cB\{ getljarticleyear:plain \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get003 } { \c{usebibmacro} \cB\{ getstatutejurisdiction \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get004 } { \c{usebibmacro} \cB\{ getljarticleauthorsc \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get005 } { \c{usebibmacro} \cB\{ getstatuteregnalyear \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get006 } { \c{usebibmacro} \cB\{ getstatuteshorttitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get007 } { \c{usebibmacro} \cB\{ getstatutelongtitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get008 } { \c{usebibmacro} \cB\{ getstatutetitleyear \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get009 } { \c{usebibmacro} \cB\{ getcasenamereffull \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get010 } { \c{usebibmacro} \cB\{ getcasenamerefnofn \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get011 } { \c{usebibmacro} \cB\{ getparallelreports \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get012 } { \c{usebibmacro} \cB\{ lclgetlegalrefstat \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get013 } { \c{usebibmacro} \cB\{ lclgetlegalrefcase \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get014 } { \c{usebibmacro} \cB\{ getljarticleauthor \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get015 } { \c{usebibmacro} \cB\{ getljarticlequotes \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get016 } { \c{usebibmacro} \cB\{ getljarticlevolume \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get017 } { \c{usebibmacro} \cB\{ getstatutenickname \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get018 } { \c{usebibmacro} \cB\{ getljarticle:ibid \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get019 } { \c{usebibmacro} \cB\{ getljarticletitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get020 } { \c{usebibmacro} \cB\{ getljartshortname \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get021 } { \c{usebibmacro} \cB\{ getstatutechapter \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get022 } { \c{usebibmacro} \cB\{ getstatutenameref \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get023 } { \c{usebibmacro} \cB\{ getcaseshortname \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get024 } { \c{usebibmacro} \cB\{ getibidsupranote \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get025 } { \c{usebibmacro} \cB\{ lclgetlegaltitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get026 } { \c{usebibmacro} \cB\{ getljarticlepage \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get027 } { \c{usebibmacro} \cB\{ getljarticleyear \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get028 } { \c{usebibmacro} \cB\{ getlcdacasefield \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get029 } { \c{usebibmacro} \cB\{ getnote:noparens \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get030 } { \c{usebibmacro} \cB\{ nocomma:postnote \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get031 } { \c{usebibmacro} \cB\{ getstatutevolume \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get032 } { \c{usebibmacro} \cB\{ getcasenamefull \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get033 } { \c{usebibmacro} \cB\{ getcasenickname \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get034 } { \c{usebibmacro} \cB\{ getreportseries \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get035 } { \c{usebibmacro} \cB\{ getreportvolume \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get036 } { \c{usebibmacro} \cB\{ lclgetlegalfull \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get037 } { \c{usebibmacro} \cB\{ getljarticleurl \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get038 } { \c{usebibmacro} \cB\{ getlcdallfields \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get039 } { \c{usebibmacro} \cB\{ notmnc:postnote \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get040 } { \c{usebibmacro} \cB\{ getstatutetitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get041 } { \c{usebibmacro} \cB\{ getaonbedition \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get042 } { \c{usebibmacro} \cB\{ geteditionyear \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get043 } { \c{usebibmacro} \cB\{ getcasenameref \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get044 } { \c{usebibmacro} \cB\{ getpartynamesa \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get045 } { \c{usebibmacro} \cB\{ getpartynamesb \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get046 } { \c{usebibmacro} \cB\{ lclgetlegalref \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get047 } { \c{usebibmacro} \cB\{ getlcepigraphp \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get048 } { \c{usebibmacro} \cB\{ getstatutename \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get049 } { \c{usebibmacro} \cB\{ getstatuteyear \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get050 } { \c{usebibmacro} \cB\{ getshorttitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get051 } { \c{usebibmacro} \cB\{ getcasenumber \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get052 } { \c{usebibmacro} \cB\{ getreportpage \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get053 } { \c{usebibmacro} \cB\{ getreportyear \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get054 } { \c{usebibmacro} \cB\{ getnote:plain \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get055 } { \c{usebibmacro} \cB\{ getlcepigraph \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get056 } { \c{usebibmacro} \cB\{ getaonbtitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get057 } { \c{usebibmacro} \cB\{ getlastnames \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get058 } { \c{usebibmacro} \cB\{ getcourtname \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get059 } { \c{usebibmacro} \cB\{ getibidsupra \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get060 } { \c{usebibmacro} \cB\{ getreportref \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get061 } { \c{usebibmacro} \cB\{ getljarticle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get062 } { \c{usebibmacro} \cB\{ getlcdcasehl \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get063 } { \c{usebibmacro} \cB\{ mnc:postnote \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get064 } { \c{usebibmacro} \cB\{ delim:choice \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get065 } { \c{usebibmacro} \cB\{ getcasename \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get066 } { \c{usebibmacro} \cB\{ getcaseyear \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get067 } { \c{usebibmacro} \cB\{ getpartysep \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get068 } { \c{usebibmacro} \cB\{ getcaseproc \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get069 } { \c{usebibmacro} \cB\{ getedition \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get070 } { \c{usebibmacro} \cB\{ getcaseref \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get071 } { \c{usebibmacro} \cB\{ getcaseurl \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get072 } { \c{usebibmacro} \cB\{ getlcdcase \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get073 } { \c{usebibmacro} \cB\{ getcanreg2 \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get074 } { \c{usebibmacro} \cB\{ getciteref \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get075 } { \c{usebibmacro} \cB\{ getchapter \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get076 } { \c{usebibmacro} \cB\{ getcasesn \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get077 } { \c{usebibmacro} \cB\{ qqcitebox \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get078 } { \c{usebibmacro} \cB\{ getcanleg \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get079 } { \c{usebibmacro} \cB\{ getcanreg \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get080 } { \c{usebibmacro} \cB\{ gettitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get081 } { \c{usebibmacro} \cB\{ quotebox \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get082 } { \c{usebibmacro} \cB\{ getibid \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get083 } { \c{usebibmacro} \cB\{ getproc \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get084 } { \c{usebibmacro} \cB\{ getnote \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get085 } { \c{usebibmacro} \cB\{ getsvjy \cE\} } \l_myscriptname_tl
+
+
+
+%output
+
+\tl_use:N \l_myscriptname_tl
 }
 
 \ExplSyntaxOff
@@ -1536,8 +1748,8 @@ x#1;;
 
 \newcommand\qqcitecasewidth{0.48}
 
-\newbibmacro{qqcitebox}{%
-\hfill\parbox{\iffieldundef{partya}{0.4}{\qqcitecasewidth}\textwidth}{\raggedright%
+\newbibmacro{quotebox}[1][]{%
+\parbox{\iffieldundef{partya}{0.4}{\qqcitecasewidth}\textwidth}{\raggedright%
 \printfield{quotetext}\par%
 \smallskip\hrule\par%
 \medskip{%
@@ -1553,7 +1765,11 @@ x#1;;
 \iffieldundef{partya}{%
 \addcomma\addspace\usebibmacro{postnote}}{}%
 \adddot}%
+#1%
 }%end parbox
+}
+\newbibmacro{qqcitebox}{%
+\hfill\colorbox{blue!12!green!8}{\usebibmacro{quotebox}}
 }
 
 
@@ -1575,24 +1791,7 @@ x#1;;
 \DeclareCiteCommand{qqcitefn}%
 {\usebibmacro{prenote}}%
 {%
-\hfill\parbox{\iffieldundef{partya}{0.4}{\qqcitecasewidth}\textwidth}{\raggedright%
-\printfield{quotetext}\par%
-\smallskip\hrule\par%
-\medskip{%
-\DeclareNameAlias[quote]{author}{given-family}%
-\iffieldundef{partya}{\hfill}{}\textemdash\addspace\printnames{author}%
-}\iffieldundef{author}{}{\par}%
-%\printnames{editor}%
-\printfield{title}%if there is one
-\iffieldundef{partya}{}{{\small\usebibmacro{getcasenameref}}}%if it's a case
-\iffieldundef{casestatus}{}{\printtext{\addcomma\addspace\printfield{casestatus}}}%
-\iffieldundef{courtfullname}{}{\printtext{\addcomma\addspace\printfield{courtfullname}}}%
-\iffieldundef{postnote}{}{%
-\iffieldundef{partya}{%
-\addcomma\addspace\usebibmacro{postnote}}{}%
-\adddot}%
-\footnotemark
-}%end parbox
+\hfill\colorbox{blue!12!green!8}{\usebibmacro{quotebox}[\footnotemark]}
 }%
 {%
 %\multicitedelim%
@@ -1609,6 +1808,17 @@ x#1;;
 }%
 {\usebibmacro{postnote}}
 
+
+
+\DeclareCiteCommand{lcycite}%
+{}%
+{%
+\iffieldundef{prenote}{}{\forcsvfield{\getblcommand}{prenote}}%
+}%
+{%
+%\multicitedelim%
+}%
+{\usebibmacro{postnote}}
 
 
 
@@ -1675,14 +1885,14 @@ x#1;;
   and
   not test {\iffieldundef{prenote}}%and a prenote
   }%
- {%
-% \renewcommand\mcdelim{\multicitedelim}
-% \renewcommand{\multicitedelim}{\adddot\addspace}%
- \adddot\addspace
- }%
- {%
-% \renewcommand{\multicitedelim}{\addsemicolon\addspace}%
- }%
+{%
+%\renewcommand\mcdelim{\multicitedelim}
+%\renewcommand{\multicitedelim}{\adddot\addspace}%
+\adddot\addspace
+}%
+{%
+%\renewcommand{\multicitedelim}{\addsemicolon\addspace}%
+}%
 }
 
 
@@ -1778,7 +1988,7 @@ courtname}%
 \usebibmacro{yy:case:partya}%
 \usebibmacro{yy:case:partyb}%
 \usebibmacro{yy:case:mnc}%
-\usebibmacro{yy:case:report}% 
+\usebibmacro{yy:case:report}%
 }
 
 \newbibmacro{yycore:postnoteprelim}{%
@@ -1881,13 +2091,13 @@ test {\ifentrytype{statute}}%
 \usebibmacro{getcanleg}%
 \usebibmacro{getcanreg2}%
 }%end citeref
-\iffieldundef{postnote}{}{\addcomma\usebibmacro{notmnc:postnote}}%
+\iffieldundef{postnote}{}{\usebibmacro{notmnc:postnote}}%
 \iffieldundef{url}{}{\addspace\printtext[angles]{\usebibmacro{getcaseurl}}}%
 }%end statute true
 {%
 %\thefield{entrykey}\the\value{citecounter}::
 %\ifnumequal{\value{citecounter}}{1}{FIRST}{xxx}%
-%\iffirstcitekey{>>\thefield{entrykey} \the\value{instcount}<<}{}
+%\iffirstcitekey{>>\thefield{entrykey}\the\value{instcount}<<}{}
 %\ifciteseen{\ifciteibid{SEENIBID}{SEEN}}{}%
  \ifcase\thereftypemode%
  \or\usebibmacro{getcasenameref}\usebibmacro{getnote}%
@@ -1912,24 +2122,24 @@ test {\ifentrytype{statute}}%
 }%
 %@@@@@@@@@@@@@@@@ postnote
 {%
-%% : general setup:
-%  \iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+%%: general setup:
+%\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
 %
 \ifboolexpr{%
 test {\ifentrytype{statute}}%
 }%
 {\iffieldundef{postnote}{}{\usebibmacro{mnc:postnote}}}%statute true
 {%case
-%% if ibid, use postnote
+%%if ibid, use postnote
 % \ifboolexpr{%
 %  test {\ifcitation}
 %  and
 %  test {\ifciteibid}
 %  }%
-% {\usebibmacro{postnote}}{%
-%%     otherwise if mnc:pn then {}
-%    \iftoggle{pinpointaftermnc}{PPAMNC}{%
-%%     otherwise:
+%{\usebibmacro{postnote}}{%
+%%    otherwise if mnc:pn then {}
+%\iftoggle{pinpointaftermnc}{PPAMNC}{%
+%%    otherwise:
 %%\iftoggle{usedibid}{\textcolor{red}{AA}}{%
  \ifcase\thereftypemode \or%
  \usebibmacro{postnote}% inline
@@ -1999,7 +2209,7 @@ test {\ifentrytype{statute}}%
 
 
 %============= lawciterr
-\DeclareCiteCommand{lawciterr}%
+\DeclareCiteCommand{lawciterr}%[\mkbibfootnote]%
 %%caseallabove      reftypemode}{1}}{}
 %%caseabovebelow  reftypemode}{2}}{}
 %%caseallbelow      reftypemode}{3}}{}
@@ -2029,7 +2239,7 @@ test {\ifentrytype{statute}}%
 \usebibmacro{fullstepindex}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\multicitedelim}%
+{\usebibmacro{delim:choice}}%
 %@@@@@@@@@@@@@@@@ postnote
 {%
  \ifcase\thereftypemode \or%
@@ -2133,7 +2343,10 @@ test {\ifentrytype{statute}}%
 {%
 %%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
 \usebibmacro{fullstepindex}%
-\usebibmacro{prenote}\usebibmacro{getcaseref}\usebibmacro{postnote}%
+\usebibmacro{prenote}%
+\usebibmacro{getcaseref}%
+\usebibmacro{getparallelreports}%
+\usebibmacro{postnote}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
@@ -2158,6 +2371,11 @@ test {\ifentrytype{statute}}%
 {\usebibmacro{postnote}}
 
 
+\newtoggle{infirstcite}
+
+\newcommand\multicitedelimrr{\addcomma\addspace}
+
+
 %============= lawciterefrr
 \DeclareCiteCommand{lawciterefrr}%
 %@@@@@@@@@@@@@@@@ prenote
@@ -2167,10 +2385,19 @@ test {\ifentrytype{statute}}%
 %%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
 %\usebibmacro{fullstepindex}%
 \usebibmacro{rrindex}%
+ \ifboolexpr{%
+  not test {\iffirstcitekey}%if 2nd+ cite
+  }%
+{%
+%\renewcommand{\multicitedelim}{\addsemicolon\addspace}
+%\renewcommand{\multicitedelim}{y}
+%\ifthenelse{\value{citecount}=2}{x}{y}
 \usebibmacro{getcaseref}%
+}{%false
+}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\multicitedelim}%
+{\multicitedelimrr}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}
 
@@ -2187,10 +2414,13 @@ test {\ifentrytype{statute}}%
 {%
 %%\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
 \usebibmacro{rrindex}%
+%\printtext{\addspace}
 \usebibmacro{getcaseref}%
+%\iffirstcitekey{\printtext{y\addspace}}{x}
+%\iffirstcitekey{\renewcommand{\multicitedelimrr}{\printtext{x\addspace}}}{\renewcommand{\multicitedelimrr}{\printtext{y\addcomma\addspace}}}
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\multicitedelim}%
+{\multicitedelimrr}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}
 
@@ -2204,7 +2434,7 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ item
 {%
 \usebibmacro{fullstepindex}%
-\usebibmacro{getnote}%
+\usebibmacro{getnote:plain}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
@@ -2220,7 +2450,7 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ item
 {%
 \usebibmacro{rrindex}%
-\iffirstcitekey{\usebibmacro{getnote}}%
+\iffirstcitekey{\usebibmacro{getnote:plain}}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {}%
@@ -2590,6 +2820,9 @@ test {\ifentrytype{case}}%
 \newbibmacro{getljarticleyear}{%
 \printtext[parens]{\thefield{year}}%
 }
+\newbibmacro{getljarticleyear:plain}{%
+\printtext[plain]{\thefield{year}}%
+}
 \newbibmacro{getljarticlevolume}{%
 \printfield[plain]{volume}%
 }
@@ -2645,12 +2878,12 @@ test {\ifentrytype{case}}%
 \iffieldundef{url}{}{%
   \ifhyperref
     {%
-      \iffieldundef{linkname}{%
-        \url{\thefield{url}}
-        }%
-        {\href{\thefield{url}}{%
-                \thefield{linkname}%
-                         }}%
+    \iffieldundef{linkname}{%
+    \url{\thefield{url}}
+    }%
+    {\href{\thefield{url}}{%
+    \thefield{linkname}%
+    }}%
     }%
     {\nolinkurl{\thefield{url}}}%
 }%
@@ -2662,14 +2895,19 @@ test {\ifentrytype{case}}%
 \iffieldundef{url}{}{%
   \ifhyperref
     {%
-      \iffieldundef{mncnumber}{%
-        \url{\thefield{url}}
-        }%
-        {\href{\thefield{url}}{%
-                \thefield{mncyear}\addspace%
-                \thefield{mncname}\addspace%
-                \thefield{mncnumber}%
-                         }}%
+    \iffieldundef{mncnumber}{%
+    \iffieldundef{linkname}{%
+    \url{\thefield{url}}
+    }%
+    {\href{\thefield{url}}{%
+    \thefield{linkname}%
+    }}%
+    }%
+    {\href{\thefield{url}}{%
+    \thefield{mncyear}\addspace%
+    \thefield{mncname}\addspace%
+    \thefield{mncnumber}%
+    }}%
     }%
     {\nolinkurl{\thefield{url}}}%
 }%
@@ -2755,7 +2993,7 @@ test {\ifentrytype{case}}%
   and
   not test {\ifciteibid}
   }%
- {\label{cfn:\thefield{entrykey}}}{}%
+{\label{cfn:\thefield{entrykey}}}{}%
 }}
 
 \newbibmacro{getljarticle}{%
@@ -2773,11 +3011,11 @@ test {\ifentrytype{case}}%
 \iffieldundef{related}{}{\addspace\usebibmacro{related}}%
 \iffieldundef{url}{}{%
 %put postnote before url:
-\iffieldundef{postnote}{}{%
+\iffieldundef{postnote}{\addspace\printtext[angles]{\usebibmacro{getljarticleurl}}}{%
 \DeclareDelimFormat{postnotedelim}{\addcomma\space}%restore
 \usebibmacro{postnote}%
 \addspace\printtext[angles]{\usebibmacro{getljarticleurl}}}}%
-\newunit\newblock%
+%\newunit\newblock%
 }
 
 
@@ -3050,7 +3288,9 @@ test {\ifentrytype{case}}%
 %{\usebibmacro{postnote}\iflastcitekey{\addspace\usebibmacro{getnote}}{}}
 {\usebibmacro{notmnc:postnote}\usebibmacro{getnote:noparens}}%{\iflastcitekey{\usebibmacro{postnote}\addspace\usebibmacro{getnote}}{\usebibmacro{postnote}}}
 
-
+\newbibmacro{delim:choice}{%
+\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}%
+}
 %============= lcinlinerr
 \DeclareCiteCommand{lcinlinerr}%
 %@@@@@@@@@@@@@@@@ prenote
@@ -3062,12 +3302,12 @@ test {\ifentrytype{case}}%
 %\usebibmacro{sendtocaseindex:test}%
 %\iffirstcitekey{\usebibmacro{sendtocaseindex}}{}%
 \ifboolexpr{
-    test {\ifkeyword{nobib}}
-    and
-    not test {\ifkeyword{showbib}}
-  }
-  {\addtocategory{nobib}{\thefield{entrykey}}}%true
-  {}%false   
+test {\ifkeyword{nobib}}
+and
+not test {\ifkeyword{showbib}}
+}
+{\addtocategory{nobib}{\thefield{entrykey}}}%true
+{}%false
 \iffirstcitekey{\textcolor{\lcinlinerrcolour}{\usebibmacro{getcasenameref}}}{\textcolor{\lcinlinerrcoloursc}{\usebibmacro{getcaseref}}}%
 %%%indexer
 %%\iffirstcitekey{%
@@ -3080,7 +3320,7 @@ test {\ifentrytype{case}}%
 \usebibmacro{rrindex}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%
+{\multicitedelimrr}%
 %@@@@@@@@@@@@@@@@ postnote
 {\iflastcitekey{\usebibmacro{postnote}\iffieldundef{note}{}{\addspace\usebibmacro{getnote}}}{\usebibmacro{postnote}}}
 
@@ -3098,7 +3338,7 @@ test {\ifentrytype{case}}%
 \usebibmacro{getcasenameref}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\multicitedelim}%
+{\usebibmacro{delim:choice}}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}
 
@@ -3117,7 +3357,7 @@ test {\ifentrytype{case}}%
 \iffirstcitekey{\usebibmacro{getcasenameref}}{\usebibmacro{getcaseref}}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\multicitedelim}%
+{\multicitedelimrr}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}
 
@@ -3197,9 +3437,9 @@ test {\ifentrytype{case}}%
 \usebibmacro{rrindex}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
-{\multicitedelim}%
+{\addcomma\addspace}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{getnote}\usebibmacro{postnote}}
 
 
 \newbibmacro{getciteref}{%
@@ -3275,13 +3515,13 @@ test {\ifentrytype{statute}}%
   {}%nothing
   {%if not ibid, then:
 %%  \textcolor{red}{CC}%
-  %if url, then postnote has already been printed
-  \iffieldundef{url}{%
+%if url, then postnote has already been printed
+\iffieldundef{url}{%
   \usebibmacro{postnote}%
   }{}%
 %%  \textcolor{red}{DD}%
   \iffieldundef{note}{}{\addspace\printfield[parens]{note}}%
-  }%
+}%
 }
 
 
@@ -3320,7 +3560,7 @@ test {\ifentrytype{statute}}%
 {\usebibmacro{prenote}}%
 %@@@@@@@@@@@@@@@@ item
 {%
-\usebibmacro{getljarticletitlequotes}%
+\usebibmacro{getljarticlequotes}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
@@ -3334,7 +3574,7 @@ test {\ifentrytype{statute}}%
 {\usebibmacro{prenote}}%
 %@@@@@@@@@@@@@@@@ item
 {%
-\usebibmacro{getljarticleyear}%
+\usebibmacro{getljarticleyear:plain}%
 }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
@@ -3401,8 +3641,8 @@ test {\ifentrytype{statute}}%
 %%         {\namepartprefix}
 %%         {\namepartsuffix}
 %  \setunit{\printdelim{nametitledelim}}\newblock
- \addcomma\addspace%
- %====== dotless title
+\addcomma\addspace%
+%====== dotless title
   \usebibmacro{maintitle+title}%
 %  \setunit{\addspace}
 \nopunct
@@ -3440,7 +3680,7 @@ test {\ifentrytype{statute}}%
 %  \newunit\newblock
   \usebibmacro{note}%
 %  \newunit\newblock
-% \addspace%
+%\addspace%
   \printtext{\mkbibparens{\usebibmacro{publisher+location+date}}}%
 %  \newunit\newblock
   \usebibmacro{chapter+pages}%
@@ -3479,6 +3719,28 @@ test {\ifentrytype{statute}}%
 }
 }
 
+\newbibmacro{getactualtitle}{%
+\printfield[emph]{title}%
+}
+
+
+\newbibmacro{getshorttitle}{%
+\iffieldundef{shorttitle}{%
+}%
+{\printfield[emph]{shorttitle}%
+}
+}
+
+\newbibmacro{getedition}{%
+\iffieldundef{edition}{}{%
+\printfield{edition}%
+}%end true
+{}%false
+}
+
+
+
+
 \newbibmacro{geteditionyear}{%
  \ifboolexpr{%
   not test {\iffieldundef{edition}}%if there is an edition
@@ -3495,6 +3757,34 @@ test {\ifentrytype{statute}}%
 }%end psrens
 }%end true
 {}%false
+}
+
+
+%--------------------- for bib ``Clerk and Lindsall on Torts 4th ed''-type items
+\newbibmacro{getaonbtitle}{%
+%\ifbibliography{}{%otherwise
+\ifnameundef{author}{}{%otherwise
+\usebibmacro{getlastnames}%
+\addspace%
+\mkbibemph{\bibstring{legalon}}
+\addspace%
+}%end name defined
+\usebibmacro{getshorttitle}%
+%\usebibmacro{geteditionyear}%
+%}%end inbib=false
+}
+
+\newbibmacro{getaonbedition}{%
+\ifbibliography{}{%otherwise
+%\ifnameundef{author}{}{%otherwise
+%\usebibmacro{getlastnames}%
+%\addspace%
+%\mkbibemph{\bibstring{legalon}}
+%\addspace%
+%}%end name defined
+%\usebibmacro{getshorttitle}%
+\usebibmacro{getedition}%
+}%end inbib=false
 }
 
 
@@ -3523,6 +3813,34 @@ test {\ifentrytype{statute}}%
 \usebibmacro{gettitle}%
 }%end inbib=false
 }
+
+
+
+%============= lcaonbtitle
+\DeclareCiteCommand{lcaonbtitle}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getaonbtitle}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
+
+%============= lcaonbedition
+\DeclareCiteCommand{lcaonbedition}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getaonbedition}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
 
 
 
@@ -3592,12 +3910,12 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{#1}{}{{\lcffieldformat#1} =  \{\thefield{#1}\},\par}%
 }
 
-\newbibmacro{getlcdcase}{%
+\newbibmacro{getlcdcase}[1][x]{%
 {%
 \ttfamily\ \par
 \noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
 \noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
-\noindent\iffieldundef{author}{}{author =  \{\thefield{author}\},\par}%
+\noindent\ifnameundef{author}{}{author =  \{\printnames[authorplain][-\value{listtotal}]{author}\},\par}%
 \noindent\iffieldundef{casename}{}{casename =  \{\thefield{casename}\},\par}%
 \noindent\iffieldundef{casenickname}{}{casenickname =  \{\thefield{casenickname}\},\par}%
 \noindent\iffieldundef{casenumber}{}{casenumber =  \{\thefield{casenumber}\},\par}%
@@ -3637,6 +3955,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{partybsn}{}{partybsn =  \{\thefield{partybsn}\},\par}%
 \noindent\iffieldundef{partysep}{}{partysep =  \{\thefield{partysep}\},\par}%
 \noindent\iffieldundef{partysepx}{}{partysepx =  \{\thefield{partysepx}\},\par}%
+\noindent\iffieldundef{quotetext}{}{quotetext =  \{\thefield{quotetext}\},\par}%
 \noindent\iffieldundef{regnum}{}{regnum =  \{\thefield{regnum}\},\par}%
 \noindent\iffieldundef{reportpage}{}{reportpage =  \{\thefield{reportpage}\},\par}%
 \noindent\iffieldundef{reportseries}{}{reportseries =  \{\thefield{reportseries}\},\par}%
@@ -3668,20 +3987,131 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 
 \ExplSyntaxOn
 \NewDocumentCommand { \mystrcomp } { m } {
- \str_case:on { #1 }
- {
- { parallel } { xxx }
- { x } { yyy }
- }
+\str_case:on { #1 }
+{
+{ parallel } { xxx }
+{ x } { yyy }
 }
-\cs_new_eq:NN \strcompare \str_if_eq:onT
+}
+\cs_new_eq:NN \strcompare \str_if_eq:onTF
 \ExplSyntaxOff
 
-\DeclareListFormat[case]{wand}{%
+\DeclareListFormat[case,ljarticle]{wand}{%
 #1%
 \ifthenelse{\value{listcount}<\value{liststop}}
 {\space and\space}
 {}}
+
+\newcommand\docompfield[1]{%
+\strcompare{\myparm}{#1}{%
+\iffieldundef{#1}{}{\noindent#1 =  \{\thefield{#1}\},\par}%
+}{}%
+}
+\newcommand\docomplist[2]{%1=list,2=list format
+\strcompare{\myparm}{#1}{%
+\iflistundef{#1}{}{\noindent#1 =  \{\printlist[#2][-\value{listtotal}]{#1}\},\par}%
+}{}%
+}
+\newcommand\lcgetabibfield[2]{%1=key,2=fieldname
+\citetrackerfalse
+\lcdacasefield[#2][]{#1}
+\citetrackertrue
+}
+
+
+\newcommand\docompfieldhl[1]{%
+\iffieldundef{#1}{}{%
+\strcompare{\myparmhl}{#1}{%
+\noindent\colorbox{green!50}{\parbox{0.85\textwidth}{#1 =  \{\thefield{#1}\},}}\par%
+}{%
+\noindent#1 =  \{\thefield{#1}\},\par%
+}%
+}%
+}
+
+\newbibmacro{getlcdcasehl}[1]{%
+{%
+\edef\myparmhl{#1}
+\color{blue}\small\ttfamily\ \par
+\begin{quotation}
+\noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
+%\noindent ...\par%
+%\noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
+%\noindent\iffieldundef{author}{}{author =  \{\thefield{author}\},\par}%
+%\noindent\iffieldundef{casename}{}{casename =  \{\thefield{casename}\},\par}%
+%\noindent\iffieldundef{casenickname}{}{casenickname =  \{\thefield{casenickname}\},\par}%
+%\noindent\iffieldundef{casenumber}{}{casenumber =  \{\thefield{casenumber}\},\par}%
+%\noindent\iffieldundef{caseshortname}{}{caseshortname =  \{\thefield{caseshortname}\},\par}%
+%\noindent\iffieldundef{casestatus}{}{casestatus =  \{\thefield{casestatus}\},\par}%
+%\noindent\iffieldundef{caseyear}{}{caseyear =  \{\thefield{caseyear}\},\par}%
+%\noindent\iffieldundef{chapter}{}{chapter =  \{\thefield{chapter}\},\par}%
+%\noindent\iffieldundef{citeref}{}{citeref =  \{\thefield{citeref}\},\par}%
+%\noindent\iffieldundef{courtcasenumber}{}{courtcasenumber =  \{\thefield{courtcasenumber}\},\par}%
+%\noindent\iffieldundef{courtdivision}{}{courtdivision =  \{\thefield{courtdivision}\},\par}%
+%\noindent\iffieldundef{courtfullname}{}{courtfullname =  \{\thefield{courtfullname}\},\par}%
+%\noindent\iffieldundef{courtjurisdiction}{}{courtjurisdiction =  \{\thefield{courtjurisdiction}\},\par}%
+%\noindent\iffieldundef{courtlist}{}{courtlist =  \{\thefield{courtlist}\},\par}%
+%\noindent\iffieldundef{courtname}{}{courtname =  \{\thefield{courtname}\},\par}%
+%\noindent\iffieldundef{date}{}{date =  \{\thefield{date}\},\par}%
+%\noindent\iffieldundef{decisionyear}{}{decisionyear =  \{\thefield{decisionyear}\},\par}%
+%\noindent\iffieldundef{fulldate}{}{fulldate =  \{\thefield{fulldate}\},\par}%
+%\noindent\iffieldundef{gazette}{}{gazette =  \{\thefield{gazette}\},\par}%
+%\noindent\iffieldundef{icaseyear}{}{icaseyear =  \{\thefield{icaseyear}\},\par}%
+\docompfieldhl{journaltitle}
+%\noindent\iffieldundef{journaltitle}{}{journaltitle =  \{\thefield{journaltitle}\},\par}%
+\docompfieldhl{keywords}
+%\noindent\iffieldundef{keywords}{}{keywords =  \{\thefield{keywords}\},\par}%
+\docompfieldhl{linkname}
+\docompfieldhl{mncname}
+\docompfieldhl{mncnumber}
+\docompfieldhl{mncurl}
+\docompfieldhl{mncyear}
+%\noindent\iffieldundef{note}{}{note =  \{\thefield{note}\},\par}%
+%\noindent\iffieldundef{number}{}{number =  \{\thefield{number}\},\par}%
+\docompfieldhl{options}
+\docompfieldhl{pages}
+\docompfieldhl{pagination}
+%%\docomplist{parallel}{wand}
+\docompfieldhl{partya}
+\docompfieldhl{partyajur}
+\docompfieldhl{partyasn}
+\docompfieldhl{partyb}
+\docompfieldhl{partybjur}
+\docompfieldhl{partybsn}
+\docompfieldhl{partysep}
+\docompfieldhl{partysepx}
+\docompfieldhl{quotetext}
+\docompfieldhl{regnum}
+\docompfieldhl{reportpage}
+\docompfieldhl{reportseries}
+\docompfieldhl{reportvolume}
+\docompfieldhl{reportyear}
+\docompfieldhl{shipname}
+\docompfieldhl{shortname}
+%\noindent\iffieldundef{statutechapter}{}{statutechapter =  \{\thefield{statutechapter}\},\par}%
+%\noindent\iffieldundef{statutejurisdiction}{}{statutejurisdiction =  \{\thefield{statutejurisdiction}\},\par}%
+%\noindent\iffieldundef{statutelongtitle}{}{statutelongtitle =  \{\thefield{statutelongtitle}\},\par}%
+%\noindent\iffieldundef{statutenickname}{}{statutenickname =  \{\thefield{statutenickname}\},\par}%
+%\noindent\iffieldundef{statuteregnalyear}{}{statuteregnalyear =  \{\thefield{statuteregnalyear}\},\par}%
+%\noindent\iffieldundef{statuteshorttitle}{}{statuteshorttitle =  \{\thefield{statuteshorttitle}\},\par}%
+%\noindent\iffieldundef{statutetitle}{}{statutetitle =  \{\thefield{statutetitle}\},\par}%
+%\noindent\iffieldundef{statutetitleyear}{}{statutetitleyear =  \{\thefield{statutetitleyear}\},\par}%
+%\noindent\iffieldundef{statutevolume}{}{statutevolume =  \{\thefield{statutevolume}\},\par}%
+%\noindent\iffieldundef{statuteyear}{}{statuteyear =  \{\thefield{statuteyear}\},\par}%
+%\noindent\iffieldundef{svjy}{}{svjy =  \{\thefield{svjy}\},\par}%
+\docompfieldhl{title}
+\docompfieldhl{url}
+\docompfieldhl{volume}
+%\noindent\iffieldundef{volyearneeded}{}{volyearneeded =  \{\thefield{volyearneeded}\},\par}%
+\docompfieldhl{year}
+\docompfieldhl{yoptions}
+%\noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
+%\noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
+%\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
+%\noindent ...\par%
+\}\par%
+\end{quotation}
+}}
 
 
 \newbibmacro{getlcdacasefield}[1]{%
@@ -3713,6 +4143,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 %\noindent\iffieldundef{gazette}{}{gazette =  \{\thefield{gazette}\},\par}%
 %\noindent\iffieldundef{icaseyear}{}{icaseyear =  \{\thefield{icaseyear}\},\par}%
 %\noindent\iffieldundef{journaltitle}{}{journaltitle =  \{\thefield{journaltitle}\},\par}%
+\docompfield{keywords}
 %\noindent\iffieldundef{keywords}{}{keywords =  \{\thefield{keywords}\},\par}%
 %\noindent\iffieldundef{linkname}{}{linkname =  \{\thefield{linkname}\},\par}%
 %\noindent\iffieldundef{mncname}{}{mncname =  \{\thefield{mncname}\},\par}%
@@ -3721,30 +4152,26 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 %\noindent\iffieldundef{mncyear}{}{mncyear =  \{\thefield{mncyear}\},\par}%
 %\noindent\iffieldundef{note}{}{note =  \{\thefield{note}\},\par}%
 %\noindent\iffieldundef{number}{}{number =  \{\thefield{number}\},\par}%
+\docompfield{options}
 %\noindent\iffieldundef{pages}{}{pages =  \{\thefield{pages}\},\par}%
 %\noindent\iffieldundef{pagination}{}{pagination =  \{\thefield{pagination}\},\par}%
-\strcompare{\myparm}{parallel}{%
-\noindent\iflistundef{parallel}{}{parallel =  \{\printlist[wand][-\value{listtotal}]{parallel}\},\par}%
-}%
-\strcompare{\myparm}{partya}{%
-\noindent\iffieldundef{partya}{}{partya =  \{\thefield{partya}\},\par}%
-}%
-%\noindent\iffieldundef{partyajur}{}{partyajur =  \{\thefield{partyajur}\},\par}%
-%\noindent\iffieldundef{partyasn}{}{partyasn =  \{\thefield{partyasn}\},\par}%
-%\noindent\iffieldundef{partyb}{}{partyb =  \{\thefield{partyb}\},\par}%
-%\noindent\iffieldundef{partybjur}{}{partybjur =  \{\thefield{partybjur}\},\par}%
-%\noindent\iffieldundef{partybsn}{}{partybsn =  \{\thefield{partybsn}\},\par}%
-\strcompare{\myparm}{partysep}{%
-\noindent\iffieldundef{partysep}{}{partysep =  \{\thefield{partysep}\},\par}%
-}%
-%\noindent\iffieldundef{partysepx}{}{partysepx =  \{\thefield{partysepx}\},\par}%
-%\noindent\iffieldundef{regnum}{}{regnum =  \{\thefield{regnum}\},\par}%
-%\noindent\iffieldundef{reportpage}{}{reportpage =  \{\thefield{reportpage}\},\par}%
-%\noindent\iffieldundef{reportseries}{}{reportseries =  \{\thefield{reportseries}\},\par}%
-%\noindent\iffieldundef{reportvolume}{}{reportvolume =  \{\thefield{reportvolume}\},\par}%
-%\noindent\iffieldundef{reportyear}{}{reportyear =  \{\thefield{reportyear}\},\par}%
-%\noindent\iffieldundef{shipname}{}{shipname =  \{\thefield{shipname}\},\par}%
-%\noindent\iffieldundef{shortname}{}{shortname =  \{\thefield{shortname}\},\par}%
+\docomplist{parallel}{wand}
+\docompfield{partya}
+\docompfield{partyajur}
+\docompfield{partyasn}
+\docompfield{partyb}
+\docompfield{partybjur}
+\docompfield{partybsn}
+\docompfield{partysep}
+\docompfield{partysepx}
+\docompfield{quotetext}
+\docompfield{regnum}
+\docompfield{reportpage}
+\docompfield{reportseries}
+\docompfield{reportvolume}
+\docompfield{reportyear}
+\docompfield{shipname}
+\docompfield{shortname}
 %\noindent\iffieldundef{statutechapter}{}{statutechapter =  \{\thefield{statutechapter}\},\par}%
 %\noindent\iffieldundef{statutejurisdiction}{}{statutejurisdiction =  \{\thefield{statutejurisdiction}\},\par}%
 %\noindent\iffieldundef{statutelongtitle}{}{statutelongtitle =  \{\thefield{statutelongtitle}\},\par}%
@@ -3781,7 +4208,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{annotation}{}{annotation =  \{\thefield{annotation}\},\par}%
 \noindent\iffieldundef{annotator}{}{annotator =  \{\thefield{annotator}\},\par}%
 \noindent\iffieldundef{article}{}{article =  \{\thefield{article}\},\par}%
-\noindent\ifnameundef{author}{}{author =  \{\thename{author}\},\par}%
+\noindent\ifnameundef{author}{}{author =  \{\printnames[authorplain][-\value{listtotal}]{author}\},\par}%
 \noindent\iffieldundef{authortype}{}{authortype =  \{\thefield{authortype}\},\par}%
 \noindent\iffieldundef{book}{}{book =  \{\thefield{book}\},\par}%
 \noindent\iffieldundef{bookauthor}{}{bookauthor =  \{\thefield{bookauthor}\},\par}%
@@ -4014,7 +4441,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}}%
 
-%============= lcdcase
+%============= lcdacasefield
 \DeclareCiteCommand{lcdacasefield}%
 %@@@@@@@@@@@@@@@@ prenote
 {}%{\usebibmacro{prenote}}%
@@ -4026,6 +4453,20 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 {}%{\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
 {}%{\usebibmacro{postnote}}%
+
+%============= lcdcasehl
+\DeclareCiteCommand{lcdcasehl}%
+%@@@@@@@@@@@@@@@@ prenote
+{}%{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getlcdcasehl}{\thefield{prenote}}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{}%{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{}%{\usebibmacro{postnote}}%
+
 
 %============= lcdallfields
 \DeclareCiteCommand{lcdallfields}%
@@ -4075,7 +4516,10 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 %----------------------
 \newcommand\sdfs[1]{{\ttfamily\small\color{blue} \textbackslash #1\space\dotfill\space}}
 \newcommand\sdft[1]{{\ttfamily\small\color{blue}\textbackslash #1}}
-
+\newcommand\sdfg[1]{{\ttfamily\small\color{blue} #1\space\dotfill\space}}
+\newcommand\boxsdfg[1]{%
+\noindent\makebox[\lcdemolabelw][l]{\sdfg{#1}}
+}
 
 %\lcsetdemooff
 \newcommand\lcdemolabelw{6cm}
@@ -4472,7 +4916,7 @@ test {\ifentrytype{jurisdiction}}%
 \newcommand\setpostnotedelimon{%
 \DeclareFieldFormat{postnote}{\mkpageprefix[pagination][\mknormrange]{##1}}%
 }
-
+%
 
 %===============================================
 %===================

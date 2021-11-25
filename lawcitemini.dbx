@@ -96,9 +96,9 @@ parallel,
   attribution, % J for the Court, for quote (qqcite)
   courtfullname, % for when unreported etc
 %link
- linkname,
- url,
- mncurl,
+linkname,
+url,
+mncurl,
 %general
   note,
   caseshortname,
@@ -165,9 +165,9 @@ parallel,
   casestatus, %unreported, etc
   attribution, % J for the Court, for quote (qqcite)
   courtfullname, % for when unreported etc
- linkname,
- url,
- mncurl,
+linkname,
+url,
+mncurl,
 }
 
 
@@ -192,9 +192,9 @@ fulldate,%
 gazette,%
 %
 svjy,%
- linkname,
- url,
- mncurl,% court link
+linkname,
+url,
+mncurl,% court link
 }
 
 \DeclareDatamodelEntryfields[ljarticle]{%

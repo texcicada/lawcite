@@ -1993,7 +1993,18 @@ xxx}%
 
 
 
-
+%======================= svjy
+\newbibmacro{getsvjy}{%
+\iffieldundef{svjy}{}{\printfield{svjy}}%
+}
+%======================= chapter
+\newbibmacro{getchapter}{%
+\iffieldundef{chapter}{}{\thefield{chapter}}%
+}
+%======================= title
+\newbibmacro{gettitle}{%
+\iffieldundef{title}{}{\printfield{title}}%
+}
 %======================= canleg
 \newbibmacro{getcanleg}{%
 %----
@@ -2458,13 +2469,13 @@ test {\iftoggle{usedibid}}
 \regex_replace_all:nnN { :getstatutetitleyear } { :get008 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getcasenamereffull } { :get009 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getcasenamerefnofn } { :get010 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getljarticleauthor } { :get011 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getljarticlequotes } { :get012 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getljarticlevolume } { :get013 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getparallelreports } { :get014 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getstatutenickname } { :get015 } \l_myscriptname_tl
-\regex_replace_all:nnN { :lclgetlegalrefcase } { :get016 } \l_myscriptname_tl
-\regex_replace_all:nnN { :lclgetlegalrefstat } { :get017 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getparallelreports } { :get011 } \l_myscriptname_tl
+\regex_replace_all:nnN { :lclgetlegalrefstat } { :get012 } \l_myscriptname_tl
+\regex_replace_all:nnN { :lclgetlegalrefcase } { :get013 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticleauthor } { :get014 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticlequotes } { :get015 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticlevolume } { :get016 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutenickname } { :get017 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getljarticle:ibid } { :get018 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getljarticletitle } { :get019 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getljartshortname } { :get020 } \l_myscriptname_tl
@@ -2472,65 +2483,67 @@ test {\iftoggle{usedibid}}
 \regex_replace_all:nnN { :getstatutenameref } { :get022 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getcaseshortname } { :get023 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getibidsupranote } { :get024 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getlcdacasefield } { :get025 } \l_myscriptname_tl
+\regex_replace_all:nnN { :lclgetlegaltitle } { :get025 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getljarticlepage } { :get026 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getljarticleyear } { :get027 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getnote:noparens } { :get028 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getstatutevolume } { :get029 } \l_myscriptname_tl
-\regex_replace_all:nnN { :lclgetlegaltitle } { :get030 } \l_myscriptname_tl
-\regex_replace_all:nnN { :nocomma:postnote } { :get031 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlcdacasefield } { :get028 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getnote:noparens } { :get029 } \l_myscriptname_tl
+\regex_replace_all:nnN { :nocomma:postnote } { :get030 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutevolume } { :get031 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getcasenamefull } { :get032 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getcasenickname } { :get033 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getlcdallfields } { :get034 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getljarticleurl } { :get035 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getreportseries } { :get036 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getreportvolume } { :get037 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getstatutetitle } { :get038 } \l_myscriptname_tl
-\regex_replace_all:nnN { :lclgetlegalfull } { :get039 } \l_myscriptname_tl
-\regex_replace_all:nnN { :notmnc:postnote } { :get040 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getreportseries } { :get034 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getreportvolume } { :get035 } \l_myscriptname_tl
+\regex_replace_all:nnN { :lclgetlegalfull } { :get036 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticleurl } { :get037 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlcdallfields } { :get038 } \l_myscriptname_tl
+\regex_replace_all:nnN { :notmnc:postnote } { :get039 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutetitle } { :get040 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getaonbedition } { :get041 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getcasenameref } { :get042 } \l_myscriptname_tl
-\regex_replace_all:nnN { :geteditionyear } { :get043 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getlcepigraphp } { :get044 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getpartynamesa } { :get045 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getpartynamesb } { :get046 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getstatutename } { :get047 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getstatuteyear } { :get048 } \l_myscriptname_tl
-\regex_replace_all:nnN { :lclgetlegalref } { :get049 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getcasenumber } { :get050 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getlcepigraph } { :get051 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getnote:plain } { :get052 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getreportpage } { :get053 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getreportyear } { :get054 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getshorttitle } { :get055 } \l_myscriptname_tl
-\regex_replace_all:nnN { :delim:choice } { :get056 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getaonbtitle } { :get057 } \l_myscriptname_tl
+\regex_replace_all:nnN { :geteditionyear } { :get042 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcasenameref } { :get043 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getpartynamesa } { :get044 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getpartynamesb } { :get045 } \l_myscriptname_tl
+\regex_replace_all:nnN { :lclgetlegalref } { :get046 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlcepigraphp } { :get047 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatutename } { :get048 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getstatuteyear } { :get049 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getshorttitle } { :get050 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcasenumber } { :get051 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getreportpage } { :get052 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getreportyear } { :get053 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getnote:plain } { :get054 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlcepigraph } { :get055 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getaonbtitle } { :get056 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlastnames } { :get057 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getcourtname } { :get058 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getibidsupra } { :get059 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getlastnames } { :get060 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getlcdcasehl } { :get061 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getljarticle } { :get062 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getreportref } { :get063 } \l_myscriptname_tl
-\regex_replace_all:nnN { :mnc:postnote } { :get064 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getcaseproc } { :get065 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getreportref } { :get060 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getljarticle } { :get061 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlcdcasehl } { :get062 } \l_myscriptname_tl
+\regex_replace_all:nnN { :mnc:postnote } { :get063 } \l_myscriptname_tl
+\regex_replace_all:nnN { :delim:choice } { :get064 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcasename } { :get065 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getcaseyear } { :get066 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getpartysep } { :get067 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getcanreg2 } { :get068 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getcasename } { :get069 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcaseproc } { :get068 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getedition } { :get069 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getcaseref } { :get070 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getcaseurl } { :get071 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getciteref } { :get072 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getedition } { :get073 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getlcdcase } { :get074 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getcanleg } { :get075 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getcanreg } { :get076 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getcasesn } { :get077 } \l_myscriptname_tl
-\regex_replace_all:nnN { :qqcitebox } { :get078 } \l_myscriptname_tl
-\regex_replace_all:nnN { :gettitle } { :get079 } \l_myscriptname_tl
-\regex_replace_all:nnN { :quotebox } { :get080 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getibid } { :get081 } \l_myscriptname_tl
-\regex_replace_all:nnN { :getnote } { :get082 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getlcdcase } { :get072 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcanreg2 } { :get073 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getciteref } { :get074 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getchapter } { :get075 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcasesn } { :get076 } \l_myscriptname_tl
+\regex_replace_all:nnN { :qqcitebox } { :get077 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcanleg } { :get078 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getcanreg } { :get079 } \l_myscriptname_tl
+\regex_replace_all:nnN { :gettitle } { :get080 } \l_myscriptname_tl
+\regex_replace_all:nnN { :quotebox } { :get081 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getibid } { :get082 } \l_myscriptname_tl
 \regex_replace_all:nnN { :getproc } { :get083 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getnote } { :get084 } \l_myscriptname_tl
+\regex_replace_all:nnN { :getsvjy } { :get085 } \l_myscriptname_tl
 
 
 %formatting
@@ -2708,13 +2721,13 @@ subxxx
 \regex_replace_all:nnN { :get008 } { \c{usebibmacro} \cB\{ getstatutetitleyear \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get009 } { \c{usebibmacro} \cB\{ getcasenamereffull \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get010 } { \c{usebibmacro} \cB\{ getcasenamerefnofn \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get011 } { \c{usebibmacro} \cB\{ getljarticleauthor \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get012 } { \c{usebibmacro} \cB\{ getljarticlequotes \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get013 } { \c{usebibmacro} \cB\{ getljarticlevolume \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get014 } { \c{usebibmacro} \cB\{ getparallelreports \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get015 } { \c{usebibmacro} \cB\{ getstatutenickname \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get016 } { \c{usebibmacro} \cB\{ lclgetlegalrefcase \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get017 } { \c{usebibmacro} \cB\{ lclgetlegalrefstat \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get011 } { \c{usebibmacro} \cB\{ getparallelreports \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get012 } { \c{usebibmacro} \cB\{ lclgetlegalrefstat \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get013 } { \c{usebibmacro} \cB\{ lclgetlegalrefcase \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get014 } { \c{usebibmacro} \cB\{ getljarticleauthor \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get015 } { \c{usebibmacro} \cB\{ getljarticlequotes \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get016 } { \c{usebibmacro} \cB\{ getljarticlevolume \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get017 } { \c{usebibmacro} \cB\{ getstatutenickname \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get018 } { \c{usebibmacro} \cB\{ getljarticle:ibid \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get019 } { \c{usebibmacro} \cB\{ getljarticletitle \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get020 } { \c{usebibmacro} \cB\{ getljartshortname \cE\} } \l_myscriptname_tl
@@ -2722,65 +2735,67 @@ subxxx
 \regex_replace_all:nnN { :get022 } { \c{usebibmacro} \cB\{ getstatutenameref \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get023 } { \c{usebibmacro} \cB\{ getcaseshortname \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get024 } { \c{usebibmacro} \cB\{ getibidsupranote \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get025 } { \c{usebibmacro} \cB\{ getlcdacasefield \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get025 } { \c{usebibmacro} \cB\{ lclgetlegaltitle \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get026 } { \c{usebibmacro} \cB\{ getljarticlepage \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get027 } { \c{usebibmacro} \cB\{ getljarticleyear \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get028 } { \c{usebibmacro} \cB\{ getnote:noparens \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get029 } { \c{usebibmacro} \cB\{ getstatutevolume \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get030 } { \c{usebibmacro} \cB\{ lclgetlegaltitle \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get031 } { \c{usebibmacro} \cB\{ nocomma:postnote \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get028 } { \c{usebibmacro} \cB\{ getlcdacasefield \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get029 } { \c{usebibmacro} \cB\{ getnote:noparens \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get030 } { \c{usebibmacro} \cB\{ nocomma:postnote \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get031 } { \c{usebibmacro} \cB\{ getstatutevolume \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get032 } { \c{usebibmacro} \cB\{ getcasenamefull \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get033 } { \c{usebibmacro} \cB\{ getcasenickname \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get034 } { \c{usebibmacro} \cB\{ getlcdallfields \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get035 } { \c{usebibmacro} \cB\{ getljarticleurl \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get036 } { \c{usebibmacro} \cB\{ getreportseries \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get037 } { \c{usebibmacro} \cB\{ getreportvolume \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get038 } { \c{usebibmacro} \cB\{ getstatutetitle \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get039 } { \c{usebibmacro} \cB\{ lclgetlegalfull \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get040 } { \c{usebibmacro} \cB\{ notmnc:postnote \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get034 } { \c{usebibmacro} \cB\{ getreportseries \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get035 } { \c{usebibmacro} \cB\{ getreportvolume \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get036 } { \c{usebibmacro} \cB\{ lclgetlegalfull \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get037 } { \c{usebibmacro} \cB\{ getljarticleurl \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get038 } { \c{usebibmacro} \cB\{ getlcdallfields \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get039 } { \c{usebibmacro} \cB\{ notmnc:postnote \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get040 } { \c{usebibmacro} \cB\{ getstatutetitle \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get041 } { \c{usebibmacro} \cB\{ getaonbedition \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get042 } { \c{usebibmacro} \cB\{ getcasenameref \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get043 } { \c{usebibmacro} \cB\{ geteditionyear \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get044 } { \c{usebibmacro} \cB\{ getlcepigraphp \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get045 } { \c{usebibmacro} \cB\{ getpartynamesa \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get046 } { \c{usebibmacro} \cB\{ getpartynamesb \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get047 } { \c{usebibmacro} \cB\{ getstatutename \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get048 } { \c{usebibmacro} \cB\{ getstatuteyear \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get049 } { \c{usebibmacro} \cB\{ lclgetlegalref \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get050 } { \c{usebibmacro} \cB\{ getcasenumber \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get051 } { \c{usebibmacro} \cB\{ getlcepigraph \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get052 } { \c{usebibmacro} \cB\{ getnote:plain \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get053 } { \c{usebibmacro} \cB\{ getreportpage \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get054 } { \c{usebibmacro} \cB\{ getreportyear \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get055 } { \c{usebibmacro} \cB\{ getshorttitle \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get056 } { \c{usebibmacro} \cB\{ delim:choice \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get057 } { \c{usebibmacro} \cB\{ getaonbtitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get042 } { \c{usebibmacro} \cB\{ geteditionyear \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get043 } { \c{usebibmacro} \cB\{ getcasenameref \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get044 } { \c{usebibmacro} \cB\{ getpartynamesa \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get045 } { \c{usebibmacro} \cB\{ getpartynamesb \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get046 } { \c{usebibmacro} \cB\{ lclgetlegalref \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get047 } { \c{usebibmacro} \cB\{ getlcepigraphp \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get048 } { \c{usebibmacro} \cB\{ getstatutename \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get049 } { \c{usebibmacro} \cB\{ getstatuteyear \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get050 } { \c{usebibmacro} \cB\{ getshorttitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get051 } { \c{usebibmacro} \cB\{ getcasenumber \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get052 } { \c{usebibmacro} \cB\{ getreportpage \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get053 } { \c{usebibmacro} \cB\{ getreportyear \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get054 } { \c{usebibmacro} \cB\{ getnote:plain \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get055 } { \c{usebibmacro} \cB\{ getlcepigraph \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get056 } { \c{usebibmacro} \cB\{ getaonbtitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get057 } { \c{usebibmacro} \cB\{ getlastnames \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get058 } { \c{usebibmacro} \cB\{ getcourtname \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get059 } { \c{usebibmacro} \cB\{ getibidsupra \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get060 } { \c{usebibmacro} \cB\{ getlastnames \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get061 } { \c{usebibmacro} \cB\{ getlcdcasehl \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get062 } { \c{usebibmacro} \cB\{ getljarticle \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get063 } { \c{usebibmacro} \cB\{ getreportref \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get064 } { \c{usebibmacro} \cB\{ mnc:postnote \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get065 } { \c{usebibmacro} \cB\{ getcaseproc \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get060 } { \c{usebibmacro} \cB\{ getreportref \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get061 } { \c{usebibmacro} \cB\{ getljarticle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get062 } { \c{usebibmacro} \cB\{ getlcdcasehl \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get063 } { \c{usebibmacro} \cB\{ mnc:postnote \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get064 } { \c{usebibmacro} \cB\{ delim:choice \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get065 } { \c{usebibmacro} \cB\{ getcasename \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get066 } { \c{usebibmacro} \cB\{ getcaseyear \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get067 } { \c{usebibmacro} \cB\{ getpartysep \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get068 } { \c{usebibmacro} \cB\{ getcanreg2 \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get069 } { \c{usebibmacro} \cB\{ getcasename \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get068 } { \c{usebibmacro} \cB\{ getcaseproc \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get069 } { \c{usebibmacro} \cB\{ getedition \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get070 } { \c{usebibmacro} \cB\{ getcaseref \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get071 } { \c{usebibmacro} \cB\{ getcaseurl \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get072 } { \c{usebibmacro} \cB\{ getciteref \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get073 } { \c{usebibmacro} \cB\{ getedition \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get074 } { \c{usebibmacro} \cB\{ getlcdcase \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get075 } { \c{usebibmacro} \cB\{ getcanleg \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get076 } { \c{usebibmacro} \cB\{ getcanreg \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get077 } { \c{usebibmacro} \cB\{ getcasesn \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get078 } { \c{usebibmacro} \cB\{ qqcitebox \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get079 } { \c{usebibmacro} \cB\{ gettitle \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get080 } { \c{usebibmacro} \cB\{ quotebox \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get081 } { \c{usebibmacro} \cB\{ getibid \cE\} } \l_myscriptname_tl
-\regex_replace_all:nnN { :get082 } { \c{usebibmacro} \cB\{ getnote \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get072 } { \c{usebibmacro} \cB\{ getlcdcase \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get073 } { \c{usebibmacro} \cB\{ getcanreg2 \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get074 } { \c{usebibmacro} \cB\{ getciteref \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get075 } { \c{usebibmacro} \cB\{ getchapter \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get076 } { \c{usebibmacro} \cB\{ getcasesn \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get077 } { \c{usebibmacro} \cB\{ qqcitebox \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get078 } { \c{usebibmacro} \cB\{ getcanleg \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get079 } { \c{usebibmacro} \cB\{ getcanreg \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get080 } { \c{usebibmacro} \cB\{ gettitle \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get081 } { \c{usebibmacro} \cB\{ quotebox \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get082 } { \c{usebibmacro} \cB\{ getibid \cE\} } \l_myscriptname_tl
 \regex_replace_all:nnN { :get083 } { \c{usebibmacro} \cB\{ getproc \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get084 } { \c{usebibmacro} \cB\{ getnote \cE\} } \l_myscriptname_tl
+\regex_replace_all:nnN { :get085 } { \c{usebibmacro} \cB\{ getsvjy \cE\} } \l_myscriptname_tl
 
 
 
@@ -4829,6 +4844,10 @@ test {\ifentrytype{statute}}%
 }
 }
 
+\newbibmacro{getactualtitle}{%
+\printfield[emph]{title}%
+}
+
 
 \newbibmacro{getshorttitle}{%
 \iffieldundef{shorttitle}{%
@@ -5021,7 +5040,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \ttfamily\ \par
 \noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
 \noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
-\noindent\iffieldundef{author}{}{author =  \{\thefield{author}\},\par}%
+\noindent\ifnameundef{author}{}{author =  \{\printnames[authorplain][-\value{listtotal}]{author}\},\par}%
 \noindent\iffieldundef{casename}{}{casename =  \{\thefield{casename}\},\par}%
 \noindent\iffieldundef{casenickname}{}{casenickname =  \{\thefield{casenickname}\},\par}%
 \noindent\iffieldundef{casenumber}{}{casenumber =  \{\thefield{casenumber}\},\par}%
@@ -5102,7 +5121,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \cs_new_eq:NN \strcompare \str_if_eq:onTF
 \ExplSyntaxOff
 
-\DeclareListFormat[case]{wand}{%
+\DeclareListFormat[case,ljarticle]{wand}{%
 #1%
 \ifthenelse{\value{listcount}<\value{liststop}}
 {\space and\space}
@@ -5314,7 +5333,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{annotation}{}{annotation =  \{\thefield{annotation}\},\par}%
 \noindent\iffieldundef{annotator}{}{annotator =  \{\thefield{annotator}\},\par}%
 \noindent\iffieldundef{article}{}{article =  \{\thefield{article}\},\par}%
-\noindent\ifnameundef{author}{}{author =  \{\thename{author}\},\par}%
+\noindent\ifnameundef{author}{}{author =  \{\printnames[authorplain][-\value{listtotal}]{author}\},\par}%
 \noindent\iffieldundef{authortype}{}{authortype =  \{\thefield{authortype}\},\par}%
 \noindent\iffieldundef{book}{}{book =  \{\thefield{book}\},\par}%
 \noindent\iffieldundef{bookauthor}{}{bookauthor =  \{\thefield{bookauthor}\},\par}%
@@ -8150,6 +8169,13 @@ coltitle=green!25!black,
 \fcolorbox{black}{blue!7!red!5}{\fcolorbox{black}{yellow!5!green!2}{\usebox{\mnbox}}}
 \end{center}
 
+\section{Introduction}
+\p The \cmdc{lawcite} \textsc{Biblatex} style attempts to automate the typesetting of some components of various legal citation styles by using a single citation command, with a view, further, to being able to switch in and out of styles mid-document, and even to switch components on and off as required in cross-jurisdictional texts. 
+
+\p This release currently implements AGLC-, Indigo-, MLR- and McGill-like style rules, as far as it can, since no legal citation style could ever be fully automated. As part of the design, individual elements of a style are accessible for when needed. Also, a `lite' version is provided for users working in non-legal contexts.
+
+\p This file is standalone, in the sense that it generates the bibliography file and the style files needed by \textsc{Biblatex}.
+
 \section{Quick Overview}
 \bigskip
 \ \marginpar{\textsf{\textsc{Case}}}
@@ -8501,7 +8527,7 @@ and
 \begin{quotation}\noindent
 \demofielddump[]{salterer}{salterer}
 \end{quotation}
-give:
+give (with \verb|\lcinlinerr{salter, salternr, salterer}|):
 \begin{quotation}\noindent
 `the corporation dieth not' -- \lcinlinerr{salter, salternr, salterer}
 \end{quotation}
@@ -9281,6 +9307,7 @@ See \lcycite[:getcasename, comma, space,
 
 \p This section lists the metafields available for use.
 
+%------------
 \subsection{A-on-B Metafields}
 \boxsdfg{:getaonbedition}\lcycite[:getaonbedition][]{phipson9}\par
 \boxsdfg{:getaonbtitle}\lcycite[:getaonbtitle][]{phipson9}\par
@@ -9290,6 +9317,9 @@ See \lcycite[:getcasename, comma, space,
 \boxsdfg{:getshorttitle}\lcycite[:getshorttitle][]{phipson9}\par
 \boxsdfg{:gettitle}\lcycite[:gettitle][]{phipson9}\par
 
+
+
+%------------
 \subsection{Case Metafields}
 \boxsdfg{:getcasename}\lcycite[:getcasename][]{snail}\par
 \boxsdfg{:getcasenamefull}\lcycite[:getcasenamefull][]{snail}\par
@@ -9317,18 +9347,27 @@ See \lcycite[:getcasename, comma, space,
 \boxsdfg{:getreportvolume}\lcycite[:getreportvolume][]{snail}\par
 \boxsdfg{:getreportyear}\lcycite[:getreportyear][]{snail}\par
 
-\subsection{In-Progress Cases}
-%\boxsdfg{:getcaseproc}\lcycite[:getcaseproc][]{xxxinprogress}\par
-%\boxsdfg{:getproc}\lcycite[:getproc][]{xxxinprogress}\par
 
-\subsection{Lawcite-lite}
-%\boxsdfg{:lclgetlegalfull}\lcycite[:lclgetlegalfull][]{xxxlegal}\par
-%\boxsdfg{:lclgetlegalref}\lcycite[:lclgetlegalref][]{xxxlegal}\par
-%\boxsdfg{:lclgetlegalrefstat}\lcycite[:lclgetlegalrefstat][]{xxxlegal}\par
-%\boxsdfg{:lclgetlegalrefcase}\lcycite[:lclgetlegalrefcase][]{xxxlegal}\par
-%\boxsdfg{:lclgetlegaltitle}\lcycite[:lclgetlegaltitle][]{xxxlegal}\par
 
-\subsection{Law Journals}
+%------------
+\subsection{In-Progress Case Metafields}
+\boxsdfg{:getcaseproc}\par
+\boxsdfg{:getproc}\par
+
+
+
+%------------
+\subsection{Lawcite-lite Metafields}
+\boxsdfg{:lclgetlegalfull}\par
+\boxsdfg{:lclgetlegalref}\par
+\boxsdfg{:lclgetlegalrefstat}\par
+\boxsdfg{:lclgetlegalrefcase}\par
+\boxsdfg{:lclgetlegaltitle}\par
+
+
+
+%------------
+\subsection{Law Journal Metafields}
 \renewcommand\lcdemolabelw{7cm}
 
 \boxsdfg{:getljarticle}\lcycite[:getljarticle][]{kirbyalr}\par
@@ -9344,6 +9383,57 @@ See \lcycite[:getcasename, comma, space,
 \boxsdfg{:getljarticleyear}\lcycite[:getljarticleyear][]{kirbyalr}\par
 \boxsdfg{:getljarticleyear:plain}\lcycite[:getljarticleyear:plain][]{kirbyalr}\par
 \boxsdfg{:getljartshortname}\lcycite[:getljartshortname][]{kirbyalr}\par
+
+
+%------------
+\subsection{Legislation Metafields}
+\boxsdfg{:getcanleg}\lcycite[:getcanleg][]{maanulth}\par
+\boxsdfg{:getcanreg}\lcycite[:getcanreg][]{maanulth}\par
+\boxsdfg{:getcanreg2}\lcycite[:getcanreg2][]{maanulth}\par
+\boxsdfg{:getchapter}\lcycite[:getchapter][]{maanulth}\par
+\boxsdfg{:getciteref}\lcycite[:getciteref][]{maanulth}\par
+\boxsdfg{:getstatutechapter}\lcycite[:getstatutechapter][]{maanulth}\par
+\boxsdfg{:getstatutejurisdiction}\lcycite[:getstatutejurisdiction][]{maanulth}\par
+\boxsdfg{:getstatutelongtitle}\lcycite[:getstatutelongtitle][]{maanulth}\par
+\boxsdfg{:getstatutename}\lcycite[:getstatutename][]{maanulth}\par
+\boxsdfg{:getstatutenameref}\lcycite[:getstatutenameref][]{maanulth}\par
+\boxsdfg{:getstatutenickname}\lcycite[:getstatutenickname][]{maanulth}\par
+\boxsdfg{:getstatuteregnalyear}\lcycite[:getstatuteregnalyear][]{maanulth}\par
+\boxsdfg{:getstatuteshorttitle}\lcycite[:getstatuteshorttitle][]{maanulth}\par
+\boxsdfg{:getstatutetitle}\lcycite[:getstatutetitle][]{maanulth}\par
+\boxsdfg{:getstatutetitleyear}\lcycite[:getstatutetitleyear][]{maanulth}\par
+\boxsdfg{:getstatutevolume}\lcycite[:getstatutevolume][]{maanulth}\par
+\boxsdfg{:getstatuteyear}\lcycite[:getstatuteyear][]{maanulth}\par
+\boxsdfg{:getsvjy}\lcycite[:getsvjy][]{maanulth}\par
+\boxsdfg{:gettitle}\lcycite[:gettitle][]{maanulth}\par
+
+
+
+
+%------------
+\subsection{Quote Metafields}
+\boxsdfg{:getlcepigraph}\lcycite[:getlcepigraph][]{q10}\par
+\boxsdfg{:getlcepigraphp}\lcycite[:getlcepigraphp][]{q10}\par
+\boxsdfg{:qqcitebox}\lcycite[:qqcitebox][]{q10}\par
+\boxsdfg{:quotebox}\lcycite[:quotebox][]{q10}\par
+
+
+
+%%%------------
+%%\subsection{Bib Metafields}
+%%\boxsdfg{:getlcdacasefield}\lcycite[:getlcdacasefield][]{casetestb}\par
+%%\boxsdfg{:getlcdallfields}\lcycite[:getlcdallfields][]{casetestb}\par
+%%\boxsdfg{:getlcdcase}\lcycite[:getlcdcase][]{casetestb}\par
+%%\boxsdfg{:getlcdcasehl}\lcycite[:getlcdcasehl][]{casetestb}\par
+%%\boxsdfg{:getnote}\lcycite[:getnote][]{casetestb}\par
+%%\boxsdfg{:getnote:noparens}\lcycite[:getnote:noparens][]{casetestb}\par
+%%\boxsdfg{:getnote:plain}\lcycite[:getnote:plain][]{casetestb}\par
+%%\boxsdfg{:mnc:postnote}\lcycite[:mnc:postnote][]{casetestb}\par
+%%\boxsdfg{:nocomma:postnote}\lcycite[:nocomma:postnote][]{casetestb}\par
+%%\boxsdfg{:notmnc:postnote}\lcycite[:notmnc:postnote][]{casetestb}\par
+%%\boxsdfg{:delim:choice}\lcycite[:delim:choice][]{casetestb}\par
+
+
 
 
 
