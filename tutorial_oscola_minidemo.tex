@@ -1,0 +1,930 @@
+
+\begin{filecontents*}[overwrite]{\jobname.bib}
+
+@jurisdiction{corr08,title = {Corr v IBC Vehicles Ltd},shorttitle = {Corr},date = {2008},number = {[2008]  UKHL 13},keywords = {gb},journaltitle = {AC},volume = {1},pages = {884},pagination = {[]},options = {year-essential=true},institution = {HL},}
+@jurisdiction{page96,title = {Page v Smith},date = {1996},journaltitle = {AC},pages = {155},institution = {HL},usera = {gb},}
+@jurisdiction{barrett01a,title = {Barrett v Enfield LBC},date = {2001},journaltitle = {BMLR},volume = {49},pages = {1},institution = {HL},}
+@jurisdiction{stubbs90,title = {Stubbs v Sayer},date = { 1990-11-08},institution = {CA},}
+@jurisdiction{calvert02,title = {Calvert v Gardiner},date = { 2002-01-01},number = {[2002] EWHC 1394 (QB)},institution = {QB},}
+@jurisdiction{powick93,title = {Powick v Malvern Wells Water Co},date = {1993-09-28},journaltitle = {The Times},institution = {QB},entrysubtype = {newspaper},}
+@jurisdiction{henly28,title = {Henly v Mayor of Lyme},date = {1828},keywords = {en},reporter = {Bing},volume = {5},pages = {91},parreporter = {ER},parvolume = {130},parpages = {995},}
+@jurisdiction{hislop42,title = {Hislop v Durham},date = {1842},keywords = {sc},reporter = {D},pages = {1168},}
+@jurisdiction{adams03,title = {Adams v Advocate General},date = {2003},keywords = {sc},reporter = {SC},pages = {171},institution = {OH},}
+@jurisdiction{dodds03,title = {Dodds v HM Advocate},date = {2003},keywords = {sc},reporter = {JC},pages = {8},}
+@jurisdiction{crofters02,title = {Crofters Commission v. Scottish Ministers},date = {2002},keywords = {sc},reporter = {SLT},series = {(Land Ct)},pages = {19},}
+@jurisdiction{davidson05,title = {Davidson v. Scottish Ministers},date = {2006},number = {[2005] UKHL 74},keywords = {gb},reporter = {SC (HL)},options = {scottish-style=true},}
+@jurisdiction{smart06,title = {Smart v HM Advocate},date = {2006},number = {[2006] HJAC 12},keywords = {sc},reporter = {JC},pages = {119},}
+@jurisdiction{adbhu,title = {Procureur de la République v ADBHU},shorttitle = {ADBHU},date = {1985},number = {240/83},keywords = {eu},journaltitle = {ECR},pages = {531},institution = {ECJ},ecli = {EU:C:1985:59},}
+@jurisdiction{C430/93,title = {Jereon van Schijndel v Stichting Pensioenfonds voor Fysiotherapeuten},shorttitle = {van Schijndel},date = {1998},number = {C-430/93--C-431/93},keywords = {eu},journaltitle = {ECR},volume = {I},pages = {4705},institution = {ECJ},hyphenation = {dutch},}
+
+
+\end{filecontents*}
+
+
+
+
+\documentclass[12pt]{article}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+%------------------
+\usepackage[table,dvipsnames,svgnames]{xcolor}
+\pagecolor{blue!3}
+\rowcolors{1}{blue!5}{blue!9}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{TeX Gyre Adventor}[Scale=1.2]%Gentium Plus}
+\setmonofont{Noto Sans Mono}%[Colour=blue]
+\newfontface\fcircnum{DejaVu Sans}[Colour=blue]
+\newcommand\circnum[1]{{\fcircnum#1}}
+%------------------
+\usepackage[british]{babel}
+\usepackage{csquotes}
+\usepackage{graphicx}
+
+\usepackage{marginnote}
+\usepackage{abstract}
+\usepackage{microtype}
+%\usepackage{makecell}
+\usepackage{minitoc}
+\dosecttoc
+%\usepackage{booktabs}
+\usepackage{etoolbox}
+
+
+\newcommand\theadcolour{\rowcolor{blue!80!green!20!yellow}}
+
+\newcommand\note[1]{(\texttt{#1})}
+
+
+\newcommand\egcasename{Donoghue v Stevenson}
+\newcommand\egcaseref{[1932] AC 562}
+
+\newcommand\eg[1]{%
+(\texttt{#1})
+}
+
+\newcounter{examplecounter}
+\newcommand\numeg{\refstepcounter{examplecounter}\marginpar{Ex \theexamplecounter\label{ex\theexamplecounter}}}
+
+
+
+
+
+
+%%%https://tex.stackexchange.com/questions/223434/ibidem-only-in-the-footnotes-and-not-in-the-running-text
+%%\makeatletter
+%%\def\blx@opt@ibidtracker@foot{%
+%%  \let\blx@imc@ifciteibid\blx@ifciteibid@foot
+%%  \let\blx@ibidtracker\blx@ibidtracker@foot
+%%  \let\blx@ibidreset\blx@ibidreset@foot
+%%  \booltrue{citetracker}}
+%%
+%%\def\blx@ifciteibid@foot{%
+%%  \ifbool{citetracker}
+%%    {\iftoggle{blx@footnote}
+%%       {\blx@imc@iffieldequals{entrykey}\blx@lastkey@text}
+%%       {\@secondoftwo}}
+%%    {\@secondoftwo}}
+%%
+%%\def\blx@ibidtracker@foot{%
+%%  \ifbool{citetracker}
+%%    {\iftoggle{blx@footnote}
+%%       {\global\let\blx@lastkey@text\abx@field@entrykey}
+%%       {\global\let\blx@lastkey@foot\abx@field@entrykey}}
+%%    {}}
+%%
+%%\def\blx@ibidreset@foot{%
+%%  \iftoggle{blx@footnote}
+%%    {\global\undef\blx@lastkey@text}}
+%%    {}
+%%\makeatother
+
+
+
+
+\newcommand\abibname{oscola}
+\newcommand\abibstyle{style=\abibname}
+\usepackage[
+\abibstyle , 
+%   use-toc-parnumrefs=false,
+%indexing=cite,
+%citetracker=true,
+%citecounter=context,
+%ibidtracker=foot,%option setting for footnotes: assumes single refs
+%ibidstyle=uc,%uppercase Ibid OSCOLA option
+%pagetracker=true,
+%idemtracker=true,
+%opcittracker=true,
+%loccittracker=true,%if same postnote in an ibid
+%autocite=footnote,
+%   datezeros=true,
+%   minnames=5,
+%   maxnames=5,%more names than this are truncated to minnames
+%   dashed=false,
+]{biblatex}
+
+\addbibresource{\jobname.bib}
+%\addbibresource{clist\jobname.bib}
+%\addbibresource{biblatex-examples.bib}
+
+%=================
+%indexing
+
+\usepackage{splitidx}
+%%\newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to page numbers.\bigskip}
+%%\newcommand\dupentries{\ \\\small\mdseries $\to$ `Duplicated' entries are intentional.}
+%%\setindexpreamble[cases]{\pagerefindexnote\dupentries}
+%%\setindexpreamble[legislation]{\pagerefindexnote}
+%%\setindexpreamble[regulations]{\pagerefindexnote}
+%%\setindexpreamble[general]{\pagerefindexnote}
+%%
+%%
+%%%Print the `preamble' of the index:
+%%\makeatletter
+%% \renewcommand*{\@@printindex}{}
+%% \def\@@printindex[#1][#2]{%
+%% \begingroup
+%% \edef\indexshortcut{#1}%
+%% \def\indexname{#2\par \useindexpreamble}%
+%% \def\kvtcb@text@index{#2}%
+%% \let\index@preamble\relax
+%% \expandafter\let\expandafter\index@preamble
+%% \csname index@\indexshortcut @preamble\endcsname
+%% \if@splitidx
+%% \def\@tempa{idx}\def\@tempb{#1}%
+%% \ifx\@tempa\@tempb\let\@indexsuffix\@gobble\fi
+%% \fi
+%%\@input@{\jobname\@indexsuffix{#1}.ind}%
+%%\endgroup
+%%\csname printindex@endhook\endcsname
+%%}
+%%\makeatother
+%%\makeindex
+%%\newindex[Table of Cases]{cases}
+%%\newindex[Table of Statutes]{legislation}
+%%\newindex[Table of Regulations]{regulations}
+%%\newindex[General Index]{general}
+%%%%%\sindex[cases]{\noindent $\to$ References are to page numbers}
+
+
+%%\AtWriteToIndex splitidx uses \protected@write to write the index entries to its output les. The
+%%\AtWriteToIndex macro lets you execute a piece of code each time an index is
+%%written to a specic index. Usage:
+%%\AtWriteToIndex{hshortcuti}{hcodei}
+%%This may be useful if you want your index entries to reference not the page number
+%%but some other counter instead. For example, in order to make each index entry
+%%in the general index (identified by the idx shortcut) point to the corresponding
+%%section number, you would write
+
+
+%-------------------------------------------------------
+%%\AtWriteToIndex{idx}{\let\thepage\thesection}
+%-------------------------------------------------------
+
+
+
+
+%Some commands to display commands:
+\newcommand\optsett[2]{\noindent\textcolor{blue}{\texttt{#1} \ifblank{#2}{}{\hfill default: \texttt{\textbf{#2}}}}}
+
+\newcommand\bcmd[1]{\{#1\}}
+\newcommand\cmd[1]{\texttt{\textcolor{blue}{\textbackslash #1}}}
+\newcommand\cmdb[1]{\texttt{\textbackslash #1}}
+\newcommand\cmdc[1]{\texttt{\textcolor{blue}{#1}}}
+\newcommand\mcmd[1]{\texttt{\textbackslash #1\{\}}}
+\newcommand\braces[1]{\{#1\}}
+\newcommand\brackets[1]{[#1]}
+\newcommand\bracketsb[1]{[\colorbox{red!15!yellow!80}{#1}]}
+\newcommand\parens[1]{(#1)}
+\newcommand\disp[1]{\hfill\fbox{#1}\hfill\ \par}
+\newcommand\dispb[1]{\hfill #1 \hfill\ \par\medskip}
+\newcommand\dispeg[1]{\noindent #1\par}
+\newcommand\angles[1]{<#1>}
+
+\newcommand\mnotepre{}
+\newcommand\mnotepredelim{}
+\newcommand\mnotepostdelim{}
+\newcommand\mnotepost{}
+\newcommand\mnote[1]{%
+{\mnotepre\mnotepredelim#1\mnotepostdelim\mnotepost}%
+}
+\newcommand\lcdisclaimer{%
+{%
+\renewcommand\mnotepre{\bigskip\noindent\sffamily\bfseries\scshape\large}
+\renewcommand\mnotepredelim{}
+\renewcommand\mnotepostdelim{}
+\renewcommand\mnotepost{\hspace{1.2em}}
+\mnote{Disclaimer}%
+}%
+}
+
+\newcommand\canreg[2]{\lawcite[#2]{#1}}
+
+\newfontface\fcc{Noto Sans Mono}
+\newcommand\attribution[1]{\hspace{2pt}\fcc\tiny\rotatebox{90}{#1}}
+
+\usepackage{tikz}
+\usetikzlibrary{tikzmark, calc}
+\newcommand\hlybox[2][]{\tikz[overlay]\node[fill=yellow!20,draw=black,inner sep=2pt, anchor=text, rectangle, rounded corners=1mm,#1] {#2};\phantom{#2}}
+
+%\usepackage{lthooks}
+
+
+\usepackage[
+final=true,
+bookmarks,
+%            allcolors = black,  
+            colorlinks=true,        
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+%================
+%changes:
+%\renewcommand*{\mkibid}{\emph}
+%\DeclareNameAlias[book]{author}{given-family}
+%%\renewcommand*\finentrypunct{}
+
+\newcommand\markercolour{red}
+\newcommand\markera{\textcolor{\markercolour}{.}}
+\newcommand\markerb{\textcolor{\markercolour}{:}}
+
+%\newcommand\citecompare[1]{%
+%\par\bigskip inline cite: \renewcommand\lguide{aglc}\marginpar{\scriptsize\cmd{yycite}}
+%\markera\yycite{#1}\markera
+%>>
+%\renewcommand\lguide{mcgill}
+%\markerb\yycite{#1}\markerb
+%
+%\medskip parencite: \renewcommand\lguide{aglc}\marginpar{\scriptsize\cmd{yyparencite}}
+%\markera\yyparencite{#1}\markera
+%>>
+%\renewcommand\lguide{mcgill}
+%\markerb\yyparencite{#1}\markerb
+%
+%\medskip footcite: \renewcommand\lguide{aglc}\marginpar{\scriptsize\cmd{yyfootcite}}
+%\markera x\yyfootcite{#1}\markera
+%>>
+%\renewcommand\lguide{mcgill}
+%\markerb x\yyfootcite{#1}\markerb
+%}
+%\newcommand\aglcd[1]{\colorbox{blue!15}{\textsc{AGLC}\textsuperscript{4}~\textsf{#1}}}
+%
+%-------------------------------
+\newcommand\bemph[1]{\colorbox{blue!12}{#1}}
+\newcommand\cemph[1]{\colorbox{red!12!yellow!72}{#1}}
+
+%-------------------------------
+\newcommand\itemdesc[1]{{\usefont{T1}{lmr}{m}{n}#1:}}
+
+%-------------------------------
+\newcounter{myexamplecounter}
+\newcommand\applymycounter[1]{\refstepcounter{myexamplecounter}%
+{\sffamily\small[Ex-\themyexamplecounter]}\label{mycite:#1}
+}
+%-------------------------------
+\newcounter{myexampledcounter}
+\newcommand\applymydcounter[1]{\refstepcounter{myexampledcounter}%
+{\sffamily\small[FS-\themyexampledcounter]}\label{mydump:#1}
+}
+
+
+%-------------------------------
+\newcommand\examplebox[1]{%
+
+\bigskip
+\fbox{\begin{minipage}{0.8\textwidth}
+#1
+\end{minipage}}
+
+\bigskip
+}
+
+
+%-------------------------------
+\newcommand\exampledemo[5][fson]{%
+
+\bigskip
+\fbox{\begin{minipage}{0.8\textwidth}
+\applymycounter{#5} -- \itemdesc{#4}\ifstrequal{#1}{fson}{\hfill{\tiny fieldset \ref{mydump:#5}}}{}\par
+\bemph{#2} $\mapsto$\ \par
+\smallskip
+#3
+\end{minipage}}
+
+\bigskip
+}
+
+%-------------------------------
+\newcommand\examplefieldscite[3]{%
+{\small
+\begin{tabular}{ll}
+\rowcolor{blue!80!green}
+\bfseries\sffamily\color{yellow!80}Citation\phantom{\Large L} & 
+\bfseries\sffamily\color{yellow!80}Bibentry fields \\
+\hline & \\
+\fbox{\begin{minipage}{0.4\textwidth}
+\bemph{#1} $\mapsto$\ \par
+\smallskip
+#2
+\end{minipage}} 
+&
+\fbox{\begin{minipage}{0.5\textwidth}
+\lcdcase{#3} 
+\end{minipage}} 
+\\
+\end{tabular}
+}}
+
+
+
+
+
+
+
+\newcommand\demofielddump[3][\newpage]{%1=layout,2=key, 3=counter
+#1%
+\ifstrequal{#1}{\newpage}{\applymydcounter{#3}Fields for example \ref{mycite:#2}: \textbf{#2} -- \par
+
+\bigskip}{}%
+\lcdcase{#2}%
+%\printrectangle
+}
+
+
+\newcounter{rectmark}
+\newcommand{\printrectangle}{\stepcounter{rectmark}
+  \gdef\mynode{pic cs:\therectmark}\tikzmark{\therectmark}%
+%  }%
+%\AddToHook{shipout/background}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[blue!10!white] (current page.north west) rectangle 
+    ( $ (\mynode) +(\paperwidth,0) $ );
+  \end{tikzpicture}
+\gdef\mynode{0,0}%
+}%
+
+
+
+\newcommand\democomm[4][]{%1=pre,2=command,3=key,4=punct
+\cmd{#2}\textcolor{brown}{\braces{#3}}{#4}
+\begin{quotation}
+#1\csname #2\endcsname{#3}
+\end{quotation}
+}
+
+\newcommand\democommpost[5][]{%1=pre,2=command,3=key,4=punct,5=postnote
+\cmd{#2}\textcolor{brown}{\brackets{#5}\braces{#3}}{#4}
+\begin{quotation}
+#1\csname #2\endcsname[#5]{#3}
+\end{quotation}
+}
+%
+\newcommand\democommpre[5][]{%1=pre,2=command,3=key,4=punct,5=prenote
+\cmd{#2}\textcolor{brown}{\brackets{#5}\brackets{}\braces{#3}}{#4}
+\begin{quotation}
+#1\csname #2\endcsname[#5][]{#3}
+\end{quotation}
+}
+
+\newcommand\democommprepost[6][]{%1=pre,2=command,3=key,4=punct,5=prenote,6=postnote
+\cmd{#2}\textcolor{brown}{\brackets{#5}\brackets{#6}\braces{#3}}{#4}
+\begin{quotation}
+#1\csname #2\endcsname[#5][#6]{#3}
+\end{quotation}
+}
+
+\newcommand\vv[1]{\texttt{#1}}
+
+\newsavebox{\mnbox}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+
+\newcounter{magparcount}
+\newfontface\fmag{Noto Sans Symbols2}[Scale=2,Colour=blue]
+\newenvironment{magpar}
+{
+\begin{tcolorbox}[breakable, enhanced,colback=yellow!10!white,boxrule=0pt,frame hidden,borderline west={1mm}{-2mm}{black}]
+{ \fmag 🔍 }
+}
+{\refstepcounter{magparcount}\hfill\color{red}(\themagparcount)\end{tcolorbox}
+ }
+
+\newenvironment{xcasenote}[1]
+{
+\begin{tcolorbox}[title=#1,
+enhanced,
+attach boxed title to top right,
+boxed title style={colframe=blue!75!yellow!15,colback=violet!75,},
+colback=red!5!white,
+colframe=red!75!black,
+fonttitle=\bfseries,
+%before title={x},
+%after title={\hfill\colorbox{Navy}{approved}},
+]
+}
+{\end{tcolorbox}
+ }
+\newenvironment{casequote}[1]
+{
+\begin{quotation}
+\begin{tcolorbox}[title=#1,
+enhanced,
+attach boxed title to top right,
+boxed title style={colframe=blue!75!yellow!15,colback=violet!8,},
+colback=brown!5!white,
+colframe=brown!75!black,
+fonttitle=\bfseries,
+coltitle=green!25!black,
+%before title={x},
+%after title={\hfill\colorbox{Navy}{approved}},
+]\begin{tabular}{ccc}\cellcolor{yellow!30!brown!18}{\Large ``} & \cellcolor{brown!12!white}
+\begin{minipage}{0.82\textwidth}
+}
+{\end{minipage} & \cellcolor{yellow!30!brown!18}{\Large''}\\\end{tabular}\end{tcolorbox}
+\end{quotation}
+ }
+
+
+%---
+\usepackage{luacolor,lua-ul}
+\colorlet{r1}{GreenYellow!50}
+\colorlet{r2}{RubineRed}
+\colorlet{r3}{RoyalPurple}
+\LuaULSetHighLightColor{r1}
+%--
+\newunderlinetype\beginUnderWavy[\number\dimexpr1ex]{\cleaders\hbox{%
+\setlength\unitlength{.3ex}%
+\begin{picture}(4,0)(0,1)
+\thicklines
+\color{red}%
+\qbezier(0,0)(1,1)(2,0)
+\qbezier(2,0)(3,-1)(4,0)
+\end{picture}%
+}}
+\newcommand\underWavy[1]{{\beginUnderWavy#1}}
+
+%---
+\usepackage{adjustbox}
+
+
+%---
+%%\newcommand\mnotepre{}
+%%\newcommand\mnotepredelim{}
+%%\newcommand\mnotepostdelim{}
+%%\newcommand\mnotepost{}
+%%\newcommand\mnote[1]{%
+%%{\mnotepre\mnotepredelim#1\mnotepostdelim\mnotepost}%
+%%}
+%%\newcommand\lcdisclaimer{%
+%%{%
+%%\renewcommand\mnotepre{\bigskip\noindent\sffamily\bfseries\scshape\large}
+%%\renewcommand\mnotepredelim{}
+%%\renewcommand\mnotepostdelim{}
+%%\renewcommand\mnotepost{\hspace{1.2em}}
+%%\mnote{Disclaimer}%
+%%}%
+%%}
+%------------------
+
+\ExplSyntaxOn
+%\NewDocumentCommand { \mystrcomp } { m } {
+%\str_case:on { #1 }
+%{
+%{ parallel } { xxx }
+%{ x } { yyy }
+%}
+%}
+\cs_new_eq:NN \strcompare \str_if_eq:onTF
+\ExplSyntaxOff
+
+\DeclareListFormat[jurisdiction]{wand}{%
+#1%
+\ifthenelse{\value{listcount}<\value{liststop}}
+{\space and\space}
+{}}
+
+\newcommand\docompfield[1]{%
+%\strcompare{\myparm}{#1}{%
+\iffieldundef{#1}{}{\noindent#1 =  \{\thefield{#1}\},\par}%
+%}{}%
+}
+\newcommand\docompfieldnote[2]{%
+%\strcompare{\myparm}{#1}{%
+\iffieldundef{#1}{}{\noindent#1 =  \{\thefield{#1}\}, \% alias for \cmdc{#2}\par}%
+%}{}%
+}
+
+\newcommand\docomplist[2]{%1=list,2=list format
+%\strcompare{\myparm}{#1}{%
+\iflistundef{#1}{}{\noindent#1 =  \{\printlist[#2][-\value{listtotal}]{#1}\},\par}%
+%}{}%
+}
+\newcommand\lcgetabibfield[2]{%1=key,2=fieldname
+\citetrackerfalse
+\lcdacasefield[#2][]{#1}
+\citetrackertrue
+}
+
+
+\newcommand\docompfieldhl[1]{%
+\iffieldundef{#1}{}{%
+\strcompare{\myparmhl}{#1}{%
+\noindent\colorbox{green!50}{\parbox{0.85\textwidth}{#1 =  \{\thefield{#1}\},}}\par%
+}{%
+\noindent#1 =  \{\thefield{#1}\},\par%
+}%
+}%
+}
+
+
+\newbibmacro{getlcdcase}{%
+{%
+%\edef\myparm{#1}
+\begin{quotation}
+\ttfamily\ \par
+\noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
+\docomplist{additionalreports}{wand}
+\docompfield{court}
+%\docompfield{date}
+\docompfield{ecli}
+\docompfield{entrysubtype}
+\docomplist{hyphenation}{wand}
+\docompfieldnote{institution}{court}
+\docompfieldnote{journaltitle}{reporter}
+\docompfield{keywords}
+\docompfield{location}
+\docompfield{note}
+\docompfield{number}
+\docompfield{options}
+\docompfield{origdate}
+\docompfield{pages}
+\docompfield{pagination}
+\docompfield{parpages}
+\docompfield{parreporter}
+\docompfield{parseries}
+\docompfield{parvolume}
+\docompfield{reporter}
+\docompfield{series}
+\docompfield{shorthand}
+\docompfield{shorttitle}
+\docompfield{title}
+\docompfield{type}
+\docompfield{usera}
+\docompfieldnote{userb}{parvolume}
+\docompfieldnote{userc}{parreporter}
+\docompfieldnote{userd}{parseries}
+\docompfieldnote{usere}{parpages}
+\docompfieldnote{verba}{ecli}
+\docompfield{volume}
+\docompfield{year}
+\noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
+\noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
+\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
+\}\par%
+\end{quotation}
+}}
+
+
+\newbibmacro{getlcdcasehl}[1]{%
+{%
+\edef\myparmhl{#1}
+\color{blue}\small\ttfamily\ \par
+\begin{quotation}
+\noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
+%\noindent ...\par%
+%\noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
+%\noindent\iffieldundef{author}{}{author =  \{\thefield{author}\},\par}%
+%\noindent\iffieldundef{casename}{}{casename =  \{\thefield{casename}\},\par}%
+%\noindent\iffieldundef{casenickname}{}{casenickname =  \{\thefield{casenickname}\},\par}%
+%\noindent\iffieldundef{casenumber}{}{casenumber =  \{\thefield{casenumber}\},\par}%
+%\noindent\iffieldundef{caseshortname}{}{caseshortname =  \{\thefield{caseshortname}\},\par}%
+%\noindent\iffieldundef{casestatus}{}{casestatus =  \{\thefield{casestatus}\},\par}%
+%\noindent\iffieldundef{caseyear}{}{caseyear =  \{\thefield{caseyear}\},\par}%
+%\noindent\iffieldundef{chapter}{}{chapter =  \{\thefield{chapter}\},\par}%
+%\noindent\iffieldundef{citeref}{}{citeref =  \{\thefield{citeref}\},\par}%
+%\noindent\iffieldundef{courtcasenumber}{}{courtcasenumber =  \{\thefield{courtcasenumber}\},\par}%
+%\noindent\iffieldundef{courtdivision}{}{courtdivision =  \{\thefield{courtdivision}\},\par}%
+%\noindent\iffieldundef{courtfullname}{}{courtfullname =  \{\thefield{courtfullname}\},\par}%
+%\noindent\iffieldundef{courtjurisdiction}{}{courtjurisdiction =  \{\thefield{courtjurisdiction}\},\par}%
+%\noindent\iffieldundef{courtlist}{}{courtlist =  \{\thefield{courtlist}\},\par}%
+%\noindent\iffieldundef{courtname}{}{courtname =  \{\thefield{courtname}\},\par}%
+%\noindent\iffieldundef{date}{}{date =  \{\thefield{date}\},\par}%
+%\noindent\iffieldundef{decisionyear}{}{decisionyear =  \{\thefield{decisionyear}\},\par}%
+%\noindent\iffieldundef{fulldate}{}{fulldate =  \{\thefield{fulldate}\},\par}%
+%\noindent\iffieldundef{gazette}{}{gazette =  \{\thefield{gazette}\},\par}%
+%\noindent\iffieldundef{icaseyear}{}{icaseyear =  \{\thefield{icaseyear}\},\par}%
+\docompfieldhl{journaltitle}
+%\noindent\iffieldundef{journaltitle}{}{journaltitle =  \{\thefield{journaltitle}\},\par}%
+\docompfieldhl{keywords}
+%\noindent\iffieldundef{keywords}{}{keywords =  \{\thefield{keywords}\},\par}%
+\docompfieldhl{linkname}
+\docompfieldhl{mncname}
+\docompfieldhl{mncnumber}
+\docompfieldhl{mncurl}
+\docompfieldhl{mncyear}
+%\noindent\iffieldundef{note}{}{note =  \{\thefield{note}\},\par}%
+%\noindent\iffieldundef{number}{}{number =  \{\thefield{number}\},\par}%
+\docompfieldhl{options}
+\docompfieldhl{pages}
+\docompfieldhl{pagination}
+%%\docomplist{parallel}{wand}
+\docompfieldhl{partya}
+\docompfieldhl{partyajur}
+\docompfieldhl{partyasn}
+\docompfieldhl{partyb}
+\docompfieldhl{partybjur}
+\docompfieldhl{partybsn}
+\docompfieldhl{partysep}
+\docompfieldhl{partysepx}
+\docompfieldhl{quotetext}
+\docompfieldhl{regnum}
+\docompfieldhl{reportpage}
+\docompfieldhl{reportseries}
+\docompfieldhl{reportvolume}
+\docompfieldhl{reportyear}
+\docompfieldhl{shipname}
+\docompfieldhl{shortname}
+%\noindent\iffieldundef{statutechapter}{}{statutechapter =  \{\thefield{statutechapter}\},\par}%
+%\noindent\iffieldundef{statutejurisdiction}{}{statutejurisdiction =  \{\thefield{statutejurisdiction}\},\par}%
+%\noindent\iffieldundef{statutelongtitle}{}{statutelongtitle =  \{\thefield{statutelongtitle}\},\par}%
+%\noindent\iffieldundef{statutenickname}{}{statutenickname =  \{\thefield{statutenickname}\},\par}%
+%\noindent\iffieldundef{statuteregnalyear}{}{statuteregnalyear =  \{\thefield{statuteregnalyear}\},\par}%
+%\noindent\iffieldundef{statuteshorttitle}{}{statuteshorttitle =  \{\thefield{statuteshorttitle}\},\par}%
+%\noindent\iffieldundef{statutetitle}{}{statutetitle =  \{\thefield{statutetitle}\},\par}%
+%\noindent\iffieldundef{statutetitleyear}{}{statutetitleyear =  \{\thefield{statutetitleyear}\},\par}%
+%\noindent\iffieldundef{statutevolume}{}{statutevolume =  \{\thefield{statutevolume}\},\par}%
+%\noindent\iffieldundef{statuteyear}{}{statuteyear =  \{\thefield{statuteyear}\},\par}%
+%\noindent\iffieldundef{svjy}{}{svjy =  \{\thefield{svjy}\},\par}%
+\docompfieldhl{title}
+\docompfieldhl{url}
+\docompfieldhl{volume}
+%\noindent\iffieldundef{volyearneeded}{}{volyearneeded =  \{\thefield{volyearneeded}\},\par}%
+\docompfieldhl{year}
+\docompfieldhl{yoptions}
+%\noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
+%\noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
+%\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
+%\noindent ...\par%
+\}\par%
+\end{quotation}
+}}
+
+
+\newbibmacro{getlcdacasefield}[1]{%
+{%
+\edef\myparm{#1}
+\color{blue}\small\ttfamily\ \par
+\begin{quotation}
+\noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
+\noindent ...\par%
+%\noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
+%\noindent\iffieldundef{author}{}{author =  \{\thefield{author}\},\par}%
+%\noindent\iffieldundef{casename}{}{casename =  \{\thefield{casename}\},\par}%
+%\noindent\iffieldundef{casenickname}{}{casenickname =  \{\thefield{casenickname}\},\par}%
+%\noindent\iffieldundef{casenumber}{}{casenumber =  \{\thefield{casenumber}\},\par}%
+%\noindent\iffieldundef{caseshortname}{}{caseshortname =  \{\thefield{caseshortname}\},\par}%
+%\noindent\iffieldundef{casestatus}{}{casestatus =  \{\thefield{casestatus}\},\par}%
+%\noindent\iffieldundef{caseyear}{}{caseyear =  \{\thefield{caseyear}\},\par}%
+%\noindent\iffieldundef{chapter}{}{chapter =  \{\thefield{chapter}\},\par}%
+%\noindent\iffieldundef{citeref}{}{citeref =  \{\thefield{citeref}\},\par}%
+%\noindent\iffieldundef{courtcasenumber}{}{courtcasenumber =  \{\thefield{courtcasenumber}\},\par}%
+%\noindent\iffieldundef{courtdivision}{}{courtdivision =  \{\thefield{courtdivision}\},\par}%
+%\noindent\iffieldundef{courtfullname}{}{courtfullname =  \{\thefield{courtfullname}\},\par}%
+%\noindent\iffieldundef{courtjurisdiction}{}{courtjurisdiction =  \{\thefield{courtjurisdiction}\},\par}%
+%\noindent\iffieldundef{courtlist}{}{courtlist =  \{\thefield{courtlist}\},\par}%
+%\noindent\iffieldundef{courtname}{}{courtname =  \{\thefield{courtname}\},\par}%
+%\noindent\iffieldundef{date}{}{date =  \{\thefield{date}\},\par}%
+%\noindent\iffieldundef{decisionyear}{}{decisionyear =  \{\thefield{decisionyear}\},\par}%
+%\noindent\iffieldundef{fulldate}{}{fulldate =  \{\thefield{fulldate}\},\par}%
+%\noindent\iffieldundef{gazette}{}{gazette =  \{\thefield{gazette}\},\par}%
+%\noindent\iffieldundef{icaseyear}{}{icaseyear =  \{\thefield{icaseyear}\},\par}%
+%\noindent\iffieldundef{journaltitle}{}{journaltitle =  \{\thefield{journaltitle}\},\par}%
+\docompfield{keywords}
+%\noindent\iffieldundef{keywords}{}{keywords =  \{\thefield{keywords}\},\par}%
+%\noindent\iffieldundef{linkname}{}{linkname =  \{\thefield{linkname}\},\par}%
+%\noindent\iffieldundef{mncname}{}{mncname =  \{\thefield{mncname}\},\par}%
+%\noindent\iffieldundef{mncnumber}{}{mncnumber =  \{\thefield{mncnumber}\},\par}%
+%\noindent\iffieldundef{mncurl}{}{mncurl =  \{\thefield{mncurl}\},\par}%
+%\noindent\iffieldundef{mncyear}{}{mncyear =  \{\thefield{mncyear}\},\par}%
+%\noindent\iffieldundef{note}{}{note =  \{\thefield{note}\},\par}%
+%\noindent\iffieldundef{number}{}{number =  \{\thefield{number}\},\par}%
+\docompfield{options}
+%\noindent\iffieldundef{pages}{}{pages =  \{\thefield{pages}\},\par}%
+%\noindent\iffieldundef{pagination}{}{pagination =  \{\thefield{pagination}\},\par}%
+\docomplist{parallel}{wand}
+\docompfield{partya}
+\docompfield{partyajur}
+\docompfield{partyasn}
+\docompfield{partyb}
+\docompfield{partybjur}
+\docompfield{partybsn}
+\docompfield{partysep}
+\docompfield{partysepx}
+\docompfield{quotetext}
+\docompfield{regnum}
+\docompfield{reportpage}
+\docompfield{reportseries}
+\docompfield{reportvolume}
+\docompfield{reportyear}
+\docompfield{shipname}
+\docompfield{shortname}
+%\noindent\iffieldundef{statutechapter}{}{statutechapter =  \{\thefield{statutechapter}\},\par}%
+%\noindent\iffieldundef{statutejurisdiction}{}{statutejurisdiction =  \{\thefield{statutejurisdiction}\},\par}%
+%\noindent\iffieldundef{statutelongtitle}{}{statutelongtitle =  \{\thefield{statutelongtitle}\},\par}%
+%\noindent\iffieldundef{statutenickname}{}{statutenickname =  \{\thefield{statutenickname}\},\par}%
+%\noindent\iffieldundef{statuteregnalyear}{}{statuteregnalyear =  \{\thefield{statuteregnalyear}\},\par}%
+%\noindent\iffieldundef{statuteshorttitle}{}{statuteshorttitle =  \{\thefield{statuteshorttitle}\},\par}%
+%\noindent\iffieldundef{statutetitle}{}{statutetitle =  \{\thefield{statutetitle}\},\par}%
+%\noindent\iffieldundef{statutetitleyear}{}{statutetitleyear =  \{\thefield{statutetitleyear}\},\par}%
+%\noindent\iffieldundef{statutevolume}{}{statutevolume =  \{\thefield{statutevolume}\},\par}%
+%\noindent\iffieldundef{statuteyear}{}{statuteyear =  \{\thefield{statuteyear}\},\par}%
+%\noindent\iffieldundef{svjy}{}{svjy =  \{\thefield{svjy}\},\par}%
+%\noindent\iffieldundef{title}{}{title =  \{\thefield{title}\},\par}%
+%\noindent\iffieldundef{url}{}{url =  \{\thefield{url}\},\par}%
+%\noindent\iffieldundef{volume}{}{volume =  \{\thefield{volume}\},\par}%
+%\noindent\iffieldundef{volyearneeded}{}{volyearneeded =  \{\thefield{volyearneeded}\},\par}%
+%\noindent\iffieldundef{year}{}{year =  \{\thefield{year}\},\par}%
+%\noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
+%\noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
+%\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
+\noindent ...\par%
+\}\par%
+\end{quotation}
+}}
+
+
+
+%============= lcdcase
+\DeclareCiteCommand{lcdcase}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getlcdcase}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
+
+%============= lcdacasefield
+\DeclareCiteCommand{lcdacasefield}%
+%@@@@@@@@@@@@@@@@ prenote
+{}%{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getlcdacasefield}{\thefield{prenote}}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{}%{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{}%{\usebibmacro{postnote}}%
+
+%============= lcdcasehl
+\DeclareCiteCommand{lcdcasehl}%
+%@@@@@@@@@@@@@@@@ prenote
+{}%{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getlcdcasehl}{\thefield{prenote}}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{}%{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{}%{\usebibmacro{postnote}}%
+
+\newcommand\lcdfielddump[2]{
+\begin{magpar}#2\end{magpar}
+
+\begin{quotation}\noindent\cite{#1}\end{quotation}
+
+\lcdcase{#1}
+
+\medskip\medskip
+}
+
+
+
+
+%------------------
+
+\title{A Short Tutorial{\normalsize \\ on using\\ the}\\   \textsc{Biblatex-OSCOLA}\\ Citation Style}
+\author{---}
+\date{12-Dec-2021}
+
+
+%------------------
+\begin{document}
+\maketitle
+
+\sbox{\mnbox}{%
+\lcdisclaimer\colorbox{blue!12!green!15}{
+\begin{minipage}{0.6\linewidth}
+ This tutorial is not affiliated with \textsc{BL-OSCOLA} in any way and no warranty is expressed or implied. Use (and modify) at own risk.
+\end{minipage}}}
+
+\begin{center}
+\fcolorbox{black}{blue!7!red!5}{\fcolorbox{black}{yellow!5!green!2}{\usebox{\mnbox}}}
+\end{center}
+
+\bigskip
+\lcdfielddump{corr08}{With medium neutral citation}
+
+\lcdfielddump{page96}{Without medium neutral citation}
+
+\lcdfielddump{barrett01a}{Year not essential for report}
+
+\lcdfielddump{stubbs90}{Unreported case}
+
+\lcdfielddump{calvert02}{Unreported case with MNC}
+
+\lcdfielddump{powick93}{Case reported in a newspaper of record}
+
+\lcdfielddump{henly28}{Nominate report}
+
+\verb>\cite[93|995]{henly28}> gives: \cite[93|995]{henly28}
+
+\lcdfielddump{hislop42}{Scottish case}
+
+\lcdfielddump{adams03}{Scottish case}
+
+\lcdfielddump{dodds03}{Scottish case}
+
+\lcdfielddump{crofters02}{Scottish case, Land Court}
+
+\lcdfielddump{davidson05}{Scottish case, with  MNC}
+
+\lcdfielddump{smart06}{Scottish case, with  MNC}
+
+\lcdfielddump{adbhu}{EU case, ecli field}
+%Note: \cmdc{verba} is the alias for \cmdc{ecli}.
+
+\lcdfielddump{C430/93}{EU case, joined cases, hyphenation}
+Note: Two hyphens (\verb|--|) indicate multiple cases, \verb|C-430/93--C-431/93|, as well as comma (,) and \verb|and|.
+
+
+
+
+%%======================================= Bibliography
+%\newpage
+%{\center
+%\printbibheading[title=Bibliography]
+%}
+%\printbibliography
+%%------------------------------- Legislation
+%\newrefcontext[sorting=statsort]
+%\printbibliography[
+%title=\center Legislation,
+%heading=subbibliography,%
+%type=statute,
+%]
+%%------------------------------- Cases
+%\newrefcontext[sorting=casesort]
+%\printbibliography[
+%title=\center Jurisprudence,
+%heading=subbibliography,%
+%type=case,
+%notcategory=nobib,
+%%notkeyword=nobib,
+%]
+%%------------------------------- Monographs
+%\newrefcontext[sorting=nty]
+%\printbibliography[
+%heading=subbibliography,%
+%%nottype=case,
+%%nottype=statute,
+%%nottype=article,
+%%nottype=ljarticle,
+%keyword=lawbook,
+%title={\center Secondary Materials: Monographs},
+%%postnote={bibcolophon},
+%]
+%%------------------------------- Legal Articles, Law Reviews
+%\newrefcontext[sorting=nty]
+%\printbibliography[
+%heading=subbibliography,%
+%title={\center Secondary Materials: Articles},
+%type=ljarticle,
+%]
+%%postnote={bibcolophon},
+%
+%%-------------------------------------
+%\bigskip
+%\hfill\rulesep\hfill\ %\hrule
+%\bigskip
+%%
+%%------------------------------- General Material
+%\printbibliography[
+%heading=subbibliography,%
+%nottype=case,
+%nottype=statute,
+%nottype=ljarticle,
+%notkeyword=lawbook,
+%title={\center General Material},
+%]
+
+
+
+\end{document}
