@@ -16,6 +16,23 @@
 @jurisdiction{smart06,title = {Smart v HM Advocate},date = {2006},number = {[2006] HJAC 12},keywords = {sc},reporter = {JC},pages = {119},}
 @jurisdiction{adbhu,title = {Procureur de la République v ADBHU},shorttitle = {ADBHU},date = {1985},number = {240/83},keywords = {eu},journaltitle = {ECR},pages = {531},institution = {ECJ},ecli = {EU:C:1985:59},}
 @jurisdiction{C430/93,title = {Jereon van Schijndel v Stichting Pensioenfonds voor Fysiotherapeuten},shorttitle = {van Schijndel},date = {1998},number = {C-430/93--C-431/93},keywords = {eu},journaltitle = {ECR},volume = {I},pages = {4705},institution = {ECJ},hyphenation = {dutch},}
+@jurisdiction{C556/07,title = {Commission v France},date = {2009},number = {C-556/07},keywords = {eu},journaltitle = {OJ},series = {C},volume = {102},pages = {8},institution = {ECJ},}
+@jurisdiction{C176/03,title = {Commission v Council},date = {2005},number = {C\textendash176/03},keywords = {eu},journaltitle = {ECR},volume = {I},pages = {7879},institution = {ECJ},}
+@jurisdiction{alcatel,title = {Alcatel/Telettra},date = {1991},number = {91\slash 251\slash EEC},keywords = {eu},journaltitle = {OJ},series = {L},volume = {122},pages = {48},institution = {Commission},userb = {IV/M.042},}
+@jurisdiction{verkehrsorgani,title = {Georg Verkehrsorgani v Ferrovie dello Stato},date = {2004},number = {2004\slash 33\slash EC},keywords = {eu},journaltitle = {OJ},series = {L},pages = {17},institution = {Commission},issue = {11},userb = {Case COMP\slash 37.685},}
+@jurisdiction{johnston86,title = {Johnston v Ireland},date = {1986},keywords = {echr},reporter = {Series A},pages = {122},institution = {ECtHR},}
+@jurisdiction{osman98,title = {Osman v UK},date = {1998},keywords = {echr},reporter = {ECHR},volume = {8},pages = {3124},institution = {ECtHR},}
+@jurisdiction{omojudi10,title = {Omojudi v UK},date = {2010},keywords = {echr},reporter = {EHHR},volume = {51},pages = {10},institution = {ECtHR},}
+@jurisdiction{balogh04,title = {Balogh v Hungary},date = { 2004-07-20},number = {47940/99},keywords = {echr},institution = {ECtHR},}
+@jurisdiction{clearbrook,title = {Clearbrook Ironworks Ltd. v. Letorneau},date = {2006},number = {2006 FCA 42},keywords = {ca},reporter = {C.P.R.},series = {4th},volume = {46},pages = {241},pagination = {paragraph},}
+@jurisdiction{pietersma,title = {Bridgewater Bank v. Pietersma},number = {2021 NBQB 180},keywords = {ca},pagination = {paragraph},}
+@jurisdiction{tang,title = {R v Tang},date = {2008},keywords = {au},reporter = {CLR},volume = {237},pages = {1},}
+@jurisdiction{western97,title = {Western Alliance Insurance Co. v. Gill},date = {1997},keywords = {us},reporter = {N.E.},series = {2},volume = {686},pages = {997},location = {Mass.},}
+@jurisdiction{operadora09,title = {Re Operadora D.B. Mexico S.A.},date = {2009},number = {6:09-cv-383-Orl022GJK},keywords = {us},court = {M.D. Fla.},indextitle = {Operadora D.B. Mexico S.A., Re},eprint = {2009 WL 2423138},}
+@jurisdiction{corfu,title = {Corfu Channel Case},date = {1949},keywords = {int},journaltitle = {ICJ Rep},pages = {4},subtitle = {UK v Albania},titleaddon = {Merits},}
+@jurisdiction{wall,title = {Legal Consequences of the Construction of a Wall},date = {2004},keywords = {int},pagination = {[]},titleaddon = {Advisory Opinion},url = {http://www.icj-cij.org/icjwww/imwp/imwpframe.htm},urldate = {2005-07-21},}
+
+
 
 
 \end{filecontents*}
@@ -505,6 +522,11 @@ coltitle=green!25!black,
 {\space and\space}
 {}}
 
+\newcommand\docompdate[1]{%
+\strcompare{urldate}{#1}{%
+\iffieldundef{urlyear}{}{\noindent#1 =  \{\thefield{urlyear}-\thefield{urlmonth}-\thefield{urlday}\},\par}%
+}{}%
+}
 \newcommand\docompfield[1]{%
 %\strcompare{\myparm}{#1}{%
 \iffieldundef{#1}{}{\noindent#1 =  \{\thefield{#1}\},\par}%
@@ -550,8 +572,10 @@ coltitle=green!25!black,
 %\docompfield{date}
 \docompfield{ecli}
 \docompfield{entrysubtype}
+\docompfield{eprint}
 \docomplist{hyphenation}{wand}
 \docompfieldnote{institution}{court}
+\docompfield{issue}
 \docompfieldnote{journaltitle}{reporter}
 \docompfield{keywords}
 \docompfield{location}
@@ -569,8 +593,12 @@ coltitle=green!25!black,
 \docompfield{series}
 \docompfield{shorthand}
 \docompfield{shorttitle}
+\docompfield{subtitle}
 \docompfield{title}
+\docompfield{titleaddon}
 \docompfield{type}
+\docompfield{url}
+\docompdate{urldate}
 \docompfield{usera}
 \docompfieldnote{userb}{parvolume}
 \docompfieldnote{userc}{parreporter}
@@ -805,6 +833,16 @@ coltitle=green!25!black,
 \medskip\medskip
 }
 
+\newcommand\lcdfielddumpb[3]{
+\begin{magpar}#3\end{magpar}
+
+\begin{quotation}\noindent\cite[#2]{#1}\end{quotation}
+
+postnote = [#2]\par
+\lcdcase{#1}
+
+\medskip\medskip
+}
 
 
 
@@ -862,7 +900,43 @@ coltitle=green!25!black,
 %Note: \cmdc{verba} is the alias for \cmdc{ecli}.
 
 \lcdfielddump{C430/93}{EU case, joined cases, hyphenation}
-Note: Two hyphens (\verb|--|) indicate multiple cases, \verb|C-430/93--C-431/93|, as well as comma (,) and \verb|and|.
+Note: Two hyphens (\verb|--|) indicate multiple cases, \verb|C-430/93--C-431/93|, as well as comma (,) and \verb|and|. \cmdc{hyphenation=\{dutch\},} command is swallowed by the processing.
+
+\lcdfielddump{C556/07}{EU case, unreported (Official Journal)}
+
+\lcdfielddumpb{C176/03}{47-48}{EU case, citation}
+
+\lcdfielddump{alcatel}{Commission: (decision\#)number,(case\#)userb}
+\lcdfielddump{verkehrsorgani}{Commission: issue=volume}
+
+\lcdfielddump{johnston86}{ECHR: Official --  Series A (<1998)}
+
+\lcdfielddump{osman98}{ECHR: Official --  ECHR (>=1998)}
+
+\lcdfielddumpb{omojudi10}{10}{ECHR: Unofficial}
+
+\lcdfielddump{balogh04}{ECHR: Unreported}
+
+\lcdfielddumpb{clearbrook}{3}{Canadian cases}
+
+\begin{quotation}
+``Adherence to the \textit{Rules of Court} is necessary to ensure a level playing field for all litigants and to provide predictability for all participants.'' -- \cite[20]{pietersma}
+\end{quotation}
+
+\lcdfielddumpb{tang}{7}{Australian cases}
+
+
+\lcdfielddump{western97}{US cases}
+
+
+\lcdfielddump{operadora09}{US cases}
+
+
+\lcdfielddump{corfu}{Public International Law cases}
+
+
+\lcdfielddump{wall}{Public International Law cases}
+
 
 
 
