@@ -86,8 +86,39 @@
 \newtoggle{bookauthorgiven}
 \togglefalse{bookauthorgiven}
 %
+% useannotation
+\newtoggle{useannotation}
+\toggletrue{useannotation}
+% usenoterup
+\newtoggle{usenoterup}
+\toggletrue{usenoterup}
+% usecommentary
+\newtoggle{usecommentary}
+\toggletrue{usecommentary}
+
+
 
 %=======================================
+
+
+\DeclareBibliographyOption[boolean]{use-annotation}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{useannotation}}
+{\togglefalse{useannotation}}%
+}
+
+\DeclareBibliographyOption[boolean]{use-noterup}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{usenoterup}}
+{\togglefalse{usenoterup}}%
+}
+
+\DeclareBibliographyOption[boolean]{use-commentary}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{usecommentary}}
+{\togglefalse{usecommentary}}%
+}
+
 
 
 \DeclareBibliographyOption[boolean]{ibid-comma-postnote}[true]{%
@@ -483,6 +514,9 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \togglefalse{ibidpostdelimcomma}
 %\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
 \toggletrue{parabrackets}
+\togglefalse{useannotation}
+\togglefalse{usenoterup}
+\togglefalse{usecommentary}
 \setlccurrentstyletag{\lcstyletagdefault}%
 }
 
@@ -521,6 +555,9 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \togglefalse{ibidpostdelimcomma}%
 %\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
 \toggletrue{parabrackets}%
+\togglefalse{useannotation}
+\togglefalse{usenoterup}
+\togglefalse{usecommentary}
 \setlccurrentstyletag{\lcstyletagaglc}%
 }
 
@@ -557,6 +594,9 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \toggletrue{ibidpostdelimcomma}%
 %\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
 \toggletrue{parabrackets}%
+\togglefalse{useannotation}
+\togglefalse{usenoterup}
+\togglefalse{usecommentary}
 \setlccurrentstyletag{\lcstyletagmlr}%
 }
 
@@ -597,6 +637,9 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \togglefalse{ibidpostdelimcomma}%
 %\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
 \togglefalse{parabrackets}%
+\togglefalse{useannotation}
+\togglefalse{usenoterup}
+\togglefalse{usecommentary}
    \setlccurrentstyletag{\lcstyletagmcgill}%
 }
 
@@ -632,6 +675,9 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \toggletrue{ibidpostdelimcomma}%
 %\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
 \toggletrue{parabrackets}%
+\togglefalse{useannotation}
+\togglefalse{usenoterup}
+\togglefalse{usecommentary}
 \setlccurrentstyletag{\lcstyletagindigo}%
 }
 
@@ -675,6 +721,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
    \iffieldundef{url}{}{\addspace\printtext[angles]{\usebibmacro{getcaseurl}}}%
 %    }%code for no crossref
 %   {\usebibmacro{getcasenameref}}%code for crossref
+ \usebibmacro{getann:noter:comm}
  \usebibmacro{finentry}
 }
 %
@@ -683,12 +730,14 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
    \usebibmacro{getstatutenameref}%
    \usebibmacro{getcanleg}%citeref method
    \usebibmacro{getcanreg2}%citeref method
+ \usebibmacro{getann:noter:comm}
  \usebibmacro{finentry}
 }
 
 \DeclareBibliographyDriver{ljarticle}{%
  \usebibmacro{begentry}%
  \usebibmacro{getljarticle}%ljb-generic}
+ \usebibmacro{getann:noter:comm}
  \usebibmacro{finentry}
 }
 

@@ -131,6 +131,10 @@ mncnumber,
 shortname,
 %quote
 quotetext,
+% annotation etc
+annotation,
+noterup,
+commentary,
 }
 
 \DeclareDatamodelEntryfields[case]{%
@@ -168,6 +172,9 @@ parallel,
 linkname,
 url,
 mncurl,
+annotation,
+noterup,
+commentary,
 }
 
 
@@ -195,6 +202,9 @@ svjy,%
 linkname,
 url,
 mncurl,% court link
+annotation,
+noterup,
+commentary,
 }
 
 \DeclareDatamodelEntryfields[ljarticle]{%
@@ -210,10 +220,16 @@ pages,
 keywords,
 note,
 shortname,
+annotation,
+noterup,
+commentary,
 }
 
 \DeclareDatamodelEntryfields[quote]{%
 quotetext,
+annotation,
+noterup,
+commentary,
 }
 
 

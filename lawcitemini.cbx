@@ -523,6 +523,49 @@ xxx}%
 }
 
 
+%====================================== annotatoion, noterup, commentary
+%%% built-in:
+%%\newbibmacro*{annotation}{%
+%%  \begingroup
+%%  \togglefalse{blx@bibliography}%
+%%  \iffieldundef{annotation}
+%%    {\printfile[annotation]{\bibannotationprefix\thefield{entrykey}.tex}}
+%%    {\printfield{annotation}}%
+%%  \endgroup}
+%%
+%%\newcommand*{\bibannotationprefix}{bibannotation-}
+%---
+\newbibmacro*{noterup}{%
+  \begingroup
+%  \togglefalse{blx@bibliography}%
+  \iffieldundef{noterup}
+    {\printfile[annotation]{\bibnoterupprefix\thefield{entrykey}.tex}}
+    {\printfield{noterup}}%
+  \endgroup}
+
+\newcommand*{\bibnoterupprefix}{bibnoterup-}
+%---
+\newbibmacro*{commentary}{%
+  \begingroup
+%  \togglefalse{blx@bibliography}%
+  \iffieldundef{commentary}
+    {\printfile[annotation]{\bibcommentaryprefix\thefield{entrykey}.tex}}
+    {\printfield{commentary}}%
+  \endgroup}
+
+\newcommand*{\bibcommentaryprefix}{bibcommentary-}
+
+%-----
+\newbibmacro*{getann:noter:comm}{%
+\iftoggle{useannotation}{\usebibmacro{annotation}}{}%
+\iftoggle{usenoterup}{\usebibmacro{noterup}}{}%
+\iftoggle{usecommentary}{\usebibmacro{commentary}}{}%
+}
+
+
+
+
+
 %====================================== toggle commands
 %\newcommand\lcnamerefdelim{\addcomma\addspace}
 \newcommand\lcnamerefdelim{\addspace}
@@ -1705,7 +1748,9 @@ x#1;;
   {\printfield{thumbnail}}%
 }%
 {}%
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 
@@ -1715,7 +1760,9 @@ x#1;;
 \printfield[plain]{quotetext}%
 }%
 {}%
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 \DeclareCiteCommand{qcitetext}%
@@ -1724,7 +1771,9 @@ x#1;;
 \printfield{quotetext}%
 }%
 {}%
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 
@@ -1743,7 +1792,9 @@ x#1;;
 {%
 \multicitedelim%
 }%
-{\iffieldundef{postnote}{}{\addcomma\addspace\usebibmacro{postnote}\adddot}}
+{\iffieldundef{postnote}{}{\addcomma\addspace\usebibmacro{postnote}\adddot}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 \newcommand\qqcitecasewidth{0.48}
@@ -1782,7 +1833,9 @@ x#1;;
 {%
 %\multicitedelim%
 }%
-{}
+{%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -1796,7 +1849,9 @@ x#1;;
 {%
 %\multicitedelim%
 }%
-{}
+{%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 \DeclareCiteCommand{ycite}%
 {\usebibmacro{prenote}}%
@@ -1806,7 +1861,9 @@ x#1;;
 {%
 \multicitedelim%
 }%
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -1818,7 +1875,9 @@ x#1;;
 {%
 %\multicitedelim%
 }%
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -2016,7 +2075,9 @@ courtname}%
 {%
 \multicitedelim%
 }%
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -2028,7 +2089,9 @@ courtname}%
 {%
 \multicitedelim%
 }%
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 \DeclareCiteCommand{yyparencite}[\mkbibparens]%
@@ -2039,7 +2102,9 @@ courtname}%
 {%
 \multicitedelim%
 }%
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -2152,7 +2217,8 @@ test {\ifentrytype{statute}}%
 % }%end: not mnc:pn
 % }%end: not ibid
 }%not statute
-}
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -2177,6 +2243,7 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ postnote
 {%
 \usebibmacro{postnote}
+ \usebibmacro{getann:noter:comm}%
 }%
 
 %============= lawcite head foot with name: only for cases
@@ -2200,7 +2267,8 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ postnote
 {%
 \usebibmacro{postnote}
-}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 
@@ -2316,7 +2384,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 %============= lawcitetitlerr
@@ -2332,7 +2402,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 %============= lawciteref
@@ -2347,7 +2419,8 @@ test {\ifentrytype{statute}}%
 \usebibmacro{getcaseref}%
 \usebibmacro{getparallelreports}%
 \usebibmacro{postnote}%
-}%end item
+ \usebibmacro{getann:noter:comm}%
+ }%end item
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
@@ -2368,7 +2441,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 \newtoggle{infirstcite}
@@ -2399,7 +2474,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelimrr}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -2422,7 +2499,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelimrr}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -2439,7 +2518,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -2455,7 +2536,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -2473,7 +2556,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -2490,7 +2575,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -2507,7 +2594,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -2536,7 +2625,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 %============= lcnickname
@@ -2552,7 +2643,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -2570,7 +2663,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -3226,7 +3321,9 @@ test {\ifentrytype{case}}%
 {\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%
 %@@@@@@@@@@@@@@@@ postnote
 %{\usebibmacro{postnote}\iflastcitekey{\addspace\usebibmacro{getnote}}{}}
-{\usebibmacro{notmnc:postnote}\usebibmacro{getnote}}%{\iflastcitekey{\usebibmacro{postnote}\addspace\usebibmacro{getnote}}{\usebibmacro{postnote}}}
+{\usebibmacro{notmnc:postnote}\usebibmacro{getnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%{\iflastcitekey{\usebibmacro{postnote}\addspace\usebibmacro{getnote}}{\usebibmacro{postnote}}}
 
 
 
@@ -3259,7 +3356,9 @@ test {\ifentrytype{case}}%
 {\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%
 %@@@@@@@@@@@@@@@@ postnote
 %{\usebibmacro{postnote}\iflastcitekey{\addspace\usebibmacro{getnote}}{}}
-{\usebibmacro{notmnc:postnote}\usebibmacro{getnote}}%{\iflastcitekey{\usebibmacro{postnote}\addspace\usebibmacro{getnote}}{\usebibmacro{postnote}}}
+{\usebibmacro{notmnc:postnote}\usebibmacro{getnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%{\iflastcitekey{\usebibmacro{postnote}\addspace\usebibmacro{getnote}}{\usebibmacro{postnote}}}
 
 
 
@@ -3286,7 +3385,9 @@ test {\ifentrytype{case}}%
 {\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%
 %@@@@@@@@@@@@@@@@ postnote
 %{\usebibmacro{postnote}\iflastcitekey{\addspace\usebibmacro{getnote}}{}}
-{\usebibmacro{notmnc:postnote}\usebibmacro{getnote:noparens}}%{\iflastcitekey{\usebibmacro{postnote}\addspace\usebibmacro{getnote}}{\usebibmacro{postnote}}}
+{\usebibmacro{notmnc:postnote}\usebibmacro{getnote:noparens}%
+ \usebibmacro{getann:noter:comm}%
+ }%{\iflastcitekey{\usebibmacro{postnote}\addspace\usebibmacro{getnote}}{\usebibmacro{postnote}}}
 
 \newbibmacro{delim:choice}{%
 \iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}%
@@ -3322,7 +3423,9 @@ not test {\ifkeyword{showbib}}
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelimrr}%
 %@@@@@@@@@@@@@@@@ postnote
-{\iflastcitekey{\usebibmacro{postnote}\iffieldundef{note}{}{\addspace\usebibmacro{getnote}}}{\usebibmacro{postnote}}}
+{\iflastcitekey{\usebibmacro{postnote}\iffieldundef{note}{}{\addspace\usebibmacro{getnote}}}{\usebibmacro{postnote}}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 %============= lcinlinenn  %no note
@@ -3340,7 +3443,9 @@ not test {\ifkeyword{showbib}}
 %@@@@@@@@@@@@@@@@ delim
 {\usebibmacro{delim:choice}}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -3359,7 +3464,9 @@ not test {\ifkeyword{showbib}}
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelimrr}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -3397,7 +3504,9 @@ not test {\ifkeyword{showbib}}
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{notmnc:postnote}}
+{\usebibmacro{notmnc:postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -3416,7 +3525,9 @@ not test {\ifkeyword{showbib}}
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{notmnc:postnote}}
+{\usebibmacro{notmnc:postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 %============= lcfootrr
 \DeclareCiteCommand{lcfootrr}[\mkbibfootnote]%
@@ -3439,7 +3550,9 @@ not test {\ifkeyword{showbib}}
 %@@@@@@@@@@@@@@@@ delim
 {\addcomma\addspace}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{getnote}\usebibmacro{postnote}}
+{\usebibmacro{getnote}\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 \newbibmacro{getciteref}{%
@@ -3471,6 +3584,7 @@ test {\ifentrytype{statute}}%
 \usebibmacro{postnote}\iffieldundef{note}{}{\addspace\printfield[parens]{note}}%
 }%end statute true
 {}%
+ \usebibmacro{getann:noter:comm}%
 }
 
 
@@ -3491,7 +3605,8 @@ test {\ifentrytype{statute}}%
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{mnc:postnote}\iffieldundef{note}{}{\addspace\printfield[parens]{note}}%
-}
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 %============= ljfootcite
@@ -3522,7 +3637,8 @@ test {\ifentrytype{statute}}%
 %%  \textcolor{red}{DD}%
   \iffieldundef{note}{}{\addspace\printfield[parens]{note}}%
 }%
-}
+ \usebibmacro{getann:noter:comm}%
+ }
 
 
 
@@ -3533,7 +3649,8 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ item
 {%
 \usebibmacro{postnote}%
-}%end item
+ \usebibmacro{getann:noter:comm}%
+ }%end item
 %@@@@@@@@@@@@@@@@ delim
 {}%
 %@@@@@@@@@@@@@@@@ postnote
@@ -3551,7 +3668,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 %============= lcljtitle
@@ -3565,7 +3684,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 %============= lcljyear
@@ -3579,7 +3700,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 %============= lcljjournaltitle
@@ -3593,7 +3716,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 %============= lcljvolume
@@ -3607,7 +3732,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 %============= lcljpage
@@ -3621,7 +3748,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 
@@ -3702,8 +3831,9 @@ test {\ifentrytype{statute}}%
     {}%
 }%
 {\multicitedelim}%
-{\usebibmacro{postnote}}%
-
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 %----------------------------------- Epigraph
@@ -3827,7 +3957,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 %============= lcaonbedition
 \DeclareCiteCommand{lcaonbedition}%
@@ -3840,7 +3972,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 
@@ -3856,7 +3990,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 %============= lcepigraphp: possessive x's y
@@ -3870,7 +4006,9 @@ test {\ifentrytype{statute}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
 
 
 
@@ -4105,6 +4243,9 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 %\noindent\iffieldundef{volyearneeded}{}{volyearneeded =  \{\thefield{volyearneeded}\},\par}%
 \docompfieldhl{year}
 \docompfieldhl{yoptions}
+\docompfieldhl{annotation}
+\docompfieldhl{noterup}
+\docompfieldhl{commentary}
 %\noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
 %\noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
 %\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
@@ -4191,6 +4332,9 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 %\noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
 %\noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
 %\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
+\docompfield{annotation}
+\docompfield{noterup}
+\docompfield{commentary}
 \noindent ...\par%
 \}\par%
 \end{quotation}
@@ -4741,6 +4885,7 @@ test {\ifentrytype{jurisdiction}}%
 %@@@@@@@@@@@@@@@@ postnote
 {%
 \usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
 }
 
 %
@@ -4841,6 +4986,7 @@ test {\ifentrytype{jurisdiction}}%
 %@@@@@@@@@@@@@@@@ postnote
 {%
 \usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
 }
 
 
