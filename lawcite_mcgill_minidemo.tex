@@ -177,6 +177,10 @@ mncurl,
 annotation,
 noterup,
 commentary,
+related,
+relatedoptions,
+relatedtype,
+relatedstring,
 }
 
 
@@ -207,6 +211,10 @@ mncurl,% court link
 annotation,
 noterup,
 commentary,
+related,
+relatedoptions,
+relatedtype,
+relatedstring,
 }
 
 \DeclareDatamodelEntryfields[ljarticle]{%
@@ -225,6 +233,10 @@ shortname,
 annotation,
 noterup,
 commentary,
+related,
+relatedoptions,
+relatedtype,
+relatedstring,
 }
 
 \DeclareDatamodelEntryfields[quote]{%
@@ -232,6 +244,10 @@ quotetext,
 annotation,
 noterup,
 commentary,
+related,
+relatedoptions,
+relatedtype,
+relatedstring,
 }
 
 
@@ -340,7 +356,17 @@ commentary,
 \newtoggle{usecommentary}
 \toggletrue{usecommentary}
 
+\newcommand{\setannotationson}{%
+\toggletrue{useannotation}
+\toggletrue{usenoterup}
+\toggletrue{usecommentary}
+}
 
+\newcommand{\setannotationsoff}{%
+\togglefalse{useannotation}
+\togglefalse{usenoterup}
+\togglefalse{usecommentary}
+}
 
 %=======================================
 
@@ -965,6 +991,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
    \iffieldundef{url}{}{\addspace\printtext[angles]{\usebibmacro{getcaseurl}}}%
 %    }%code for no crossref
 %   {\usebibmacro{getcasenameref}}%code for crossref
+\usebibmacro{lcrelated}
  \usebibmacro{getann:noter:comm}
  \usebibmacro{finentry}
 }
@@ -974,6 +1001,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
    \usebibmacro{getstatutenameref}%
    \usebibmacro{getcanleg}%citeref method
    \usebibmacro{getcanreg2}%citeref method
+\usebibmacro{lcrelated}
  \usebibmacro{getann:noter:comm}
  \usebibmacro{finentry}
 }
@@ -981,6 +1009,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \DeclareBibliographyDriver{ljarticle}{%
  \usebibmacro{begentry}%
  \usebibmacro{getljarticle}%ljb-generic}
+\usebibmacro{lcrelated}
  \usebibmacro{getann:noter:comm}
  \usebibmacro{finentry}
 }
@@ -1325,6 +1354,21 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 %%pages,
 %%keywords,
 %%note,
+
+% bibmacros: general
+\newbibmacro{lcrelated}{%
+%:\thefield{entrykey};\thefield{related}:%xxx
+\iffieldundef{related}{}{%
+\iffieldundef{relatedtype}{}{%
+\addspace\bibstring{\thefield{relatedtype}}\space}%
+\entrydata*{\thefield{related}}{%
+\ifentrytype{case}{\addspace\usebibmacro{getcasenameref}}{}%
+\ifentrytype{statute}{\addspace\usebibmacro{getstatutenameref}}{}%
+\ifentrytype{ljarticle}{\addspace\usebibmacro{getljarticle}}{}%
+}%
+}%
+}
+
 
 
 
@@ -1729,8 +1773,8 @@ xxx}%
   \begingroup
 %  \togglefalse{blx@bibliography}%
   \iffieldundef{noterup}
-    {\printfile[annotation]{\bibnoterupprefix\thefield{entrykey}.tex}}
-    {\printfield{noterup}}%
+    {\addspace\printfile[annotation]{\bibnoterupprefix\thefield{entrykey}.tex}}
+    {\addspace\printfield{noterup}}%
   \endgroup}
   
 \newcommand*{\bibnoterupprefix}{bibnoterup-}
@@ -1739,8 +1783,8 @@ xxx}%
   \begingroup
 %  \togglefalse{blx@bibliography}%
   \iffieldundef{commentary}
-    {\printfile[annotation]{\bibcommentaryprefix\thefield{entrykey}.tex}}
-    {\printfield{commentary}}%
+    {\addspace\printfile[annotation]{\bibcommentaryprefix\thefield{entrykey}.tex}}
+    {\addspace\printfield{commentary}}%
   \endgroup}
   
 \newcommand*{\bibcommentaryprefix}{bibcommentary-}
@@ -2991,6 +3035,7 @@ x#1;;
 
 \newbibmacro{quotebox}[1][]{%
 \parbox{\iffieldundef{partya}{0.4}{\qqcitecasewidth}\textwidth}{\raggedright%
+%\thefield{related}xxx
 \printfield{quotetext}\par%
 \smallskip\hrule\par%
 \medskip{%
@@ -3006,7 +3051,8 @@ x#1;;
 \iffieldundef{partya}{%
 \addcomma\addspace\usebibmacro{postnote}}{}%
 \adddot}%
-#1%
+\iffieldundef{related}{}{\addsemicolon\addspace\usebibmacro{lcrelated}}%
+#1% possible footnotemark
 }%end parbox
 }
 \newbibmacro{qqcitebox}{%
@@ -5285,6 +5331,10 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{partysepx}{}{partysepx =  \{\thefield{partysepx}\},\par}%
 \noindent\iffieldundef{quotetext}{}{quotetext =  \{\thefield{quotetext}\},\par}%
 \noindent\iffieldundef{regnum}{}{regnum =  \{\thefield{regnum}\},\par}%
+\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
+\noindent\iffieldundef{relatedtype}{}{relatedtype =  \{\thefield{relatedtype}\},\par}%
+\noindent\iffieldundef{relatedstring}{}{relatedstring =  \{\thefield{relatedstring}\},\par}%
+\noindent\iffieldundef{relatedoptions}{}{relatedoptions =  \{\thefield{relatedoptions}\},\par}%
 \noindent\iffieldundef{reportpage}{}{reportpage =  \{\thefield{reportpage}\},\par}%
 \noindent\iffieldundef{reportseries}{}{reportseries =  \{\thefield{reportseries}\},\par}%
 \noindent\iffieldundef{reportvolume}{}{reportvolume =  \{\thefield{reportvolume}\},\par}%
@@ -5309,7 +5359,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{year}{}{year =  \{\thefield{year}\},\par}%
 \noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
 \noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
-\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
+%\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
 \}\par%
 }}
 
@@ -6260,7 +6310,7 @@ test {\ifentrytype{jurisdiction}}%
 \end{filecontents*}
 
 \begin{filecontents*}[overwrite]{english-lawcitemini.lbx}
-  \ProvidesFile{english-lawcite.lbx}[2019/04/09 english with additions for legal citations]
+  \ProvidesFile{english-lawcitemini.lbx}[2019/04/09 english with additions for legal citations]
   \InheritBibliographyExtras{english}
   \NewBibliographyString{versus,case,act,
   %singular
@@ -6316,6 +6366,7 @@ ibidsupra,
 ibidsupran,
 ibidsupranote,
 onlyat,
+quotedin,
 }
   \DeclareBibliographyStrings{%
     inherit   = {english},
@@ -6375,6 +6426,7 @@ ibidsupra = {{supra}}{{supra}},
 ibidsupran = {{n}}{{n}},
 ibidsupranote = {{note}}{{note}},
 onlyat = {{at}}{{at}},
+quotedin = {{quoted in}}{{quoted in}},
   }
 
 
@@ -6468,7 +6520,7 @@ onlyat = {{at}}{{at}},
 
 @quote{q9,quotetext =  { In this appeal, the Court is called upon to answer the age-old question:  If a tree falls in the forest and you are not around to replant it, how does it affect your taxes? },crossref =  {dmi},options={skipbib=true},}
 
-@quote{q10,quotetext =  {We are entitled to assume that lawyers have not only some general background in law, but that they have some general background in obtaining information from electronic data bases and are using appropriate means to acquire that information.},crossref =  {kelly},options={skipbib=true},}
+@quote{q10,quotetext =  {We are entitled to assume that lawyers have not only some general background in law, but that they have some general background in obtaining information from electronic data bases and are using appropriate means to acquire that information.},crossref =  {kelly},options={skipbib=true}, related={atkinson},relatedtype={quotedin},}
 
 @quote{q11,quotetext =  {Sitting judges swear an oath that they will decide cases on the law and the evidence themselves, not blindly accept the say-so of others or abdicate the decision to others. As well, for many other reasons, retired judges’ opinions do not have as much influence on sitting judges as some might suppose.},crossref =  {coldwater},options={skipbib=true},}
 
@@ -9632,7 +9684,11 @@ See \lcycite[:getcasename, comma, space,
 \boxsdfg{:qqcitebox}\lcycite[:qqcitebox][]{q10}\par
 \boxsdfg{:quotebox}\lcycite[:quotebox][]{q10}\par
 
+%\qqcite{q10}
 
+\lcdcase{q10}
+
+Bibentry \cmdc{q10} does a cross-reference to the case's bibentry, to bring in the case details: \cmdc{crossref =  \{kelly\}, options=\{ skipbib=true\},}.
 
 %%%------------
 %%\subsection{Bib Metafields}
@@ -9662,9 +9718,42 @@ See \lcycite[:getcasename, comma, space,
 %(in any number of months)
 %\end{adjustbox}
 
+
 %------------
-\subsection{Annotations}
-Requires \cmdc{loadfiles=true} Biblatex package option.
+\subsection{Spacing and Punctuation Metafields}
+\p Available spacing and punctuation metafields are:
+{ itcolon } 
+{ isubtitle } 
+{ subtitle } 
+{ emdash } 
+{ endash } 
+{ dot } 
+{ comma } 
+{ colon } 
+{ space } 
+{ lparen } 
+{ rparen } 
+{ lbrace } 
+{ rbrace } 
+
+\subsection{Generic Metafields}
+\p Available generic metafields are:
+{ name } 
+{ title } 
+{ edition } 
+{ location } 
+{ publisher } 
+{ year } 
+{ volume } 
+{ note } 
+
+%------------
+\section{Annotations}
+\p Annotations can be added on a per-entry basis via a bibentry field or via an external file. The annotation feature is built into the Biblatex style. Lawcite adds a further two: \cmdc{noterup}, and \cmdc{commentary}.
+
+\p For performance reasons, use the external file method when there are large volumes of text(s).
+
+\p Requires \cmdc{loadfiles=true} Biblatex package option.
 \toggletrue{useannotation}
 \toggletrue{usenoterup}
 \toggletrue{usecommentary}
@@ -9675,9 +9764,73 @@ Requires \cmdc{loadfiles=true} Biblatex package option.
 \toggletrue{usecommentary}
 \end{verbatim}
 
+\begin{quotation}
+	
+\noindent
 \lcinline{testanc1}
 
-\lcinline{testanc2}
+\noindent\lcinline{testanc2}
+\end{quotation}
+
+\p The filename prefix can be changed by doing \cmd{renewcommand}\braces{X}\braces{\ldots}, where X is one of:
+
+\begin{quotation}
+\noindent\cmd{bibannotationprefix},\par
+\noindent \cmd{bibnoterupprefix}, \par 
+\noindent or \cmd{bibcommentaryprefix}. 
+\end{quotation}
+
+
+% Exclude the annotations from the bibliography:
+\togglefalse{useannotation}
+\togglefalse{usenoterup}
+\togglefalse{usecommentary}
+
+\section{Text Highlighting}
+\p For those interested, text highlighting in this document has been done by the following.
+
+\p highlighting -- the \cmd{highLight} command, \highLight{this is highlighted}, from the luacolor and lua-ul packages.
+
+\p underwave -- the \cmd{underWavy} command, \underWavy{this is underWavy}, a custom command based on the same packages (code from TeX.SE).
+
+\p enclosed text -- the \cmd{hlybox} command, \hlybox{sample text}, a TikZ-based command (code from TeX.SE).
+
+\p magnification-glass environment -- the \cmdc{magpar} environment, using tcolorbox package.
+\begin{magpar}
+This is a magpar environment.
+\end{magpar}
+
+\begin{verbatim}
+\begin{magpar}
+This is a magpar environment.
+\end{magpar}
+\end{verbatim}
+
+\p \cmdc{casenote} environment -- takes case name as a parameter, to become the title of the environment.
+
+\begin{casenote}{A Parameter}
+This is a casenote environment.
+\end{casenote}
+
+\begin{verbatim}
+\begin{casenote}{A Parameter}
+This is a casenote environment.
+\end{casenote}
+\end{verbatim}
+
+\p \cmdc{casequote} environment -- takes a text string as a parameter, to become the title of the environment.
+
+\begin{casequote}{A Parameter}
+This is a casequote environment.
+\end{casequote}
+
+\begin{verbatim}
+\begin{casequote}{A Parameter}
+This is a casequote environment.
+\end{casequote}
+\end{verbatim}
+
+
 
 
 
