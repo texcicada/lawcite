@@ -2122,7 +2122,10 @@ xxx}%
 
 %======================= statuteref
 \newbibmacro{getstatuteref}{%
-{}%
+{%
+\iffieldundef{statuteregnalyear}{}{%
+\addcomma\addspace\usebibmacro{getstatuteregnalyear}}%
+}%
 }
 
 %======================= statutenameref
@@ -5286,7 +5289,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 
 \newbibmacro{getlcdcase}[1][x]{%
 {%
-\ttfamily\ \par
+\small\ttfamily\ \par
 \noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
 \noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
 \noindent\ifnameundef{author}{}{author =  \{\printnames[authorplain][-\value{listtotal}]{author}\},\par}%
@@ -6435,6 +6438,10 @@ quotedin = {{quoted in}}{{quoted in}},
 \end{filecontents*}
 
 \begin{filecontents*}[overwrite]{clist\jobname.bib}
+
+@statute{canconst1982,statutetitle = {Canada Act},note = {Constitution Act 1982},statutejurisdiction = {UK},statuteregnalyear = {c 11, sch B},statutetitleyear = {1982},}
+@statute{canconst1867,statutetitle = {Constitution Act},note = {Constitution Act 1867},statutejurisdiction = {Imp},statuteregnalyear = {30 \& 31 Vict c 3},statutetitleyear = {1867},}
+@statute{cancharter,statutetitle = {Canada Act},note = {Canadian Charter of Rights and Freedoms},statutejurisdiction = {UK},statuteregnalyear = {c 11, sch B pt I},statutetitleyear = {1982},}
 
 @case{testanc1,partya = {Test},partyb = {ANC field},annotation = {This is an annotation field.},noterup = {This is a noterup field.},commentary = {This is a commentary field.},}
 @case{testanc2,partya = {Test},partyb = {ANC file},}
@@ -7620,8 +7627,8 @@ partyb = {Brousseau},caseyear = {2020},courtname = {QCCA},casenumber = {1073},}
 @ljarticle{parkinson,author = {Patrick Parkinson},title = {The Payoffs and Pitfalls of Laws that Encourage Shared Parenting},subtitle = {Lessons from the Australian Experience},date = {2014},volume = {37},journaltitle = {Dalhousie Law Journal},pages = {301},linkname = {2014 CanLIIDocs 33572},url = {https://canlii.ca/t/t0xv},}
 @ljarticle{silver,author = {Natalie Silver and Renate Buijze},title = {Tax Incentives for Cross-border Giving in an Era of Philanthropic Globalization},subtitle = {A Comparative Perspective},date = {2020},volume = {6},journaltitle = {Canadian Journal of Comparative and Contemporary Law},pages = {109},linkname = {2020 CanLIIDocs 3314},url = {https://canlii.ca/t/t07q},}
 @ljarticle{beck,author = {Luke Beck},title = {The Role of Religion in the Law of Royal Succession in Canada and Australia},date = {2017},volume = {43},journaltitle = {Queen's Law Journal},pages = {53},linkname = {2017 CanLIIDocs 3968},url = {https://canlii.ca/t/sx2r},}
-@statute{samstata,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statutechapter = {statutechapter},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
-@statute{samstatb,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
+@statute{samstata,statutetitle = {statutetitle:nociteref},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statutechapter = {statutechapter},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
+@statute{samstatb,statutetitle = {statutetitle:nociteref:nostatutechapter},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
 @statute{samstatc,statutetitle = {statutetitle},statutelongtitle = {statutelongtitle},statuteshorttitle = {statuteshorttitle},statutenickname = {statutenickname},statutevolume = {statutevolume},statutejurisdiction = {statutejurisdiction},statuteregnalyear = {statuteregnalyear},statutechapter = {statutechapter},statuteyear = {statuteyear},statutetitleyear = {statutetitleyear},title = {title},chapter = {chapter},year = {year},citeref = {peireg},regnum = {regnum},fulldate = {fulldate},gazette = {gazette},svjy = {svjy},}
 @book{phipson9,author = {Sidney Phipson},title = {Phipson’s Manual of the Law of Evidence},date = {1966},publisher = {Sweet \& Maxwell},location = {London},edition = {9},keywords = {lawbook},shorttitle = {Evidence},editor = {D W Elliott},}
 @case{riley,partya = {R},partyb = {Riley},reportvolume = {18},reportseries = {CoxCC},reportpage = {285},caseshortname = {Riley},decisionyear = {1896},}
@@ -8560,7 +8567,7 @@ Note:
 \begin{center}
 \toggletrue{lcimageshow}
 \setlcimagescale{1}
-\lcimage{imvelocity}
+\lcimage{imvelocity}\rotatebox{90}{\tiny CommonLII}
 \caption[The Velocity]{\lcinlinerr{velocity, velocitynr, velocityer}.}
 \end{center}
 \end{figure}
@@ -8767,7 +8774,7 @@ Text\lawcitesfoot(Overall prenote:)(overall postnote)[654-55]{wismer}[128-29]{mu
 \begin{center}
 \toggletrue{lcimageshow}
 \setlcimagescale{0.7}
-\lcimage{equity}
+\lcimage{equity}\rotatebox{90}{\tiny CommonLII}
 \caption[Equity follows Law]{\lcinlinerr{equity, equitycary, equityer}.}
 \end{center}
 \end{figure}
@@ -9034,10 +9041,24 @@ verb &  &&  & regnum && \\
 \p The following instruments are not currently covered by \cmdc{lawcite}.
 
 \begin{itemize}
-\item Bills
 \item Constitutions and Charters
+   \begin{itemize}
+   \item \setstatjurison\lawcite{canconst1982}
+   \item \lawcite{canconst1867}
+   \item \lawcite{cancharter}\setstatjurisoff
+   \end{itemize}
 \item Treaties, Agreements, and Accords
+\item Bills
+\item Parliamentary papers
 \end{itemize}
+
+
+%%\lawcite{samstata}
+%%
+%%\lawcite{samstatb}
+%%
+%%\lawcite{samstatc}
+
 
 
 \section{Law Journals}
@@ -9193,7 +9214,7 @@ This allows use of cross-referencing and other biblatex features.
 \end{itemize}
 \lcsetdemooff
 
-\p \paradef{illus}Illustrations of cases, statutes and law journals may be made. When finished, change back to the document style (see \pararef{styleset}).
+\p \paradef{illus}Illustrations of cases, statutes and law journals may be made. When finished, change back to the main citation style (see \pararef{styleset}).
 
 \begin{itemize}
 \item Use \cmd{lccitedemo}\braces{key}\braces{pinpoint} to illustrate the various citestyles for a case citation.
@@ -9336,7 +9357,7 @@ produces\footnote{This entry has \angles{(Can)} rather than \angles{(Can.)}.}
 \noindent\lawcite{cca1970b} {\footnotesize (citeref)}
 \end{quotation}
 
-\p The postnote may be retrieved separately with \cmd{lcpostnote}, allowing for a variation in the flow of text, if required: \angles{\lawcite[s 457(1)]{crimcode1970}} versus \angles{\lcpostnote[s 457(1)]{crimcode1970} of the \lawcite{crimcode1970}}.
+\p The postnote may be retrieved separately with \cmd{lcpostnote}, allowing for a variation in the flow of text, if required: \angles{\highLight{\lawcite[s 457(1)]{crimcode1970}}} versus \angles{\highLight{\lcpostnote[s 457(1)]{crimcode1970} of the \lawcite{crimcode1970}}}.
 
 \p The @statute bibentry handles three types of data structure: with a \cmdc{statutechapter}; without a \cmdc{statutechapter}; with a \cmdc{citeref}.\footnote{The actual details of he typeset output will vary slightly, according to the style options and overrides in play.}
 
