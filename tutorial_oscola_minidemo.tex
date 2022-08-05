@@ -68,6 +68,7 @@
 \setsansfont{TeX Gyre Adventor}[Scale=1.2]%Gentium Plus}
 \setmonofont{Noto Sans Mono}%[Colour=blue]
 \newfontface\fcircnum{DejaVu Sans}[Colour=blue]
+\newfontface\fdev{Shobhika}[Script=Devanagari,Renderer=HarfBuzz]
 \newcommand\circnum[1]{{\fcircnum#1}}
 %------------------
 \usepackage[british]{babel}
@@ -106,7 +107,7 @@
 \newcommand\theadcolour{\rowcolor{blue!80!green!20!yellow}}
 
 \newcommand\note[1]{(\texttt{#1})}
-
+\newcommand\markerpar{\marginpar{{\color{red}\fdev ङ्क्ष्य }}}
 
 \newcommand\egcasename{Donoghue v Stevenson}
 \newcommand\egcaseref{[1932] AC 562}
@@ -703,6 +704,7 @@ coltitle=green!25!black,
 \docomplist{additionalreports}{wand}
 \docomplist{court}{wand}
 %\docompfield{date}
+\docompfieldnote[derived from]{day}{date}
 \docompfield{ecli}
 \docompfield{entrysubtype}
 \docompfield{eprint}
@@ -712,6 +714,7 @@ coltitle=green!25!black,
 \docompfieldnote{journaltitle}{reporter}
 \docompfield{keywords}
 \docomplist{location}{wand}
+\docompfieldnote[derived from]{month}{date}
 \docompfield{note}
 \docompfield{number}
 \docompfield{options}
@@ -1541,91 +1544,130 @@ Run latex, biber, latex, latex, splitindex, latex, splitindex, latex.
 As each component is inserted into the document, page numbers used by cross-references will change, so they need to ``settle''.
 
 
+\newpage
 \section{Cases}
 \lcdfielddump{corr08}{With medium neutral citation}
 
+\newpage
 \lcdfielddump{page96}{Without medium neutral citation}
 
+\newpage
 \lcdfielddump{barrett01a}{Year not essential for report}
 
+\newpage
 \lcdfielddump{stubbs90}{Unreported case}
 
+\newpage
 \lcdfielddump{calvert02}{Unreported case with MNC}
 
+\newpage
 \lcdfielddump{powick93}{Case reported in a newspaper of record}
 
+\newpage
 \lcdfielddump{henly28}{Nominate report}
 
 \verb>\cite[93|995]{henly28}> gives: \cite[93|995]{henly28}
 
+\newpage
 \lcdfielddump{hislop42}{Scottish case}
 
+\newpage
 \lcdfielddump{adams03}{Scottish case}
 
+\newpage
 \lcdfielddump{dodds03}{Scottish case}
 
+\newpage
 \lcdfielddump{crofters02}{Scottish case, Land Court}
 
+\newpage
 \lcdfielddump{davidson05}{Scottish case, with  MNC}
 
+\newpage
 \lcdfielddump{smart06}{Scottish case, with  MNC}
 
+\newpage
 \lcdfielddump{adbhu}{EU case, ecli field}
 %Note: \cmdc{verba} is the alias for \cmdc{ecli}.
 
+\newpage
 \lcdfielddump{C430/93}{EU case, joined cases, hyphenation}
 Note: Two hyphens (\verb|--|) indicate multiple cases, \verb|C-430/93--C-431/93|, as well as comma (,) and \verb|and|. \cmdc{hyphenation=\{dutch\},} command is swallowed by the processing.
 
+\newpage
 \lcdfielddump{C556/07}{EU case, unreported (Official Journal)}
 
+\newpage
 \lcdfielddumpb{C176/03}{47-48}{EU case, citation}
 
+\newpage
 \lcdfielddump{alcatel}{Commission: (decision\#)number,(case\#)userb}
 \lcdfielddump{verkehrsorgani}{Commission: issue=volume}
 
+\newpage
 \lcdfielddump{johnston86}{ECHR: Official --  Series A (<1998)}
 
+\newpage
 \lcdfielddump{osman98}{ECHR: Official --  ECHR (>=1998)}
 
+\newpage
 \lcdfielddumpb{omojudi10}{10}{ECHR: Unofficial}
 
+\newpage
 \lcdfielddump{balogh04}{ECHR: Unreported}
 
+\newpage
 \lcdfielddumpb{clearbrook}{3}{Canadian cases}
 
+\newpage
 \begin{casequoteb}{The Rules}{ -- \cite[20]{pietersma}}
 Adherence to the \textit{Rules of Court} is necessary to ensure a level playing field for all litigants and to provide predictability for all participants.
 \end{casequoteb}
 
+\newpage
 \lcdfielddumpb{tang}{7}{Australian cases}
 
 
+\newpage
 \lcdfielddump{western97}{US cases}
 
 
+\newpage
 \lcdfielddump{operadora09}{US cases}
 
 
+\newpage
 \lcdfielddump{corfu}{Public International Law cases}
 
 
+\newpage
 \lcdfielddump{wall}{Public International Law cases}
 
+\newpage
 \section{Legislation}
 \cmdc{Pagination} choices are \cmdc{section} (s), \cmdc{rule} (r), \cmdc{regulation} (reg), \cmdc{clause} (cl).
 
+
 \lcdfielddump{ucta}{Statute}
 
+\newpage
 \lcdfielddump{nia1965}{Statute, subsequent cite}
 Subsequent cite: \dosubseqciteb{nia1965}{2}
 
+\newpage
 \lcdfielddump{disorderly}{Regulations}
 
-\lcdfielddumpb{academies}{8(2)}{Bills}
-\cmdc{Institution} choices are \cmdc{HC}, \cmdc{HL}.
+\newpage
+\lcdfielddumpb{academies}{8(2)}
+{Bills}
 
+\cmdc{Institution} choices are 
+\cmdc{HC}, \cmdc{HL}.
+
+\newpage
 \lcdfielddump{charitiesnotes}{Explanatory Notes}
 
+\newpage
 \lcdfielddump{UNGA_Res2222}{UN Resolutions}
 %text\autocite{UNGA_Res2222}
 
@@ -1711,63 +1753,70 @@ Sundry material \ldots
 %  \settoggle{bbx:looseleaf}{#1}}
 %\DeclareEntryOption{year-essential}[true]{%
 %    \setboolean{bbx@year-essential}{#1}}
+\newcommand\cmdd[2]{%
+\textbackslash #1\{#2\} $\mapsto$ \csname#1\endcsname{#2}%
+}
+\newcommand\cmddb[3]{%
+\textbackslash #1\brackets{#2}\{#3\} $\mapsto$ \csname#1\endcsname[#2]{#3}%
+}
+
 
 \section{Meta}
-1.\underWavy{Meta commands in this document}
+1.\markerpar\underWavy{Meta commands in this document}
 
-2.\circnum{text}
+2.\cmdd{circnum}{text}
 
 \optsett{3.text1}{text2}
 
-4.\bcmd{text}
+4.\cmdd{bcmd}{text}
 
-5.\cmd{text}
+5.\cmdd{cmd}{text}
 
-6.\cmdb{text}
+6.\cmdd{cmdb}{text}
 
-7.\cmdc{text}
+7.\cmdd{cmdc}{text}
 
-8.\mcmd{text}
+8.\cmdd{mcmd}{text}
 
-9.\braces{text}
+9.\cmdd{braces}{text}
 
-10.\brackets{text}
+10.\cmdd{brackets}{text}
 
-11.\bracketsb{text}
+11.\cmdd{bracketsb}{text}
 
-12.\parens{text}
+12.\cmdd{parens}{text}
 
-13.\disp{text}
+13.\cmdd{disp}{text}
 
-14.\dispb{text}
+14.\cmdd{dispb}{text}
 
-\dispeg{15.text}
+\cmdd{dispeg}{15.text}
 
-16.\angles{text}
+16.\cmdd{angles}{text}
 
-17.\note{text}
+17.\cmdd{note}{text}
 
 18.\egcasename
 
 19.\egcaseref
 
-20.\eg{text}
+20.\cmdd{eg}{text}
 
-21.\hlybox{}{text}
+21.\cmddb{hlybox}{red}{text}
 
-22.\bemph{text}
+22.\cmdd{bemph}{text}
 
-23.\cemph{text}
+23.\cmdd{cemph}{text}
 
-24.\itemdesc{text}
+24.\cmdd{itemdesc}{text}
 
-25.\vv{text}
+25.\cmdd{vv}{text}
 
 %26.\democomm{textit}{angles}{text1}{$\mapsto$}
 
 26a. \democomm[See ]{cite}{henly28}{:}
 
-27.\examplebox{x}
+27.\cmdd{examplebox}{x}
 
 28.\markera
 
@@ -1796,6 +1845,6 @@ text: xcasenote environment
 %\mydpletter[vertical pos]{Drop lines num}{ellipse y radius}{Scale font size}{Drop letter}{image}{Append text}{Par contents}
 {\mydpletter[-2pt]{4}{50pt}{4}{\color{red!70}O}{equity}{US Supreme Court}{legal lipsum: }} \leglipsumr
 
-
+{\fdev  ङ+्+क+्+ष+्+य =   ङ्क्ष्य }
 
 \end{document}
