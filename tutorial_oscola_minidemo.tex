@@ -69,7 +69,7 @@
 \setmonofont{Noto Sans Mono}%[Colour=blue]
 \newfontface\fcircnum{DejaVu Sans}[Colour=blue]
 \newfontface\fdev{Shobhika}[Script=Devanagari,Renderer=HarfBuzz]
-\newcommand\circnum[1]{{\fcircnum#1}}
+\newcommand\circnum[1]{{\fcircnum\symbol{\ifcase#1\or 10112\or 10113\or 10114\or 10115\or 10116\or 10117\or 10118\or 10119\or 10120\fi}}}
 %------------------
 \usepackage[british]{babel}
 \usepackage{csquotes}
@@ -1764,7 +1764,7 @@ Sundry material \ldots
 \section{Meta}
 1.\markerpar\underWavy{Meta commands in this document}
 
-2.\cmdd{circnum}{text}
+2.\cmdd{circnum}{9}
 
 \optsett{3.text1}{text2}
 
