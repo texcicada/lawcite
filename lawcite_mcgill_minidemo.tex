@@ -1,5 +1,429 @@
  
 \begin{filecontents*}[overwrite]{lawcitemini.dbx}
+
+%...............................................................................................
+\ExplSyntaxOn
+
+
+		\cs_generate_variant:Nn 
+			\seq_gset_split:Nnn 
+			{ cno }
+
+
+	\seq_new:N 
+			\l_fc_rweq_seq
+	\seq_new:N 
+			\l_fc_rweqz_seq
+	\seq_new:N 
+			\l_fc_rweqy_seq
+	\tl_new:N 
+			\l_fc_rweqz_tl
+	\seq_new:N 
+			\l_fc_rweqyy_seq
+	\int_new:N 
+			\l_fc_rweqz_int
+	\int_new:N 
+			\l_fc_rweqy_int
+
+
+	\tl_new:N 
+			\g_fc_namespace_tl
+
+	\tl_gset:Nn 
+			\g_fc_namespace_tl
+			{mfs}
+
+
+
+
+
+%****************************************************
+%*
+%****************************************************
+%------------------
+	\cs_set:Npn \ic_funccatena:n #1 { 
+	% 1=seq
+			\seq_set_split:Nnn 
+					\l_tmpa_seq 
+					{ ; } 
+					{ #1 }
+			\tl_set:Nx 
+					\l_tmpa_tl % bibentry key
+					{ 
+						\seq_item:Nn 
+								\l_tmpa_seq  
+								{1} 
+					}
+			\tl_set:Nx 
+					\l_tmpb_tl % action on next decision
+					{ 
+						\seq_item:Nn 
+								\l_tmpa_seq 
+								{2} 
+					}
+
+% first item
+			\int_compare:nNnTF 
+					{ \g_fc_curritem_int } = { 1 }
+					{ 
+						\lcinline % full case name\ref
+									{ \tl_use:N \l_tmpa_tl }
+					}
+					{ 
+						\lawciteref %caseref only
+									{ \tl_use:N \l_tmpa_tl }
+					}
+
+%last item
+			\int_compare:nNnTF 
+					{ \g_fc_curritem_int } { = } { \g_fc_totalitems_int }
+					{   } % no punct sep: delim
+					{ , \tex_space:D  } % delim comma space
+	
+					\tl_use:N \l_tmpb_tl % court action (empty on last decision)
+
+%last item
+			\int_compare:nNnTF 
+					{ \g_fc_curritem_int } { = } { \g_fc_totalitems_int }
+					{   } % no delim
+					{ \tex_space:D  } % delim space
+						
+%			\bool_if:NTF
+%				\g_fc_rollcall_bool
+%				{
+%			\tex_space:D
+%			\mkbibparens
+%						{ \tl_use:N \l_tmpb_tl }
+%				}
+%				{
+%						,
+%						\tex_space:D
+%						\tl_use:N \l_tmpb_tl
+%				}
+						
+%			\int_compare:nNnTF 
+%					{ \g_fc_curritem_int } { < } { \g_fc_totalitems_int }
+%					{ ; \tex_space:D \int_gincr:N \g_fc_curritem_int }
+%					{ . }
+						
+						% looper+
+				\int_gincr:N \g_fc_curritem_int
+				
+	}
+
+
+%****************************************************
+%*
+%****************************************************
+%------------------
+	\cs_set:Npn \ic_funcrollcall:n #1 { 
+	% 1=seq
+			\seq_set_split:Nnn 
+					\l_tmpa_seq 
+					{ ; } 
+					{ #1 }
+			\tl_set:Nx 
+					\l_tmpa_tl % bibentry key
+					{ 
+						\seq_item:Nn 
+								\l_tmpa_seq  
+								{1} 
+					}
+			\tl_set:Nx 
+					\l_tmpb_tl % user note/comment
+					{ 
+						\seq_item:Nn 
+								\l_tmpa_seq 
+								{2} 
+					}
+	
+			\lcinline
+						{ \tl_use:N \l_tmpa_tl }
+						
+			\bool_if:NTF
+				\g_fc_rollcall_bool
+				{
+			\tex_space:D
+			\mkbibparens
+						{ \tl_use:N \l_tmpb_tl }
+				}
+				{
+						,
+						\tex_space:D
+						\tl_use:N \l_tmpb_tl
+				}
+						
+			\int_compare:nNnTF 
+					{ \g_fc_curritem_int } { < } { \g_fc_totalitems_int }
+					{ ; \tex_space:D \int_gincr:N \g_fc_curritem_int }
+					{ . }
+						
+				
+	}
+
+
+
+
+
+%****************************************************
+%*
+%****************************************************
+%------------------
+	\cs_set:Npn \ic_funcsortseq:cn #1#2 { % 1=seq, 2=order (<:descending, >:ascending) 
+	\seq_sort:cn  { #1 } %\l_fc_rweq_seq 
+		{
+			\seq_clear:N 
+					\l_fc_rweqz_seq 
+			\seq_clear:N 
+					\l_fc_rweqy_seq 
+			\seq_set_split:Nnn 
+					\l_fc_rweqz_seq 
+					{ ; } 
+					{ ##1 }
+			\seq_set_split:Nnn 
+					\l_fc_rweqy_seq 
+					{ ; } 
+					{ ##2 }
+			\tl_set:Nx 
+					\l_fc_rweqz_tl 
+					{ 
+						\seq_item:Nn 
+								\l_fc_rweqz_seq 
+								{1} 
+					}
+			\tl_set:Nx 
+					\l_fc_rweqy_tl 
+					{ 
+						\seq_item:Nn 
+								\l_fc_rweqy_seq 
+								{1} 
+					}
+
+			\int_set:Nn 
+					\l_fc_rweqz_int 
+					{ 
+						\tl_count_tokens:V 
+								\l_fc_rweqz_tl 
+					}
+			\int_set:Nn 
+					\l_fc_rweqy_int 
+					{ 
+						\tl_count_tokens:V 
+						\l_fc_rweqy_tl 
+					}
+			\int_compare:nNnTF 
+					{ \l_fc_rweqz_int } { #2 } { \l_fc_rweqy_int }
+					{ \sort_return_swapped: }
+					{ \sort_return_same: }
+		}
+}
+
+
+
+
+	\int_new:N 
+			\g_fc_curritem_int
+	\int_new:N 
+			\g_fc_totalitems_int
+	\bool_new:N 
+			\g_fc_rollcall_bool
+	\bool_new:N 
+			\g_fc_catena_bool
+%****************************************************
+%*
+%****************************************************
+%--------------------
+\NewDocumentCommand { \lcrollcall } { s +m } { 
+% 1=namspace,
+% 2=seq name, 
+% 3=data
+
+				\IfBooleanTF {#1}
+				{ \bool_gset_true:N \g_fc_rollcall_bool 	}
+				{ \bool_gset_false:N \g_fc_rollcall_bool 	}
+
+
+				\mfsloadaseq [lc] { rollcall } { #2 }
+				
+					\int_gset:Nn
+							\g_fc_totalitems_int
+							{
+							\seq_count:c
+							{ g_fc_rwe 
+					  \tl_use:N
+					  		\g_fc_namespace_tl 
+							rollcall
+					   _seq } 
+					   }
+
+					\int_gset:Nn
+						\g_fc_curritem_int
+						{ 1 }
+
+
+			\seq_map_function:cN 
+					{ g_fc_rwe 
+					  \tl_use:N
+					  		\g_fc_namespace_tl 
+							rollcall
+					   _seq } 
+					\ic_funcrollcall:n
+%					\adddot
+
+}
+
+
+
+
+
+
+%****************************************************
+%*
+%****************************************************
+%--------------------
+\NewDocumentCommand { \lccatena } { s +m } { 
+% 1=namspace,
+% (2=seq name, )
+% 3=data
+
+				\IfBooleanTF {#1}
+				{ \bool_gset_true:N \g_fc_catena_bool 	}
+				{ \bool_gset_false:N \g_fc_catena_bool 	}
+
+
+				\mfsloadaseq [lc] { catena } { #2 }
+				
+					\int_gset:Nn
+							\g_fc_totalitems_int
+							{
+							\seq_count:c
+							{ g_fc_rwe 
+					  \tl_use:N
+					  		\g_fc_namespace_tl 
+							catena
+					   _seq } 
+					   }
+
+					\int_gset:Nn
+						\g_fc_curritem_int
+						{ 1 }
+
+
+			\seq_map_function:cN 
+					{ g_fc_rwe 
+					  \tl_use:N
+					  		\g_fc_namespace_tl 
+							catena
+					   _seq } 
+					\ic_funccatena:n
+%					\adddot
+
+}
+
+
+
+
+
+
+%****************************************************
+%*
+%****************************************************
+%--------------------
+\NewDocumentCommand { \mfsloadaseq } { o m +m } { % 1=seq name, 2=data
+
+				\IfNoValueTF { #1 } 
+						{ \tl_clear:N \g_fc_namespace_tl } 
+						{ \tl_gset:Nn \g_fc_namespace_tl { #1 } }
+
+
+	\cs_if_free:cT
+			{ g_fc_rwe \g_fc_namespace_tl #2 _seq }
+			{ \seq_new:c
+					{ g_fc_rwe \g_fc_namespace_tl #2 _seq } 
+			}
+	\seq_gclear:c 
+			{ g_fc_rwe \g_fc_namespace_tl #2 _seq } 
+	\seq_gset_split:cno 
+			{ g_fc_rwe \g_fc_namespace_tl #2 _seq } 
+			{ , } 
+			{ #3 }
+
+%	\seq_show:c 
+%			{ g_fc_rwe \g_fc_namespace_tl #2 _seq } 
+
+
+}
+
+
+%****************************************************
+%*
+%****************************************************
+%--------------------
+\NewDocumentCommand { \mfsloadaprop } { o m +m } { % 1=NS, 2=prop name, 3=data
+
+				\IfNoValueTF { #1 } 
+						{ \tl_clear:N \g_fc_namespace_tl } 
+						{ \tl_gset:Nn \g_fc_namespace_tl { #1 } }
+
+	\cs_if_free:cT
+			{ g_fc_rwe \g_fc_namespace_tl #2 _prop }
+			{ \prop_new:c
+					{ g_fc_rwe \g_fc_namespace_tl #2 _prop } 
+			}
+	\prop_gclear:c 
+			{ g_fc_rwe \g_fc_namespace_tl #2 _prop } 
+	\prop_gset_from_keyval:cn 
+			{ g_fc_rwe \g_fc_namespace_tl #2 _prop } 
+			{ #3 }
+
+}
+
+
+
+
+%****************************************************
+%*
+%****************************************************
+%--------------------
+\NewDocumentCommand { \mfssortaseq } { o m m } { %1=seqname, 2=><, asc/desc
+
+				\IfNoValueTF { #1 } 
+						{ \tl_clear:N \g_fc_namespace_tl } 
+						{ \tl_gset:Nn \g_fc_namespace_tl { #1 } }
+
+\ic_funcsortseq:cn { g_fc_rwe \g_fc_namespace_tl #2 _seq } { #3 }
+
+}
+
+
+
+%****************************************************
+%*
+%****************************************************
+%--------------------
+\NewDocumentCommand { \mfssortaseqnum } { o m m } { %1=seqname, 2=><, asc/desc
+
+				\IfNoValueTF { #1 } 
+						{ \tl_clear:N \g_fc_namespace_tl } 
+						{ \tl_gset:Nn \g_fc_namespace_tl { #1 } }
+
+\ic_funcsortseqnum:cn { g_fc_rwe \g_fc_namespace_tl #2 _seq } { #3 }
+}
+
+
+
+
+
+
+
+
+
+%...............................................................................................
+\ExplSyntaxOff
+
+\newcommand\lccomma{,}
+
+
 %hyperref support for splitindex
 %\NewDocumentCommand\boldhyperpage{ m } {\textbf{\hyperpage{#1}}
 %\NewDocumentCommand\boldhyperpage{ m } {\hyperpage{#1}}
@@ -6537,6 +6961,9 @@ quotedin = {{quoted in}}{{quoted in}},
 
 @quote{q14,quotetext =  {We have been building an impressive structure brick by brick for many years, but without any apparent overall design, and we have not stepped back to examine the coherence of the net result.},crossref =  {ryder},options={skipbib=true},}
 
+@quote{q119,crossref = {chow},quotepinpoint = {1},quotetext = {Smartphones are ubiquitous in modern society and a principal means by which vast numbers of individuals communicate with one another. Much of that communication is in the form of telephone calls and text messages. – Skolrood J},options = {skipbib=true},
+}
+
 
 @case{casetest,
 attribution = {attribution},
@@ -7966,6 +8393,21 @@ shorttitle={Torts},
 options={skipbib=true,},
 }
 
+
+
+@case{cargill,partya = {Cargill Grain Co},partyb = {Foundation Co of Canada Ltd},reportyear = {1970},volyearneeded = {true},reportseries = {CS},reportpage = {145},}
+@case{cargill2,partya = {Cargill Grain Co},partyb = {Foundation Co of Canada Ltd},reportyear = {1970},volyearneeded = {true},reportseries = {CA},reportpage = {265},}
+@case{cargill3,partya = {Cargill Grain Co},partyb = {Foundation Co of Canada Ltd},reportyear = {1977},reportvolume = {1},volyearneeded = {true},reportseries = {SCR},reportpage = {659},linkname = {1975 CanLII 200 (SCC)},url = {https://www.canlii.org/en/ca/scc/doc/1975/1975canlii200/1975canlii200.html},}
+
+@case{chow,partya = {Chow},partyb = { Facebook, Inc},caseyear = {2022},courtname = {BCSC},casenumber = {137},linkname = {CanLII},url = {https://www.canlii.org/en/bc/bcsc/doc/2022/2022bcsc137/2022bcsc137.html},}
+@case{douez,partya = {Douez},partyb = { Facebook, Inc},caseyear = {2014},courtname = {BCSC},casenumber = {953},}
+@case{douez2,partya = {Douez},partyb = { Facebook, Inc},caseyear = {2015},courtname = {BCCA},casenumber = {279},}
+@case{douez3,partya = {Douez},partyb = { Facebook, Inc},caseyear = {2017},courtname = {SCC},casenumber = {33},}
+@case{douez4,partya = {Douez},partyb = { Facebook, Inc},caseyear = {2018},courtname = {BCCA},casenumber = {186},}
+@case{douez5,partya = {Douez},partyb = { Facebook, Inc},reportyear = {2018},volyearneeded = {true},reportseries = {SCCA No},reportpage = {298},}
+
+
+
 \end{filecontents*}
 
 
@@ -8055,28 +8497,28 @@ options={skipbib=true,},
 
 
 
-\newcommand\abibname{lawcitemini}
-\newcommand\abibstyle{style=\abibname}
-\usepackage[
-\abibstyle , 
-lawcitestyle=mcgill,
-   use-toc-parnumrefs=false,
-indexing=cite,
-citetracker=true,
-citecounter=context,
-ibidtracker=foot,%option setting for footnotes: assumes single refs
-%%ibidstyle=uc,%uppercase Ibid OSCOLA option
-pagetracker=true,
-idemtracker=true,
-opcittracker=true,
-loccittracker=true,%if same postnote in an ibid
-autocite=footnote,
-   datezeros=true,
-   minnames=5,
-   maxnames=5,%more names than this are truncated to minnames
-   dashed=false,
-   loadfiles=true,% for annotations stored in files
-]{biblatex}
+	\newcommand\abibname{lawcitemini}
+	\newcommand\abibstyle{style=\abibname}
+	\usepackage[
+	\abibstyle , 
+	lawcitestyle=mcgill,
+	   use-toc-parnumrefs=false,
+	indexing=cite,
+	citetracker=true,
+	citecounter=context,
+	ibidtracker=foot,%option setting for footnotes: assumes single refs
+	%%ibidstyle=uc,%uppercase Ibid OSCOLA option
+	pagetracker=true,
+	idemtracker=true,
+	opcittracker=true,
+	loccittracker=true,%if same postnote in an ibid
+	autocite=footnote,
+	   datezeros=true,
+	   minnames=5,
+	   maxnames=5,%more names than this are truncated to minnames
+	   dashed=false,
+	   loadfiles=true,% for annotations stored in files
+	]{biblatex}
 
 \addbibresource{\jobname.bib}
 \addbibresource{clist\jobname.bib}
@@ -9807,7 +10249,7 @@ Bibentry \cmdc{q10} does a cross-reference to the case's bibentry, to bring in t
 \togglefalse{usenoterup}
 \togglefalse{usecommentary}
 
-\section{Text Highlighting}
+%\section{Text Highlighting}
 \p For those interested, text highlighting in this document has been done by the following.
 
 \p highlighting -- the \cmd{highLight} command, \highLight{this is highlighted}, from the luacolor and lua-ul packages.
@@ -9912,6 +10354,43 @@ nottype=ljarticle,
 notkeyword=lawbook,
 title={\center General Material},
 ]
+
+
+
+
+\cmd{lcrollcall*}
+
+\lcrollcall*{
+colchester;a comment
+,araujo;another comment
+,coldwater;some more comment
+}
+
+
+\cmd{lcrollcall}
+
+\lcrollcall{
+colchester;\textbf{formatted} text
+,araujo;\textit{formatted} text
+,coldwater;\textbf{a note}
+}
+
+
+\cmd{lccatena}
+
+\lccatena{%
+cargill;aff'd
+,cargill2;rev’d on other grounds\lccomma
+,cargill3;
+}.
+
+\lccatena{%
+douez;rev’d but not on this point
+,douez2;rev’d but not on this point
+,douez3;subsequent appeal from the BCSC judgment rev’d in part but not on this point
+,douez4;leave to appeal ref’d
+,douez5;
+}.
 
 
 
