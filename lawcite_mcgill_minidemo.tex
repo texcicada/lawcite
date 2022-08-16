@@ -3417,6 +3417,15 @@ subxxx
 \tl_use:N \l_myscriptname_tl
 }
 
+\NewDocumentCommand  { \lcqquotationmdf } { m } {
+
+\begin{mdframed}
+\lcqquotation{#1}
+\end{mdframed}
+
+}
+
+
 \ExplSyntaxOff
 
 \newcommand*{\lcsetseq}[1]{%
@@ -8458,7 +8467,8 @@ options={skipbib=true,},
 @case{cargill2,partya = {Cargill Grain Co},partyb = {Foundation Co of Canada Ltd},reportyear = {1970},volyearneeded = {true},reportseries = {CA},reportpage = {265},}
 @case{cargill3,partya = {Cargill Grain Co},partyb = {Foundation Co of Canada Ltd},reportyear = {1977},reportvolume = {1},volyearneeded = {true},reportseries = {SCR},reportpage = {659},linkname = {1975 CanLII 200 (SCC)},url = {https://www.canlii.org/en/ca/scc/doc/1975/1975canlii200/1975canlii200.html},}
 
-@case{chow,partya = {Chow},partyb = { Facebook, Inc},caseyear = {2022},courtname = {BCSC},casenumber = {137},linkname = {CanLII},url = {https://www.canlii.org/en/bc/bcsc/doc/2022/2022bcsc137/2022bcsc137.html},pagination =  {atparagraph},}
+@case{chow,partya = {Chow},partyb = { Facebook, Inc},caseyear = {2022},courtname = {BCSC},casenumber = {137},attribution = {Skolrood J},linkname = {CanLII},url = {https://www.canlii.org/en/bc/bcsc/doc/2022/2022bcsc137/2022bcsc137.html},pagination = {atparagraph},}
+
 @case{douez,partya = {Douez},partyb = { Facebook, Inc},caseyear = {2014},courtname = {BCSC},casenumber = {953},}
 @case{douez2,partya = {Douez},partyb = { Facebook, Inc},caseyear = {2015},courtname = {BCCA},casenumber = {279},}
 @case{douez3,partya = {Douez},partyb = { Facebook, Inc},caseyear = {2017},courtname = {SCC},casenumber = {33},}
@@ -8467,7 +8477,7 @@ options={skipbib=true,},
 
 @case{vww,partya = {VWW},partyb = {Wasylyshen},caseyear = {2013},courtname = {ABQB},casenumber = {327},reportvolume = {563},reportseries = {AR},reportpage = {281},linkname = {CanLII},url = {https://canlii.ca/t/fz327},pagination = {atparagraph},}
 
-@quote{q120,crossref = {vww},quotepinpoint = {72-74},}
+@quote{q120,crossref = {vww},quotepinpoint = {72-74},options={skip-bib=true},}
 
 
 \end{filecontents*}
@@ -10466,11 +10476,19 @@ douez;rev’d but not on this point
 
 \qqcite[1]{q119}
 
-\cmd{lcqquotation} for extensive quotation (e.g., excerpt for a casebook), here visually set off wih an mdframed environment:
+\cmd{lcqquotation} for extensive quotation (e.g., excerpt for a casebook), here visually set off wih an mdframed environment:\footnote{The wrapper command is \cmd{lcqquotationmdf}.}
 
-\begin{mdframed}
-\lcqquotation{q120}
-\end{mdframed}
+%\begin{mdframed}
+\lcqquotationmdf{q120}
+%\end{mdframed}
+
+The bibentry is basically just a nexus:
+
+\begin{verbatim}
+@quote{q120,crossref = {vww},options={skip-bib=true},}
+\end{verbatim}
+
+with the crossref pulling in the legal citation, and the citation command pulling in text and latex code from the corresponding file, \cmdc{bibqquotation-q120.tex}. Use \cmd{nocite}\braces{vww} to process the crossref case as an entry in its own right into the Table of Cases and Bibliography if it is not cited elsewhere in the main text.\nocite{vww}
 
 
 \end{document}
