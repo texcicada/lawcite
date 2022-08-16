@@ -561,6 +561,7 @@ quotetext,
 annotation,
 noterup,
 commentary,
+qquotation,
 }
 
 \DeclareDatamodelEntryfields[case]{%
@@ -601,6 +602,7 @@ mncurl,
 annotation,
 noterup,
 commentary,
+%qquotation,
 related,
 relatedoptions,
 relatedtype,
@@ -635,6 +637,7 @@ mncurl,% court link
 annotation,
 noterup,
 commentary,
+%qquotation,
 related,
 relatedoptions,
 relatedtype,
@@ -657,6 +660,7 @@ shortname,
 annotation,
 noterup,
 commentary,
+%qquotation,
 related,
 relatedoptions,
 relatedtype,
@@ -668,6 +672,7 @@ quotetext,
 annotation,
 noterup,
 commentary,
+qquotation,
 related,
 relatedoptions,
 relatedtype,
@@ -779,17 +784,24 @@ relatedstring,
 % usecommentary
 \newtoggle{usecommentary}
 \toggletrue{usecommentary}
+% useqquotation
+\newtoggle{useqquotation}
+\toggletrue{useqquotation}
+
+
 
 \newcommand{\setannotationson}{%
 \toggletrue{useannotation}
 \toggletrue{usenoterup}
 \toggletrue{usecommentary}
+\toggletrue{useqquotation}
 }
 
 \newcommand{\setannotationsoff}{%
 \togglefalse{useannotation}
 \togglefalse{usenoterup}
 \togglefalse{usecommentary}
+\togglefalse{useqquotation}
 }
 
 %=======================================
@@ -813,6 +825,11 @@ relatedstring,
 {\togglefalse{usecommentary}}%
 }
 
+\DeclareBibliographyOption[boolean]{use-qquotation}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{useqquotation}}
+{\togglefalse{useqquotation}}%
+}
 
 
 \DeclareBibliographyOption[boolean]{ibid-comma-postnote}[true]{%
@@ -1198,19 +1215,20 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \togglefalse{ibiditalic}%
 \togglefalse{ibiduppercase}%
 \setcounter{ibiddelimmode}{1}%none   
-\togglefalse{pinpointaftermnc}
-\togglefalse{ibidsupracomma}
-\togglefalse{ibidsuprabrackets}
-\togglefalse{ibidsupraon}
-\togglefalse{ibidsupraitalic}
-\togglefalse{ibidsupranotelong}
-\togglefalse{bookauthorgiven}   
-\togglefalse{ibidpostdelimcomma}
+\togglefalse{pinpointaftermnc}%
+\togglefalse{ibidsupracomma}%
+\togglefalse{ibidsuprabrackets}%
+\togglefalse{ibidsupraon}%
+\togglefalse{ibidsupraitalic}%
+\togglefalse{ibidsupranotelong}%
+\togglefalse{bookauthorgiven}%
+\togglefalse{ibidpostdelimcomma}%
 %\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
-\toggletrue{parabrackets}
-\togglefalse{useannotation}
-\togglefalse{usenoterup}
-\togglefalse{usecommentary}
+\toggletrue{parabrackets}%
+\togglefalse{useannotation}%
+\togglefalse{usenoterup}%
+\togglefalse{usecommentary}%
+\togglefalse{useqquotation}%
 \setlccurrentstyletag{\lcstyletagdefault}%
 }
 
@@ -1249,9 +1267,10 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \togglefalse{ibidpostdelimcomma}%
 %\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
 \toggletrue{parabrackets}%
-\togglefalse{useannotation}
-\togglefalse{usenoterup}
-\togglefalse{usecommentary}
+\togglefalse{useannotation}%
+\togglefalse{usenoterup}%
+\togglefalse{usecommentary}%
+\togglefalse{useqquotation}%
 \setlccurrentstyletag{\lcstyletagaglc}%
 }
 
@@ -1288,9 +1307,10 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \toggletrue{ibidpostdelimcomma}%
 %\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
 \toggletrue{parabrackets}%
-\togglefalse{useannotation}
-\togglefalse{usenoterup}
-\togglefalse{usecommentary}
+\togglefalse{useannotation}%
+\togglefalse{usenoterup}%
+\togglefalse{usecommentary}%
+\togglefalse{useqquotation}%
 \setlccurrentstyletag{\lcstyletagmlr}%
 }
 
@@ -1331,9 +1351,10 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \togglefalse{ibidpostdelimcomma}%
 %\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
 \togglefalse{parabrackets}%
-\togglefalse{useannotation}
-\togglefalse{usenoterup}
-\togglefalse{usecommentary}
+\togglefalse{useannotation}%
+\togglefalse{usenoterup}%
+\togglefalse{usecommentary}%
+\togglefalse{useqquotation}%
    \setlccurrentstyletag{\lcstyletagmcgill}%
 }
 
@@ -1369,9 +1390,10 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 \toggletrue{ibidpostdelimcomma}%
 %\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
 \toggletrue{parabrackets}%
-\togglefalse{useannotation}
-\togglefalse{usenoterup}
-\togglefalse{usecommentary}
+\togglefalse{useannotation}%
+\togglefalse{usenoterup}%
+\togglefalse{usecommentary}%
+\togglefalse{useqquotation}%
 \setlccurrentstyletag{\lcstyletagindigo}%
 }
 
@@ -2181,7 +2203,7 @@ xxx}%
 }
 
 
-%====================================== annotatoion, noterup, commentary
+%====================================== annotation, noterup, commentary, qquotation
 %%% built-in:
 %%\newbibmacro*{annotation}{%
 %%  \begingroup
@@ -2212,12 +2234,24 @@ xxx}%
   \endgroup}
   
 \newcommand*{\bibcommentaryprefix}{bibcommentary-}
+%---
+\newbibmacro*{qquotation}{%
+  \begingroup
+  \togglefalse{blx@bibliography}%===
+  \iffieldundef{qquotation}
+    {\addspace\printfile[annotation]{\bibqquotationprefix\thefield{entrykey}.tex}}
+    {\addspace\printfield{qquotation}}%
+   \addspace -- \addspace \usebibmacro{getcasenamerefnofn}
+  \endgroup}
+  
+\newcommand*{\bibqquotationprefix}{bibqquotation-}
 
 %-----
 \newbibmacro*{getann:noter:comm}{%
 \iftoggle{useannotation}{\usebibmacro{annotation}}{}%
 \iftoggle{usenoterup}{\usebibmacro{noterup}}{}%
 \iftoggle{usecommentary}{\usebibmacro{commentary}}{}%
+%\iftoggle{useqquotation}{\usebibmacro{qquotation}}{}%
 }
 
 
@@ -3492,6 +3526,24 @@ x#1;;
 {\usebibmacro{prenote}}%
 {%
 \usebibmacro{qqcitebox}%
+}%
+{%
+%\multicitedelim%
+}%
+{%
+ \usebibmacro{getann:noter:comm}%
+ }
+
+
+
+
+
+%extensive quote:
+\DeclareCiteCommand{lcqquotation}%
+{\usebibmacro{prenote}}%
+{%
+\iftoggle{useqquotation}{\usebibmacro{qquotation}}{}%
+%\usebibmacro{qquotation}%
 }%
 {%
 %\multicitedelim%
@@ -5913,6 +5965,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \docompfieldhl{annotation}
 \docompfieldhl{noterup}
 \docompfieldhl{commentary}
+\docompfieldhl{qquotation}
 %\noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
 %\noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
 %\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
@@ -6002,6 +6055,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \docompfield{annotation}
 \docompfield{noterup}
 \docompfield{commentary}
+\docompfield{qquotation}
 \noindent ...\par%
 \}\par%
 \end{quotation}
@@ -6873,6 +6927,12 @@ quotedin = {{quoted in}}{{quoted in}},
 @case{rta1979,partya =  {Re Residential Tenancies Act, 1979},caseyear =  {1981},courtname =  {CanLII},casenumber =  {24},pagination =  {atparagraph},reportyear =  {1981},reportvolume =  {1},volyearneeded =  {true},reportseries =  {SCR},reportpage =  {714},mncurl =  {https://www.canlii.org/en/ca/scc/doc/1981/1981canlii24/1981canlii24.html},}
 @case{ccpref,partya =  {Reference re Code of Civil Procedure (Que.), art. 35},caseyear =  {2021},courtname =  {SCC},casenumber =  {27},pagination =  {atparagraph},url =  {https://canlii.ca/t/jgnxz},linkname =  {CanLII},}
 @case{edwardsa,partya =  {Edwards},partyb =  {Attorney‑General for Canada},caseshortname =  {Edwards},caseyear =  {1929},courtname =  {CanLII},casenumber =  {438 (UK JCPC)},reportyear =  {1930},reportseries =  {AC},reportpage =  {134},mncurl =  {https://www.canlii.org/en/ca/ukjcpc/doc/1929/1929canlii438/1929canlii438.html},note =  {PC},casenickname =  {Persons},}
+@case{edwardsa2,partya =  {Edwards},partyb =  {AG of  Canada},caseshortname =  {Edwards},caseyear =  {1929},courtname =  {CanLII},casenumber =  {438 (UKPC)},reportyear =  {1930},reportseries =  {AC},reportpage =  {134},mncurl =  {https://www.canlii.org/en/ca/ukjcpc/doc/1929/1929canlii438/1929canlii438.html},note =  {PC},casenickname =  {The Persons Case},}
+@case{reece,partya = {Reece},partyb = {Edmonton (City)},caseyear = {2011},courtname = {ABCA},casenumber = {238},reportvolume = {335},reportseries = {DLR (4th)},reportpage = {600},}
+@case{reece2,partya = {Reece},partyb = {Edmonton (City)},reportyear = {2011},volyearneeded = {true},reportseries = {SCCA No},reportpage = {447},}
+@case{joly,partya = {Joly},partyb = {Pelletier},reportyear = {1999},volyearneeded = {true},reportseries = {OJ No},reportpage = {1728 (QL)},note = {Ont Sup Ct J},parallel = {1999 CarswellOnt 1587},}
+@statute{canconst1867b,statutetitle = {The Constitution Act},statuteregnalyear = {30 \& 31 Vict, c3},statutetitleyear = {1867},pagination = {section},}
+
 @case{rta1996,partya =  {Reference re Amendments to the Residential Tenancies Act (N.S.)},caseshortname =  {Residential Tenancies Act (1996)},caseyear =  {1996},courtname =  {CanLII},casenumber =  {259},pagination =  {atparagraph},reportyear =  {1996},reportvolume =  {1},volyearneeded =  {true},reportseries =  {SCR},reportpage =  {186},mncurl =  {https://www.canlii.org/en/ca/scc/doc/1996/1996canlii259/1996canlii259.html},}
 
 @case{hmb,partya = {H.M.B. Holdings Ltd.},partyb = {Antigua and Barbuda},caseyear = {2021},courtname = {SCC},casenumber = {44},linkname = {CanLII},url = {https://www.canlii.org/en/ca/scc/doc/2021/2021scc44/2021scc44.html},pagination = {atparagraph},}
@@ -6961,9 +7021,8 @@ quotedin = {{quoted in}}{{quoted in}},
 
 @quote{q14,quotetext =  {We have been building an impressive structure brick by brick for many years, but without any apparent overall design, and we have not stepped back to examine the coherence of the net result.},crossref =  {ryder},options={skipbib=true},}
 
-@quote{q119,crossref = {chow},quotepinpoint = {1},quotetext = {Smartphones are ubiquitous in modern society and a principal means by which vast numbers of individuals communicate with one another. Much of that communication is in the form of telephone calls and text messages. – Skolrood J},options = {skipbib=true},
+@quote{q119,crossref = {chow},quotepinpoint = {1},quotetext = {Smartphones are ubiquitous in modern society and a principal means by which vast numbers of individuals communicate with one another. Much of that communication is in the form of telephone calls and text messages. – Skolrood J},options = {skipbib=true},pagination =  {atparagraph},
 }
-
 
 @case{casetest,
 attribution = {attribution},
@@ -8399,13 +8458,16 @@ options={skipbib=true,},
 @case{cargill2,partya = {Cargill Grain Co},partyb = {Foundation Co of Canada Ltd},reportyear = {1970},volyearneeded = {true},reportseries = {CA},reportpage = {265},}
 @case{cargill3,partya = {Cargill Grain Co},partyb = {Foundation Co of Canada Ltd},reportyear = {1977},reportvolume = {1},volyearneeded = {true},reportseries = {SCR},reportpage = {659},linkname = {1975 CanLII 200 (SCC)},url = {https://www.canlii.org/en/ca/scc/doc/1975/1975canlii200/1975canlii200.html},}
 
-@case{chow,partya = {Chow},partyb = { Facebook, Inc},caseyear = {2022},courtname = {BCSC},casenumber = {137},linkname = {CanLII},url = {https://www.canlii.org/en/bc/bcsc/doc/2022/2022bcsc137/2022bcsc137.html},}
+@case{chow,partya = {Chow},partyb = { Facebook, Inc},caseyear = {2022},courtname = {BCSC},casenumber = {137},linkname = {CanLII},url = {https://www.canlii.org/en/bc/bcsc/doc/2022/2022bcsc137/2022bcsc137.html},pagination =  {atparagraph},}
 @case{douez,partya = {Douez},partyb = { Facebook, Inc},caseyear = {2014},courtname = {BCSC},casenumber = {953},}
 @case{douez2,partya = {Douez},partyb = { Facebook, Inc},caseyear = {2015},courtname = {BCCA},casenumber = {279},}
 @case{douez3,partya = {Douez},partyb = { Facebook, Inc},caseyear = {2017},courtname = {SCC},casenumber = {33},}
 @case{douez4,partya = {Douez},partyb = { Facebook, Inc},caseyear = {2018},courtname = {BCCA},casenumber = {186},}
 @case{douez5,partya = {Douez},partyb = { Facebook, Inc},reportyear = {2018},volyearneeded = {true},reportseries = {SCCA No},reportpage = {298},}
 
+@case{vww,partya = {VWW},partyb = {Wasylyshen},caseyear = {2013},courtname = {ABQB},casenumber = {327},reportvolume = {563},reportseries = {AR},reportpage = {281},linkname = {CanLII},url = {https://canlii.ca/t/fz327},pagination = {atparagraph},}
+
+@quote{q120,crossref = {vww},quotepinpoint = {72-74},}
 
 
 \end{filecontents*}
@@ -8863,6 +8925,7 @@ coltitle=green!25!black,
 
 %---
 \usepackage{adjustbox}
+\usepackage{mdframed}
 
 
 %---
@@ -9565,7 +9628,7 @@ This allows use of cross-referencing and other biblatex features.
 \begin{itemize}\item\cmd{qqcite} (formatted epigraph quote): \end{itemize}\begin{quotation}\qqcite{q5}\end{quotation}
 \begin{itemize}\item\cmd{qqcitefn} (formatted epigraph quote with footnote mark, to be used in association with \cmd{footnotetext}):\end{itemize} \begin{quotation}\qqcitefn{q5}\end{quotation}\footnotetext{Some text.}
 
-\p An example of a case-related epigraph: \begin{quotation}\qqcite{q9}\end{quotation}
+\p \cmd{qqcite} An example of a case-related epigraph: \begin{quotation}\qqcite{q9}\end{quotation}
 
 \p \paradef{aonb} Authorial attribution can be formatted as the customary \textit{A on B} with \cmd{lcepigraphp}, for the possessive case: \lcepigraphp{anncrimnsw}.
 
@@ -10212,7 +10275,7 @@ Bibentry \cmdc{q10} does a cross-reference to the case's bibentry, to bring in t
 
 %------------
 \section{Annotations}
-\p Annotations can be added on a per-entry basis via a bibentry field or via an external file. The annotation feature is built into the Biblatex style. Lawcite adds a further two: \cmdc{noterup}, and \cmdc{commentary}.
+\p Annotations can be added on a per-entry basis via a bibentry field or via an external file. The annotation feature is built into the Biblatex style. Lawcite adds a further two: \cmdc{noterup}, and \cmdc{commentary}. \cmdc{qquotation} is intended for extensive quotation in citations.
 
 \p For performance reasons, use the external file method when there are large volumes of text(s).
 
@@ -10220,11 +10283,12 @@ Bibentry \cmdc{q10} does a cross-reference to the case's bibentry, to bring in t
 \toggletrue{useannotation}
 \toggletrue{usenoterup}
 \toggletrue{usecommentary}
-
+\toggletrue{useqquotation}
 \begin{verbatim}
 \toggletrue{useannotation}
 \toggletrue{usenoterup}
 \toggletrue{usecommentary}
+\toggletrue{useqquotation}
 \end{verbatim}
 
 \begin{quotation}
@@ -10240,7 +10304,8 @@ Bibentry \cmdc{q10} does a cross-reference to the case's bibentry, to bring in t
 \begin{quotation}
 \noindent\cmd{bibannotationprefix},\par
 \noindent \cmd{bibnoterupprefix}, \par 
-\noindent or \cmd{bibcommentaryprefix}. 
+\noindent \cmd{bibcommentaryprefix}, \par
+\noindent or \cmd{bibqquotationprefix}. 
 \end{quotation}
 
 
@@ -10248,6 +10313,7 @@ Bibentry \cmdc{q10} does a cross-reference to the case's bibentry, to bring in t
 \togglefalse{useannotation}
 \togglefalse{usenoterup}
 \togglefalse{usecommentary}
+%\togglefalse{useqquotation} % already excluded
 
 %\section{Text Highlighting}
 \p For those interested, text highlighting in this document has been done by the following.
@@ -10390,8 +10456,21 @@ douez;rev’d but not on this point
 ,douez3;subsequent appeal from the BCSC judgment rev’d in part but not on this point
 ,douez4;leave to appeal ref’d
 ,douez5;
-}.
+}
 
+
+
+\begin{casequote}{\lcshorttitle{chow}}
+\qcitetextnoqq{q119} in \lcinline[1]{chow}.
+\end{casequote}
+
+\qqcite[1]{q119}
+
+\cmd{lcqquotation} for extensive quotation (e.g., excerpt for a casebook), here visually set off wih an mdframed environment:
+
+\begin{mdframed}
+\lcqquotation{q120}
+\end{mdframed}
 
 
 \end{document}
