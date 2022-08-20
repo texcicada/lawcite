@@ -136,6 +136,21 @@
 %%keywords,
 %%note,
 
+% bibmacros: general
+\newbibmacro{lcrelated}{%
+%:\thefield{entrykey};\thefield{related}:%xxx
+\iffieldundef{related}{}{%
+\iffieldundef{relatedtype}{}{%
+\addspace\bibstring{\thefield{relatedtype}}\space}%
+\entrydata*{\thefield{related}}{%
+\ifentrytype{case}{\addspace\usebibmacro{getcasenameref}}{}%
+\ifentrytype{statute}{\addspace\usebibmacro{getstatutenameref}}{}%
+\ifentrytype{ljarticle}{\addspace\usebibmacro{getljarticle}}{}%
+}%
+}%
+}
+
+
 
 
 % bibmacros: case
@@ -523,7 +538,7 @@ xxx}%
 }
 
 
-%====================================== annotatoion, noterup, commentary
+%====================================== annotation, noterup, commentary, qquotation
 %%% built-in:
 %%\newbibmacro*{annotation}{%
 %%  \begingroup
@@ -539,8 +554,8 @@ xxx}%
   \begingroup
 %  \togglefalse{blx@bibliography}%
   \iffieldundef{noterup}
-    {\printfile[annotation]{\bibnoterupprefix\thefield{entrykey}.tex}}
-    {\printfield{noterup}}%
+    {\addspace\printfile[annotation]{\bibnoterupprefix\thefield{entrykey}.tex}}
+    {\addspace\printfield{noterup}}%
   \endgroup}
 
 \newcommand*{\bibnoterupprefix}{bibnoterup-}
@@ -549,17 +564,29 @@ xxx}%
   \begingroup
 %  \togglefalse{blx@bibliography}%
   \iffieldundef{commentary}
-    {\printfile[annotation]{\bibcommentaryprefix\thefield{entrykey}.tex}}
-    {\printfield{commentary}}%
+    {\addspace\printfile[annotation]{\bibcommentaryprefix\thefield{entrykey}.tex}}
+    {\addspace\printfield{commentary}}%
   \endgroup}
 
 \newcommand*{\bibcommentaryprefix}{bibcommentary-}
+%---
+\newbibmacro*{qquotation}{%
+  \begingroup
+  \togglefalse{blx@bibliography}%===
+  \iffieldundef{qquotation}
+    {\addspace\printfile[annotation]{\bibqquotationprefix\thefield{entrykey}.tex}}
+    {\addspace\printfield{qquotation}}%
+   \addspace -- \addspace \usebibmacro{getcasenamerefnofn}
+  \endgroup}
+
+\newcommand*{\bibqquotationprefix}{bibqquotation-}
 
 %-----
 \newbibmacro*{getann:noter:comm}{%
 \iftoggle{useannotation}{\usebibmacro{annotation}}{}%
 \iftoggle{usenoterup}{\usebibmacro{noterup}}{}%
 \iftoggle{usecommentary}{\usebibmacro{commentary}}{}%
+%\iftoggle{useqquotation}{\usebibmacro{qquotation}}{}%
 }
 
 
@@ -888,7 +915,10 @@ xxx}%
 
 %======================= statuteref
 \newbibmacro{getstatuteref}{%
-{}%
+{%
+\iffieldundef{statuteregnalyear}{}{%
+\addcomma\addspace\usebibmacro{getstatuteregnalyear}}%
+}%
 }
 
 %======================= statutenameref
@@ -1722,6 +1752,15 @@ subxxx
 \tl_use:N \l_myscriptname_tl
 }
 
+\NewDocumentCommand  { \lcqquotationmdf } { m } {
+
+\begin{mdframed}
+\lcqquotation{#1}
+\end{mdframed}
+
+}
+
+
 \ExplSyntaxOff
 
 \newcommand*{\lcsetseq}[1]{%
@@ -1801,6 +1840,7 @@ x#1;;
 
 \newbibmacro{quotebox}[1][]{%
 \parbox{\iffieldundef{partya}{0.4}{\qqcitecasewidth}\textwidth}{\raggedright%
+%\thefield{related}xxx
 \printfield{quotetext}\par%
 \smallskip\hrule\par%
 \medskip{%
@@ -1816,7 +1856,8 @@ x#1;;
 \iffieldundef{partya}{%
 \addcomma\addspace\usebibmacro{postnote}}{}%
 \adddot}%
-#1%
+\iffieldundef{related}{}{\addsemicolon\addspace\usebibmacro{lcrelated}}%
+#1% possible footnotemark
 }%end parbox
 }
 \newbibmacro{qqcitebox}{%
@@ -1829,6 +1870,24 @@ x#1;;
 {\usebibmacro{prenote}}%
 {%
 \usebibmacro{qqcitebox}%
+}%
+{%
+%\multicitedelim%
+}%
+{%
+ \usebibmacro{getann:noter:comm}%
+ }
+
+
+
+
+
+%extensive quote:
+\DeclareCiteCommand{lcqquotation}%
+{\usebibmacro{prenote}}%
+{%
+\iftoggle{useqquotation}{\usebibmacro{qquotation}}{}%
+%\usebibmacro{qquotation}%
 }%
 {%
 %\multicitedelim%
@@ -4050,7 +4109,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 
 \newbibmacro{getlcdcase}[1][x]{%
 {%
-\ttfamily\ \par
+\small\ttfamily\ \par
 \noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
 \noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
 \noindent\ifnameundef{author}{}{author =  \{\printnames[authorplain][-\value{listtotal}]{author}\},\par}%
@@ -4095,6 +4154,10 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{partysepx}{}{partysepx =  \{\thefield{partysepx}\},\par}%
 \noindent\iffieldundef{quotetext}{}{quotetext =  \{\thefield{quotetext}\},\par}%
 \noindent\iffieldundef{regnum}{}{regnum =  \{\thefield{regnum}\},\par}%
+\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
+\noindent\iffieldundef{relatedtype}{}{relatedtype =  \{\thefield{relatedtype}\},\par}%
+\noindent\iffieldundef{relatedstring}{}{relatedstring =  \{\thefield{relatedstring}\},\par}%
+\noindent\iffieldundef{relatedoptions}{}{relatedoptions =  \{\thefield{relatedoptions}\},\par}%
 \noindent\iffieldundef{reportpage}{}{reportpage =  \{\thefield{reportpage}\},\par}%
 \noindent\iffieldundef{reportseries}{}{reportseries =  \{\thefield{reportseries}\},\par}%
 \noindent\iffieldundef{reportvolume}{}{reportvolume =  \{\thefield{reportvolume}\},\par}%
@@ -4119,7 +4182,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{year}{}{year =  \{\thefield{year}\},\par}%
 \noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
 \noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
-\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
+%\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
 \}\par%
 }}
 
@@ -4246,6 +4309,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \docompfieldhl{annotation}
 \docompfieldhl{noterup}
 \docompfieldhl{commentary}
+\docompfieldhl{qquotation}
 %\noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
 %\noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
 %\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
@@ -4335,6 +4399,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \docompfield{annotation}
 \docompfield{noterup}
 \docompfield{commentary}
+\docompfield{qquotation}
 \noindent ...\par%
 \}\par%
 \end{quotation}

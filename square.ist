@@ -4,9 +4,7 @@ delim_2 "\\space\\dotfill\\space ["
 delim_n "], ["
 delim_r "--"
 delim_t "]"
-%encap_infix "{\\ChapterPage{"
-%%encap_prefix "["
-%encap_suffix "]"
-
-line_max 500
-
+%encap_prefix "\\"
+%encap_infix "{"
+%encap_suffix "}"
+line_max 1000

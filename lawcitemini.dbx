@@ -1,3 +1,427 @@
+
+%...............................................................................................
+\ExplSyntaxOn
+
+
+  \cs_generate_variant:Nn
+   \seq_gset_split:Nnn
+   { cno }
+
+
+ \seq_new:N
+   \l_fc_rweq_seq
+ \seq_new:N
+   \l_fc_rweqz_seq
+ \seq_new:N
+   \l_fc_rweqy_seq
+ \tl_new:N
+   \l_fc_rweqz_tl
+ \seq_new:N
+   \l_fc_rweqyy_seq
+ \int_new:N
+   \l_fc_rweqz_int
+ \int_new:N
+   \l_fc_rweqy_int
+
+
+ \tl_new:N
+   \g_fc_namespace_tl
+
+ \tl_gset:Nn
+   \g_fc_namespace_tl
+   {mfs}
+
+
+
+
+
+%****************************************************
+%*
+%****************************************************
+%------------------
+ \cs_set:Npn \ic_funccatena:n #1 {
+ % 1=seq
+   \seq_set_split:Nnn
+     \l_tmpa_seq
+     { ; }
+     { #1 }
+   \tl_set:Nx
+     \l_tmpa_tl % bibentry key
+     {
+      \seq_item:Nn
+        \l_tmpa_seq
+        {1}
+     }
+   \tl_set:Nx
+     \l_tmpb_tl % action on next decision
+     {
+      \seq_item:Nn
+        \l_tmpa_seq
+        {2}
+     }
+
+% first item
+   \int_compare:nNnTF
+     { \g_fc_curritem_int } = { 1 }
+     {
+      \lcinline % full case name\ref
+         { \tl_use:N \l_tmpa_tl }
+     }
+     {
+      \lawciteref %caseref only
+         { \tl_use:N \l_tmpa_tl }
+     }
+
+%last item
+   \int_compare:nNnTF
+     { \g_fc_curritem_int } { = } { \g_fc_totalitems_int }
+     {   } % no punct sep: delim
+     { , \tex_space:D  } % delim comma space
+ 
+     \tl_use:N \l_tmpb_tl % court action (empty on last decision)
+
+%last item
+   \int_compare:nNnTF
+     { \g_fc_curritem_int } { = } { \g_fc_totalitems_int }
+     {   } % no delim
+     { \tex_space:D  } % delim space
+      
+%   \bool_if:NTF
+%    \g_fc_rollcall_bool
+%    {
+%   \tex_space:D
+%   \mkbibparens
+%      { \tl_use:N \l_tmpb_tl }
+%    }
+%    {
+%      ,
+%      \tex_space:D
+%      \tl_use:N \l_tmpb_tl
+%    }
+      
+%   \int_compare:nNnTF
+%     { \g_fc_curritem_int } { < } { \g_fc_totalitems_int }
+%     { ; \tex_space:D \int_gincr:N \g_fc_curritem_int }
+%     { . }
+      
+      % looper+
+    \int_gincr:N \g_fc_curritem_int
+    
+ }
+
+
+%****************************************************
+%*
+%****************************************************
+%------------------
+ \cs_set:Npn \ic_funcrollcall:n #1 {
+ % 1=seq
+   \seq_set_split:Nnn
+     \l_tmpa_seq
+     { ; }
+     { #1 }
+   \tl_set:Nx
+     \l_tmpa_tl % bibentry key
+     {
+      \seq_item:Nn
+        \l_tmpa_seq
+        {1}
+     }
+   \tl_set:Nx
+     \l_tmpb_tl % user note/comment
+     {
+      \seq_item:Nn
+        \l_tmpa_seq
+        {2}
+     }
+ 
+   \lcinline
+      { \tl_use:N \l_tmpa_tl }
+      
+   \bool_if:NTF
+    \g_fc_rollcall_bool
+    {
+   \tex_space:D
+   \mkbibparens
+      { \tl_use:N \l_tmpb_tl }
+    }
+    {
+      ,
+      \tex_space:D
+      \tl_use:N \l_tmpb_tl
+    }
+      
+   \int_compare:nNnTF
+     { \g_fc_curritem_int } { < } { \g_fc_totalitems_int }
+     { ; \tex_space:D \int_gincr:N \g_fc_curritem_int }
+     { . }
+      
+    
+ }
+
+
+
+
+
+%****************************************************
+%*
+%****************************************************
+%------------------
+ \cs_set:Npn \ic_funcsortseq:cn #1#2 { % 1=seq, 2=order (<:descending, >:ascending)
+ \seq_sort:cn  { #1 } %\l_fc_rweq_seq
+  {
+   \seq_clear:N
+     \l_fc_rweqz_seq
+   \seq_clear:N
+     \l_fc_rweqy_seq
+   \seq_set_split:Nnn
+     \l_fc_rweqz_seq
+     { ; }
+     { ##1 }
+   \seq_set_split:Nnn
+     \l_fc_rweqy_seq
+     { ; }
+     { ##2 }
+   \tl_set:Nx
+     \l_fc_rweqz_tl
+     {
+      \seq_item:Nn
+        \l_fc_rweqz_seq
+        {1}
+     }
+   \tl_set:Nx
+     \l_fc_rweqy_tl
+     {
+      \seq_item:Nn
+        \l_fc_rweqy_seq
+        {1}
+     }
+
+   \int_set:Nn
+     \l_fc_rweqz_int
+     {
+      \tl_count_tokens:V
+        \l_fc_rweqz_tl
+     }
+   \int_set:Nn
+     \l_fc_rweqy_int
+     {
+      \tl_count_tokens:V
+      \l_fc_rweqy_tl
+     }
+   \int_compare:nNnTF
+     { \l_fc_rweqz_int } { #2 } { \l_fc_rweqy_int }
+     { \sort_return_swapped: }
+     { \sort_return_same: }
+  }
+}
+
+
+
+
+ \int_new:N
+   \g_fc_curritem_int
+ \int_new:N
+   \g_fc_totalitems_int
+ \bool_new:N
+   \g_fc_rollcall_bool
+ \bool_new:N
+   \g_fc_catena_bool
+%****************************************************
+%*
+%****************************************************
+%--------------------
+\NewDocumentCommand { \lcrollcall } { s +m } {
+% 1=namspace,
+% 2=seq name,
+% 3=data
+
+    \IfBooleanTF {#1}
+    { \bool_gset_true:N \g_fc_rollcall_bool  }
+    { \bool_gset_false:N \g_fc_rollcall_bool  }
+
+
+    \mfsloadaseq [lc] { rollcall } { #2 }
+    
+     \int_gset:Nn
+       \g_fc_totalitems_int
+       {
+       \seq_count:c
+       { g_fc_rwe
+       \tl_use:N
+         \g_fc_namespace_tl
+       rollcall
+        _seq }
+        }
+
+     \int_gset:Nn
+      \g_fc_curritem_int
+      { 1 }
+
+
+   \seq_map_function:cN
+     { g_fc_rwe
+       \tl_use:N
+         \g_fc_namespace_tl
+       rollcall
+        _seq }
+     \ic_funcrollcall:n
+%     \adddot
+
+}
+
+
+
+
+
+
+%****************************************************
+%*
+%****************************************************
+%--------------------
+\NewDocumentCommand { \lccatena } { s +m } {
+% 1=namspace,
+% (2=seq name, )
+% 3=data
+
+    \IfBooleanTF {#1}
+    { \bool_gset_true:N \g_fc_catena_bool  }
+    { \bool_gset_false:N \g_fc_catena_bool  }
+
+
+    \mfsloadaseq [lc] { catena } { #2 }
+    
+     \int_gset:Nn
+       \g_fc_totalitems_int
+       {
+       \seq_count:c
+       { g_fc_rwe
+       \tl_use:N
+         \g_fc_namespace_tl
+       catena
+        _seq }
+        }
+
+     \int_gset:Nn
+      \g_fc_curritem_int
+      { 1 }
+
+
+   \seq_map_function:cN
+     { g_fc_rwe
+       \tl_use:N
+         \g_fc_namespace_tl
+       catena
+        _seq }
+     \ic_funccatena:n
+%     \adddot
+
+}
+
+
+
+
+
+
+%****************************************************
+%*
+%****************************************************
+%--------------------
+\NewDocumentCommand { \mfsloadaseq } { o m +m } { % 1=seq name, 2=data
+
+    \IfNoValueTF { #1 }
+      { \tl_clear:N \g_fc_namespace_tl }
+      { \tl_gset:Nn \g_fc_namespace_tl { #1 } }
+
+
+ \cs_if_free:cT
+   { g_fc_rwe \g_fc_namespace_tl #2 _seq }
+   { \seq_new:c
+     { g_fc_rwe \g_fc_namespace_tl #2 _seq }
+   }
+ \seq_gclear:c
+   { g_fc_rwe \g_fc_namespace_tl #2 _seq }
+ \seq_gset_split:cno
+   { g_fc_rwe \g_fc_namespace_tl #2 _seq }
+   { , }
+   { #3 }
+
+% \seq_show:c
+%   { g_fc_rwe \g_fc_namespace_tl #2 _seq }
+
+
+}
+
+
+%****************************************************
+%*
+%****************************************************
+%--------------------
+\NewDocumentCommand { \mfsloadaprop } { o m +m } { % 1=NS, 2=prop name, 3=data
+
+    \IfNoValueTF { #1 }
+      { \tl_clear:N \g_fc_namespace_tl }
+      { \tl_gset:Nn \g_fc_namespace_tl { #1 } }
+
+ \cs_if_free:cT
+   { g_fc_rwe \g_fc_namespace_tl #2 _prop }
+   { \prop_new:c
+     { g_fc_rwe \g_fc_namespace_tl #2 _prop }
+   }
+ \prop_gclear:c
+   { g_fc_rwe \g_fc_namespace_tl #2 _prop }
+ \prop_gset_from_keyval:cn
+   { g_fc_rwe \g_fc_namespace_tl #2 _prop }
+   { #3 }
+
+}
+
+
+
+
+%****************************************************
+%*
+%****************************************************
+%--------------------
+\NewDocumentCommand { \mfssortaseq } { o m m } { %1=seqname, 2=><, asc/desc
+
+    \IfNoValueTF { #1 }
+      { \tl_clear:N \g_fc_namespace_tl }
+      { \tl_gset:Nn \g_fc_namespace_tl { #1 } }
+
+\ic_funcsortseq:cn { g_fc_rwe \g_fc_namespace_tl #2 _seq } { #3 }
+
+}
+
+
+
+%****************************************************
+%*
+%****************************************************
+%--------------------
+\NewDocumentCommand { \mfssortaseqnum } { o m m } { %1=seqname, 2=><, asc/desc
+
+    \IfNoValueTF { #1 }
+      { \tl_clear:N \g_fc_namespace_tl }
+      { \tl_gset:Nn \g_fc_namespace_tl { #1 } }
+
+\ic_funcsortseqnum:cn { g_fc_rwe \g_fc_namespace_tl #2 _seq } { #3 }
+}
+
+
+
+
+
+
+
+
+
+%...............................................................................................
+\ExplSyntaxOff
+
+\newcommand\lccomma{,}
+
+
 %hyperref support for splitindex
 %\NewDocumentCommand\boldhyperpage{ m } {\textbf{\hyperpage{#1}}
 %\NewDocumentCommand\boldhyperpage{ m } {\hyperpage{#1}}
@@ -135,6 +559,7 @@ quotetext,
 annotation,
 noterup,
 commentary,
+qquotation,
 }
 
 \DeclareDatamodelEntryfields[case]{%
@@ -175,6 +600,11 @@ mncurl,
 annotation,
 noterup,
 commentary,
+%qquotation,
+related,
+relatedoptions,
+relatedtype,
+relatedstring,
 }
 
 
@@ -205,6 +635,11 @@ mncurl,% court link
 annotation,
 noterup,
 commentary,
+%qquotation,
+related,
+relatedoptions,
+relatedtype,
+relatedstring,
 }
 
 \DeclareDatamodelEntryfields[ljarticle]{%
@@ -223,6 +658,11 @@ shortname,
 annotation,
 noterup,
 commentary,
+%qquotation,
+related,
+relatedoptions,
+relatedtype,
+relatedstring,
 }
 
 \DeclareDatamodelEntryfields[quote]{%
@@ -230,6 +670,11 @@ quotetext,
 annotation,
 noterup,
 commentary,
+qquotation,
+related,
+relatedoptions,
+relatedtype,
+relatedstring,
 }
 
 

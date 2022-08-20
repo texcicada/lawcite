@@ -1,9 +1,9 @@
 % arara: lualatex
 % arara: biber
 % arara: lualatex
-% arara: splitindex: { style: plain.ist }
+% arara: splitindex: { style: square.ist }
 % arara: lualatex
-% arara: splitindex: { style: plain.ist }
+% arara: splitindex: { style: square.ist }
 % arara: lualatex
 
 \begin{filecontents*}{\jobname.bib}
@@ -164,8 +164,8 @@ pages = {51},
 	party-separator-dotted=true,
 	lawrefstyle=caseallabove,
 	print-toc-tos=true,
+	use-toc-parnumrefs=true,
 	hyperlink-index-pages=true,
-%	use-toc-parnumrefs=false,
 	citetracker=true,
 	ibidtracker=false,%for demo purposes
 	]{biblatex}
@@ -211,23 +211,72 @@ pages = {51},
 }
 
 
+%==========================
 
 
+%===============================
 
 \makeindex
 \newindex[Table of Cases]{cases}
 \newindex[Table of Statutes]{legislation}
 \newindex[Table of Regulations]{regulations}
 \newindex[General Index]{general}
-\newcommand\pagerefindexnoteb{{\small\mdseries Duplicates are intentional\itshape\hfill Page}}
-\setindexpreamble[cases]{\pagerefindexnoteb}
+%\setindexhyperlinks
+
+%-------------------------------------------------------
+\AtWriteToIndex{cases}{\let\thepage\theparno}
+\AtWriteToIndex{legislation}{\let\thepage\theparno}
+\AtWriteToIndex{regulations}{\let\thepage\theparno}
+%-------------------------------------------------------
+
+\usepackage{tikz}
+\usetikzlibrary{shadows,backgrounds}
+
+\newcommand\theball{\tikz \shade[ball color=green!40] (0,0) circle (0.75ex);\hspace{0.75em}}
+
+
+
+%\newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to paragraph numbers.\hfill{\itshape Para}\bigskip}
+\newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to \iftoggle{lcparnumrefs}{paragraph}{page} numbers.\hfill{\itshape \iftoggle{lcparnumrefs}{Para}{Page}}\bigskip}
+\newcommand\dupentries{\ \\{\small\mdseries $\to$ `Duplicated' entries are intentional}.}
+
+\setindexpreamble[cases]{\pagerefindexnote}
+\setindexpreamble[legislation]{\pagerefindexnote}
+\setindexpreamble[regulations]{\pagerefindexnote}
+
+
+%%Print the `preamble' of the index:
+%\makeatletter
+% \renewcommand*{\@@printindex}{}
+% \def\@@printindex[#1][#2]{%
+% \begingroup
+% \edef\indexshortcut{#1}%
+% \def\indexname{#2\par \useindexpreamble}%<=====
+% \def\kvtcb@text@index{#2}%
+% \let\index@preamble\relax
+% \expandafter\let\expandafter\index@preamble
+% \csname index@\indexshortcut @preamble\endcsname
+% \if@splitidx
+% \def\@tempa{idx}\def\@tempb{#1}%
+% \ifx\@tempa\@tempb\let\@indexsuffix\@gobble\fi
+% \fi
+%\@input@{\jobname\@indexsuffix{#1}.ind}%
+%\endgroup
+%\csname printindex@endhook\endcsname
+%}
+%\makeatother
+
+%\newcommand\pagerefindexnoteb{{\small\mdseries Duplicates are intentional\itshape\hfill Para}}
+%\setindexpreamble[cases]{\pagerefindexnoteb}
+%\setindexpreamble[legislation]{\pagerefindexnoteb}
+%\setindexpreamble[regulations]{\pagerefindexnoteb}
 
 \usepackage[
 				bookmarks,
             colorlinks=true,        
             allcolors = black,  
             citecolor=blue,        
-%            hyperindex=false, 
+            hyperindex=false, 
 ]{hyperref}
 
 
@@ -263,20 +312,20 @@ pages = {51},
 
 %\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
 \section{Intro}
-Lawcite is a Biblatex style for handling legal citations.
+\p Lawcite is a Biblatex style for handling legal citations.
 
-It uses low-level options settings (such as, `Is the \textit{v} dotted, or not?') and groups them into the higher-level categories that are legal citation styles. Three major citation styles are pre-defined so far (MLR, McGill, and AGLC). The user may mix-and-match option settings as  appropriate, and change settings mid-document if required.
+\p It uses low-level options settings (such as, `Is the \textit{v} dotted, or not?') and groups them into the higher-level categories that are legal citation styles. Three major citation styles are pre-defined so far (MLR, McGill, and AGLC). The user may mix-and-match option settings as  appropriate, and change settings mid-document if required.
 
-Using the ext-authortitle-ibid Biblatex style as a base, lawcite defines three new bibentry types, @case, @statute and @ljarticle, and a (more or less) flexible citation command (\cmd{lawcite} itself) plus some ancillary commands. 
+\p Using the ext-authortitle-ibid Biblatex style as a base, lawcite defines three new bibentry types, @case, @statute and @ljarticle, and a (more or less) flexible citation command (\cmd{lawcite} itself) plus some ancillary commands. 
 
-The indexing mechanism, used to create the Table of Cases and Table of Statutes, is SplitIndex (from the splitidx package) working in combination with the standard MakeIndex machinery.
+\p The indexing mechanism, used to create the Table of Cases and Table of Statutes, is SplitIndex (from the splitidx package) working in combination with the standard MakeIndex machinery.
 
-There is also a lawcite-`lite' version, legal, designed for working with legal material in the non-law disciplines.
+\p There is also a lawcite-`lite' version, legal, designed for working with legal material in the non-law disciplines.
 
 \section{Files}
-Currently, installation of files is manual.
+\p Currently, installation of files is manual.
 
-Put the files listed in Reference \ref{ref:files} in a location where \TeX\ can find the, such as the current folder.
+\p Put the files listed in Reference \ref{ref:files} in a location where \TeX\ can find the, such as the current folder.
 
 \begin{dor}{ref:files}{Files needed for lawcite}
 \begin{description}
@@ -285,12 +334,12 @@ Put the files listed in Reference \ref{ref:files} in a location where \TeX\ can 
 \item[lawcite.cbx]  citation commands.
 \item[english-lawcite.lbx]  language-specific string constants, such as the abbreviations for `rule' and `regulation', in singular and plural form.
 \item[plain.ist] index style file for producing a plain-style Table of Cases with dot leaders, plus preparatory code for producing hyperlinked page numbers. The file name is arbitrary. The file is used as input by the SplitIndex program (see Section \ref{workflow} for the workflow). 
-\item[square.ist] index style file for producing a plain-style Table of Cases with dot leaders and numbers enclosed in square brackets ([]) -- intended for use with paragraph numbers (hyperlinking of paragraph numbers is done outside of the .ist file). The file name is arbitrary. The file is used as input by the SplitIndex program (see Section \ref{workflow} for the workflow).
+\item[square.ist] index style file for producing a square-bracket style Table of Cases with dot leaders and numbers enclosed in square brackets ([]) -- intended for use with paragraph numbers (hyperlinking of paragraph numbers is done outside of the .ist file). The file name is arbitrary. The file is used as input by the SplitIndex program (see Section \ref{workflow} for the workflow).
 \end{description}
 \end{dor}
 
 \section{Workflow}\label{workflow}
-For a file, \cef{foo.tex}, the workflow is as shown in Reference \ref{ref:workflow}.
+\p For a file, \cef{foo.tex}, the workflow is as shown in Reference \ref{ref:workflow}.
 
 \begin{dor}{ref:workflow}{Workflow}
 \begin{itemize}
@@ -306,7 +355,7 @@ For a file, \cef{foo.tex}, the workflow is as shown in Reference \ref{ref:workfl
 	\begin{itemize}
 	\item bibliographic and citation material is incorporated
 	\end{itemize}
-\item \verb|splitindex foo -- -s plain.ist -c|
+\item \verb|splitindex foo -s square.ist -c|
 	\begin{itemize}
 	\item index information is split out into \cef{.ind} files for the Table of Cases, etc
 	\end{itemize}
@@ -314,13 +363,13 @@ For a file, \cef{foo.tex}, the workflow is as shown in Reference \ref{ref:workfl
 	\begin{itemize}
 	\item Table of Cases is incorporated
 	\end{itemize}
-\item \verb|splitindex foo -- -s plain.ist -c|
-	\begin{itemize}
-	\item any refreshed page numbers for the Table of Cases are collected
-	\end{itemize}
+%\item \verb|splitindex foo -s square.ist -c|
+%	\begin{itemize}
+%	\item any refreshed page numbers for the Table of Cases are collected
+%	\end{itemize}
 \item \verb|xelatex foo|
 	\begin{itemize}
-	\item page numbers settle
+	\item page numbers for non-paragraph cross-references settle
 	\end{itemize}
 \end{itemize}
 \end{dor}
@@ -328,9 +377,9 @@ For a file, \cef{foo.tex}, the workflow is as shown in Reference \ref{ref:workfl
 \section{Commands}
 
 \subsection{\cmd{lcproc} -- in-progress proceedings}
-The lc-proceedings citation command, \cmd{lcproc}, looks for the bibentry fields shown in code listing \ref{ex}.
+\p The lc-proceedings citation command, \cmd{lcproc}, looks for the bibentry fields shown in code listing \ref{ex}.
 
-Use this citation command when there is no published decision.
+\p Use this citation command when there is no published decision.
 
 \begin{dov}{ex}{In-progress proceedings bibentry example}
 
@@ -347,48 +396,48 @@ Use this citation command when there is no published decision.
 \end{dov}
 \newpage 
 
-\cmdb{lcproc}{abcproc} produces: 
+\p \cmdb{lcproc}{abcproc} produces: 
 
 \lcproc{abcproc}
 \bigskip
 
-The index style file, \cef{plain.ist}, has to contain the formatting code as shown in listing \ref{list:ist} for the page numbers in the Table of Cases to hyperlink correctly.
+\p The index style file, \cef{square.ist}, has to contain the formatting code as shown in listing \ref{list:ist} for the paragraph numbers in the Table of Cases to hyperlink correctly.
 
 
-\begin{dov}{list:ist}{Code for plain.ist file for SplitIndex}
+\begin{dov}{list:ist}{Code for square.ist file for SplitIndex}
 
-delim_0 "\\space\\dotfill\\space "\hss
-delim_1 "\\space\\dotfill\\space "\hss
-delim_2 "\\space\\dotfill\\space "\hss
-delim_n ", "
+delim_0 "\\space\\dotfill\\space ["
+delim_1 "\\space\\dotfill\\space ["
+delim_2 "\\space\\dotfill\\space ["
+delim_n "], ["
 delim_r "--"
-delim_t ""
-encap_prefix "\\"
-encap_infix "{"
-encap_suffix "}"
+delim_t "]"
+%encap_prefix "\\"
+%encap_infix "{"
+%encap_suffix "}"
 line_max 1000
 
 \end{dov}
 \newpage
 
-The first citation\marginpar{2nd cite} of a case is in full: \lcproc{xyzproc}.
+\p The first citation\marginpar{2nd cite} of a case is in full: \lcproc{xyzproc}.
 
-If the biblatex cite tracking option has been switched on 
+\p If the biblatex cite tracking option has been switched on 
 \begin{quotation}
 \hspace{2em}\verb|citetracker=true|
 \end{quotation}
  then, in subsequent citations of the same case, only the case name is presented: \lcproc{xyzproc}.
 
 %\newpage
-The \cmd{lawcite} command's indexing capability has been enhanced to also include page hyperlinking in the Table of Cases, like \cmd{lcproc} does.
+\p The \cmd{lawcite} command's indexing capability has been enhanced to also include page hyperlinking in the Table of Cases, like \cmd{lcproc} does.
 
-Example:
+\p Example:
 
 \lawcite{snail}
 \bigskip
 
 \setpartysepitalicoff
-To illustrate changing settings mid-document,
+\p To illustrate changing settings mid-document,
 \cmd{setpartysepitalicoff} does this: 
 
 \lawcite{thomascar}, 
@@ -403,13 +452,13 @@ and the indexer picks it up too.
 \lcepigraphp[ \nopp 232]{tnl}
 \end{quotation}
 
-The \cmd{lawcite} command is the general purpose citation command.
+\p The \cmd{lawcite} command is the general purpose citation command.
 
-It is governed by a set of switches set either as biblatex options, or as mid-document commands.
+\p It is governed by a set of switches set either as biblatex options, or as mid-document commands.
 \bigskip
 
 \newpage
-Booleans
+\p Booleans
 
 \begin{tabular}{lll}
 \bfseries Option & \bfseries Toggle & \bfseries Command \\ 
@@ -438,12 +487,12 @@ use-toc-parnumrefs & lcparnumrefs &  \\
 \lccitedemo{snail}{565}
 \bigskip
 
-There is some interaction with the lawcite refstyle and other settings already set prior in the document and partway through the list. And the biblatex ibid-tracker option has been switched off to allow the demonstration to show the case name rather than a trail of ibids.
+\p There is some interaction with the lawcite refstyle and other settings already set prior in the document and partway through the list. And the biblatex ibid-tracker option has been switched off to  allow the demonstration to show the case name rather than a trail of ibids.
 
-And, of course, all these variations find their way into the Table of Cases (an index).
+\p And, of course, all these variations find their way into the Table of Cases (an index).
 
 \newpage
-Law Journals and Law Reviews
+\p Law Journals and Law Reviews
 \bigskip
 
 \lccitedemolj{smythsc}
