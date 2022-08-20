@@ -1,0 +1,23 @@
+!config
+# This rule is makeindex.yaml, modified to splitindex 2022
+identifier: splitindex
+name: Splitindex
+authors:
+- TeXCicada
+commands:
+- name: The Splitindex
+  command: >
+    @{
+        base = getBasename(reference.getName());
+        infile = base.concat('.').concat(input);
+        return getCommand('splitindex', infile, style);
+    }
+arguments:
+- identifier: input
+  flag: >
+    @{
+      parameters.input
+    }
+  default: idx
+- identifier: style
+  flag: "@{ [ '-s', parameters.style ] }"
