@@ -93,6 +93,12 @@ pages = {51},
 \newcommand\goodoh{{\large\ftmark 🗸}}
 \newcommand\notsogoodoh{{\large\ftmark 🗶}}
 \usepackage{fancyhdr} % Needed for customized footer
+%\tracingall
+\usepackage{alltt}
+\usepackage{parskip}
+\newcommand\defaultparskip{\setlength\parskip{0pt}}
+\newcommand\normalparskip{\parskip=.5\baselineskip plus 2pt\relax}
+  
 
 %\colorbox{white}{\textcolor{white}{\makebox(40,20){XXXXX}}
 %\kern-23pt{\raisebox{0.9ex}{\thepage}}
@@ -157,8 +163,8 @@ pages = {51},
 
 \newcommand\bef[1]{(\textit{#1})}
 \newcommand\cef[1]{\textit{#1}}
-\newcommand\cmd[1]{\textsf{\textbackslash\textbf{#1}}}
-\newcommand\cmdb[2]{\textsf{\textbackslash\textbf{#1}\{#2\}}}
+\newcommand\mycmd[1]{\textsf{\textbackslash\textbf{#1}}}
+\newcommand\mycmdb[2]{\textsf{\textbackslash\textbf{#1}\{#2\}}}
 
 \usepackage[style=lawcitemini,
 	party-separator-dotted=true,
@@ -178,6 +184,8 @@ pages = {51},
 \rowcolors{1}{blue!5}{blue!9}
 \usepackage{float}
 %\floatstyle{boxed}
+\usepackage{capt-of}
+
 %------------------------------- program float
 \newfloat{program}{h}{lop}
 \floatname{program}{Code listing}
@@ -209,6 +217,23 @@ pages = {51},
     \end{mdframed}
     \endreference
 }
+
+
+%------------------------------- codelook, instream
+
+\newenvironment{codelook}%[2]%
+  {\VerbatimEnvironment
+%      \program
+    \begin{mdframed}[backgroundcolor=green!40!yellow!12]
+    \begin{Verbatim}[numbers=left,numbersep=2pt]
+%    \captionof{program}{#2}%
+%    \label{#1}%    
+    }
+  {\end{Verbatim}%
+    \end{mdframed}
+%    \endprogram
+}
+
 
 
 %==========================
@@ -279,12 +304,27 @@ pages = {51},
             hyperindex=false, 
 ]{hyperref}
 
+\newcommand\mypackage[1]{\textsc{#1}}
+\newcommand\myoption[1]{\textcolor{blue}{\textsf{#1}}}
 
-
+\newfontface\fcircled{Noto Sans Mono CJK JP}[Colour=red]
+\newcommand\ci{{\fcircled\Uchar9312}}%①}
+\newcommand\cii{{\fcircled\Uchar9313}}
+\newcommand\ciii{{\fcircled\Uchar9314}}
+\newcommand\civ{{\fcircled\Uchar9315}}
+\newcommand\cv{{\fcircled\Uchar9316}}
 
 %=============================================
 \begin{document}
 \maketitle
+\begin{quotation}
+`There are many different citation styles.' 
+\medskip
+
+\lcepigraphp[ \nopp 232]{tnl}
+\end{quotation}
+
+\newpage
 \tableofcontents
 
 %\setprintlegtocon
@@ -316,7 +356,7 @@ pages = {51},
 
 \p It uses low-level options settings (such as, `Is the \textit{v} dotted, or not?') and groups them into the higher-level categories that are legal citation styles. Three major citation styles are pre-defined so far (MLR, McGill, and AGLC). The user may mix-and-match option settings as  appropriate, and change settings mid-document if required.
 
-\p Using the ext-authortitle-ibid Biblatex style as a base, lawcite defines three new bibentry types, @case, @statute and @ljarticle, and a (more or less) flexible citation command (\cmd{lawcite} itself) plus some ancillary commands. 
+\p Using the ext-authortitle-ibid Biblatex style as a base, lawcite defines three new bibentry types, @case, @statute and @ljarticle, and a (more or less) flexible citation command (\mycmd{lawcite} itself) plus some ancillary commands. 
 
 \p The indexing mechanism, used to create the Table of Cases and Table of Statutes, is SplitIndex (from the splitidx package) working in combination with the standard MakeIndex machinery.
 
@@ -376,8 +416,8 @@ pages = {51},
 
 \section{Commands}
 
-\subsection{\cmd{lcproc} -- in-progress proceedings}
-\p The lc-proceedings citation command, \cmd{lcproc}, looks for the bibentry fields shown in code listing \ref{ex}.
+\subsection{\mycmd{lcproc} -- in-progress proceedings}
+\p The lc-proceedings citation command, \mycmd{lcproc}, looks for the bibentry fields shown in code listing \ref{ex}.
 
 \p Use this citation command when there is no published decision.
 
@@ -396,7 +436,7 @@ pages = {51},
 \end{dov}
 \newpage 
 
-\p \cmdb{lcproc}{abcproc} produces: 
+\p \mycmdb{lcproc}{abcproc} produces: 
 
 \lcproc{abcproc}
 \bigskip
@@ -429,7 +469,7 @@ line_max 1000
  then, in subsequent citations of the same case, only the case name is presented: \lcproc{xyzproc}.
 
 %\newpage
-\p The \cmd{lawcite} command's indexing capability has been enhanced to also include page hyperlinking in the Table of Cases, like \cmd{lcproc} does.
+\p The \mycmd{lawcite} command's indexing capability has been enhanced to also include page hyperlinking in the Table of Cases, like \mycmd{lcproc} does.
 
 \p Example:
 
@@ -438,21 +478,15 @@ line_max 1000
 
 \setpartysepitalicoff
 \p To illustrate changing settings mid-document,
-\cmd{setpartysepitalicoff} does this: 
+\mycmd{setpartysepitalicoff} does this: 
 
 \lawcite{thomascar}, 
 
 and the indexer picks it up too.
 
-\subsection{\cmd{lawcite} -- published decisions}
-\begin{quotation}
-`There are many different citation styles.' 
-\medskip
+\subsection{\mycmd{lawcite} -- published decisions}
 
-\lcepigraphp[ \nopp 232]{tnl}
-\end{quotation}
-
-\p The \cmd{lawcite} command is the general purpose citation command.
+\p The \mycmd{lawcite} command is the general purpose citation command.
 
 \p It is governed by a set of switches set either as biblatex options, or as mid-document commands.
 \bigskip
@@ -484,7 +518,9 @@ use-toc-parnumrefs & lcparnumrefs &  \\
 \end{tabular}
 
 \newpage
+\defaultparskip
 \lccitedemo{snail}{565}
+\normalparskip
 \bigskip
 
 \p There is some interaction with the lawcite refstyle and other settings already set prior in the document and partway through the list. And the biblatex ibid-tracker option has been switched off to  allow the demonstration to show the case name rather than a trail of ibids.
@@ -495,8 +531,129 @@ use-toc-parnumrefs & lcparnumrefs &  \\
 \p Law Journals and Law Reviews
 \bigskip
 
+\defaultparskip
 \lccitedemolj{smythsc}
+\normalparskip
 \bigskip 
+
+\section{Paragaph numbering}
+\p The \mycmd{p} command is available for numbering logical paragraphs. Labels are automatically created to feed into the Table of Cases and Table of Statutes.
+
+%\p Commands \mycmd{paradef} and \mycmd{pararef} are available for manual labels and manual cross-references.
+
+\section{Table of Cases}
+\subsection{Preparation}
+\p To manually activate the Table of Cases and Table of Statutes, switch the \mypackage{biblatex} package option \myoption{print-toc-tos} on. \ci
+
+\p To have paragraph numbers available for the Table of Cases and Table of Statutes, switch the \mypackage{biblatex} package option \myoption{use-toc-parnumrefs} on. \cii\  To physically send them there, see \pararef{pnind}.
+
+\p To hyperlink from the Table of Cases and Table of Statutes, switch the \mypackage{biblatex} package option \myoption{hyperlink-index-pages} on \ciii, and switch the \mypackage{hyperref} package option \myoption{hyperindex} off. \civ
+
+\p In summary:
+
+
+\begin{alltt}
+\textbackslash{}usepackage[
+...
+	print-toc-tos=true,   \ci
+	use-toc-parnumrefs=true,   \cii
+	hyperlink-index-pages=true,   \ciii
+]\{biblatex\}
+
+\textbackslash{}usepackage[
+...
+	hyperindex=false,   \civ
+...
+]\{hyperref\}
+\end{alltt}
+
+\subsection{Printing the indexes}
+\p There are various index processors available. For example, \mypackage{imakeidx} can automatically run \mypackage{splitindex} and/or \mypackage{xindy}.
+
+\p Here, the process for a manual \mypackage{splitindex} is described.
+
+\p Declare the ToC, ToS and ToR indexes.
+             
+\bigskip
+%{code:ind}{Declare the indexes}
+%\begin{codelook}
+%    \captionof{program}{#2}%
+%    \label{#1}%    
+\begin{mdframed}[backgroundcolor=green!40!yellow!12]
+\begin{Verbatim}[numbers=left,numbersep=2pt]
+\usepackage{splitidx}
+\makeindex
+\newindex[Table of Cases]{cases}
+\newindex[Table of Statutes]{legislation}
+\newindex[Table of Regulations]{regulations}
+\newindex[General Index]{general}
+\end{Verbatim}
+
+\end{mdframed}
+%\end{codelook}
+%%%-------------------------------------------------------
+
+
+\p \paradef{pnind}Use the paragraph number.
+             
+\bigskip
+\begin{mdframed}[backgroundcolor=green!40!yellow!12]
+\begin{Verbatim}[numbers=left,numbersep=2pt]
+\AtWriteToIndex{cases}{\let\thepage\theparno}
+\AtWriteToIndex{legislation}{\let\thepage\theparno}
+\AtWriteToIndex{regulations}{\let\thepage\theparno}
+\end{Verbatim}
+
+\end{mdframed}
+
+%-------------------------------------------------------
+\p Set the index preamble.
+             
+\bigskip
+\begin{mdframed}[backgroundcolor=green!40!yellow!12]
+\begin{Verbatim}[numbers=left,numbersep=2pt]
+\newcommand\pagerefindexnote{\bigskip\noindent
+\small\mdseries $\to$ References are to 
+\iftoggle{lcparnumrefs}{paragraph}{page} numbers.
+\hfill{\itshape \iftoggle{lcparnumrefs}{Para}{Page}}
+\bigskip}
+\newcommand\dupentries{\ \\{\small\mdseries
+ $\to$ `Duplicated' entries are intentional}.}
+
+\setindexpreamble[cases]{\pagerefindexnote}
+\setindexpreamble[legislation]{\pagerefindexnote}
+\setindexpreamble[regulations]{\pagerefindexnote}
+\end{Verbatim}
+
+\end{mdframed}
+%%
+%%
+
+%-------------------------------------------------------
+\p Print the indexes in one-column mode.
+             
+\bigskip
+\begin{mdframed}[backgroundcolor=green!40!yellow!12]
+\begin{Verbatim}[numbers=left,numbersep=2pt]
+\let\xoldtwocolumn\twocolumn
+\iftoggle{printlegtoc}{%
+\let\oldtwocolumn\twocolumn
+\renewcommand{\twocolumn}[1][]{#1}
+\let\oldclearpage\clearpage
+\renewcommand\clearpage{\relax}
+\extendtheindex{}{\useindexpreamble}{}{}
+\printindex[cases]
+\printindex[legislation]
+\iftoggle{printregulations}{\printindex[regulations]}{}
+%%%\printindex[general]
+\renewcommand{\twocolumn}[1][]{\oldtwocolumn}
+\renewcommand\clearpage{\oldclearpage}
+}{}
+\bigskip
+\end{Verbatim}
+
+\end{mdframed}
+
 
 
 \bigskip
