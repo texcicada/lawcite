@@ -1,4 +1,32 @@
- 
+% arara: lualatex
+% arara: biber
+% arara: lualatex
+% arara: splitindex: { style: squarecheck.ist }
+% arara: lualatex
+% arara: splitindex: { style: squarecheck.ist }
+% arara: lualatex
+% arara: lualatex
+
+
+
+
+\begin{filecontents*}{squarecheck.ist}
+delim_0 ", \\squarecheck{"
+delim_t "}"
+\end{filecontents*}
+
+\begin{filecontents*}{plain.ist}
+delim_0 "\\space\\dotfill\\space "\hss
+delim_1 "\\space\\dotfill\\space "\hss
+delim_2 "\\space\\dotfill\\space "\hss
+delim_n ", "
+delim_r "--"
+delim_t ""
+encap_prefix "\\"
+encap_infix "{"
+encap_suffix "}"
+line_max 1000
+\end{filecontents*}
 \begin{filecontents*}[overwrite]{lawcitemini.dbx}
 
 %...............................................................................................
@@ -1124,7 +1152,7 @@ relatedstring,
 }
 
 \DeclareBibliographyOption[boolean]{hyperlink-index-pages}[true]{%
-\ifstrequal{#1}{true}{\toggletrue{hyperindexpages}}{\togglefalse{hyperindexpages}}
+\ifstrequal{#1}{true}{\toggletrue{hyperindexpages}\setindexhyperlinks}{\togglefalse{hyperindexpages}}
 }
 
 
@@ -5774,6 +5802,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 
 \newbibmacro{getlcdcase}[1][x]{%
 {%
+\defaultparskip
 \small\ttfamily\ \par
 \noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
 \noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
@@ -5849,6 +5878,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
 %\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
 \}\par%
+\normalparskip
 }}
 
 \ExplSyntaxOn
@@ -5899,7 +5929,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 {%
 \edef\myparmhl{#1}
 \color{blue}\small\ttfamily\ \par
-\begin{quotation}
+\begin{myquotation}
 \noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
 %\noindent ...\par%
 %\noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
@@ -5980,7 +6010,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 %\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
 %\noindent ...\par%
 \}\par%
-\end{quotation}
+\end{myquotation}
 }}
 
 
@@ -5988,7 +6018,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 {%
 \edef\myparm{#1}
 \color{blue}\small\ttfamily\ \par
-\begin{quotation}
+\begin{myquotation}
 \noindent @\thefield{entrytype}\{\thefield{entrykey},\par%
 \noindent ...\par%
 %\noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
@@ -6067,7 +6097,7 @@ existsnumeric}{notinentry}}{existslist}}{existsname}}{existsfield}
 \docompfield{qquotation}
 \noindent ...\par%
 \}\par%
-\end{quotation}
+\end{myquotation}
 }}
 
 
@@ -8516,6 +8546,9 @@ options={skipbib=true,},
 \dosecttoc
 %\usepackage{booktabs}
 \usepackage{etoolbox}
+\usepackage{parskip}
+\newcommand\defaultparskip{\setlength\parskip{0pt}}
+\newcommand\normalparskip{\parskip=.5\baselineskip plus 2pt\relax}
 
 
 \newcommand\theadcolour{\rowcolor{blue!80!green!20!yellow}}
@@ -8574,7 +8607,9 @@ options={skipbib=true,},
 	\usepackage[
 	\abibstyle , 
 	lawcitestyle=mcgill,
-	   use-toc-parnumrefs=false,
+	print-toc-tos=true,
+	use-toc-parnumrefs=true,
+	hyperlink-index-pages=true,
 	indexing=cite,
 	citetracker=true,
 	citecounter=context,
@@ -8600,9 +8635,9 @@ options={skipbib=true,},
 %indexing
 
 \usepackage{splitidx}
-\newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to page numbers.\bigskip}
+\newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to \iftoggle{lcparnumrefs}{paragraph}{page} numbers.\hfill{\itshape \iftoggle{lcparnumrefs}{Para}{Page}}\bigskip}
 \newcommand\dupentries{\ \\\small\mdseries $\to$ `Duplicated' entries are intentional.}
-\setindexpreamble[cases]{\pagerefindexnote\dupentries}
+\setindexpreamble[cases]{\dupentries\par\pagerefindexnote}
 \setindexpreamble[legislation]{\pagerefindexnote}
 \setindexpreamble[regulations]{\pagerefindexnote}
 \setindexpreamble[general]{\pagerefindexnote}
@@ -8650,6 +8685,9 @@ options={skipbib=true,},
 %%\AtWriteToIndex{idx}{\let\thepage\thesection}
 %-------------------------------------------------------
 
+\AtWriteToIndex{cases}{\let\thepage\theparno}
+\AtWriteToIndex{legislation}{\let\thepage\theparno}
+\AtWriteToIndex{regulations}{\let\thepage\theparno}
 
 
 
@@ -8816,7 +8854,9 @@ bookmarks,
 \ifstrequal{#1}{\newpage}{\applymydcounter{#3}Fields for example \ref{mycite:#2}: \textbf{#2} -- \par
 
 \bigskip}{}%
+\defaultparskip
 \lcdcase{#2}%
+%\normalparskip
 %\printrectangle
 }
 
@@ -8837,30 +8877,30 @@ bookmarks,
 
 \newcommand\democomm[4][]{%1=pre,2=command,3=key,4=punct
 \cmd{#2}\textcolor{brown}{\braces{#3}}{#4}
-\begin{quotation}
+\begin{myquotation}
 #1\csname #2\endcsname{#3}
-\end{quotation}
+\end{myquotation}
 }
 
 \newcommand\democommpost[5][]{%1=pre,2=command,3=key,4=punct,5=postnote
 \cmd{#2}\textcolor{brown}{\brackets{#5}\braces{#3}}{#4}
-\begin{quotation}
+\begin{myquotation}
 #1\csname #2\endcsname[#5]{#3}
-\end{quotation}
+\end{myquotation}
 }
 %
 \newcommand\democommpre[5][]{%1=pre,2=command,3=key,4=punct,5=prenote
 \cmd{#2}\textcolor{brown}{\brackets{#5}\brackets{}\braces{#3}}{#4}
-\begin{quotation}
+\begin{myquotation}
 #1\csname #2\endcsname[#5][]{#3}
-\end{quotation}
+\end{myquotation}
 }
 
 \newcommand\democommprepost[6][]{%1=pre,2=command,3=key,4=punct,5=prenote,6=postnote
 \cmd{#2}\textcolor{brown}{\brackets{#5}\brackets{#6}\braces{#3}}{#4}
-\begin{quotation}
+\begin{myquotation}
 #1\csname #2\endcsname[#5][#6]{#3}
-\end{quotation}
+\end{myquotation}
 }
 
 \newcommand\vv[1]{\texttt{#1}}
@@ -8873,11 +8913,23 @@ bookmarks,
 \newfontface\fmag{Noto Sans Symbols2}[Scale=2,Colour=blue]
 \newenvironment{magpar}
 {
+\vspace{1ex}
 \begin{tcolorbox}[breakable, enhanced,colback=yellow!10!white,boxrule=0pt,frame hidden,borderline west={1mm}{-2mm}{black}]
 { \fmag 🔍 }
 }
 {\end{tcolorbox}
+\vspace{1.8ex}
  }
+
+\newenvironment{myquotation}
+{
+\vspace{2.1ex}
+\begin{quotation}
+}
+{\end{quotation}
+\vspace{2.8ex}
+ }
+
 
 \newenvironment{casenote}[1]
 {
@@ -8896,7 +8948,7 @@ fonttitle=\bfseries,
  }
 \newenvironment{casequote}[1]
 {
-\begin{quotation}
+\begin{myquotation}
 \begin{tcolorbox}[title=#1,
 enhanced,
 attach boxed title to top right,
@@ -8911,7 +8963,7 @@ coltitle=green!25!black,
 \begin{minipage}{0.82\textwidth}
 }
 {\end{minipage} & \cellcolor{yellow!30!brown!18}{\Large''}\\\end{tabular}\end{tcolorbox}
-\end{quotation}
+\end{myquotation}
  }
 
 
@@ -8935,11 +8987,128 @@ coltitle=green!25!black,
 
 %---
 \usepackage{adjustbox}
+\usepackage{fancyvrb}
 \usepackage{mdframed}
-
+\usepackage{fancyvrb-ex}
 
 %---
 
+\ExplSyntaxOn
+
+%****************************************************
+%*
+%****************************************************
+%--------------------
+%\NewDocumentCommand { \mfsloadaseq } { o m +m } { % 1=seq name, 2=data
+%
+%				\IfNoValueTF { #1 } 
+%						{ \tl_clear:N \g_fc_namespace_tl } 
+%						{ \tl_gset:Nn \g_fc_namespace_tl { #1 } }
+%
+%
+%	\cs_if_free:cT
+%			{ g_fc_rwe \g_fc_namespace_tl #2 _seq }
+%			{ \seq_new:c
+%					{ g_fc_rwe \g_fc_namespace_tl #2 _seq } 
+%			}
+%	\seq_gclear:c 
+%			{ g_fc_rwe \g_fc_namespace_tl #2 _seq } 
+%	\seq_gset_split:cno 
+%			{ g_fc_rwe \g_fc_namespace_tl #2 _seq } 
+%			{ , } 
+%			{ #3 }
+%
+%%	\seq_show:c 
+%%			{ g_fc_rwe \g_fc_namespace_tl #2 _seq } 
+%
+%
+%}
+
+
+%%\renewcommand\setindexhyperlinks{%
+%%\iftoggle{lcparnumrefs}{%
+%%\renewcommand\myhyperref[1]{\ref{para.##1}}%
+%%%\renewcommand\lcparnumrefsencap{|myhyperref}%
+%%\renewcommand\lcparnumrefsencap{}%
+%%}%end true
+%%{%false
+%%\renewcommand\myhyperref[1]{\hyperpage{##1}}%
+%%%\renewcommand\lcparnumrefsencap{|myhyperref}%
+%%\renewcommand\lcparnumrefsencap{}%
+%%}%end false
+%%}
+
+
+
+%------------------
+	\cs_set:Npn \lc_funcaddsqbrb:n #1 { 
+	%	[#1]
+\iftoggle{lcparnumrefs}{%
+\renewcommand\myhyperref[1]{\ref{para.##1}}%
+}%end true
+{%false
+\renewcommand\myhyperref[1]{\hyperpage{##1}}%
+}%end false
+
+[
+\iftoggle{hyperindexpages}{%
+\myhyperref{#1}%
+}%end true
+{%false
+#1
+}%end false
+]
+
+}
+
+
+%------------------
+	\cs_set:Npn \lc_funcaddsqbr:n #1 { 
+	% 1=seq
+			\seq_set_split:Nnn 
+					\l_tmpa_seq 
+					{ -- } 
+					{ #1 }
+				\seq_map_function:NN 
+					\l_tmpa_seq
+					\lc_funcaddsqbrb:n
+}
+
+\NewDocumentCommand{\squarecheck}{>{\SplitArgument{1}{--}}m}
+ {
+   \formatrange#1
+ }
+\NewDocumentCommand{\formatrange}{mm}
+ {
+  \IfNoValueTF { #2 }
+   { % no --, it's not a range
+   \mfsloadaseq[ref]{index}{#1}
+   
+%%   			\int_compare:nNnTF 
+%%					{ \seq_count:c { g_fc_rwe \g_fc_namespace_tl index _seq } } = { 1 }
+%%					{ [#1] } % single item
+%					{ % X, Y items
+%%					\seq_gset_split:Nnn 
+%%					\g_tmpa_seq 
+%%					{ ; } 
+%%					{ #1 } 
+
+				\seq_map_function:cN 
+					{ g_fc_rwe \g_fc_namespace_tl index _seq }
+					\lc_funcaddsqbr:n
+
+
+%					}    % X, Y items
+
+   
+   
+   }
+   { % it's a range
+%    [#1]--[#2] 
+   }
+ }
+
+\ExplSyntaxOff
 
 \title{Legal citation \\ using \\a >>\textcolor{blue}{\lccurrentstyle}-like<< \\ lawcitestyle}
 \author{}
@@ -8965,6 +9134,15 @@ coltitle=green!25!black,
 
 \p This file is standalone, in the sense that it generates the bibliography file and the style files needed by \textsc{Biblatex}.
 
+\newpage
+The built-in Table of Cases/Statutes/Regulations are not part of `McGill'; they are shown here for convenient reference.
+
+\renewcommand\lcparnumrefsencap{}%
+\printlawciteindexes
+
+
+
+\newpage
 \section{Quick Overview}
 \bigskip
 \ \marginpar{\textsf{\textsc{Case}}}
@@ -8995,7 +9173,7 @@ produced by:
 
 \bigskip
 \begin{magpar}
-%\begin{quotation}\noindent
+%\begin{myquotation}\noindent
 %{\ttfamily
 %\cmd{mkbibquote}\braces{\cmd{ldots} Chief Justice Lamer’s observations in 
 %\cmd{lcshorttitle}\braces{rta1996} 
@@ -9007,7 +9185,7 @@ produced by:
 %to be interpreted flexibly\cmd{ldots}}
 %\hspace{0.1pt}\cmd{lawcite}\hspace{0.1pt}\brackets{From}\hspace{0.1pt}\brackets{303}\hspace{0.1pt}\braces{ccpref}
 %}
-%\end{quotation}
+%\end{myquotation}
 \begin{verbatim}
 \mkbibquote{\ldots 
 Chief Justice Lamer’s observations in 
@@ -9027,6 +9205,7 @@ flexibly\ldots}\lawcite[From][303]{ccpref}
 \bigskip
 from
 
+%\defaultparskip
 \demofielddump[]{edwardsa}{can}
 
 \bigskip
@@ -9091,9 +9270,9 @@ Note:
 \renewcommand\numpardelimpre{\medskip}\renewcommand\numparindent{\hspace{0.5em}}
 \section{Citation Commands}
 %%\cmd{lawcite}
-%%\begin{quotation}
+%%\begin{myquotation}
 %%Text\lawcite{hmb}
-%%\end{quotation}
+%%\end{myquotation}
 
 \p This section describes the citation commands available for use with the \vv{@case} and \vv{@statute} bibentry types.
 
@@ -9125,30 +9304,35 @@ With \verb|\@|, \democomm[Text]{lawcite}{hmb2}{:}
 {However, cf. ``In my view, the purchase of articles in Idaho from a seller located there and their removal to Alberta for resale does not constitute carrying on business in Idaho.'' -- }{13}
 
 \p Subsequent history of a case: build the history by hand:
+
 \begin{magpar}
 \begin{verbatim}
 Text\footnote{\lcinline{acme}, 
 rev'd \lawciteref{acmeca}.}
 \end{verbatim}
 \end{magpar}
-\begin{quotation}
+
+\begin{myquotation}
 Text\footnote{\lcinline{acme}, rev'd \lawciteref{acmeca}.}
-\end{quotation}
+\end{myquotation}
+
+but see now the \cmd{lccatena} command at \pararef{:lccatena}.
+
 
 \p Parallel reports: items are separated by \textit{and}
 
-\begin{quotation}
+\begin{myquotation}
 ``The result of the clause is that the effect of the original judgment depends upon the rules on recognition of foreign judgments in force in this Province. I refer to  \lcinline{aero}.''\lawcite[][600]{moore}
-\end{quotation}
+\end{myquotation}
 
 
 \citetrackerfalse
 \lcdacasefield[parallel][]{tdi}
 \citetrackertrue
 
-\begin{quotation}
+\begin{myquotation}
 ``In \lcinline{morguard}, the Supreme Court of Canada broadened the criteria for the recognition and enforcement of foreign judgments. La Forest J., writing for the court, reviewed the nineteenth-century English rules governing the recognition of foreign judgments. He discussed the concept of Canada as a single nation, the need to encourage the flow of trade and commerce between the provinces, and the reasons why the existing rules, as they were adopted in Canadian jurisprudence, require broadening for this country. He concluded that the "real and substantial connection" test for the recognition of foreign judgments should govern in Canada. That is, if the events, the parties or the circumstances giving rise to the conflict have a real and substantial connection to the jurisdiction from which a judgment emanates, that judgment should be recognized for enforcement purposes.''\lawcite[][3]{tdi}
-\end{quotation}
+\end{myquotation}
 
 \p Using a different party separator (\textit{c} for ``contre''):
 
@@ -9157,15 +9341,15 @@ Text\footnote{\lcinline{acme}, rev'd \lawciteref{acmeca}.}
 %\citetrackertrue
 \lcgetabibfield{calego}{partysep}
 
-\begin{quotation}
+\begin{myquotation}
 ``À cela s’ajoute le fait que, si le contrat de travail impose à un salarié certaines restrictions à sa liberté d’expression[25], il n’y a pas de raison pour que des restrictions du même ordre ne visent pas également l’employeur.''\lawcite[][115]{calego}
-\end{quotation}
+\end{myquotation}
 %Il y a plus d’un siècle, dans McAuliffe v. Mayor and Board of Aldermen of New Bedford, 29 N.E. 517 (1892), le juge Holmes écrivait, p. 517-8 : « There are few employments for hire in which the servant does not agree to suspend his constitutional right of free speech, as well as of idleness, by the implied terms of his contract. »
 
 \p Citing from a different jurisdiction (US), by changing the citation style mid-document:
-\begin{quotation}
+\begin{myquotation}
 Il y a plus d’un siècle, dans \lcsetstyleindigo\lcinline{mcauliffe}\marginpar{$\leftarrow$ \sffamily\small\lccurrentstyle}\lcsetstylemcgill, le juge Holmes écrivait, \lcpostnote[][p. 517-8]{mcauliffe} : « There are few employments for hire in which the servant does not agree to suspend his constitutional right of free speech, as well as of idleness, by the implied terms of his contract. »\lawcite[][note 25]{calego}
-\end{quotation}
+\end{myquotation}
 
 %\begin{itemize}
 %\item
@@ -9262,28 +9446,28 @@ The parenthetical and footnote versions can be done the usual way (with \cmdc{(.
 
 This code:
 \begin{magpar}
-\begin{quotation}
+\begin{myquotation}
 \noindent\cmd{togglefalse} \braces{pinpointaftermnc}\\
 \cmd{lawcitesinline} (Overall prenote:) (overall postnote) \brackets{654-55} \braces{wismer} \brackets{128-29} \braces{mulroney} \brackets{189} \braces{toucheross} \brackets{394} \braces{roglass}.\\
 \cmd{toggletrue} \braces{pinpointaftermnc}
-\end{quotation}
+\end{myquotation}
 \end{magpar}
 produces:
-\begin{quotation}\noindent
+\begin{myquotation}\noindent
 \togglefalse{pinpointaftermnc}
 \lawcitesinline(Overall prenote:)(overall postnote)[654-55]{wismer}[128-29]{mulroney}[189]{toucheross}[394]{roglass}.
 \toggletrue{pinpointaftermnc}
-\end{quotation}
+\end{myquotation}
 
 In this case, none of the citations have real MNCs, so \cmdc{pinpointaftermnc} is toggled to false, so that the pinpoints appear after the law report reference and not after the CanLII ``MNC''.
 
 \p The corresponding footnote version uses \cmd{lawcitesfoot}:
 
-\begin{quotation}
+\begin{myquotation}
 \togglefalse{pinpointaftermnc}
 Text\lawcitesfoot(Overall prenote:)(overall postnote)[654-55]{wismer}[128-29]{mulroney}[189]{toucheross}[394]{roglass}
 \toggletrue{pinpointaftermnc}
-\end{quotation}
+\end{myquotation}
 
 \begin{figure}
 \begin{center}
@@ -9301,25 +9485,25 @@ Text\lawcitesfoot(Overall prenote:)(overall postnote)[654-55]{wismer}[128-29]{mu
 %%\citetrackertrue
 %\lcgetabibfield{salter}{options}
 
-\begin{quotation}\noindent
+\begin{myquotation}\noindent
 \demofielddump[]{salter}{salter}
-\end{quotation}
+\end{myquotation}
 
 The two child entries will \cmdc{crossref} back to the parent and inherit its fields (the party names), and one of the child entries will use the \cmdc{skipbib} option:
 
-\begin{quotation}\noindent
+\begin{myquotation}\noindent
 \demofielddump[]{salternr}{salternr}
-\end{quotation}
+\end{myquotation}
 
 and
 
-\begin{quotation}\noindent
+\begin{myquotation}\noindent
 \demofielddump[]{salterer}{salterer}
-\end{quotation}
+\end{myquotation}
 give (with \verb|\lcinlinerr{salter, salternr, salterer}|):
-\begin{quotation}\noindent
+\begin{myquotation}\noindent
 `the corporation dieth not' -- \lcinlinerr{salter, salternr, salterer}
-\end{quotation}
+\end{myquotation}
 
 \p To \marginpar{buggy} follow the current cite style, use
 \democomm[Text]{lawciterr}{salter, salternr, salterer}{:}
@@ -9338,17 +9522,17 @@ Workaround for footnote styles: use \cmd{footnote}\braces{\cmd{lcinelinerr}\brac
 \p Alternatively to the parent-child method, especially when pinpoints are needed, two full bibentries with the components of their citations may be used:, the casename and caseref from one bibentry, followed by the caseref of the other, with one of the entries having the \cmdc{skipbib=true} option,
 
 so that, with
-\begin{quotation}\noindent
+\begin{myquotation}\noindent
 \demofielddump[]{ashnr}{ashnr}
-\end{quotation}
+\end{myquotation}
 and
-\begin{quotation}\noindent
+\begin{myquotation}\noindent
 \demofielddump[]{asher}{asher}
-\end{quotation}
+\end{myquotation}
 the combination \verb|\lcinline[358]{ashnr}, \lawciteref[526]{asher}.| gives:
-\begin{quotation}\noindent
+\begin{myquotation}\noindent
 \lcinline[358]{ashnr}, \lawciteref[526]{asher}.
-\end{quotation}
+\end{myquotation}
 
 
 %%Not really needed, given that components are already available.
@@ -9604,7 +9788,7 @@ verb &  &&  & regnum && \\
 
 \end{itemize}
 
-\p `Ordinary' articles can be stored in the @article bibentry type: \begin{quotation}\noindent\fullcite{a104}\end{quotation}
+\p `Ordinary' articles can be stored in the @article bibentry type: \begin{myquotation}\noindent\fullcite{a104}\end{myquotation}
 
 \section{Legal Monographs}
 
@@ -9632,13 +9816,13 @@ This allows use of cross-referencing and other biblatex features.
 
 \p Available citation commands are:
 
-\begin{itemize}\item \cmd{qcite} (quoted text, with attribution):\end{itemize} \begin{quotation}\qcite{q5}\end{quotation}
-\begin{itemize}\item\cmd{qcitetext} (quoted text):\end{itemize} \begin{quotation}\qcitetext{q5}\end{quotation}
-\begin{itemize}\item\cmd{qcitetextnoqq} (plain text, no quotes): \end{itemize}\begin{quotation}\qcitetextnoqq{q5}\end{quotation}
-\begin{itemize}\item\cmd{qqcite} (formatted epigraph quote): \end{itemize}\begin{quotation}\qqcite{q5}\end{quotation}
-\begin{itemize}\item\cmd{qqcitefn} (formatted epigraph quote with footnote mark, to be used in association with \cmd{footnotetext}):\end{itemize} \begin{quotation}\qqcitefn{q5}\end{quotation}\footnotetext{Some text.}
+\begin{itemize}\item \cmd{qcite} (quoted text, with attribution):\end{itemize} \begin{myquotation}\qcite{q5}\end{myquotation}
+\begin{itemize}\item\cmd{qcitetext} (quoted text):\end{itemize} \begin{myquotation}\qcitetext{q5}\end{myquotation}
+\begin{itemize}\item\cmd{qcitetextnoqq} (plain text, no quotes): \end{itemize}\begin{myquotation}\qcitetextnoqq{q5}\end{myquotation}
+\begin{itemize}\item\cmd{qqcite} (formatted epigraph quote): \end{itemize}\begin{myquotation}\qqcite{q5}\end{myquotation}
+\begin{itemize}\item\cmd{qqcitefn} (formatted epigraph quote with footnote mark, to be used in association with \cmd{footnotetext}):\end{itemize} \begin{myquotation}\qqcitefn{q5}\end{myquotation}\footnotetext{Some text.}
 
-\p \cmd{qqcite} An example of a case-related epigraph: \begin{quotation}\qqcite{q9}\end{quotation}
+\p \cmd{qqcite} An example of a case-related epigraph: \begin{myquotation}\qqcite{q9}\end{myquotation}
 
 \p \paradef{aonb} Authorial attribution can be formatted as the customary \textit{A on B} with \cmd{lcepigraphp}, for the possessive case: \lcepigraphp{anncrimnsw}.
 
@@ -9841,36 +10025,36 @@ casestatus}.
 
 \p An @statute bib entry with the \cmdc{citeref} field set to \cmdc{canleg} produces this structure:
 
-\begin{quotation}
+\begin{myquotation}
 \lawcite{samplestat}
-\end{quotation}
+\end{myquotation}
 so that an entry
 
 \lcdcase{cancorp}
 produces\footnote{Note that the dot \angles{.} in \angles{(Can.)} is marked as an abbreviation dot with \angles{\textbackslash @}, thus \angles{(Can.\textbackslash @)}, so that biblatex's puncuation tracker will add \angles{, c} to the output rather than start a new sentence with \angles{\ C}.}
-\begin{quotation}
+\begin{myquotation}
 \lawcite{cancorp}
-\end{quotation}
+\end{myquotation}
 %\lcdcase{samplestat}
 and a bib entry without the \cmdc{citeref} field produces this structure:
 
-\begin{quotation}
+\begin{myquotation}
 \lawcite{samplestat2}
-\end{quotation}
+\end{myquotation}
 and so an entry
 
 \lcdcase{cancorp2}
 produces\footnote{This entry has \angles{(Can)} rather than \angles{(Can.)}.}
-\begin{quotation}
+\begin{myquotation}
 \lawcite{cancorp2}
-\end{quotation}
+\end{myquotation}
 
 \p Again, this time from the Revised Statutes:
-\begin{quotation}
+\begin{myquotation}
 \noindent\lawcite{cca1970} {\footnotesize (non-citeref)}
 
 \noindent\lawcite{cca1970b} {\footnotesize (citeref)}
-\end{quotation}
+\end{myquotation}
 
 \p The postnote may be retrieved separately with \cmd{lcpostnote}, allowing for a variation in the flow of text, if required: \angles{\highLight{\lawcite[s 457(1)]{crimcode1970}}} versus \angles{\highLight{\lcpostnote[s 457(1)]{crimcode1970} of the \lawcite{crimcode1970}}}.
 
@@ -9878,22 +10062,22 @@ produces\footnote{This entry has \angles{(Can)} rather than \angles{(Can.)}.}
 
 \p When \cmdc{statutechapter} is present and \cmdc{citeref} is not, the following structure is used:
 
-\begin{quotation}
+\begin{myquotation}
 \lawcite{samstata}
-\end{quotation}
+\end{myquotation}
 
 \p When both \cmdc{statutechapter} and \cmdc{citeref} are not present, the following structure is used:
 
-\begin{quotation}
+\begin{myquotation}
 \lawcite{samstatb}
-\end{quotation}
+\end{myquotation}
 
 
 \p When \cmdc{citeref} is present, the following structure is used (depending on the citeref value - see \pararef{cffields}):
 
-\begin{quotation}
+\begin{myquotation}
 \lawcite{samstatc}
-\end{quotation}
+\end{myquotation}
 
 \p The available fields are listed in the following:
 
@@ -9946,9 +10130,9 @@ produces\footnote{This entry has \angles{(Can)} rather than \angles{(Can.)}.}
 
 \p For law journals, the CanLII link may be stored as if it were an MNC, or not. In either case, the \cmdc{url} will be used as link.
 
-\begin{quotation}
+\begin{myquotation}
 \noindent\ljcite{otis}
-\end{quotation}
+\end{myquotation}
 from
 
 %\lcdcase{otis}
@@ -9956,9 +10140,9 @@ from
 \colorbox{blue!12}{\begin{minipage}{\textwidth}\lcdcasehl[mncname][]{otis}\end{minipage}}
 
 versus
-\begin{quotation}
+\begin{myquotation}
 \noindent\ljcite{tetley}
-\end{quotation}
+\end{myquotation}
 from
 
 %\lcdcase{tetley}
@@ -9969,7 +10153,7 @@ from
 \lcsetstylemcgill
 \section{Examples}
 
-\begin{quotation}
+\begin{myquotation}
 A plea of guilty is not an
 admission of any facts giving rise to the charge. It is
 evidence only that that particular accused considers that he
@@ -9980,7 +10164,7 @@ plea of guilty only admits that the accused committed the
 offence charged and does not admit the truth of any
 depositions. See \highLight{Regina v. Riley (1896), 18 Cox, C.C. 285 at
 p. 295 per Hawkins J}. \lawcite{berry}
-\end{quotation}
+\end{myquotation}
 
 \renewcommand\postnotedelim{,\ }%
 \lcaonbtitle{phipson9}, 
@@ -10024,9 +10208,9 @@ points out that
 % The theory of the Crown
 
 \newpage
-\begin{quotation}
+\begin{myquotation}
 The ability to cross-examine a witness as to the basis for his opinion and the factors which he has taken into account and those which he has omitted can be relevant, pertinent and indeed vital to testing  that opinion: see, for example, \highLight{\textit{ R. v. Rosik} (1970), 2 C.C.C. (2d) 351, [1971] 2 O.R. 47, 13 Crim. L.Q. 224 (Ont. C.A.) (appeal to the Supreme Court of Canada dismissed 2 C.C.C. (2d) 393\textit{n}, [1971] 2 O.R. 89\textit{n}, [1971] S.C.R. vi), and \textit{R. v. Abbey} (1982), 68 C.C.C. (2d) 394, 138 D.LR. (3d) 202, [1982] 2 S.C.R. 24 (S.C.C.).}\lawcite[559-560]{howard}
-\end{quotation}
+\end{myquotation}
 
 
 \lcinline{rosik}
@@ -10057,9 +10241,9 @@ The main concern of the hearsay rule is the veracity of the statements made. The
 \end{casequote}
 
 \newpage
-\begin{quotation}\noindent
+\begin{myquotation}\noindent
 As Woods J.A. said in \highLight{R. v. Perras (1972), 1972 CanLII 868 (SK CA), 8 C.C.C. (2d) 209, at p. 213}, ``The evidence of a physician stating what a patient told him about his symptoms is \hlybox{not} evidence as to the existence of the symptoms. To accept it as such would be to infringe the rule against hearsay."\lawcite[45-46]{abbey}
-\end{quotation}
+\end{myquotation}
 
 \lcinline[213]{perras}
 
@@ -10301,22 +10485,22 @@ Bibentry \cmdc{q10} does a cross-reference to the case's bibentry, to bring in t
 \toggletrue{useqquotation}
 \end{verbatim}
 
-\begin{quotation}
+\begin{myquotation}
 	
 \noindent
 \lcinline{testanc1}
 
 \noindent\lcinline{testanc2}
-\end{quotation}
+\end{myquotation}
 
 \p The filename prefix can be changed by doing \cmd{renewcommand}\braces{X}\braces{\ldots}, where X is one of:
 
-\begin{quotation}
+\begin{myquotation}
 \noindent\cmd{bibannotationprefix},\par
 \noindent \cmd{bibnoterupprefix}, \par 
 \noindent \cmd{bibcommentaryprefix}, \par
 \noindent or \cmd{bibqquotationprefix}. 
-\end{quotation}
+\end{myquotation}
 
 
 % Exclude the annotations from the bibliography:
@@ -10325,7 +10509,7 @@ Bibentry \cmdc{q10} does a cross-reference to the case's bibentry, to bring in t
 \togglefalse{usecommentary}
 %\togglefalse{useqquotation} % already excluded
 
-%\section{Text Highlighting}
+\section{Text Highlighting}
 \p For those interested, text highlighting in this document has been done by the following.
 
 \p highlighting -- the \cmd{highLight} command, \highLight{this is highlighted}, from the luacolor and lua-ul packages.
@@ -10369,7 +10553,7 @@ This is a casequote environment.
 \end{casequote}
 \end{verbatim}
 
-
+%\section{Options and Switches}
 
 
 
@@ -10427,14 +10611,16 @@ heading=subbibliography,%
 nottype=case,
 nottype=statute,
 nottype=ljarticle,
+nottype=quote,
 notkeyword=lawbook,
 title={\center General Material},
 ]
 
 
 
+\p Some sundry commands.
 
-\cmd{lcrollcall*}
+\p \cmd{lcrollcall*}
 
 \lcrollcall*{
 colchester;a comment
@@ -10452,7 +10638,7 @@ colchester;\textbf{formatted} text
 }
 
 
-\cmd{lccatena}
+\p \cmd{lccatena}\paradef{:lccatena}
 
 \lccatena{%
 cargill;aff'd
@@ -10476,19 +10662,61 @@ douez;rev’d but not on this point
 
 \qqcite[1]{q119}
 
-\cmd{lcqquotation} for extensive quotation (e.g., excerpt for a casebook), here visually set off wih an mdframed environment:\footnote{The wrapper command is \cmd{lcqquotationmdf}.}
+\p \cmd{lcqquotation} for extensive quotation (e.g., excerpt for a casebook), here visually set off wih an mdframed environment:\footnote{The wrapper command is \cmd{lcqquotationmdf}.}
 
 %\begin{mdframed}
 \lcqquotationmdf{q120}
 %\end{mdframed}
 
-The bibentry is basically just a nexus:
+\p The bibentry is basically just a nexus:
 
+\bigskip
 \begin{verbatim}
 @quote{q120,crossref = {vww},options={skip-bib=true},}
 \end{verbatim}
 
-with the crossref pulling in the legal citation, and the citation command pulling in text and latex code from the corresponding file, \cmdc{bibqquotation-q120.tex}. Use \cmd{nocite}\braces{vww} to process the crossref case as an entry in its own right into the Table of Cases and Bibliography if it is not cited elsewhere in the main text.\nocite{vww}
+\bigskip
+with the crossref pulling in the legal citation, and the citation command pulling in text and latex code from the corresponding file, \cmdc{bibqquotation-q120.tex}. Use \cmd{nocite}\braces{vww} to process the crossref case as an entry in its own right into the Table of Cases and Bibliography if it is not directly cited elsewhere.\nocite{vww}
+
+\p For inline code listings, use:
+
+{
+\begin{Example}[formatcom=\color{blue}]
+\bigskip
+\begin{mdframed}[backgroundcolor=green!40!yellow!12]
+\begin{Verbatim}[numbers=left,numbersep=2pt]
+\AtWriteToIndex{cases}{\let\thepage\theparno}
+\AtWriteToIndex{legislation}{\let\thepage\theparno}
+\AtWriteToIndex{regulations}{\let\thepage\theparno}
+\end{Verbatim}
+
+
+\end{mdframed}
+
+\end{Example}
+}
+%to produce:
+%
+%\bigskip
+%\begin{mdframed}[backgroundcolor=green!40!yellow!12]
+%\begin{Verbatim}[numbers=left,numbersep=2pt]
+%\AtWriteToIndex{cases}{\let\thepage\theparno}
+%\AtWriteToIndex{legislation}{\let\thepage\theparno}
+%\AtWriteToIndex{regulations}{\let\thepage\theparno}
+%\end{Verbatim}
+%
+%\end{mdframed}
+
+
+
 
 
 \end{document}
+
+   In a valiant but ultimately futile effort to bring proportionality to this action, I heard what I had hoped would be an attenuated refusals motion in which the parties might focus on what was truly needed to get the case to trial. It is apparent that the parties have much more on their respective plates than just this one piece of litigation. So their positions are driven by far wider considerations. Unless or until the court determines that the parties have consumed more than their fair share of scarce public resources, their battles appear to be destined to continue as unrelenting as the 500 year war between Eminiar VII and Vendikar.
+   [1]
+    “A Taste of Armageddon,” Star Trek, Season 1, Episode 23, NBC, February 23, 1967.
+    
+    Apotex Inc. v Eli Lilly and Company, 2017 ONSC 7204 (CanLII), <https://canlii.ca/t/hp39f>
+    
+    
