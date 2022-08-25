@@ -1,11 +1,11 @@
-% xarara: lualatex
-% xarara: biber
-% xarara: lualatex
-% xarara: splitindex: { style: squarecheck.ist }
+% arara: lualatex
+% arara: biber
 % arara: lualatex
 % arara: splitindex: { style: squarecheck.ist }
 % arara: lualatex
-% xarara: lualatex
+% arara: splitindex: { style: squarecheck.ist }
+% arara: lualatex
+% arara: lualatex
 
 
 
@@ -28,7 +28,64 @@ encap_suffix "}"
 line_max 1000
 \end{filecontents*}
 \begin{filecontents*}[overwrite]{lawcitemini.dbx}
+\newcommand\printbibliographymcgill{%
+\newpage
+{\center
+\printbibheading[title=Bibliography]
+}
+%------------------------------- Legislation
+\newrefcontext[sorting=statsort]
+\printbibliography[
+title=\center Legislation,
+heading=subbibliography,%
+type=statute,
+]
+%------------------------------- Cases
+\newrefcontext[sorting=casesort]
+\printbibliography[
+title=\center Jurisprudence,
+heading=subbibliography,%
+type=case,
+notcategory=nobib,
+%notkeyword=nobib,
+]
+%------------------------------- Monographs
+\newrefcontext[sorting=nty]
+\printbibliography[
+heading=subbibliography,%
+%nottype=case,
+%nottype=statute,
+%nottype=article,
+%nottype=ljarticle,
+keyword=lawbook,
+title={\center Secondary Materials: Monographs},
+%postnote={bibcolophon},
+]
+%------------------------------- Legal Articles, Law Reviews
+\newrefcontext[sorting=nty]
+\printbibliography[
+heading=subbibliography,%
+title={\center Secondary Materials: Articles},
+type=ljarticle,
+]
+%postnote={bibcolophon},
 
+%-------------------------------------
+\bigskip
+\hfill\rulesep\hfill\ %\hrule
+\bigskip
+%
+%------------------------------- General Material
+\printbibliography[
+heading=subbibliography,%
+nottype=case,
+nottype=statute,
+nottype=ljarticle,
+nottype=quote,
+notkeyword=lawbook,
+title={\center General Material},
+]
+}
 %...............................................................................................
 \ExplSyntaxOn
 
@@ -10620,65 +10677,65 @@ This is a casequote environment.
 
 
 %======================================= Bibliography
-\citetrackerfalse
-\newpage
-{\center
-\printbibheading[title=Bibliography]
-}
-%------------------------------- Legislation
-\newrefcontext[sorting=statsort]
-\printbibliography[
-title=\center Legislation,
-heading=subbibliography,%
-type=statute,
-]
-%------------------------------- Cases
-\newrefcontext[sorting=casesort]
-\printbibliography[
-title=\center Jurisprudence,
-heading=subbibliography,%
-type=case,
-notcategory=nobib,
-%notkeyword=nobib,
-]
-%------------------------------- Monographs
-\newrefcontext[sorting=nty]
-\printbibliography[
-heading=subbibliography,%
-%nottype=case,
-%nottype=statute,
-%nottype=article,
-%nottype=ljarticle,
-keyword=lawbook,
-title={\center Secondary Materials: Monographs},
-%postnote={bibcolophon},
-]
-%------------------------------- Legal Articles, Law Reviews
-\newrefcontext[sorting=nty]
-\printbibliography[
-heading=subbibliography,%
-title={\center Secondary Materials: Articles},
-type=ljarticle,
-]
-%postnote={bibcolophon},
-
-%-------------------------------------
-\bigskip
-\hfill\rulesep\hfill\ %\hrule
-\bigskip
-%
-%------------------------------- General Material
-\printbibliography[
-heading=subbibliography,%
-nottype=case,
-nottype=statute,
-nottype=ljarticle,
-nottype=quote,
-notkeyword=lawbook,
-title={\center General Material},
-]
-\citetrackertrue
-
+%%%\citetrackerfalse
+%%\newpage
+%%{\center
+%%\printbibheading[title=Bibliography]
+%%}
+%%%------------------------------- Legislation
+%%\newrefcontext[sorting=statsort]
+%%\printbibliography[
+%%title=\center Legislation,
+%%heading=subbibliography,%
+%%type=statute,
+%%]
+%%%------------------------------- Cases
+%%\newrefcontext[sorting=casesort]
+%%\printbibliography[
+%%title=\center Jurisprudence,
+%%heading=subbibliography,%
+%%type=case,
+%%notcategory=nobib,
+%%%notkeyword=nobib,
+%%]
+%%%------------------------------- Monographs
+%%\newrefcontext[sorting=nty]
+%%\printbibliography[
+%%heading=subbibliography,%
+%%%nottype=case,
+%%%nottype=statute,
+%%%nottype=article,
+%%%nottype=ljarticle,
+%%keyword=lawbook,
+%%title={\center Secondary Materials: Monographs},
+%%%postnote={bibcolophon},
+%%]
+%%%------------------------------- Legal Articles, Law Reviews
+%%\newrefcontext[sorting=nty]
+%%\printbibliography[
+%%heading=subbibliography,%
+%%title={\center Secondary Materials: Articles},
+%%type=ljarticle,
+%%]
+%%%postnote={bibcolophon},
+%%
+%%%-------------------------------------
+%%\bigskip
+%%\hfill\rulesep\hfill\ %\hrule
+%%\bigskip
+%%%
+%%%------------------------------- General Material
+%%\printbibliography[
+%%heading=subbibliography,%
+%%nottype=case,
+%%nottype=statute,
+%%nottype=ljarticle,
+%%nottype=quote,
+%%notkeyword=lawbook,
+%%title={\center General Material},
+%%]
+%%%\citetrackertrue
+\printbibliographymcgill
 
 \p Some sundry commands.
 
