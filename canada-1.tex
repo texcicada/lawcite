@@ -1,0 +1,133 @@
+% arara: lualatex
+% arara: biber
+% arara: lualatex
+% xarara: splitindex: { style: squarecheck.ist }
+% xarara: lualatex
+% xarara: splitindex: { style: squarecheck.ist }
+% xarara: lualatex
+% arara: lualatex
+
+\begin{filecontents*}[overwrite]{\jobname.bib}
+@case{bjt,partya = {BJT},partyb = {JD},caseyear = {2022},courtname = {SCC},casenumber = {24},linkname = {CanLII},url = {https://canlii.ca/t/jpkkn},pagination = {atparagraph},}
+
+@case{goforth,partya = {R},partyb = {Goforth },caseyear = {2022},courtname = {SCC},casenumber = {25},reportyear = {2021},reportseries = {SCJ},reportpage = {No 103 (QL)},linkname = {CanLII},url = {https://canlii.ca/t/jpqcs},pagination = {atparagraph},}
+
+@case{collins,partya = {Canada (Attorney General)},partyb = {Collins Family Trust},caseyear = {2022},courtname = {SCC},casenumber = {26},caseshortname = {Collins Family Trust},linkname = {CanLII},url = {https://canlii.ca/t/jptr6},pagination = {atparagraph},}
+
+
+
+\end{filecontents*}
+
+
+
+\documentclass{article}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+%------------------
+
+%------------------
+\usepackage[table,dvipsnames,svgnames]{xcolor}
+\pagecolor{blue!3}
+\rowcolors{1}{blue!5}{blue!9}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{TeX Gyre Adventor}[Scale=1.2]%Gentium Plus}
+\setmonofont{Noto Sans Mono}%[Colour=blue]
+\newfontface\fcircnum{DejaVu Sans}[Colour=blue]
+\newcommand\circnum[1]{{\fcircnum#1}}
+%------------------
+\usepackage[british]{babel}
+\usepackage{csquotes}
+\usepackage{graphicx}
+
+\usepackage{marginnote}
+\usepackage{microtype}
+\usepackage{parskip}
+\newcommand\defaultparskip{\setlength\parskip{0pt}}
+\newcommand\normalparskip{\parskip=.5\baselineskip plus 2pt\relax}
+
+\usepackage{splitidx}
+
+
+
+\newcommand\theadcolour{\rowcolor{blue!80!green!20!yellow}}
+
+\newcommand\note[1]{(\texttt{#1})}
+
+
+
+	\newcommand\abibname{lawcitemini}
+	\newcommand\abibstyle{style=\abibname}
+	\usepackage[
+	\abibstyle , 
+	lawcitestyle=mcgill,
+%	print-toc-tos=true,
+%	use-toc-parnumrefs=true,
+%	hyperlink-index-pages=true,
+	indexing=cite,
+	citetracker=true,
+	citecounter=context,
+%	ibidtracker=foot,%option setting for footnotes: assumes single refs
+	%%ibidstyle=uc,%uppercase Ibid OSCOLA option
+	pagetracker=true,
+	idemtracker=true,
+	opcittracker=true,
+	loccittracker=true,%if same postnote in an ibid
+	autocite=footnote,
+	   datezeros=true,
+	   minnames=5,
+	   maxnames=5,%more names than this are truncated to minnames
+	   dashed=false,
+	   loadfiles=true,% for annotations stored in files
+	]{biblatex}
+
+\addbibresource{\jobname.bib}
+
+\newfontface\fcc{Noto Sans Mono}
+\newcommand\attribution[1]{\hspace{2pt}\fcc\tiny\rotatebox{90}{#1}}
+
+\usepackage{tikz}
+\usetikzlibrary{tikzmark, calc}
+\newcommand\hlybox[2][]{\tikz[overlay]\node[fill=yellow!20,draw=black,inner sep=2pt, anchor=text, rectangle, rounded corners=1mm,#1] {#2};\phantom{#2}}
+
+\usepackage[
+final=true,
+bookmarks,
+%            allcolors = black,  
+            colorlinks=true,        
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+%================
+
+%---
+\usepackage{luacolor,lua-ul}
+\colorlet{r1}{GreenYellow!50}
+\colorlet{r2}{RubineRed}
+\colorlet{r3}{RoyalPurple}
+\LuaULSetHighLightColor{r1}
+%--
+\newunderlinetype\beginUnderWavy[\number\dimexpr1ex]{\cleaders\hbox{%
+\setlength\unitlength{.3ex}%
+\begin{picture}(4,0)(0,1)
+\thicklines
+\color{red}%
+\qbezier(0,0)(1,1)(2,0)
+\qbezier(2,0)(3,-1)(4,0)
+\end{picture}%
+}}
+\newcommand\underWavy[1]{{\beginUnderWavy#1}}
+
+%------------------
+
+\begin{document}
+-- Unsupported generalizations are inappropriate.\lawcite[108]{bjt}
+
+-- ``the trial judge left the jury equipped with a charge that, in critical sections, is not comprehensible to a legally trained reader, let alone to a layperson juror''\lawcite[67]{goforth}
+
+-- ``the zone of unfairness''\lawcite[93]{collins}
+
+
+
+\rulesep
+\end{document}
