@@ -14,6 +14,13 @@
 
 @case{collins,partya = {Canada (Attorney General)},partyb = {Collins Family Trust},caseyear = {2022},courtname = {SCC},casenumber = {26},caseshortname = {Collins Family Trust},linkname = {CanLII},url = {https://canlii.ca/t/jptr6},pagination = {atparagraph},}
 
+@case{ccd,partya = {British Columbia (Attorney General)},partyb = {Council of Canadians with Disabilities},caseyear = {2022},courtname = {SCC},casenumber = {27},caseshortname = {CCD},linkname = {CanLII},url = {https://canlii.ca/t/jpx81},pagination = {atparagraph},}
+
+@case{guidara,partya = {Guidara},partyb = {Canada (Procureur général)},partysep = {c},caseyear = {2022},courtname = {CAF},casenumber = {122},linkname = {CanLII},url = {https://canlii.ca/t/jq059},pagination = {atparagraph},}
+
+@case{vavilov,partya = {Canada (Ministre de la Citoyenneté et de l’Immigration)},partyb = {Vavilov},partysep = {c},caseyear = {2019},courtname = {CSC},casenumber = {65},reportyear = {2019},reportvolume = {4},volyearneeded = {true},reportseries = {RCS},reportpage = {653},caseshortname = {Vavilov},parallel = { [2019] ACS no 65 and [2019] SCJ No 65 (QL) and [2019] CarswellNat 7883 and EYB 2019-335761 and 59 Admin LR (6th) 1 and 69 RJ imm (4th) 1 and [2020] EXP 27 and AZ-51654335 and 312 ACWS (3d) 460 and 441 DLR (4th) 1 },linkname = {CanLII},url = {https://canlii.ca/t/j46kc},mncurl = {https://www.canlii.org/fr/ca/csc/doc/2019/2019csc65/2019csc65.html},pagination = {atparagraph},langid = {french},}
+@case{dunsmuir,partya = {Dunsmuir},partyb = {Nouveau-Brunswick},partysep = {c},caseyear = {2008},courtname = {CSC},casenumber = {9},reportyear = {2008},reportvolume = {1},volyearneeded = {true},reportseries = {RCS},reportpage = {190},parallel = { [2008] ACS no 9 and [2008] SCJ No 9 (QL) and [2008] CarswellNB 124 and EYB 2008-130674 and JE 2008-547 and 170 LAC (4th) 1 and 64 RCDT (3d) 1 and 69 Admin LR (4th) 1 and 69 RJ imm (3d) 1 and 95 LCR 65 and DTE 2008T-223 and 844 APR 1 and AZ-50478101 and 164 ACWS (3d) 727 and 291 DLR (4th) 577 and 372 NR 1 and 329 RNB (2d) 1},linkname = {CanLII},url = {https://canlii.ca/t/1vxsn},pagination = {atparagraph},}
+
 
 
 \end{filecontents*}
@@ -35,7 +42,7 @@
 \newfontface\fcircnum{DejaVu Sans}[Colour=blue]
 \newcommand\circnum[1]{{\fcircnum#1}}
 %------------------
-\usepackage[british]{babel}
+\usepackage[french,british]{babel}
 \usepackage{csquotes}
 \usepackage{graphicx}
 
@@ -73,6 +80,7 @@
 	opcittracker=true,
 	loccittracker=true,%if same postnote in an ibid
 	autocite=footnote,
+%	autolang=french,
 	   datezeros=true,
 	   minnames=5,
 	   maxnames=5,%more names than this are truncated to minnames
@@ -118,14 +126,96 @@ bookmarks,
 }}
 \newcommand\underWavy[1]{{\beginUnderWavy#1}}
 
+
+
+
+
+
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\newfontface\fmag{Noto Sans Symbols2}[Scale=2,Colour=blue]
+\newenvironment{magpar}
+{
+\vspace{1ex}
+\begin{tcolorbox}[breakable, enhanced,colback=yellow!10!white,boxrule=0pt,frame hidden,borderline west={1mm}{-2mm}{black}]
+{ \fmag 🔍 }
+}
+{\end{tcolorbox}
+\vspace{1.8ex}
+ }
+
+\newenvironment{myquotation}
+{
+\vspace{2.1ex}
+\begin{quotation}
+}
+{\end{quotation}
+\vspace{2.8ex}
+ }
+
+
+\newenvironment{casenote}[1]
+{
+\begin{tcolorbox}[title=#1,
+enhanced,
+attach boxed title to top right,
+boxed title style={colframe=blue!75!yellow!15,colback=violet!75,},
+colback=red!5!white,
+colframe=red!75!black,
+fonttitle=\bfseries,
+%before title={x},
+%after title={\hfill\colorbox{Navy}{approved}},
+]
+}
+{\end{tcolorbox}
+ }
+\newenvironment{casequote}[1]
+{
+\begin{myquotation}
+\begin{tcolorbox}[title=#1,
+enhanced,
+attach boxed title to top right,
+boxed title style={colframe=blue!75!yellow!15,colback=violet!8,},
+colback=brown!5!white,
+colframe=brown!75!black,
+fonttitle=\bfseries,
+coltitle=green!25!black,
+%before title={x},
+%after title={\hfill\colorbox{Navy}{approved}},
+]\begin{tabular}{ccc}\cellcolor{yellow!30!brown!18}{\Large ``} & \cellcolor{brown!12!white}
+\begin{minipage}{0.82\textwidth}
+}
+{\end{minipage} & \cellcolor{yellow!30!brown!18}{\Large''}\\\end{tabular}\end{tcolorbox}
+\end{myquotation}
+ }
+
+
+
 %------------------
 
 \begin{document}
+
+\p Supreme Court of Canada
+
 -- Unsupported generalizations are inappropriate.\lawcite[108]{bjt}
 
 -- ``the trial judge left the jury equipped with a charge that, in critical sections, is not comprehensible to a legally trained reader, let alone to a layperson juror''\lawcite[67]{goforth}
 
 -- ``the zone of unfairness''\lawcite[93]{collins}
+
+\begin{casequote}{Access}Access to justice depends on the efficient and responsible use of court resources. Frivolous lawsuits, endless procedural delays, and unnecessary appeals increase the time and expense of litigation and waste these resources. To preserve meaningful access, courts must ensure that their resources remain available to the litigants who need them most — namely, those who advance meritorious and justiciable claims that warrant judicial attention. \\[0.8\baselineskip]
+-- \lcinline[1]{ccd}
+\end{casequote}
+
+\selectlanguage{french}
+\p 	Cour d'appel fédérale
+
+-- \enquote{Le rôle de la Cour est plutôt de s’assurer que la décision contestée, et la justification qui la sous-tend, possèdent les « attributs de la raisonnabilité » (\lcshorttitle[86]{vavilov}, citant \lcshorttitle[47]{dunsmuir}). Elle doit ainsi s’intéresser à la fois au résultat obtenu et au raisonnement qui a mené à ce résultat. Comme la Cour suprême le rappelait dans Vavilov, la décision raisonnable est celle qui est « fondée sur une analyse intrinsèquement cohérente et rationnelle et [qui] est justifiée au regard des contraintes juridiques et factuelles auxquelles le décideur est assujetti » (\lcshorttitle[85-90]{vavilov}).}\lawcite[15]{guidara} 
+
+
+\selectlanguage{english}
 
 
 

@@ -736,6 +736,6 @@ relatedstring,
 
 
 \DeclareLanguageMapping{english}{english-lawcitemini}
-
+\DeclareLanguageMapping{french}{french-lawcitemini}
 
 \endinput
