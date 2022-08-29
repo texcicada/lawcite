@@ -25,6 +25,16 @@
 
 @quote{q102,crossref = {apotex},options = {skipbib=true},}
 
+@case{nova,partya = {Nova-Biorubber Green Technologies Inc},partyb = {Sustainable Development Technology Canada},caseyear = {2022},courtname = {FCA},casenumber = {121},caseshortname = {Nova-Biorubber},linkname = {CanLII},url = {https://canlii.ca/t/jpz6n},pagination = {atparagraph},}
+
+@case{wojdan,partya = {Wojdan},partyb = {Canada (Attorney General)},caseyear = {2022},courtname = {FCA},casenumber = {120},linkname = {CanLII},url = {https://canlii.ca/t/jpz6r},pagination = {atparagraph},}
+
+@case{thompson,partya = {Canada},partyb = {Thompson},caseyear = {2022},courtname = {FCA},casenumber = {119},caseshortname = {Thompson},linkname = {CanLII},url = {https://canlii.ca/t/jpwk3},pagination = {atparagraph},}
+
+
+
+
+
 
 \end{filecontents*}
 
@@ -89,7 +99,7 @@
 	   maxnames=5,%more names than this are truncated to minnames
 	   dashed=false,
 	   loadfiles=true,% for annotations stored in files
-	   use-qquotation=true, %for long excerpts
+	   use-qquotation=true, %for long excerpts, via bibqq...-files
 	]{biblatex}
 
 \addbibresource{\jobname.bib}
@@ -224,6 +234,16 @@ coltitle=green!25!black,
 
 \bigskip
 \lcqquotationmdf{q102}
+
+\p Federal Court of Appeal
+
+-- No action for status review if no reviewable error\lawcite[6]{nova}
+
+-- \enquote{In its written submissions, the appellant also alleges that the Federal Court is in a conflict of interest with the respondent as the latter is a federally created organization. The appellant’s allegations are serious, unsubstantiated, without merit and ought not have been made.}\lawcite[9]{nova}
+
+-- removal of vaccination requirement mootizes action to suspend requirement: \enquote{We are all of the view that. this appeal is now moot, as the Policy that the appellants seek to suspend is no longer in force}\lawcite[4]{wojdan} 
+
+-- ``No Fishing'' at discovery stage even though standard of relevance is lower than at trial\lawcite[43,46]{thompson}
 
 \rulesep
 
