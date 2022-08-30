@@ -3815,6 +3815,87 @@ test {\ifentrytype{statute}}%
 
 
 
+\DeclareCiteCommand{lcbookatey}%
+{\usebibmacro{prenote}}%
+{%
+%  \usebibmacro{publisher+location+date}%
+%  book bib driver from ext-standard.bbx:
+\iftoggle{bookauthorgiven}{\DeclareNameAlias[book]{author}{given-family}}{}%
+  \usebibmacro{author/editor+others/translator+others}%
+%%%  \printnames{author}
+%%\usebibmacro{name:given-family}
+%%         {\namepartfamily}
+%%         {\namepartgiveni}
+%%         {\namepartprefix}
+%%         {\namepartsuffix}
+%  \setunit{\printdelim{nametitledelim}}\newblock
+\addcomma\addspace%
+%====== dotless title
+  \usebibmacro{maintitle+title}%
+%  \setunit{\addspace}
+\nopunct
+%%%  \iffieldsequal{maintitle}{title}
+%%%    {\clearfield{maintitle}%
+%%%     \clearfield{mainsubtitle}%
+%%%     \clearfield{maintitleaddon}}
+%%%    {\iffieldundef{maintitle}
+%%%       {}
+%%%       {\usebibmacro{maintitle}%
+%%%%        \newunit\newblock
+%%%        \iffieldundef{volume}
+%%%          {}
+%%%          {\printfield{volume}%
+%%%           \printfield{part}%
+%%%           \setunit{\addcolon\space}}}}%
+%%%  \usebibmacro{title}%
+%%%%  \newunit
+%
+%
+%
+%
+%%  \newunit
+%  \usebibmacro{language}%
+%%  \newunit\newblock
+%  \usebibmacro{byauthor}%
+%%  \newunit\newblock
+%  \usebibmacro{byeditor+others}%
+%%  \newunit\newblock
+%  \usebibmacro{edition}%
+    \printtext{\mkbibparens{\usebibmacro{edition}\addspace\usebibmacro{publisher+location+date}}\iffieldundef{postnote}{}{\addcomma}}
+%%  \newunit
+%  \usebibmacro{barevolume+volumes}%
+%%  \newunit\newblock
+%  \usebibmacro{series+number}%
+%%  \newunit\newblock
+%  \usebibmacro{note}%
+%%  \newunit\newblock
+%%\addspace%
+%  \printtext{\mkbibparens{\usebibmacro{publisher+location+date}}}%
+%%  \newunit\newblock
+%  \usebibmacro{chapter+pages}%
+%%  \newunit
+%  \usebibmacro{pagetotal}%
+%%  \newunit\newblock
+%  \usebibmacro{isbn}%
+%%  \newunit\newblock
+%  \usebibmacro{doi+eprint+url}%
+%%  \newunit\newblock
+%  \usebibmacro{addendum+pubstate}%
+%  \setunit{\bibpagerefpunct}
+%%  \newblock
+%  \usebibmacro{pageref}%
+%%  \newunit\newblock
+%  \iftoggle{bbx:related}
+%    {\usebibmacro{related:init}%
+%     \usebibmacro{related}}
+%    {}%
+}%
+{\multicitedelim}%
+{\usebibmacro{postnote}%
+ \usebibmacro{getann:noter:comm}%
+ }%
+
+
 \DeclareCiteCommand{lcbook}[\mkbibfootnote]%
 {\usebibmacro{prenote}}%
 {%
