@@ -576,8 +576,25 @@ xxx}%
   \iffieldundef{qquotation}
     {\addspace\printfile[annotation]{\bibqquotationprefix\thefield{entrykey}.tex}}
     {\addspace\printfield{qquotation}}%
-   \addspace -- \addspace \usebibmacro{getcasenamerefnofn}
+   \addspace --\lcnbsp\usebibmacro{getcasenamerefnofn}%
   \endgroup}
+%   \tex_Uchar:D 160
+%\nobreakspace
+%\tl_new:N \c_nbspace_tl
+%\tl_set:Nn \c_nbspace_tl { \tex_Uchar:D 160 }
+
+\ExplSyntaxOn
+\newcommand\lcnbsp{%
+\bool_lazy_or:nnTF
+ { \sys_if_engine_luatex_p: }
+ { \sys_if_engine_xetex_p: }
+ { \tex_Uchar:D 160 }
+ { \nobreakspace }
+}
+\ExplSyntaxOff%
+
+
+
 
 \newcommand*{\bibqquotationprefix}{bibqquotation-}
 
@@ -611,6 +628,9 @@ xxx}%
 
 \newcommand\setpartynamesitalicon{\settoggle{partynamesitalic}{true}}
 \newcommand\setpartynamesitalicoff{\settoggle{partynamesitalic}{false}}
+
+\newcommand\setpartynamesitalictoctoson{\settoggle{partynamesitalictoctos}{true}}
+\newcommand\setpartynamesitalictoctosoff{\settoggle{partynamesitalictoctos}{false}}
 
 \newcommand\lcconstallabove{1}
 \newcommand\lcconstabovebelow{2}
@@ -959,15 +979,17 @@ xxx}%
 \iffieldequalstr{citeref}{canleg}{%
  \printfield{title}\addcomma\addspace\printfield{svjy}%
 \addcomma\addspace\bibstring{canchapter}~\thefield{chapter}%
-\renewcommand\lcindexaccum{}%empty
-\xappto\lcindexaccum{%
+\renewcommand\lcindexaccum{}%empty the accumulator
+\xappto\lcindexaccum{%[cases] AA
 \thefield{title}, \thefield{svjy}%
 , c \thefield{chapter}%
 }%
+%%\iftoggle{lcindexing}{\sindex[\lctor]{\lcindexaccum\lcparnumrefsencap}\renewcommand\lcindexaccum{}}{}%AA
 \ifkeyword{regulations}{\toggletrue{printxregulations}}{\togglefalse{printxregulations}}%
-\iftoggle{lcindexing}{\sindex[\lctor]{\lcindexaccum\lcparnumrefsencap}}{}%
+\iftoggle{lcindexing}{\sindex[\lctor]{\lcindexaccum\lcparnumrefsencap}\renewcommand\lcindexaccum{}}{}%real
 \togglefalse{printxregulations}%
-\renewcommand\lcindexaccum{}%empty
+%\renewcommand\lcindexaccum{}%empty
+\csxdef{lcindexaccum}{}%empty: global
  }{}%endif
 }
 
@@ -1752,13 +1774,19 @@ subxxx
 \tl_use:N \l_myscriptname_tl
 }
 
-\NewDocumentCommand  { \lcqquotationmdf } { m } {
-
-\begin{mdframed}
-\lcqquotation{#1}
-\end{mdframed}
-
-}
+\NewDocumentCommand  { \lcqquotationmdf } { o m } {
+\IfNoValueTF{#1}%
+{%
+\begin{mdframed}%
+\lcqquotation{#2}%
+\end{mdframed}%
+}%
+{%
+\begin{mdframed}%
+\lcqquotation[#1]{#2}%
+\end{mdframed}%
+}%
+}%
 
 
 \ExplSyntaxOff
@@ -1886,15 +1914,17 @@ x#1;;
 \DeclareCiteCommand{lcqquotation}%
 {\usebibmacro{prenote}}%
 {%
-\iftoggle{useqquotation}{\usebibmacro{qquotation}}{}%
+\iftoggle{useqquotation}{\usebibmacro{qquotation}%
+\usebibmacro{indexcaseparm}}{}%
 %\usebibmacro{qquotation}%
 }%
 {%
 %\multicitedelim%
 }%
 {%
- \usebibmacro{getann:noter:comm}%
- }
+\iffieldundef{postnote}{}{\usebibmacro{postnote}}%
+\usebibmacro{getann:noter:comm}%
+}
 
 
 
@@ -2117,6 +2147,11 @@ courtname}%
 }%
 }
 
+\newbibmacro{find:toc:tos:tor}{%
+\ifentrytype{case}{\lccase}{\ifentrytype{statute}{\iftoggle{printregulations}{\lctor}{\lctos}}{\lcgeneral}}%
+}
+
+
 \newbibmacro{yycore}{%
 %\usebibmacro{set:multidelim}%
 \usebibmacro{yycore:seq}%
@@ -2195,6 +2230,7 @@ test {\ifentrytype{statute}}%
 {%
 %% \ifentrytype{case}{xxx}{zyyy}%does not work
 % \iffieldequalstr{entrytype}{case}{xxx}{zyyy}%works
+%%\renewcommand\lcindexaccum{}%
 \ifboolexpr{%
 test {\ifentrytype{statute}}%
 }%
@@ -2212,11 +2248,14 @@ test {\ifentrytype{statute}}%
    }{\usebibmacro{getcanreg}}%end canreg
 }%end: no citeref
 {%start false: citeref exists
+\renewcommand\lcindexaccum{}%
 \usebibmacro{getcanleg}%
 \usebibmacro{getcanreg2}%
+\renewcommand\lcindexaccum{}%
 }%end citeref
 \iffieldundef{postnote}{}{\usebibmacro{notmnc:postnote}}%
 \iffieldundef{url}{}{\addspace\printtext[angles]{\usebibmacro{getcaseurl}}}%
+%\renewcommand\lcindexaccum{}%
 }%end statute true
 {%
 %\thefield{entrykey}\the\value{citecounter}::
@@ -2814,7 +2853,7 @@ test {\ifentrytype{case}}%
 \iftoggle{commainindex}{,}{}\addspace\iffieldundef{casenumber}{}{\iftoggle{mncbrackets}{[}{}\thefield{caseyear}\iftoggle{mncbrackets}{]}{} \thefield{courtname} \thefield{casenumber}}%
 %\iffieldundef{reportpage}{}{\thefield{reportyear} \thefield{reportvolume} \thefield{reportseries} \thefield{reportpage}} %
 \iffieldundef{reportpage}{}{%
-\iffieldundef{casenumber}{}{;}%
+\iffieldundef{casenumber}{}{,}%
 \iffieldundef{reportyear}{}{%
 \iffieldundef{reportvolume}{ [}{%
 \iffieldundef{volyearneeded}{ (}{ [}}%
@@ -3033,7 +3072,7 @@ test {\ifentrytype{case}}%
   \ifhyperref
     {%
     \iffieldundef{linkname}{%
-    \url{\thefield{url}}
+    \url{\thefield{url}}%
     }%
     {\href{\thefield{url}}{%
     \thefield{linkname}%
@@ -3174,13 +3213,15 @@ test {\ifentrytype{case}}%
 
 
 \newbibmacro{sendtoindexrr}{%
+\ifentrytype{case}{%
 \iftoggle{lcindexing}{%
 \sindex[cases]{%
 %{%
 %\color{red}%
 \lcindexaccum%
 %}%
-\lcparnumrefsencap}}{}%
+\lcparnumrefsencap}}{}}{}%
+\csxdef{lcindexaccum}{}%empty
 }
 
 
@@ -3191,8 +3232,9 @@ test {\ifentrytype{case}}%
 }%
 {%true: is a case
 \iftoggle{lcindexing}{%
-\usebibmacro{getindexcasename}%
-\usebibmacro{getindexcaseref}%
+\usebibmacro{indexcaseparm}%
+%\usebibmacro{getindexcasename}%
+%\usebibmacro{getindexcaseref}%
 \usebibmacro{sendtoindexrr}%
 }%end true
 {}%false=is not case
@@ -3206,6 +3248,7 @@ test {\ifentrytype{case}}%
 \newbibmacro{rrindex}{%name for first key; refs for the rest
 \iftoggle{lcindexing}{%
 \iffirstcitekey{%
+%\renewcommand\lcindexaccum{}%
 \usebibmacro{getindexcasename}%
 }{}%firstcite
 {%loopcite
@@ -5069,12 +5112,11 @@ test {\ifentrytype{jurisdiction}}%
  \usebibmacro{getcasename}%
   \usebibmacro{getcaseproc}}%
 }
-
-\newbibmacro{indexcaseparm}{%
+\newbibmacro{indexcaseparmtoc}{%
 \sindex[cases]{%
 \thefield{partya}\thefield{partyb}@%for sorting
 %partynames = casename
-\iftoggle{partynamesitalic}{%start italic
+\iftoggle{partynamesitalictoctos}{%start italic
 \textit{%
 \iffieldundef{shipname}{\thefield{partya}\iffieldundef{partyajur}{}{ (\thefield{partyajur})}%no space, for one party only; space if partyb (before v)
 \iffieldundef{partyb}{}{ \iffieldundef{partysep}{\iftoggle{partysepitalic}{\textit{v}}{\textup{v}}}{\iftoggle{partysepitalic}{\textit{\thefield{partysep}}}{\textup{\thefield{partysep}}}}\iftoggle{partysepdotted}{.}{} \thefield{partyb}\iffieldundef{partybjur}{}{ (\thefield{partybjur})}}}{\thefield{shipname}, The}}}%end italic
@@ -5109,6 +5151,17 @@ test {\ifentrytype{jurisdiction}}%
 \iffieldundef{icaseyear}{\iffieldundef{caseyear}{\iffieldundef{reportyear}{}{ (\thefield{reportyear})}}{ (\thefield{caseyear})}}{ (\thefield{icaseyear})}%
 }%end refintoc false
 \lcparnumrefsencap}%end sindex
+}
+
+\newbibmacro{indexcaseparmtostor}{%
+\iftoggle{lcindexing}{%
+  \sindex[\iftoggle{printregulations}{\lctor}{\lctos}]{\thefield{statutetitle}\iftoggle{stattycomma}{,}{} \thefield{statutetitleyear}\iftoggle{statjurisdiction}{\iffieldundef{statutejurisdiction}{}{ (\thefield{statutejurisdiction})}}{}%\usebibmacro{getnote}%
+\iffieldundef{note}{}{ (\thefield{note})}%
+\lcparnumrefsencap}}{}%
+}%
+\newbibmacro{indexcaseparm}{%
+\ifentrytype{case}{\usebibmacro{indexcaseparmtoc}}{\ifentrytype{statute}{\usebibmacro{indexcaseparmtostor}}{}}%
+%
 }
 
 \newbibmacro{getprocindex}{%

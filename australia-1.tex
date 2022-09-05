@@ -1,0 +1,553 @@
+% arara: lualatex
+% arara: biber
+% arara: lualatex
+% arara: splitindex: { style: squarecheck.ist }
+% arara: lualatex
+% arara: splitindex: { style: squarecheck.ist }
+% arara: lualatex
+% arara: lualatex
+
+\begin{filecontents*}[overwrite]{\jobname.bib}
+@case{sluggett,partya = {Sluggett},partyb = {Commonwealth of Australia},caseyear = {2011},courtname = {FMCA},casenumber = {609},linkname = {AustLII},url = {http://www.austlii.edu.au/cgi-bin/viewdoc/au/cases/cth/FMCA/2011/609.html},pagination = {atparagraph},}
+
+@quote{q103,crossref = {sluggett},quotepinpoint = {516},options = {skipbib=true},}
+
+
+%---
+@case{bjt,partya = {BJT},partyb = {JD\@},caseyear = {2022},courtname = {SCC},casenumber = {24},linkname = {CanLII},url = {https://canlii.ca/t/jpkkn},pagination = {atparagraph},}
+
+@case{goforth,partya = {R},partyb = {Goforth },caseyear = {2022},courtname = {SCC},casenumber = {25},reportyear = {2021},reportseries = {SCJ},reportpage = {No 103 (QL)},linkname = {CanLII},url = {https://canlii.ca/t/jpqcs},pagination = {atparagraph},}
+
+@case{collins,partya = {Canada (Attorney General)},partyb = {Collins Family Trust},caseyear = {2022},courtname = {SCC},casenumber = {26},caseshortname = {Collins Family Trust},linkname = {CanLII},url = {https://canlii.ca/t/jptr6},pagination = {atparagraph},}
+
+@case{ccd,partya = {British Columbia (Attorney General)},partyb = {Council of Canadians with Disabilities},caseyear = {2022},courtname = {SCC},casenumber = {27},caseshortname = {CCD},linkname = {CanLII},url = {https://canlii.ca/t/jpx81},pagination = {atparagraph},}
+
+@case{guidara,partya = {Guidara},partyb = {Canada (Procureur général)},partysep = {c},caseyear = {2022},courtname = {CAF},casenumber = {122},linkname = {CanLII},url = {https://canlii.ca/t/jq059},pagination = {atparagraph},}
+
+@case{vavilov,partya = {Canada (Ministre de la Citoyenneté et de l’Immigration)},partyb = {Vavilov},partysep = {c},caseyear = {2019},courtname = {CSC},casenumber = {65},reportyear = {2019},reportvolume = {4},volyearneeded = {true},reportseries = {RCS},reportpage = {653},caseshortname = {Vavilov},parallel = { [2019] ACS no 65 and [2019] SCJ No 65 (QL) and [2019] CarswellNat 7883 and EYB 2019-335761 and 59 Admin LR (6th) 1 and 69 RJ imm (4th) 1 and [2020] EXP 27 and AZ-51654335 and 312 ACWS (3d) 460 and 441 DLR (4th) 1 },linkname = {CanLII},url = {https://canlii.ca/t/j46kc},mncurl = {https://www.canlii.org/fr/ca/csc/doc/2019/2019csc65/2019csc65.html},pagination = {atparagraph},langid = {french},}
+@case{dunsmuir,partya = {Dunsmuir},partyb = {Nouveau-Brunswick},partysep = {c},caseyear = {2008},courtname = {CSC},casenumber = {9},reportyear = {2008},reportvolume = {1},volyearneeded = {true},reportseries = {RCS},reportpage = {190},parallel = { [2008] ACS no 9 and [2008] SCJ No 9 (QL) and [2008] CarswellNB 124 and EYB 2008-130674 and JE 2008-547 and 170 LAC (4th) 1 and 64 RCDT (3d) 1 and 69 Admin LR (4th) 1 and 69 RJ imm (3d) 1 and 95 LCR 65 and DTE 2008T-223 and 844 APR 1 and AZ-50478101 and 164 ACWS (3d) 727 and 291 DLR (4th) 577 and 372 NR 1 and 329 RNB (2d) 1},linkname = {CanLII},url = {https://canlii.ca/t/1vxsn},pagination = {atparagraph},}
+
+@case{apotex,partya = {Apotex Inc},partyb = {Eli Lilly and Company},caseyear = {2017},courtname = {ONSC},casenumber = {7204},caseshortname = {Apotex},linkname = {CanLII},url = {https://canlii.ca/t/hp39f},pagination = {atparagraph},}
+
+@quote{q102,crossref = {apotex},options = {skipbib=true},}
+
+@case{nova,partya = {Nova-Biorubber Green Technologies Inc},partyb = {Sustainable Development Technology Canada},caseyear = {2022},courtname = {FCA},casenumber = {121},caseshortname = {Nova-Biorubber},linkname = {CanLII},url = {https://canlii.ca/t/jpz6n},pagination = {atparagraph},}
+
+@case{wojdan,partya = {Wojdan},partyb = {Canada (Attorney General)},caseyear = {2022},courtname = {FCA},casenumber = {120},linkname = {CanLII},url = {https://canlii.ca/t/jpz6r},pagination = {atparagraph},}
+
+@case{thompson,partya = {Canada},partyb = {Thompson},caseyear = {2022},courtname = {FCA},casenumber = {119},caseshortname = {Thompson},linkname = {CanLII},url = {https://canlii.ca/t/jpwk3},pagination = {atparagraph},}
+
+@case{swist,partya = {Swist},partyb = {MEG Energy Corp},caseyear = {2022},courtname = {FCA},casenumber = {118},linkname = {CanLII},url = {https://canlii.ca/t/jpvl2},pagination = {atparagraph},}
+
+@case{whirlpool,partya = {Whirlpool Corp},partyb = {Camco Inc},caseyear = {2000},courtname = {SCC},casenumber = {67},reportyear = {2000},reportvolume = {2},volyearneeded = {true},reportseries = {SCR},reportpage = {1067},caseshortname = {Whirlpool},parallel = { [2000] ACS no 68 and [2000] SCJ No 68 (QL) and 9 CPR (4th) 129 and 186 FTR 268 and 194 DLR (4th) 193 and 263 NR 88 },linkname = {CanLII},url = {https://canlii.ca/t/5235},pagination = {atparagraph},}
+
+@book{fox,author = {H G Fox},title = {The Canadian Law and Practice Relating to Letters Patent for Inventions},date = {1969},edition = {4},keywords = {lawbook},shorttitle = {Patents},pagination = {atpage},}
+
+@case{thomson,partya = {Thomson},partyb = {Canada (Attorney General)},caseyear = {2022},courtname = {FCA},casenumber = {97},linkname = {CanLII},url = {https://canlii.ca/t/jpl62},pagination = {atparagraph},}
+
+@case{muller,partya = {Canada (Attorney General)},partyb = {Muller},caseyear = {2022},courtname = {FCA},casenumber = {99},caseshortname = {Muller},linkname = {CanLII},url = {https://canlii.ca/t/jpklv },pagination = {atparagraph},}
+
+
+
+
+
+
+
+
+\end{filecontents*}
+
+
+
+\documentclass{article}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+%------------------
+
+%------------------
+\usepackage[table,dvipsnames,svgnames]{xcolor}
+\pagecolor{blue!3}
+\rowcolors{1}{blue!5}{blue!9}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{TeX Gyre Adventor}[Scale=1.2]%Gentium Plus}
+\setmonofont{Noto Sans Mono}%[Colour=blue]
+\newfontface\fcircnum{DejaVu Sans}[Colour=blue]
+\newcommand\circnum[1]{{\fcircnum#1}}
+%------------------
+\usepackage[french,british]{babel}
+\usepackage{csquotes}
+\usepackage{graphicx}
+
+\usepackage{marginnote}
+\usepackage{microtype}
+\usepackage{parskip}
+\newcommand\defaultparskip{\setlength\parskip{0pt}}
+\newcommand\normalparskip{\parskip=.5\baselineskip plus 2pt\relax}
+
+\usepackage{splitidx}
+
+
+
+\newcommand\theadcolour{\rowcolor{blue!80!green!20!yellow}}
+
+\newcommand\note[1]{(\texttt{#1})}
+
+
+
+	\newcommand\abibname{lawcitemini}
+	\newcommand\abibstyle{style=\abibname}
+	\usepackage[
+	\abibstyle , 
+	lawcitestyle=aglc, %mcgill,
+%	print-toc-tos=true,
+%	use-toc-parnumrefs=true,
+%	hyperlink-index-pages=true,
+	indexing=cite,
+	citetracker=true,
+	citecounter=context,
+%	ibidtracker=foot,%option setting for footnotes: assumes single refs
+	%%ibidstyle=uc,%uppercase Ibid OSCOLA option
+	pagetracker=true,
+	idemtracker=true,
+	opcittracker=true,
+	loccittracker=true,%if same postnote in an ibid
+	autocite=footnote,
+%	autolang=french,
+	   datezeros=true,
+	   minnames=5,
+	   maxnames=5,%more names than this are truncated to minnames
+	   dashed=false,
+	   loadfiles=true,% for annotations stored in files
+	   use-qquotation=true, %for long excerpts, via bibqq...-files
+	]{biblatex}
+
+\addbibresource{\jobname.bib}
+
+\newfontface\fcc{Noto Sans Mono}
+\newcommand\attribution[1]{\hspace{2pt}\fcc\tiny\rotatebox{90}{#1}}
+
+\usepackage{tikz}
+\usetikzlibrary{tikzmark, calc}
+\newcommand\hlybox[2][]{\tikz[overlay]\node[fill=yellow!20,draw=black,inner sep=2pt, anchor=text, rectangle, rounded corners=1mm,#1] {#2};\phantom{#2}}
+
+\usepackage[
+final=true,
+bookmarks,
+%            allcolors = black,  
+            colorlinks=true,        
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+%================
+
+%---
+\usepackage{luacolor,lua-ul}
+\colorlet{r1}{GreenYellow!50}
+\colorlet{r2}{RubineRed}
+\colorlet{r3}{RoyalPurple}
+\LuaULSetHighLightColor{r1}
+%--
+\newunderlinetype\beginUnderWavy[\number\dimexpr1ex]{\cleaders\hbox{%
+\setlength\unitlength{.3ex}%
+\begin{picture}(4,0)(0,1)
+\thicklines
+\color{red}%
+\qbezier(0,0)(1,1)(2,0)
+\qbezier(2,0)(3,-1)(4,0)
+\end{picture}%
+}}
+\newcommand\underWavy[1]{{\beginUnderWavy#1}}
+
+
+
+
+
+
+\usepackage{mdframed}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\newfontface\fmag{Noto Sans Symbols2}[Scale=2,Colour=blue]
+\newenvironment{magpar}
+{
+\vspace{1ex}
+\begin{tcolorbox}[breakable, enhanced,colback=yellow!10!white,boxrule=0pt,frame hidden,borderline west={1mm}{-2mm}{black}]
+{ \fmag 🔍 }
+}
+{\end{tcolorbox}
+\vspace{1.8ex}
+ }
+
+\newenvironment{myquotation}
+{
+\vspace{2.1ex}
+\begin{quotation}
+}
+{\end{quotation}
+\vspace{2.8ex}
+ }
+
+
+\newenvironment{casenote}[1]
+{
+\begin{tcolorbox}[title=#1,
+enhanced,
+attach boxed title to top right,
+boxed title style={colframe=blue!75!yellow!15,colback=violet!75,},
+colback=red!5!white,
+colframe=red!75!black,
+fonttitle=\bfseries,
+%before title={x},
+%after title={\hfill\colorbox{Navy}{approved}},
+]
+}
+{\end{tcolorbox}
+ }
+\newenvironment{casequote}[1]
+{
+\begin{myquotation}
+\begin{tcolorbox}[title=#1,
+enhanced,
+attach boxed title to top right,
+boxed title style={colframe=blue!75!yellow!15,colback=violet!8,},
+colback=brown!5!white,
+colframe=brown!75!black,
+fonttitle=\bfseries,
+coltitle=green!25!black,
+%before title={x},
+%after title={\hfill\colorbox{Navy}{approved}},
+]\begin{tabular}{ccc}\cellcolor{yellow!30!brown!18}{\Large ``} & \cellcolor{brown!12!white}
+\begin{minipage}{0.82\textwidth}
+}
+{\end{minipage} & \cellcolor{yellow!30!brown!18}{\Large''}\\\end{tabular}\end{tcolorbox}
+\end{myquotation}
+ }
+
+%==================================
+%indexing-related
+
+
+
+\newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to \iftoggle{lcparnumrefs}{paragraph}{page} numbers.\hfill{\itshape \iftoggle{lcparnumrefs}{Para}{Page}}\bigskip}
+\newcommand\dupentries{\ \\\small\mdseries $\to$ `Duplicated' entries are intentional.}
+\setindexpreamble[cases]{\pagerefindexnote}
+\setindexpreamble[legislation]{\pagerefindexnote}
+\setindexpreamble[regulations]{\pagerefindexnote}
+\setindexpreamble[general]{\pagerefindexnote}
+
+
+%Print the `preamble' of the index:
+\makeatletter
+ \renewcommand*{\@@printindex}{}
+ \def\@@printindex[#1][#2]{%
+ \begingroup
+ \edef\indexshortcut{#1}%
+ \def\indexname{#2\par \useindexpreamble}%
+ \def\kvtcb@text@index{#2}%
+ \let\index@preamble\relax
+ \expandafter\let\expandafter\index@preamble
+ \csname index@\indexshortcut @preamble\endcsname
+ \if@splitidx
+ \def\@tempa{idx}\def\@tempb{#1}%
+ \ifx\@tempa\@tempb\let\@indexsuffix\@gobble\fi
+ \fi
+\@input@{\jobname\@indexsuffix{#1}.ind}%
+\endgroup
+\csname printindex@endhook\endcsname
+}
+\makeatother
+\makeindex
+\newindex[Table of Cases]{cases}
+\newindex[Table of Statutes]{legislation}
+\newindex[Table of Regulations]{regulations}
+\newindex[General Index]{general}
+%%%\sindex[cases]{\noindent $\to$ References are to page numbers}
+
+
+%%\AtWriteToIndex splitidx uses \protected@write to write the index entries to its output les. The
+%%\AtWriteToIndex macro lets you execute a piece of code each time an index is
+%%written to a specic index. Usage:
+%%\AtWriteToIndex{hshortcuti}{hcodei}
+%%This may be useful if you want your index entries to reference not the page number
+%%but some other counter instead. For example, in order to make each index entry
+%%in the general index (identified by the idx shortcut) point to the corresponding
+%%section number, you would write
+
+
+%-------------------------------------------------------
+%%\AtWriteToIndex{idx}{\let\thepage\thesection}
+%-------------------------------------------------------
+
+\AtWriteToIndex{cases}{\let\thepage\theparno}
+\AtWriteToIndex{legislation}{\let\thepage\theparno}
+\AtWriteToIndex{regulations}{\let\thepage\theparno}
+
+
+
+%---
+
+\ExplSyntaxOn
+
+%****************************************************
+%*
+%****************************************************
+%--------------------
+%\NewDocumentCommand { \mfsloadaseq } { o m +m } { % 1=seq name, 2=data
+%
+%				\IfNoValueTF { #1 } 
+%						{ \tl_clear:N \g_fc_namespace_tl } 
+%						{ \tl_gset:Nn \g_fc_namespace_tl { #1 } }
+%
+%
+%	\cs_if_free:cT
+%			{ g_fc_rwe \g_fc_namespace_tl #2 _seq }
+%			{ \seq_new:c
+%					{ g_fc_rwe \g_fc_namespace_tl #2 _seq } 
+%			}
+%	\seq_gclear:c 
+%			{ g_fc_rwe \g_fc_namespace_tl #2 _seq } 
+%	\seq_gset_split:cno 
+%			{ g_fc_rwe \g_fc_namespace_tl #2 _seq } 
+%			{ , } 
+%			{ #3 }
+%
+%%	\seq_show:c 
+%%			{ g_fc_rwe \g_fc_namespace_tl #2 _seq } 
+%
+%
+%}
+
+
+%%\renewcommand\setindexhyperlinks{%
+%%\iftoggle{lcparnumrefs}{%
+%%\renewcommand\myhyperref[1]{\ref{para.##1}}%
+%%%\renewcommand\lcparnumrefsencap{|myhyperref}%
+%%\renewcommand\lcparnumrefsencap{}%
+%%}%end true
+%%{%false
+%%\renewcommand\myhyperref[1]{\hyperpage{##1}}%
+%%%\renewcommand\lcparnumrefsencap{|myhyperref}%
+%%\renewcommand\lcparnumrefsencap{}%
+%%}%end false
+%%}
+
+
+
+%------------------
+	\cs_set:Npn \lc_funcaddsqbrb:n #1 { 
+	%	[#1]
+	\int_gincr:N \g_lc_rangecount_int
+	
+\iftoggle{lcparnumrefs}{%
+\renewcommand\myhyperref[1]{\ref{para.##1}}%
+}%end true
+{%false
+\renewcommand\myhyperref[1]{\hyperpage{##1}}%
+}%end false
+
+   			\int_compare:nNnTF 
+					{ \g_lc_rangetotal_int } > { 1 }
+					{
+   					\int_compare:nNnTF 
+							{ \g_lc_rangecount_int } > { 1 }
+							{ % T
+									% nothing					
+							}
+							{ % F
+									[
+							}
+
+					} % end T
+					{ % F
+						[
+					}
+
+%[
+\iftoggle{hyperindexpages}{%
+\myhyperref{#1}%
+}%end true
+{%false
+#1
+}%end false
+%%]
+
+   			\int_compare:nNnTF 
+					{ \g_lc_rangetotal_int } > { 1 }
+					{
+   					\int_compare:nNnTF 
+							{ \g_lc_rangecount_int } = { 1 }
+							{ % T
+									-- % range delim					
+							}
+							{ % F
+									]
+							}
+
+					} % end T
+					{ % F
+						]
+					}
+
+
+}
+
+
+%------------------
+	\cs_set:Npn \lc_funcaddsqbr:n #1 { 
+	% 1=seq
+		\int_gset:Nn \g_lc_rangecount_int { 0 }
+		\int_gset:Nn \g_lc_rangetotal_int { 0 }
+
+			\seq_set_split:Nnn 
+					\l_tmpa_seq 
+					{ -- } 
+					{ #1 }
+			\int_gset:Nn 
+					\g_lc_rangetotal_int 
+					{ \seq_count:N \l_tmpa_seq }
+					
+				\seq_map_function:NN 
+					\l_tmpa_seq
+					\lc_funcaddsqbrb:n
+}
+
+
+
+\int_new:N \g_lc_rangecount_int
+\int_new:N \g_lc_rangetotal_int
+\NewDocumentCommand { \squarecheck }{ m }
+ {
+
+   \mfsloadaseq[ref]{index}{#1}
+
+				\seq_map_function:cN 
+					{ g_fc_rwe \g_fc_namespace_tl index _seq }
+					\lc_funcaddsqbr:n
+}
+
+
+
+
+\NewDocumentCommand{\xsquarecheck}{>{\SplitArgument{1}{--}}m}
+ {
+   \formatrange#1
+ }
+\NewDocumentCommand{\formatrange}{mm}
+ {
+  \IfNoValueTF { #2 }
+   { % no --, it's not a range
+   \mfsloadaseq[ref]{index}{#1}
+   
+%%   			\int_compare:nNnTF 
+%%					{ \seq_count:c { g_fc_rwe \g_fc_namespace_tl index _seq } } = { 1 }
+%%					{ [#1] } % single item
+%					{ % X, Y items
+%%					\seq_gset_split:Nnn 
+%%					\g_tmpa_seq 
+%%					{ ; } 
+%%					{ #1 } 
+
+				\seq_map_function:cN 
+					{ g_fc_rwe \g_fc_namespace_tl index _seq }
+					\lc_funcaddsqbr:n
+
+
+%					}    % X, Y items
+
+   
+   
+   }
+   { % it's a range
+    \{#1\}--(#2) 
+   }
+ }
+
+\ExplSyntaxOff
+
+
+
+
+
+%------------------
+% Helpfile
+\newcommand\lawcitehelp[1]{\csname lchelp#1\endcsname}
+\newcommand\lchelpusercomm{
+User commands
+
+Ancillary user commands defined in .dbx file
+%\mfsloadaseq
+
+\begin{itemize}
+\item printbibliographymcgill
+\item lcrollcall
+\item lccatena
+\end{itemize}
+
+
+Ancillary user commands defined in .cbx file
+
+\begin{itemize}
+\item lcqquotationmdf
+\item printlawciteindexes
+\end{itemize}
+
+
+
+}
+
+
+
+%------------------
+
+\begin{document}
+\p Some cases.
+
+\printlawciteindexes
+
+\p Supreme Court of Canada
+
+\p -- Unsupported generalizations are inappropriate.\lawcite[108]{bjt}
+
+\p -- ``the trial judge left the jury equipped with a charge that, in critical sections, is not comprehensible to a legally trained reader, let alone to a layperson juror''\lawcite[67]{goforth}
+
+\p -- ``the zone of unfairness''\lawcite[93]{collins}
+
+\begin{casequote}{Access}Access to justice depends on the efficient and responsible use of court resources. Frivolous lawsuits, endless procedural delays, and unnecessary appeals increase the time and expense of litigation and waste these resources. To preserve meaningful access, courts must ensure that their resources remain available to the litigants who need them most — namely, those who advance meritorious and justiciable claims that warrant judicial attention. \\[0.8\baselineskip]
+-- \lcinline[1]{ccd}
+\end{casequote}
+
+\selectlanguage{french}
+\p 	Cour d'appel fédérale
+
+\p -- \enquote{Le rôle de la Cour est plutôt de s’assurer que la décision contestée, et la justification qui la sous-tend, possèdent les « attributs de la raisonnabilité » (\lcshorttitle[86]{vavilov}, citant \lcshorttitle[47]{dunsmuir}). Elle doit ainsi s’intéresser à la fois au résultat obtenu et au raisonnement qui a mené à ce résultat. Comme la Cour suprême le rappelait dans \lcshorttitle{vavilov}, la décision raisonnable est celle qui est « fondée sur une analyse intrinsèquement cohérente et rationnelle et [qui] est justifiée au regard des contraintes juridiques et factuelles auxquelles le décideur est assujetti » (\lcshorttitle[85-90]{vavilov}).}\lawcite[15]{guidara} 
+
+
+\selectlanguage{english}
+
+\bigskip
+\lcqquotationmdf{q102}
+
+\p Federal Court of Appeal
+
+\p -- No action for status review if no reviewable error\lawcite[6]{nova}
+
+\p -- \enquote{In its written submissions, the appellant also alleges that the Federal Court is in a conflict of interest with the respondent as the latter is a federally created organization. The appellant’s allegations are serious, unsubstantiated, without merit and ought not have been made.}\lawcite[9]{nova}
+
+\p -- removal of vaccination requirement mootizes action to suspend requirement: \enquote{We are all of the view that. this appeal is now moot, as the Policy that the appellants seek to suspend is no longer in force}\lawcite[4]{wojdan} 
+
+\p -- ``No Fishing'' at discovery stage even though standard of relevance is lower than at trial\lawcite[43,46]{thompson}
+
+\p -- \enquote{the patent specification is not addressed to grammarians, etymologists or to the public generally, but to skilled individuals sufficiently versed in the art to which the patent relates to enable them on a technical level to appreciate the nature and description of the invention:  \lcbookatey[185]{fox}.}\lawcite[53]{whirlpool}
+
+\p -- \enquote{Construction of a patent is a question of law, reviewable for correctness: \lcshorttitle[61, 76]{whirlpool}. However, the first instance court is entitled to deference in its appreciation of the evidence that bears on construction. This includes, in particular, expert evidence as to how the skilled reader would understand the claim language.}\lawcite[18]{swist}
+
+\p -- \enquote{transparency, intelligibility and justification \ldots The reasons explain how and why the decision was made  \ldots The  \ldots Board Decision was based on an internally coherent and rational chain of analysis that was justified in relation to the facts and the law that constrained its functions as a reconsideration panel. }\lawcite[41]{thomson}
+
+\lcqquotationmdf[516]{q103}%\nocite{sluggett}
+
+\rulesep
+\newpage
+\lawcitehelp{usercomm}
+%\printbibliographymcgill
+\end{document}

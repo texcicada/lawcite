@@ -39,6 +39,9 @@
 \newtoggle{partynamesitalic}
 \toggletrue{partynamesitalic}
 %
+\newtoggle{partynamesitalictoctos}
+\togglefalse{partynamesitalictoctos}
+%
 \newcounter{reftypemode}
 \setcounter{reftypemode}{3}%default: 3 allbelow
 %
@@ -417,6 +420,12 @@
 {\togglefalse{partynamesitalic}}%
 }
 %
+\DeclareBibliographyOption[boolean]{party-names-italic-toctos}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{partynamesitalictoctos}}
+{\togglefalse{partynamesitalictoctos}}%
+}
+%
 \DeclareBibliographyOption[boolean]{party-separator-italic}[true]{%
 \ifstrequal{#1}{true}
 {\toggletrue{partysepitalic}}
@@ -507,6 +516,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 %--------------------- Default lawcite style
 \newcommand\lcsetstyledefault{%
    \toggletrue{partynamesitalic}%
+   \togglefalse{partynamesitalictoctos}%
    \toggletrue{partysepitalic}%
    \togglefalse{partysepdotted}%
    \toggletrue{mncbrackets}%
@@ -549,6 +559,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 %--------------------- AGLC
 \newcommand\lcsetstyleaglc{%
    \toggletrue{partynamesitalic}%
+   \togglefalse{partynamesitalictoctos}%
    \toggletrue{partysepitalic}%
    \togglefalse{partysepdotted}%
    \toggletrue{mncbrackets}%
@@ -595,6 +606,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
    \toggletrue{partysepdotted}%
    \togglefalse{partysepitalic}%
    \toggletrue{partynamesitalic}%
+   \togglefalse{partynamesitalictoctos}%
    \toggletrue{mncbrackets}%
    \setcounter{reftypemode}{2}%
    \togglefalse{printlegtoc}%
@@ -634,6 +646,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
    \togglefalse{partysepdotted}%
    \toggletrue{partysepitalic}%
    \toggletrue{partynamesitalic}%
+   \togglefalse{partynamesitalictoctos}%
    \setcounter{reftypemode}{3}%
    \togglefalse{mncbrackets}%
    \toggletrue{stattycomma}%after the title
@@ -672,7 +685,8 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 %--------------------- Indigo
 \newcommand\lcsetstyleindigo{%
    \toggletrue{partynamesitalic}%
-   \toggletrue{partysepitalic}%
+   \togglefalse{partynamesitalictoctos}%
+  \toggletrue{partysepitalic}%
    \toggletrue{partysepdotted}%
    \togglefalse{mncbrackets}%
    \setcounter{reftypemode}{1}%

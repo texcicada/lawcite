@@ -1,5 +1,6 @@
 \newcommand\printbibliographymcgill{%
 \newpage
+\lcsetindexingoff
 {\center
 \printbibheading[title=Bibliography]
 }
@@ -55,6 +56,9 @@ nottype=quote,
 notkeyword=lawbook,
 title={\center General Material},
 ]
+%
+%\iftoggle{lcindexing}{\lcsetindexingon}{\lcsetindexingoff} %
+\lcsetindexingon%
 }
 %...............................................................................................
 \ExplSyntaxOn
@@ -528,6 +532,9 @@ title={\center General Material},
 \newcommand\lctos{legislation}
 %
 
+\newcommand\lccase{cases}
+\newcommand\lcgneral{general}
+%\newcommand\lctos{legislation}
 \newcommand\lctor{%
 %\ifkeyword{regulations}{\iftoggle{printregulations}{regulations}{legislation}}{legislation}%
 \iftoggle{printxregulations}{regulations}{legislation}%
