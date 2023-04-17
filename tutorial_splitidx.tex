@@ -1,0 +1,684 @@
+
+
+%\begin{filecontents*}[overwrite]{\jobname.bib}
+\begin{filecontents*}{\jobname.bib}
+@case{sc1,partya = {Ippolito},partyb = {Cesco},caseyear = {2020},courtname = {NSWSC},casenumber = {561},}
+@case{sc2,partya = {R},partyb = {Munshizada, Danishyar and Baines},caseyear = {2020},courtname = {NSWSC},casenumber = {566},}
+@case{sc3,partya = {Hu},partyb = {Blue Whale Entertainment Pty Ltd},caseyear = {2020},courtname = {NSWSC},casenumber = {562},}
+@case{sc4,partya = {The Trust Company (PTAL) Limited},partyb = {Samuel M Holdings Pty Ltd},caseyear = {2020},courtname = {NSWSC},casenumber = {556},}
+@case{sc5,partya = {Carrafa},partyb = {Asfar},caseyear = {2020},courtname = {NSWSC},casenumber = {530},}
+@case{sc6,partya = {Flowers},partyb = {State of New South Wales},caseyear = {2020},courtname = {NSWSC},casenumber = {526},}
+@case{sc7,partya = {Steven Binetter as the representative of the Estate of the Late Ida Wolff},partyb = {Ronald Binetter},caseyear = {2020},courtname = {NSWSC},casenumber = {552},}
+@case{sc8,partya = {Strata Plan 87060},partyb = {Loulach Developments Pty Ltd},caseyear = {2020},courtname = {NSWSC},casenumber = {550},}
+@case{sc9,partya = {R},partyb = {Tangi (No 12)},caseyear = {2020},courtname = {NSWSC},casenumber = {547},}
+@case{sc10,partya = {International Management Group of America Pty Ltd},partyb = {Media Niugini Ltd t/as EMTV},caseyear = {2020},courtname = {NSWSC},casenumber = {559},}
+@case{sctest,partya = {Case name only},partyb = {xxx},caseyear = {2020},courtname = {XXXSC},casenumber = {000},}
+
+
+@statute{hba,
+statutetitle = {Home Building Act},
+statutejurisdiction = {NSW},
+statutetitleyear = {1989},%for the title
+}
+
+
+@statute{canreg,
+statutetitle = {Maple Products Regulations},
+statuteshorttitle = {CRC},
+statutechapter = {289},
+}
+
+\end{filecontents*}
+
+
+%===================================================
+
+\documentclass[12pt]{article}
+\newcommand\rulesep{\rule{0.4\textwidth}{.4pt}}
+\usepackage[table]{xcolor}
+\pagecolor{green!3}
+
+\newcommand\term[1]{{\sffamily\color{blue}#1}}
+\title{QuickStart Guide\kern-0.25em\llap{\raisebox{1.5ex}{{\tiny\term{lawcite}}}}\\Tutorials\\ = \colorbox{yellow!40!green!20}{\textcolor{blue}{splitidx}} = }
+\author{Creating a Table of Cases using \term{splitidx} package.}
+\date{}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+%\setsansfont{Noto Sans}[Scale=0.8]
+%\setmonofont{Noto Sans Mono}%[Scale=0.8]
+\usepackage{xparse}
+
+%------------------
+
+
+
+\newcommand\abibname{lawcite}
+\newcommand\abibstyle{style=\abibname}
+\usepackage[
+	\abibstyle , 
+	set-lawcite-indexing=false,
+	indexing=cite,
+	citetracker=true,
+	ibidtracker=true,
+	pagetracker=true,
+	idemtracker=true,
+  opcittracker=true,
+	loccittracker=true,
+	autocite=footnote,
+   datezeros=true,
+	lawcitestyle=aglc,
+	use-toc-parnumrefs=true,
+		]{biblatex}
+
+\addbibresource{\jobname.bib}
+		
+%=================
+%indexing
+
+\newcommand*\myhyperref[1]{\ref{para.#1}}
+
+\usepackage{splitidx}
+\newcommand\pagerefindexnote{\bigskip\noindent\small\mdseries $\to$ References are to paragraph numbers.\par\hfill\textit{Para}\par}
+
+
+%Print the `preamble' of the index:
+%%\makeatletter
+%% \renewcommand*{\@@printindex}{}
+%% \def\@@printindex[#1][#2]{%
+%% \begingroup
+%% \edef\indexshortcut{#1}%
+%% \def\indexname{#2\par \useindexpreamble}%<=====
+%% \def\kvtcb@text@index{#2}%
+%% \let\index@preamble\relax
+%% \expandafter\let\expandafter\index@preamble
+%% \csname index@\indexshortcut @preamble\endcsname
+%% \if@splitidx
+%% \def\@tempa{idx}\def\@tempb{#1}%
+%% \ifx\@tempa\@tempb\let\@indexsuffix\@gobble\fi
+%% \fi
+%%\@input@{\jobname\@indexsuffix{#1}.ind}%
+%%\endgroup
+%%\csname printindex@endhook\endcsname
+%%}
+%%\makeatother
+\makeindex
+\newindex[Table of Cases]{cases}
+\newindex[Table of Statutes]{legislation}
+\newindex[Table of Regulations]{regulations}
+
+\setindexpreamble[cases]{\pagerefindexnote}
+\setindexpreamble[legislation]{\pagerefindexnote}
+\setindexpreamble[regulations]{\pagerefindexnote}
+
+%%%
+%%%%Numbered paragraphs
+%%%\newcounter{parno}%[paragraph]%% numbered paragraph
+%%%\renewcommand{\theparno}{\arabic{parno}}
+%%%\newcommand{\p}{\refstepcounter{parno}\noindent[\theparno]\label{para.\theparno}\ } 
+%%%\setcounter{secnumdepth}{4}
+%%%\setcounter{parno}{0}
+%%%
+%%%
+%%%%numbered paragraphs cross-referencing method
+%%%\newcommand\definname{para}
+%%%\newcommand{\paradef}[1]{\label{#1}}
+%%%\newcommand\pararef[1]{\definname\ [\ref{#1}]}
+%%%
+
+\newfontface\ftmark{Noto Sans Symbols2}
+\newcommand\goodoh{{\large\ftmark ✔}}%🗸
+\newcommand\notsogoodoh{{\large\ftmark 🗶}}
+\newcommand\setmpx{\color{red}}
+\newcommand\xx{{\setmpx\notsogoodoh}}
+\newcommand\setmpy{\color{blue!80!green}}
+\newcommand\yy{{\setmpy\goodoh}}
+\newcommand\zz[1]{\textbf{\textit{\myhyperref{#1}}}}
+
+
+%-------------------------------------------------------
+\AtWriteToIndex{cases}{\let\thepage\theparno}
+\AtWriteToIndex{legislation}{\let\thepage\theparno}
+\AtWriteToIndex{regulations}{\let\thepage\theparno}
+%-------------------------------------------------------
+
+
+
+%%%user bib commands
+%%\newcommand\lcsec[1]{\bibstring{section}~#1}
+%%\newcommand\lcsecyr[2]{\bibstring{section}~#1\addspace\mkbibparens{#2}}
+%%\newcommand\lcssec[1]{\bibstring{sections}~#1}
+%%\newcommand\lcssecyr[2]{\bibstring{sections}~#1\addspace\mkbibparens{#2}}
+
+\usepackage[
+				bookmarks,
+            colorlinks=true,        
+            allcolors = black,  
+            citecolor=blue, 
+            hyperindex=false,       
+]{hyperref}
+
+
+%\catcode`ζ=0
+
+\catcode255=11
+\edef\ÿ{ÿ}
+\catcode255=0 
+
+
+
+%\newbibmacro{xyz}{%
+%\thefield{partya}%
+%\thefield{partyb}%
+%}
+\usepackage{usebib}
+\newbibfield{partya}
+\newbibfield{partyb}
+\newbibfield{statutetitle}
+\newbibfield{statutetitleyear}
+\bibinput{\jobname}
+
+
+
+\ExplSyntaxOn
+
+
+%\cs_generate_variant:Nn 
+%		\tl_set:Nn 
+%		{ Ne }
+%
+%%\makeatletter
+%%%\def\index{\@bsphack\begingroup \@sanitize\@index}
+%%\def\index{\@bsphack\begingroup \@index}
+%%\makeatother
+\newcommand\myy[3]{\sindex[#1]{#2@#3}}
+%\newcommand\mxx[1]{#1}
+%\newcommand\muu{}
+%
+%\iow_new:N \g_xxw
+
+%		\str_set:N \l_lc_sortkey_str
+
+
+\NewDocumentCommand { \ii } { O{cases} m O{lcinline} } {
+
+%\iow_open:Nn \g_xxw { \jobname.mxx }
+%\iow_now:Nx \g_xxw { \use:c { lctitle{#2} } }
+%\iow_close:N \g_xxw
+
+
+\str_case:nnTF { #1 }
+{
+{cases} { 
+		\tl_set:Nn \l_tmpa_tl {
+		\use:c { #3 } { #2 }
+%		 \lawcitetitle{#2}
+%		 , 
+%		 \space 
+%		 \lawciteref{#2} 
+		 }
+		\tl_set:Nn \l_tmpb_tl {
+			\usebibentry{#2}{partya}\usebibentry{#2}{partyb}
+		 }}
+{legislation} { 
+		\tl_set:Nn \l_tmpa_tl {
+		\use:c { #3 } { #2 }
+		 }
+		\tl_set:Nn \l_tmpb_tl {
+			\usebibentry{#2}{statutetitle}\usebibentry{#2}{statutetitleyear}
+		 }}
+{regulations} { 
+		\tl_set:Nn \l_tmpa_tl {
+		\use:c { #3 } { #2 }
+		 }
+		\tl_set:Nn \l_tmpb_tl {
+			\usebibentry{#2}{statutetitle}
+		 }
+		 }
+} {} {}
+
+
+		 
+ 
+
+
+
+
+%%\iow_open:Nn \g_xxw { \jobname.mxx }
+%%\iow_now:Nx \g_xxw { \use:c { l_tmpb_tl } }
+%%\iow_close:N \g_xxw
+
+
+%\tl_show:N ÿl_tmpb_tl
+%<<\mxx{\use:c{l_tmpb_tl}}>>
+%\xdef\mzz#2{\mxx{\use:c{l_tmpb_tl}}}
+\myy{#1}{\l_tmpb_tl}{\l_tmpa_tl} 
+%\sindex[#1]{ \myy{ÿl_tmpb_tl}@ÿl_tmpa_tl } 
+
+
+%%		\tl_set:Nn \l_tmpa_tl { \lawcitetitle{#1}, \lawciteref{#1} }
+%%		\tl_show:N \l_tmpa_tl
+%%%\exp_args:NNc
+%%	\tl_set:Nv \l_tmpb_tl { l_tmpa_tl }
+%%	\tl_show:N \l_tmpb_tl
+%%%	\tl_use:N \l_tmpb_tl	
+	}
+
+
+%\NewDocumentEnvironment { dov } { +v } {
+%	#1
+%}{}
+%
+%
+%\NewDocumentCommand { \illus } { m +m } {
+%	\tl_set:Nn \l_tmpa_tl { #1 }
+%	\tl_set:Nn \l_tmpb_tl { #2 }
+%\yin \l_tmpa_tl
+%\yq
+%		\begin{dov} \l_tmpb_tl \end{dov}
+%\yqq
+%
+%}
+
+
+\ExplSyntaxOff
+
+
+
+%\DeclareCiteCommand{lctitle}%
+%%@@@@@@@@@@@@@@@@ prenote
+%{\usebibmacro{prenote}}%
+%%@@@@@@@@@@@@@@@@ item
+%{%
+%\printfield[plain]{partya}%
+%\printfield[plain]{partyb}%
+%}%end item
+%%@@@@@@@@@@@@@@@@ delim
+%{}%
+%%@@@@@@@@@@@@@@@@ postnote
+%{\usebibmacro{postnote}}
+%
+%
+%
+%\DeclareCiteCommand{lctitlex}%
+%%@@@@@@@@@@@@@@@@ prenote
+%{}%
+%%@@@@@@@@@@@@@@@@ item
+%{%
+%\usebibmacro{xyz}%
+%}%end item
+%%@@@@@@@@@@@@@@@@ delim
+%{}%
+%%@@@@@@@@@@@@@@@@ postnote
+%{}
+
+
+
+
+
+
+%\newcommand\ww{}
+%\newcommand\ii[1]{\sindex[cases]{\lawcitetitle{#1}, \lawciteref{#1}}}
+
+
+%some wrapper commands for convenience
+%%%\imki@wrindexentry{names}{Charles}{26} - this is an imakeidx macro
+%\makeatletter
+%\newcommand{\addindexitem}[3]{%
+%\imki@wrindexentry{#1}{#2}{#3}}
+%\makeatother
+
+\newcommand{\textformat}[1]{\textsf{\textbf{#1}}}
+
+\newcommand\yq{\begin{quotation}\noindent}
+\newcommand\yqq{\end{quotation}}
+
+\newcommand\yc{\begin{center}}
+\newcommand\ycc{\end{center}}
+
+\newcommand\yi{\begin{itemize}}
+\newcommand\yii{\end{itemize}}
+
+\newcommand\yis{\item[\space]}
+
+\newcommand\ye{\begin{enumerate}}
+\newcommand\yee{\end{enumerate}}
+
+\newcommand\yim{\item}
+\newcommand\yin{\vspace{\baselineskip}\item}
+
+
+\newcommand\yd{\begin{description}}
+\newcommand\ydd{\end{description}}
+
+\newcommand\yb[1]{\colorbox{blue!12}{#1}}
+
+
+
+
+\newcommand\cmd[1]{\texttt{\textbackslash#1}}
+\newcommand\marg[1]{\texttt{\{#1\}}}
+\newcommand\oarg[1]{\texttt{[#1]}}
+
+
+\setnumparshiftleft{\hspace{-2.5em}}
+%\setnumparfillright{\dimexpr2.5em+\wd\mybox}
+\setnumparfillright{\hspace{3.5em}}
+\setnumparformat{\color{blue}\bfseries}
+\setnumpardelimleft{}
+\setnumpardelimright{.}
+
+
+
+
+
+%------------------
+\begin{document}
+\maketitle
+%\sindex[cases]{\hfill Para}
+%\indexprologue{\noindent $\to$ References are to paragraph numbers}
+\extendtheindex{}{\useindexpreamble}{}{}
+\printlawciteindexes
+\bigskip
+\hfill\rulesep\hfill\ %\hrule%{0.8\linewidth}
+\bigskip
+
+
+
+
+
+%\newpage
+\p\noindent Some New South Wales  Supreme Court decisions, as at mid-May 2020. There are no regulations in this sample\footnote{Like Canadian \lawcite{canreg}.}.\ii[regulations]{canreg}[lawcite]
+\bigskip
+
+
+%\newsavebox{\mybox}
+%\savebox{\mybox}{\mbox{\p}}
+%\showthe\wd\mybox 
+%\usebox{\mybox} \the\dimexpr2em-\wd\mybox\relax
+
+
+\p A compensation case\lawcite{sc1} under the \lawcite{hba}.\ii{sc1}\ii[legislation]{hba}[lawcite]
+%\sindex[cases]{\xx\textit{ABC* v XYZ}, 123 xxx 456} 
+%\sindex[cases]{\xx\textit{CDE* v UVW}, 789 yyy 3} 
+%\sindex[cases]{\xx\textit{X1* v X2}, 123 xxx 159}
+%\sindex[cases]{abc@\yy\textit{ABC** v XYZ}, 123 xxx 456|zz} 
+%\sindex[cases]{cde@\yy\textit{CDE** v UVW}, 789 yyy 3|zz} 
+%\sindex[cases]{x1@\yy\textit{X1** v X2}, 123 xxx 159|zz}
+
+\p In a criminal matter, the trial date was vacated ``because it was not possible to assemble a jury panel under current public-health restrictions''\lawcite[\lcpara{2}]{sc2}.\ii{sc2}
+
+\p In an equity case, the question was whether the Court should take the ``unusual'' step of ordering specific performance of an agreement where one party had agreed to pay another party an amount in settlement of the proceedings\lawcite{sc3}.\ii{sc3}
+
+
+\p In a dispute about whether service on the receivers of a claim for possession of real property in the Illawarra was sufficient (it was), if there were any potential dispute about costs, the parties had leave ``to file dot point written submissions about costs of no more than three pages in length within one week of today''\lawcite[\lcpara{38}]{sc4}.\ii{sc4}
+
+\p A long and complicated matter involving a will and a property, with a change in the pleadings sought\lawcite{sc5}: ``It can be inferred from any review of the amended pleading that gaining a proper understanding of the case and re-pleading it properly is something that would have taken quite a number of weeks.''\lawcite[\lcpara{47}]{sc5}\ii{sc5}
+
+\setnumparformat{\color{red}\bfseries}
+
+\p A case where an application for trial by jury was refused\lawcite{sc6}.
+\begin{quotation}
+\ldots\ \  The resources of this Court and others like it are finite and delays are often unavoidable despite the best efforts of all concerned. Mr Flowers wants his case heard and the State of New South Wales evidently shares his view. In such circumstances it is very important that Mr Flowers not become diverted by unhelpful voices chattering on the sidelines or by loud drums being beaten by folk with unhelpful agendas that are inevitably destined to frustrate his progress before eventually discarding him and moving on to their next target. There must necessarily be a limit to the amount of valuable court time Mr Flowers (or anyone like him) can be permitted to dedicate to silly arguments or confected obsessions that clog the court and waste everybody’s time without advancing his case.\lawcite[\lcpara{19}]{sc6}\ii{sc6}
+\end{quotation}
+
+%\setnumparshiftleft{}
+%\setnumparfillright{\hspace{3pt}--\hspace{3pt}}
+%\setnumparformat{\color{red}}
+%\setnumpardelimleft{[}
+%\setnumpardelimright{]}
+
+\setnumparformat{\color{blue}\bfseries}
+
+\p An application for security of costs against an executor\lawcite{sc7}.\ii{sc7}
+
+\p A building and construction case where there was a mistake in the name of a party\lawcite{sc8}.\ii{sc8}
+
+\p A sentencing hearing: ``murder, the most serious crime in the criminal calendar''\lawcite[\lcpara{1}]{sc9}.\ii{sc9}
+
+\p A contracts case, with an originating process being served outside Australia\lawcite{sc10}.\ii{sc10}
+
+\bigskip
+\bigskip
+\hfill ----oooOooo---- \hfill\ 
+
+\newpage
+\p Test: only title in the index: \verb.\ii{sctest}[lawcitetitle]..\ii{sctest}[lawcitetitle]
+
+\bigskip
+
+\bigskip
+
+\bigskip
+{\Large Using \term{splitidx} package to create a Table of Cases}
+
+\bigskip
+\p {\large Code}
+
+
+\ye
+\yin Switch off lawcite's internel indexing.
+\yq
+\begin{verbatim}
+\usepackage[
+	...
+	set-lawcite-indexing=false,
+	...	]{biblatex}
+\end{verbatim}
+\yqq
+
+%---
+\yin Call the \term{splitidx} package.
+\yq
+\begin{verbatim}
+\usepackage{splitidx}
+\end{verbatim}
+\yqq
+
+%---
+\yin Activate \term{makeindex} and define the named indexes that will become the Tables.
+\yq
+\begin{verbatim}
+\makeindex
+\newindex[Table of Cases]{cases}
+\newindex[Table of Statutes]{legislation}
+\newindex[Table of Regulations]{regulations}
+\end{verbatim}
+\yqq
+
+
+
+%---
+\yin Write the paragraph number to the index instead of the page number.
+\yq
+\begin{verbatim}
+%-------------------------------------------------------
+\AtWriteToIndex{cases}{\let\thepage\theparno}
+\AtWriteToIndex{legislation}{\let\thepage\theparno}
+\AtWriteToIndex{regulations}{\let\thepage\theparno}
+%-------------------------------------------------------
+\end{verbatim}
+\yqq
+
+
+
+%---
+\yin Use the \term{usebib} package to get access to the plain-text of the bibentry fields that will form the indexentry's sort key. Make custom fields visible to \term{usebib} with the \cmd{newbibfield} command.
+\yq
+\begin{verbatim}
+\usepackage{usebib}
+\newbibfield{partya}
+\newbibfield{partyb}
+\newbibfield{statutetitle}
+\newbibfield{statutetitleyear}
+\end{verbatim}
+\yqq
+
+%---
+\yin Read in the bibtex database \verb,.bib, file with the \cmd{bibinput} command. The \verb,.bib, extension is not required.
+\yq
+\begin{verbatim}
+\bibinput{\jobname}
+\end{verbatim}
+\yqq
+
+
+%---
+\yin Define a helper command that will assemble the indexing command's arguments and call the indexing command.
+\yq
+\begin{verbatim}
+\ExplSyntaxOn
+
+\newcommand\myy[3]{\sindex[#1]{#2@#3}}
+
+\NewDocumentCommand { \ii } { O{cases} m O{lcinline} } {
+
+% 1 = indexname
+% 2 = bibentry key 
+% 3 = citation command name
+
+% \l_tmpa_tl = citation command = index entry
+% \l_tmpb_tl = plain-text fields = sortkey
+
+
+\str_case:nnTF { #1 }
+{
+
+{cases} { 
+		\tl_set:Nn \l_tmpa_tl {
+		\use:c { #3 } { #2 }
+		 }
+		\tl_set:Nn \l_tmpb_tl {
+			\usebibentry{#2}{partya}\usebibentry{#2}{partyb}
+		 }}
+
+{legislation} { 
+		\tl_set:Nn \l_tmpa_tl {
+		\use:c { #3 } { #2 }
+		 }
+		\tl_set:Nn \l_tmpb_tl {
+			\usebibentry{#2}{statutetitle}\usebibentry{#2}{statutetitleyear}
+		 }}
+
+{regulations} { 
+		\tl_set:Nn \l_tmpa_tl {
+		\use:c { #3 } { #2 }
+		 }
+		\tl_set:Nn \l_tmpb_tl {
+			\usebibentry{#2}{statutetitle}
+		 }
+		 }
+} {} {}
+
+	\myy{#1}{\l_tmpb_tl}{\l_tmpa_tl} 
+
+	}
+
+\ExplSyntaxOff
+\end{verbatim}
+\yqq
+
+
+%---
+\yin Use the helper command to send items to the specified index.
+\yq
+\begin{verbatim}
+
+\ii{sc7}
+\ii[legislation]{hba}[lawcite]
+\ii[regulations]{canreg}[lawcite]
+
+\end{verbatim}
+
+Test: only title in the index: 
+\verb.\ii{sctest}[lawcitetitle]. sends <<\lawcitetitle{sctest}>> into the index.
+
+\yqq
+
+
+%---
+\yin Add a prenote/prologue to the indexes, if desired.
+\yq
+\begin{verbatim}
+\newcommand\pagerefindexnote{\bigskip\noindent\small
+\mdseries $\to$ References are to paragraph numbers.
+\par\hfill\textit{Para}\par}
+
+\setindexpreamble[cases]{\pagerefindexnote}
+\setindexpreamble[legislation]{\pagerefindexnote}
+\setindexpreamble[regulations]{\pagerefindexnote}
+
+\extendtheindex{}{\useindexpreamble}{}{}
+
+\end{verbatim}
+\yqq
+
+
+
+
+
+%---
+\yin Print the Tables.
+\yq
+\begin{verbatim}
+\printlawciteindexes
+\end{verbatim}
+\yqq
+
+Alternatively,
+
+\yq
+\begin{verbatim}
+\printindex[cases]
+\printindex[legislation]
+\iftoggle{printregulations}{\printindex[regulations]}{}
+\end{verbatim}
+\yqq
+
+
+%
+\yee
+
+\bigskip
+\p {\large Workflow toolchain}
+
+\bigskip
+Compile with
+
+\yi
+\yim (pdf/xe/lua)latex
+\yim biber
+\yim (pdf/xe/lua)latex
+\yim splitindex -- -s square.ist -c
+\yim (pdf/xe/lua)latex
+\yim (pdf/xe/lua)latex
+\yii
+
+where the index style file \term{square.ist} is:
+
+\yq
+\begin{verbatim}
+delim_0 "\\space\\dotfill\\space ["
+delim_1 "\\space\\dotfill\\space ["
+delim_2 "\\space\\dotfill\\space ["
+delim_n "], ["
+delim_r "--"[
+delim_t "]"
+
+line_max 172
+\end{verbatim}
+\yqq
+
+
+
+
+
+\bigskip
+\p {\large Usage}
+
+\yd
+\yin[\yb{\cmd{ii}\marg{bibentry key}}] example: \cmd{ii}\marg{sc1} prints <<\lcinline{sc1}>> into the default \term{cases} index using the default citation command name for indexing, \term{lcinline} without the backslash (which only handles cases).
+\yin[\yb{\cmd{ii}\oarg{index name}\marg{bibentry key}\oarg{citation command name}}] example: \cmd{ii}\oarg{legislation}\marg{hba}\oarg{lawcite} prints <<\lawcite{hba}>> into the \term{legislation} index using the generic citation command name, \term{lawcite} without the backslash (which knows to print statute titles inline).
+\ydd
+
+
+\end{document}
